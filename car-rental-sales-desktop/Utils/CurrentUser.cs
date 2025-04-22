@@ -16,7 +16,7 @@ namespace car_rental_sales_desktop.Utils
 
         public static int? BranchID => _user?.BranchID;
 
-        public static string BranchName => _user?.Branch?.BranchName ?? string.Empty;
+        public static string BranchName => _user?.Branch?.BranchName ?? "No Branch Assigned";
 
         public static int RoleID => _user?.RoleID ?? 0;
 
@@ -33,10 +33,14 @@ namespace car_rental_sales_desktop.Utils
             if (user == null || !user.IsActive)
                 return false;
 
-            _user = user;
-            LoginTime = DateTime.Now;
-
             var userRepository = new UserRepository();
+
+            _user = userRepository.GetById(user.UserID);
+
+            if (_user == null)
+                return false;
+
+            LoginTime = DateTime.Now;
             userRepository.UpdateLastLogin(user.UserID);
 
             return true;
