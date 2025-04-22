@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using car_rental_sales_desktop.Forms.Pages;
+using car_rental_sales_desktop.Models;
+using car_rental_sales_desktop.Repositories;
 
 namespace car_rental_sales_desktop.Methods
 {
@@ -41,6 +43,8 @@ namespace car_rental_sales_desktop.Methods
             }
         }
 
+        // In LoginMethods.cs, modify the HandleLogin method:
+
         public static void HandleLogin(TextBox usernameTextBox, TextBox passwordTextBox, LoginPage loginForm)
         {
             if (string.IsNullOrWhiteSpace(usernameTextBox.Text))
@@ -69,8 +73,16 @@ namespace car_rental_sales_desktop.Methods
                 Application.DoEvents();
                 System.Threading.Thread.Sleep(1000);
 
-                Form mainForm = new Form();
-                mainForm.Show();
+                // Get the user data
+                UserRepository userRepository = new UserRepository();
+                User currentUser = userRepository.GetByUsername(username);
+
+                // Set the current user
+                CurrentUser.SetCurrentUser(currentUser);
+
+                // Create and show the MainPage
+                MainPage mainPage = new MainPage(currentUser);
+                mainPage.Show();
                 loginForm.Hide();
             }
             else

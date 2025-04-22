@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using car_rental_sales_desktop.Models;
 using FontAwesome.Sharp;
+using car_rental_sales_desktop.Forms.Pages;
 
 namespace car_rental_sales_desktop
 {
@@ -124,7 +125,11 @@ namespace car_rental_sales_desktop
             if (result == DialogResult.Yes)
             {
                 this.Close();
-                // You can show login form here
+                LoginPage loginPage = new LoginPage();
+                loginPage.Show();
+                // Clear the current user session
+                Utils.CurrentUser.Logout();
+
             }
         }
     }
