@@ -39,6 +39,7 @@
             btnVehicles = new FontAwesome.Sharp.IconButton();
             btnCustomers = new FontAwesome.Sharp.IconButton();
             btnDashboard = new FontAwesome.Sharp.IconButton();
+            btnMainPage = new FontAwesome.Sharp.IconButton();
             pnlLogo = new Panel();
             lblLogoText = new Label();
             iconLogo = new FontAwesome.Sharp.IconPictureBox();
@@ -74,6 +75,7 @@
             pnlSideMenu.Controls.Add(btnVehicles);
             pnlSideMenu.Controls.Add(btnCustomers);
             pnlSideMenu.Controls.Add(btnDashboard);
+            pnlSideMenu.Controls.Add(btnMainPage);
             pnlSideMenu.Controls.Add(pnlLogo);
             pnlSideMenu.Dock = DockStyle.Left;
             pnlSideMenu.Location = new Point(0, 0);
@@ -93,7 +95,7 @@
             btnSettings.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSettings.IconSize = 32;
             btnSettings.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSettings.Location = new Point(0, 570);
+            btnSettings.Location = new Point(0, 620);
             btnSettings.Name = "btnSettings";
             btnSettings.Padding = new Padding(10, 0, 0, 0);
             btnSettings.Size = new Size(250, 50);
@@ -115,7 +117,7 @@
             btnService.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnService.IconSize = 32;
             btnService.ImageAlign = ContentAlignment.MiddleLeft;
-            btnService.Location = new Point(0, 520);
+            btnService.Location = new Point(0, 570);
             btnService.Name = "btnService";
             btnService.Padding = new Padding(10, 0, 0, 0);
             btnService.Size = new Size(250, 50);
@@ -137,7 +139,7 @@
             btnReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnReports.IconSize = 32;
             btnReports.ImageAlign = ContentAlignment.MiddleLeft;
-            btnReports.Location = new Point(0, 470);
+            btnReports.Location = new Point(0, 520);
             btnReports.Name = "btnReports";
             btnReports.Padding = new Padding(10, 0, 0, 0);
             btnReports.Size = new Size(250, 50);
@@ -159,7 +161,7 @@
             btnStaff.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnStaff.IconSize = 32;
             btnStaff.ImageAlign = ContentAlignment.MiddleLeft;
-            btnStaff.Location = new Point(0, 420);
+            btnStaff.Location = new Point(0, 470);
             btnStaff.Name = "btnStaff";
             btnStaff.Padding = new Padding(10, 0, 0, 0);
             btnStaff.Size = new Size(250, 50);
@@ -181,7 +183,7 @@
             btnBranches.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnBranches.IconSize = 32;
             btnBranches.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBranches.Location = new Point(0, 370);
+            btnBranches.Location = new Point(0, 420);
             btnBranches.Name = "btnBranches";
             btnBranches.Padding = new Padding(10, 0, 0, 0);
             btnBranches.Size = new Size(250, 50);
@@ -203,7 +205,7 @@
             btnSales.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSales.IconSize = 32;
             btnSales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSales.Location = new Point(0, 320);
+            btnSales.Location = new Point(0, 370);
             btnSales.Name = "btnSales";
             btnSales.Padding = new Padding(10, 0, 0, 0);
             btnSales.Size = new Size(250, 50);
@@ -225,7 +227,7 @@
             btnRentals.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnRentals.IconSize = 32;
             btnRentals.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRentals.Location = new Point(0, 270);
+            btnRentals.Location = new Point(0, 320);
             btnRentals.Name = "btnRentals";
             btnRentals.Padding = new Padding(10, 0, 0, 0);
             btnRentals.Size = new Size(250, 50);
@@ -247,7 +249,7 @@
             btnVehicles.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnVehicles.IconSize = 32;
             btnVehicles.ImageAlign = ContentAlignment.MiddleLeft;
-            btnVehicles.Location = new Point(0, 220);
+            btnVehicles.Location = new Point(0, 270);
             btnVehicles.Name = "btnVehicles";
             btnVehicles.Padding = new Padding(10, 0, 0, 0);
             btnVehicles.Size = new Size(250, 50);
@@ -269,7 +271,7 @@
             btnCustomers.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCustomers.IconSize = 32;
             btnCustomers.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCustomers.Location = new Point(0, 170);
+            btnCustomers.Location = new Point(0, 220);
             btnCustomers.Name = "btnCustomers";
             btnCustomers.Padding = new Padding(10, 0, 0, 0);
             btnCustomers.Size = new Size(250, 50);
@@ -291,7 +293,7 @@
             btnDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnDashboard.IconSize = 32;
             btnDashboard.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDashboard.Location = new Point(0, 120);
+            btnDashboard.Location = new Point(0, 170);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.Padding = new Padding(10, 0, 0, 0);
             btnDashboard.Size = new Size(250, 50);
@@ -300,6 +302,28 @@
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnDashboard.UseVisualStyleBackColor = true;
+            // 
+            // btnMainPage
+            // 
+            btnMainPage.Dock = DockStyle.Top;
+            btnMainPage.FlatAppearance.BorderSize = 0;
+            btnMainPage.FlatStyle = FlatStyle.Flat;
+            btnMainPage.Font = new Font("Segoe UI", 11F);
+            btnMainPage.ForeColor = Color.White;
+            btnMainPage.IconChar = FontAwesome.Sharp.IconChar.House;
+            btnMainPage.IconColor = Color.White;
+            btnMainPage.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnMainPage.IconSize = 32;
+            btnMainPage.ImageAlign = ContentAlignment.MiddleLeft;
+            btnMainPage.Location = new Point(0, 120);
+            btnMainPage.Name = "btnMainPage";
+            btnMainPage.Padding = new Padding(10, 0, 0, 0);
+            btnMainPage.Size = new Size(250, 50);
+            btnMainPage.TabIndex = 11;
+            btnMainPage.Text = "  Main Page";
+            btnMainPage.TextAlign = ContentAlignment.MiddleLeft;
+            btnMainPage.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnMainPage.UseVisualStyleBackColor = true;
             // 
             // pnlLogo
             // 
@@ -356,9 +380,9 @@
             lblPageTitle.ForeColor = Color.FromArgb(49, 76, 143);
             lblPageTitle.Location = new Point(69, 26);
             lblPageTitle.Name = "lblPageTitle";
-            lblPageTitle.Size = new Size(114, 28);
+            lblPageTitle.Size = new Size(112, 28);
             lblPageTitle.TabIndex = 1;
-            lblPageTitle.Text = "Dashboard";
+            lblPageTitle.Text = "Main Page";
             // 
             // iconCurrentPage
             // 
@@ -494,6 +518,7 @@
         private Panel pnlLogo;
         private FontAwesome.Sharp.IconPictureBox iconLogo;
         private Label lblLogoText;
+        private FontAwesome.Sharp.IconButton btnMainPage;
         private FontAwesome.Sharp.IconButton btnDashboard;
         private FontAwesome.Sharp.IconButton btnCustomers;
         private FontAwesome.Sharp.IconButton btnVehicles;
