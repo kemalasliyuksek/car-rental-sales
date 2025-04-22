@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\Images\" />
+    <Folder Include="Forms\Controls\" />
   </ItemGroup>
 
   <ItemGroup>

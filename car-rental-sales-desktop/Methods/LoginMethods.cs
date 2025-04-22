@@ -17,6 +17,7 @@ namespace car_rental_sales_desktop.Methods
     internal class LoginMethods
     {
 
+        // Bu metod kullanıcı adı ve şifreyi alır, veritabanında doğrular ve kullanıcıyı giriş yapmış olarak işaretler.
         public static bool ValidateLogin(string username, string password)
         {
             try
@@ -43,8 +44,7 @@ namespace car_rental_sales_desktop.Methods
             }
         }
 
-        // In LoginMethods.cs, modify the HandleLogin method:
-
+        // 
         public static void HandleLogin(TextBox usernameTextBox, TextBox passwordTextBox, LoginPage loginForm)
         {
             if (string.IsNullOrWhiteSpace(usernameTextBox.Text))
@@ -73,15 +73,12 @@ namespace car_rental_sales_desktop.Methods
                 Application.DoEvents();
                 System.Threading.Thread.Sleep(1000);
 
-                // Get the user data
                 UserRepository userRepository = new UserRepository();
                 User currentUser = userRepository.GetByUsername(username);
 
-                // Set the current user
                 CurrentUser.SetCurrentUser(currentUser);
 
-                // Create and show the MainPage
-                MainPage mainPage = new MainPage(currentUser);
+                MainPage mainPage = new MainPage();
                 mainPage.Show();
                 loginForm.Hide();
             }
