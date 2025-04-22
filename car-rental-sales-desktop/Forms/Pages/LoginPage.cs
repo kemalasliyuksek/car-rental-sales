@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using car_rental_sales_desktop.Methods;
-using Org.BouncyCastle.Asn1.Cmp;
+using car_rental_sales_desktop.Repositories;
+using car_rental_sales_desktop.Utils;
+using car_rental_sales_desktop.Models;
 
 namespace car_rental_sales_desktop.Forms.Pages
 {
@@ -19,25 +20,25 @@ namespace car_rental_sales_desktop.Forms.Pages
         {
             InitializeComponent();
 
-            BtnEye.MouseDown += BtnEye_MouseDown;
-            BtnEye.MouseUp += BtnEye_MouseUp;
+            btnEye.MouseDown += BtnEye_MouseDown;
+            btnEye.MouseUp += BtnEye_MouseUp;
 
-            TxtBoxPassword.Text = "Enter your password";
-            TxtBoxPassword.PasswordChar = '\0';
-            TxtBoxPassword.Enter += TxtBoxPassword_Enter;
-            TxtBoxPassword.Leave += TxtBoxPassword_Leave;
-            TxtBoxPassword.KeyDown += TextBox_KeyDown;
+            txtPassword.Text = "Enter your password";
+            txtPassword.PasswordChar = '\0';
+            txtPassword.Enter += TxtBoxPassword_Enter;
+            txtPassword.Leave += TxtBoxPassword_Leave;
+            txtPassword.KeyDown += TextBox_KeyDown;
 
-            TxtBoxUsername.Enter += TxtBoxUsername_Enter;
-            TxtBoxUsername.Leave += TxtBoxUsername_Leave;
-            TxtBoxUsername.KeyDown += TextBox_KeyDown;
+            txtUsername.Enter += TxtBoxUsername_Enter;
+            txtUsername.Leave += TxtBoxUsername_Leave;
+            txtUsername.KeyDown += TextBox_KeyDown;
 
-            this.AcceptButton = BtnLogin;
+            this.AcceptButton = btnLogin;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            LoginMethods.HandleLogin(TxtBoxUsername, TxtBoxPassword, this);
+            HandleLogin(txtUsername, txtPassword, this);
         }
 
         private void iconMinimize_Click(object sender, EventArgs e)
@@ -70,59 +71,91 @@ namespace car_rental_sales_desktop.Forms.Pages
 
         private void BtnEye_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnEye.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            btnEye.IconChar = FontAwesome.Sharp.IconChar.Eye;
 
-            TxtBoxPassword.PasswordChar = '\0';
+            txtPassword.PasswordChar = '\0';
         }
 
         private void BtnEye_MouseUp(object sender, MouseEventArgs e)
         {
-            BtnEye.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+            btnEye.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
 
-            TxtBoxPassword.PasswordChar = '*';
+            txtPassword.PasswordChar = '*';
         }
 
         private void TxtBoxUsername_Enter(object sender, EventArgs e)
         {
-            if (TxtBoxUsername.Text == "Enter your username")
+            if (txtUsername.Text == "Enter your username")
             {
-                TxtBoxUsername.Text = "";
+                txtUsername.Text = "";
             }
         }
 
         private void TxtBoxUsername_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(TxtBoxUsername.Text))
+            if (string.IsNullOrEmpty(txtUsername.Text))
             {
-                TxtBoxUsername.Text = "Enter your username";
+                txtUsername.Text = "Enter your username";
             }
         }
 
         private void TxtBoxPassword_Enter(object sender, EventArgs e)
         {
-            if (TxtBoxPassword.Text == "Enter your password")
+            if (txtPassword.Text == "Enter your password")
             {
-                TxtBoxPassword.Text = "";
-                TxtBoxPassword.PasswordChar = '*';
+                txtPassword.Text = "";
+                txtPassword.PasswordChar = '*';
             }
         }
 
         private void TxtBoxPassword_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(TxtBoxPassword.Text))
+            if (string.IsNullOrEmpty(txtPassword.Text))
             {
-                TxtBoxPassword.Text = "Enter your password";
-                TxtBoxPassword.PasswordChar = '\0';
+                txtPassword.Text = "Enter your password";
+                txtPassword.PasswordChar = '\0';
             }
         }
 
+        // TR: Bu metod, kullanıcı adı ve şifre alanlarına Enter tuşuna basıldığında giriş işlemini gerçekleştirir.
+        // EN: This method performs the login operation when the Enter key is pressed in the username and password fields.
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                LoginMethods.HandleLogin(TxtBoxUsername, TxtBoxPassword, this);
+                HandleLogin(txtUsername, txtPassword, this);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
+            }
+        }
+
+        // TR: Bu metod UserRepository sınıfını kullanarak kullanıcı adı ve şifre ile giriş yapmayı sağlar.
+        // EN: This method allows login using username and password by utilizing the UserRepository class.
+        public static void HandleLogin(TextBox usernameTextBox, TextBox passwordTextBox, LoginPage loginForm)
+        {
+            string username = usernameTextBox.Text.Trim();
+            string password = passwordTextBox.Text;
+
+            UserRepository userRepository = new UserRepository();
+            bool success = userRepository.ValidateLogin(username, password);
+
+            if (success)
+            {
+                LoginPage.ShowSuccess(loginForm, "Login successful! You are being redirected...");
+
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(1000);
+
+                User currentUser = userRepository.GetByUsername(username);
+                CurrentUser.SetCurrentUser(currentUser);
+
+                MainPage mainPage = new MainPage();
+                mainPage.Show();
+                loginForm.Hide();
+            }
+            else
+            {
+                LoginPage.ShowError(loginForm, "The username or password is incorrect!");
             }
         }
     }

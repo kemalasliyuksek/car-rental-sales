@@ -2,30 +2,10 @@
 {
     partial class MainPage
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             pnlSideMenu = new Panel();
@@ -47,7 +27,7 @@
             lblPageTitle = new Label();
             iconCurrentPage = new FontAwesome.Sharp.IconPictureBox();
             pnlUserInfo = new Panel();
-            ıconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            picUserAvatar = new FontAwesome.Sharp.IconPictureBox();
             lblBranchName = new Label();
             btnLogOut = new FontAwesome.Sharp.IconButton();
             lblUserRole = new Label();
@@ -59,7 +39,7 @@
             pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconCurrentPage).BeginInit();
             pnlUserInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ıconPictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picUserAvatar).BeginInit();
             SuspendLayout();
             // 
             // pnlSideMenu
@@ -400,7 +380,7 @@
             // 
             // pnlUserInfo
             // 
-            pnlUserInfo.Controls.Add(ıconPictureBox1);
+            pnlUserInfo.Controls.Add(picUserAvatar);
             pnlUserInfo.Controls.Add(lblBranchName);
             pnlUserInfo.Controls.Add(btnLogOut);
             pnlUserInfo.Controls.Add(lblUserRole);
@@ -411,20 +391,20 @@
             pnlUserInfo.Size = new Size(369, 80);
             pnlUserInfo.TabIndex = 1;
             // 
-            // ıconPictureBox1
+            // picUserAvatar
             // 
-            ıconPictureBox1.BackColor = Color.White;
-            ıconPictureBox1.Dock = DockStyle.Left;
-            ıconPictureBox1.ForeColor = SystemColors.ControlText;
-            ıconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.None;
-            ıconPictureBox1.IconColor = SystemColors.ControlText;
-            ıconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconPictureBox1.IconSize = 80;
-            ıconPictureBox1.Location = new Point(0, 0);
-            ıconPictureBox1.Name = "ıconPictureBox1";
-            ıconPictureBox1.Size = new Size(80, 80);
-            ıconPictureBox1.TabIndex = 0;
-            ıconPictureBox1.TabStop = false;
+            picUserAvatar.BackColor = Color.White;
+            picUserAvatar.Dock = DockStyle.Left;
+            picUserAvatar.ForeColor = SystemColors.ControlText;
+            picUserAvatar.IconChar = FontAwesome.Sharp.IconChar.None;
+            picUserAvatar.IconColor = SystemColors.ControlText;
+            picUserAvatar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            picUserAvatar.IconSize = 80;
+            picUserAvatar.Location = new Point(0, 0);
+            picUserAvatar.Name = "picUserAvatar";
+            picUserAvatar.Size = new Size(80, 80);
+            picUserAvatar.TabIndex = 0;
+            picUserAvatar.TabStop = false;
             // 
             // lblBranchName
             // 
@@ -433,9 +413,9 @@
             lblBranchName.ForeColor = Color.Gray;
             lblBranchName.Location = new Point(96, 54);
             lblBranchName.Name = "lblBranchName";
-            lblBranchName.Size = new Size(74, 15);
+            lblBranchName.Size = new Size(44, 15);
             lblBranchName.TabIndex = 3;
-            lblBranchName.Text = "Main Branch";
+            lblBranchName.Text = "Branch";
             // 
             // btnLogOut
             // 
@@ -463,9 +443,9 @@
             lblUserRole.ForeColor = Color.Gray;
             lblUserRole.Location = new Point(95, 34);
             lblUserRole.Name = "lblUserRole";
-            lblUserRole.Size = new Size(80, 15);
+            lblUserRole.Size = new Size(30, 15);
             lblUserRole.TabIndex = 2;
-            lblUserRole.Text = "Administrator";
+            lblUserRole.Text = "Role";
             // 
             // lblUsername
             // 
@@ -474,9 +454,9 @@
             lblUsername.ForeColor = Color.FromArgb(49, 76, 143);
             lblUsername.Location = new Point(95, 9);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(75, 20);
+            lblUsername.Size = new Size(117, 20);
             lblUsername.TabIndex = 1;
-            lblUsername.Text = "John Doe";
+            lblUsername.Text = "Name Surname";
             // 
             // pnlContent
             // 
@@ -509,7 +489,7 @@
             ((System.ComponentModel.ISupportInitialize)iconCurrentPage).EndInit();
             pnlUserInfo.ResumeLayout(false);
             pnlUserInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)ıconPictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picUserAvatar).EndInit();
             ResumeLayout(false);
         }
 
@@ -539,6 +519,6 @@
         private Label lblBranchName;
         private Panel pnlContent;
         private FontAwesome.Sharp.IconButton btnLogOut;
-        private FontAwesome.Sharp.IconPictureBox ıconPictureBox1;
+        private FontAwesome.Sharp.IconPictureBox picUserAvatar;
     }
 }

@@ -2,49 +2,29 @@
 {
     partial class LoginPage
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginPage));
             pnlContent = new Panel();
             lblStatus = new Label();
             lblVersion = new Label();
-            LnkForgotPassword = new LinkLabel();
-            BtnLogin = new Button();
-            lblPleaseLogin = new Label();
+            lnkForgotPassword = new LinkLabel();
+            btnLogin = new Button();
+            lblLoginRequest = new Label();
             lblWelcome = new Label();
-            iconClose = new FontAwesome.Sharp.IconButton();
-            iconMinimize = new FontAwesome.Sharp.IconButton();
+            btnClose = new FontAwesome.Sharp.IconButton();
+            btnMinimize = new FontAwesome.Sharp.IconButton();
             pnlPassword = new Panel();
-            BtnEye = new FontAwesome.Sharp.IconButton();
+            btnEye = new FontAwesome.Sharp.IconButton();
             iconPassword = new FontAwesome.Sharp.IconPictureBox();
-            TxtBoxPassword = new TextBox();
+            txtPassword = new TextBox();
             pnlUsername = new Panel();
             iconUsername = new FontAwesome.Sharp.IconPictureBox();
-            TxtBoxUsername = new TextBox();
+            txtUsername = new TextBox();
             picLogin = new PictureBox();
             pnlContent.SuspendLayout();
             pnlPassword.SuspendLayout();
@@ -58,12 +38,12 @@
             // 
             pnlContent.Controls.Add(lblStatus);
             pnlContent.Controls.Add(lblVersion);
-            pnlContent.Controls.Add(LnkForgotPassword);
-            pnlContent.Controls.Add(BtnLogin);
-            pnlContent.Controls.Add(lblPleaseLogin);
+            pnlContent.Controls.Add(lnkForgotPassword);
+            pnlContent.Controls.Add(btnLogin);
+            pnlContent.Controls.Add(lblLoginRequest);
             pnlContent.Controls.Add(lblWelcome);
-            pnlContent.Controls.Add(iconClose);
-            pnlContent.Controls.Add(iconMinimize);
+            pnlContent.Controls.Add(btnClose);
+            pnlContent.Controls.Add(btnMinimize);
             pnlContent.Controls.Add(pnlPassword);
             pnlContent.Controls.Add(pnlUsername);
             pnlContent.Dock = DockStyle.Right;
@@ -91,46 +71,46 @@
             lblVersion.TabIndex = 10;
             lblVersion.Text = "Car Rental and Sales - Version 1.0";
             // 
-            // LnkForgotPassword
+            // lnkForgotPassword
             // 
-            LnkForgotPassword.ActiveLinkColor = Color.FromArgb(26, 115, 232);
-            LnkForgotPassword.AutoSize = true;
-            LnkForgotPassword.Font = new Font("Segoe UI", 10F);
-            LnkForgotPassword.LinkColor = Color.FromArgb(49, 76, 143);
-            LnkForgotPassword.Location = new Point(285, 378);
-            LnkForgotPassword.Name = "LnkForgotPassword";
-            LnkForgotPassword.Size = new Size(112, 19);
-            LnkForgotPassword.TabIndex = 5;
-            LnkForgotPassword.TabStop = true;
-            LnkForgotPassword.Text = "Forgot Password";
-            LnkForgotPassword.TextAlign = ContentAlignment.MiddleRight;
-            LnkForgotPassword.LinkClicked += lnkForgotPassword_LinkClicked;
+            lnkForgotPassword.ActiveLinkColor = Color.FromArgb(26, 115, 232);
+            lnkForgotPassword.AutoSize = true;
+            lnkForgotPassword.Font = new Font("Segoe UI", 10F);
+            lnkForgotPassword.LinkColor = Color.FromArgb(49, 76, 143);
+            lnkForgotPassword.Location = new Point(285, 378);
+            lnkForgotPassword.Name = "lnkForgotPassword";
+            lnkForgotPassword.Size = new Size(112, 19);
+            lnkForgotPassword.TabIndex = 5;
+            lnkForgotPassword.TabStop = true;
+            lnkForgotPassword.Text = "Forgot Password";
+            lnkForgotPassword.TextAlign = ContentAlignment.MiddleRight;
+            lnkForgotPassword.LinkClicked += lnkForgotPassword_LinkClicked;
             // 
-            // BtnLogin
+            // btnLogin
             // 
-            BtnLogin.BackColor = Color.FromArgb(49, 76, 143);
-            BtnLogin.FlatAppearance.BorderSize = 0;
-            BtnLogin.FlatStyle = FlatStyle.Flat;
-            BtnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            BtnLogin.ForeColor = Color.White;
-            BtnLogin.Location = new Point(50, 449);
-            BtnLogin.Name = "BtnLogin";
-            BtnLogin.Size = new Size(350, 50);
-            BtnLogin.TabIndex = 6;
-            BtnLogin.Text = "Login";
-            BtnLogin.UseVisualStyleBackColor = false;
-            BtnLogin.Click += btnLogin_Click;
+            btnLogin.BackColor = Color.FromArgb(49, 76, 143);
+            btnLogin.FlatAppearance.BorderSize = 0;
+            btnLogin.FlatStyle = FlatStyle.Flat;
+            btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnLogin.ForeColor = Color.White;
+            btnLogin.Location = new Point(50, 449);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(350, 50);
+            btnLogin.TabIndex = 6;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
-            // lblPleaseLogin
+            // lblLoginRequest
             // 
-            lblPleaseLogin.AutoSize = true;
-            lblPleaseLogin.Font = new Font("Segoe UI", 12F);
-            lblPleaseLogin.ForeColor = Color.Gray;
-            lblPleaseLogin.Location = new Point(37, 216);
-            lblPleaseLogin.Name = "lblPleaseLogin";
-            lblPleaseLogin.Size = new Size(377, 21);
-            lblPleaseLogin.TabIndex = 5;
-            lblPleaseLogin.Text = "Please enter your information to log in to the system.";
+            lblLoginRequest.AutoSize = true;
+            lblLoginRequest.Font = new Font("Segoe UI", 12F);
+            lblLoginRequest.ForeColor = Color.Gray;
+            lblLoginRequest.Location = new Point(37, 216);
+            lblLoginRequest.Name = "lblLoginRequest";
+            lblLoginRequest.Size = new Size(377, 21);
+            lblLoginRequest.TabIndex = 5;
+            lblLoginRequest.Text = "Please enter your information to log in to the system.";
             // 
             // lblWelcome
             // 
@@ -143,71 +123,71 @@
             lblWelcome.TabIndex = 4;
             lblWelcome.Text = "Welcome";
             // 
-            // iconClose
+            // btnClose
             // 
-            iconClose.BackColor = Color.Transparent;
-            iconClose.FlatAppearance.BorderSize = 0;
-            iconClose.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            iconClose.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            iconClose.FlatStyle = FlatStyle.Flat;
-            iconClose.IconChar = FontAwesome.Sharp.IconChar.XmarkCircle;
-            iconClose.IconColor = Color.FromArgb(49, 76, 143);
-            iconClose.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            iconClose.IconSize = 30;
-            iconClose.Location = new Point(417, 3);
-            iconClose.Name = "iconClose";
-            iconClose.Size = new Size(30, 30);
-            iconClose.TabIndex = 8;
-            iconClose.UseVisualStyleBackColor = false;
-            iconClose.Click += iconClose_Click;
+            btnClose.BackColor = Color.Transparent;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnClose.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.IconChar = FontAwesome.Sharp.IconChar.XmarkCircle;
+            btnClose.IconColor = Color.FromArgb(49, 76, 143);
+            btnClose.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            btnClose.IconSize = 30;
+            btnClose.Location = new Point(417, 3);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(30, 30);
+            btnClose.TabIndex = 8;
+            btnClose.UseVisualStyleBackColor = false;
+            btnClose.Click += iconClose_Click;
             // 
-            // iconMinimize
+            // btnMinimize
             // 
-            iconMinimize.BackColor = Color.Transparent;
-            iconMinimize.FlatAppearance.BorderSize = 0;
-            iconMinimize.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            iconMinimize.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            iconMinimize.FlatStyle = FlatStyle.Flat;
-            iconMinimize.IconChar = FontAwesome.Sharp.IconChar.MinusCircle;
-            iconMinimize.IconColor = Color.FromArgb(49, 76, 143);
-            iconMinimize.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            iconMinimize.IconSize = 30;
-            iconMinimize.Location = new Point(381, 3);
-            iconMinimize.Name = "iconMinimize";
-            iconMinimize.Size = new Size(30, 30);
-            iconMinimize.TabIndex = 7;
-            iconMinimize.UseVisualStyleBackColor = false;
-            iconMinimize.Click += iconMinimize_Click;
+            btnMinimize.BackColor = Color.Transparent;
+            btnMinimize.FlatAppearance.BorderSize = 0;
+            btnMinimize.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnMinimize.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnMinimize.FlatStyle = FlatStyle.Flat;
+            btnMinimize.IconChar = FontAwesome.Sharp.IconChar.MinusCircle;
+            btnMinimize.IconColor = Color.FromArgb(49, 76, 143);
+            btnMinimize.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            btnMinimize.IconSize = 30;
+            btnMinimize.Location = new Point(381, 3);
+            btnMinimize.Name = "btnMinimize";
+            btnMinimize.Size = new Size(30, 30);
+            btnMinimize.TabIndex = 7;
+            btnMinimize.UseVisualStyleBackColor = false;
+            btnMinimize.Click += iconMinimize_Click;
             // 
             // pnlPassword
             // 
             pnlPassword.BorderStyle = BorderStyle.FixedSingle;
-            pnlPassword.Controls.Add(BtnEye);
+            pnlPassword.Controls.Add(btnEye);
             pnlPassword.Controls.Add(iconPassword);
-            pnlPassword.Controls.Add(TxtBoxPassword);
+            pnlPassword.Controls.Add(txtPassword);
             pnlPassword.Location = new Point(51, 319);
             pnlPassword.Name = "pnlPassword";
             pnlPassword.Size = new Size(348, 43);
             pnlPassword.TabIndex = 1;
             // 
-            // BtnEye
+            // btnEye
             // 
-            BtnEye.Anchor = AnchorStyles.None;
-            BtnEye.BackColor = Color.Transparent;
-            BtnEye.FlatAppearance.BorderSize = 0;
-            BtnEye.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            BtnEye.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            BtnEye.FlatStyle = FlatStyle.Flat;
-            BtnEye.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
-            BtnEye.IconColor = Color.Black;
-            BtnEye.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            BtnEye.IconSize = 32;
-            BtnEye.Location = new Point(311, 4);
-            BtnEye.Name = "BtnEye";
-            BtnEye.Size = new Size(32, 32);
-            BtnEye.TabIndex = 3;
-            BtnEye.TabStop = false;
-            BtnEye.UseVisualStyleBackColor = false;
+            btnEye.Anchor = AnchorStyles.None;
+            btnEye.BackColor = Color.Transparent;
+            btnEye.FlatAppearance.BorderSize = 0;
+            btnEye.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnEye.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnEye.FlatStyle = FlatStyle.Flat;
+            btnEye.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+            btnEye.IconColor = Color.Black;
+            btnEye.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            btnEye.IconSize = 32;
+            btnEye.Location = new Point(311, 4);
+            btnEye.Name = "btnEye";
+            btnEye.Size = new Size(32, 32);
+            btnEye.TabIndex = 3;
+            btnEye.TabStop = false;
+            btnEye.UseVisualStyleBackColor = false;
             // 
             // iconPassword
             // 
@@ -224,24 +204,24 @@
             iconPassword.TabIndex = 2;
             iconPassword.TabStop = false;
             // 
-            // TxtBoxPassword
+            // txtPassword
             // 
-            TxtBoxPassword.BackColor = SystemColors.Control;
-            TxtBoxPassword.BorderStyle = BorderStyle.None;
-            TxtBoxPassword.Font = new Font("Segoe UI", 12F);
-            TxtBoxPassword.ForeColor = Color.FromArgb(64, 64, 64);
-            TxtBoxPassword.Location = new Point(43, 9);
-            TxtBoxPassword.Name = "TxtBoxPassword";
-            TxtBoxPassword.PasswordChar = '*';
-            TxtBoxPassword.Size = new Size(265, 22);
-            TxtBoxPassword.TabIndex = 2;
-            TxtBoxPassword.Text = "Enter your password";
+            txtPassword.BackColor = SystemColors.Control;
+            txtPassword.BorderStyle = BorderStyle.None;
+            txtPassword.Font = new Font("Segoe UI", 12F);
+            txtPassword.ForeColor = Color.FromArgb(64, 64, 64);
+            txtPassword.Location = new Point(43, 9);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new Size(265, 22);
+            txtPassword.TabIndex = 2;
+            txtPassword.Text = "Enter your password";
             // 
             // pnlUsername
             // 
             pnlUsername.BorderStyle = BorderStyle.FixedSingle;
             pnlUsername.Controls.Add(iconUsername);
-            pnlUsername.Controls.Add(TxtBoxUsername);
+            pnlUsername.Controls.Add(txtUsername);
             pnlUsername.Location = new Point(51, 255);
             pnlUsername.Name = "pnlUsername";
             pnlUsername.Size = new Size(348, 43);
@@ -262,17 +242,17 @@
             iconUsername.TabIndex = 2;
             iconUsername.TabStop = false;
             // 
-            // TxtBoxUsername
+            // txtUsername
             // 
-            TxtBoxUsername.BackColor = SystemColors.Control;
-            TxtBoxUsername.BorderStyle = BorderStyle.None;
-            TxtBoxUsername.Font = new Font("Segoe UI", 12F);
-            TxtBoxUsername.ForeColor = Color.FromArgb(64, 64, 64);
-            TxtBoxUsername.Location = new Point(43, 9);
-            TxtBoxUsername.Name = "TxtBoxUsername";
-            TxtBoxUsername.Size = new Size(300, 22);
-            TxtBoxUsername.TabIndex = 1;
-            TxtBoxUsername.Text = "Enter your username";
+            txtUsername.BackColor = SystemColors.Control;
+            txtUsername.BorderStyle = BorderStyle.None;
+            txtUsername.Font = new Font("Segoe UI", 12F);
+            txtUsername.ForeColor = Color.FromArgb(64, 64, 64);
+            txtUsername.Location = new Point(43, 9);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(300, 22);
+            txtUsername.TabIndex = 1;
+            txtUsername.Text = "Enter your username";
             // 
             // picLogin
             // 
@@ -313,17 +293,17 @@
         private PictureBox picLogin;
         private Panel pnlPassword;
         private Panel pnlUsername;
-        private TextBox TxtBoxUsername;
-        private TextBox TxtBoxPassword;
+        private TextBox txtUsername;
+        private TextBox txtPassword;
         private FontAwesome.Sharp.IconPictureBox iconUsername;
         private FontAwesome.Sharp.IconPictureBox iconPassword;
-        private FontAwesome.Sharp.IconButton BtnEye;
-        private FontAwesome.Sharp.IconButton iconMinimize;
-        private FontAwesome.Sharp.IconButton iconClose;
-        private Label lblPleaseLogin;
+        private FontAwesome.Sharp.IconButton btnEye;
+        private FontAwesome.Sharp.IconButton btnMinimize;
+        private FontAwesome.Sharp.IconButton btnClose;
+        private Label lblLoginRequest;
         private Label lblWelcome;
-        private LinkLabel LnkForgotPassword;
-        private Button BtnLogin;
+        private LinkLabel lnkForgotPassword;
+        private Button btnLogin;
         private Label lblVersion;
         private Label lblStatus;
     }
