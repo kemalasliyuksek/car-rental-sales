@@ -2,8 +2,6 @@
 {
     partial class MainPage
     {
-        private System.ComponentModel.IContainer components = null;
-
         #region Windows Form Designer generated code
 
         private void InitializeComponent()
@@ -20,13 +18,10 @@
             btnCustomers = new FontAwesome.Sharp.IconButton();
             btnDashboard = new FontAwesome.Sharp.IconButton();
             btnMainPage = new FontAwesome.Sharp.IconButton();
-            pnlLogo = new Panel();
-            lblLogoText = new Label();
-            iconLogo = new FontAwesome.Sharp.IconPictureBox();
+            pnlCurrentUser = new Panel();
             pnlTopBar = new Panel();
             lblPageTitle = new Label();
             iconCurrentPage = new FontAwesome.Sharp.IconPictureBox();
-            pnlUserInfo = new Panel();
             picUserAvatar = new FontAwesome.Sharp.IconPictureBox();
             lblBranchName = new Label();
             btnLogOut = new FontAwesome.Sharp.IconButton();
@@ -34,11 +29,9 @@
             lblUsername = new Label();
             pnlContent = new Panel();
             pnlSideMenu.SuspendLayout();
-            pnlLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)iconLogo).BeginInit();
+            pnlCurrentUser.SuspendLayout();
             pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconCurrentPage).BeginInit();
-            pnlUserInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picUserAvatar).BeginInit();
             SuspendLayout();
             // 
@@ -56,7 +49,7 @@
             pnlSideMenu.Controls.Add(btnCustomers);
             pnlSideMenu.Controls.Add(btnDashboard);
             pnlSideMenu.Controls.Add(btnMainPage);
-            pnlSideMenu.Controls.Add(pnlLogo);
+            pnlSideMenu.Controls.Add(pnlCurrentUser);
             pnlSideMenu.Dock = DockStyle.Left;
             pnlSideMenu.Location = new Point(0, 0);
             pnlSideMenu.Name = "pnlSideMenu";
@@ -65,6 +58,7 @@
             // 
             // btnSettings
             // 
+            btnSettings.Cursor = Cursors.Hand;
             btnSettings.Dock = DockStyle.Top;
             btnSettings.FlatAppearance.BorderSize = 0;
             btnSettings.FlatStyle = FlatStyle.Flat;
@@ -84,9 +78,11 @@
             btnSettings.TextAlign = ContentAlignment.MiddleLeft;
             btnSettings.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSettings.UseVisualStyleBackColor = true;
+            btnSettings.Click += btnSettings_Click;
             // 
             // btnService
             // 
+            btnService.Cursor = Cursors.Hand;
             btnService.Dock = DockStyle.Top;
             btnService.FlatAppearance.BorderSize = 0;
             btnService.FlatStyle = FlatStyle.Flat;
@@ -106,9 +102,11 @@
             btnService.TextAlign = ContentAlignment.MiddleLeft;
             btnService.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnService.UseVisualStyleBackColor = true;
+            btnService.Click += btnService_Click;
             // 
             // btnReports
             // 
+            btnReports.Cursor = Cursors.Hand;
             btnReports.Dock = DockStyle.Top;
             btnReports.FlatAppearance.BorderSize = 0;
             btnReports.FlatStyle = FlatStyle.Flat;
@@ -128,9 +126,11 @@
             btnReports.TextAlign = ContentAlignment.MiddleLeft;
             btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReports.UseVisualStyleBackColor = true;
+            btnReports.Click += btnReports_Click;
             // 
             // btnStaff
             // 
+            btnStaff.Cursor = Cursors.Hand;
             btnStaff.Dock = DockStyle.Top;
             btnStaff.FlatAppearance.BorderSize = 0;
             btnStaff.FlatStyle = FlatStyle.Flat;
@@ -150,9 +150,11 @@
             btnStaff.TextAlign = ContentAlignment.MiddleLeft;
             btnStaff.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnStaff.UseVisualStyleBackColor = true;
+            btnStaff.Click += btnStaff_Click;
             // 
             // btnBranches
             // 
+            btnBranches.Cursor = Cursors.Hand;
             btnBranches.Dock = DockStyle.Top;
             btnBranches.FlatAppearance.BorderSize = 0;
             btnBranches.FlatStyle = FlatStyle.Flat;
@@ -160,7 +162,7 @@
             btnBranches.ForeColor = Color.White;
             btnBranches.IconChar = FontAwesome.Sharp.IconChar.Building;
             btnBranches.IconColor = Color.White;
-            btnBranches.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnBranches.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnBranches.IconSize = 32;
             btnBranches.ImageAlign = ContentAlignment.MiddleLeft;
             btnBranches.Location = new Point(0, 420);
@@ -172,15 +174,17 @@
             btnBranches.TextAlign = ContentAlignment.MiddleLeft;
             btnBranches.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnBranches.UseVisualStyleBackColor = true;
+            btnBranches.Click += btnBranches_Click;
             // 
             // btnSales
             // 
+            btnSales.Cursor = Cursors.Hand;
             btnSales.Dock = DockStyle.Top;
             btnSales.FlatAppearance.BorderSize = 0;
             btnSales.FlatStyle = FlatStyle.Flat;
             btnSales.Font = new Font("Segoe UI", 11F);
             btnSales.ForeColor = Color.White;
-            btnSales.IconChar = FontAwesome.Sharp.IconChar.CartShopping;
+            btnSales.IconChar = FontAwesome.Sharp.IconChar.Tags;
             btnSales.IconColor = Color.White;
             btnSales.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSales.IconSize = 32;
@@ -194,9 +198,11 @@
             btnSales.TextAlign = ContentAlignment.MiddleLeft;
             btnSales.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSales.UseVisualStyleBackColor = true;
+            btnSales.Click += btnSales_Click;
             // 
             // btnRentals
             // 
+            btnRentals.Cursor = Cursors.Hand;
             btnRentals.Dock = DockStyle.Top;
             btnRentals.FlatAppearance.BorderSize = 0;
             btnRentals.FlatStyle = FlatStyle.Flat;
@@ -216,9 +222,11 @@
             btnRentals.TextAlign = ContentAlignment.MiddleLeft;
             btnRentals.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnRentals.UseVisualStyleBackColor = true;
+            btnRentals.Click += btnRentals_Click;
             // 
             // btnVehicles
             // 
+            btnVehicles.Cursor = Cursors.Hand;
             btnVehicles.Dock = DockStyle.Top;
             btnVehicles.FlatAppearance.BorderSize = 0;
             btnVehicles.FlatStyle = FlatStyle.Flat;
@@ -238,9 +246,11 @@
             btnVehicles.TextAlign = ContentAlignment.MiddleLeft;
             btnVehicles.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnVehicles.UseVisualStyleBackColor = true;
+            btnVehicles.Click += btnVehicles_Click;
             // 
             // btnCustomers
             // 
+            btnCustomers.Cursor = Cursors.Hand;
             btnCustomers.Dock = DockStyle.Top;
             btnCustomers.FlatAppearance.BorderSize = 0;
             btnCustomers.FlatStyle = FlatStyle.Flat;
@@ -260,9 +270,11 @@
             btnCustomers.TextAlign = ContentAlignment.MiddleLeft;
             btnCustomers.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnCustomers.UseVisualStyleBackColor = true;
+            btnCustomers.Click += btnCustomers_Click;
             // 
             // btnDashboard
             // 
+            btnDashboard.Cursor = Cursors.Hand;
             btnDashboard.Dock = DockStyle.Top;
             btnDashboard.FlatAppearance.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
@@ -282,9 +294,11 @@
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnDashboard.UseVisualStyleBackColor = true;
+            btnDashboard.Click += btnDashboard_Click;
             // 
             // btnMainPage
             // 
+            btnMainPage.Cursor = Cursors.Hand;
             btnMainPage.Dock = DockStyle.Top;
             btnMainPage.FlatAppearance.BorderSize = 0;
             btnMainPage.FlatStyle = FlatStyle.Flat;
@@ -304,49 +318,27 @@
             btnMainPage.TextAlign = ContentAlignment.MiddleLeft;
             btnMainPage.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnMainPage.UseVisualStyleBackColor = true;
+            btnMainPage.Click += btnMainPage_Click;
             // 
-            // pnlLogo
+            // pnlCurrentUser
             // 
-            pnlLogo.BackColor = Color.FromArgb(39, 60, 117);
-            pnlLogo.Controls.Add(lblLogoText);
-            pnlLogo.Controls.Add(iconLogo);
-            pnlLogo.Dock = DockStyle.Top;
-            pnlLogo.Location = new Point(0, 0);
-            pnlLogo.Name = "pnlLogo";
-            pnlLogo.Size = new Size(250, 120);
-            pnlLogo.TabIndex = 0;
-            // 
-            // lblLogoText
-            // 
-            lblLogoText.Dock = DockStyle.Bottom;
-            lblLogoText.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblLogoText.ForeColor = Color.White;
-            lblLogoText.Location = new Point(0, 80);
-            lblLogoText.Name = "lblLogoText";
-            lblLogoText.Size = new Size(250, 40);
-            lblLogoText.TabIndex = 1;
-            lblLogoText.Text = "CAR RENTAL";
-            lblLogoText.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // iconLogo
-            // 
-            iconLogo.BackColor = Color.Transparent;
-            iconLogo.IconChar = FontAwesome.Sharp.IconChar.Car;
-            iconLogo.IconColor = Color.White;
-            iconLogo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconLogo.IconSize = 64;
-            iconLogo.Location = new Point(93, 12);
-            iconLogo.Name = "iconLogo";
-            iconLogo.Size = new Size(64, 64);
-            iconLogo.TabIndex = 0;
-            iconLogo.TabStop = false;
+            pnlCurrentUser.BackColor = Color.FromArgb(39, 60, 117);
+            pnlCurrentUser.Controls.Add(btnLogOut);
+            pnlCurrentUser.Controls.Add(picUserAvatar);
+            pnlCurrentUser.Controls.Add(lblUsername);
+            pnlCurrentUser.Controls.Add(lblBranchName);
+            pnlCurrentUser.Controls.Add(lblUserRole);
+            pnlCurrentUser.Dock = DockStyle.Top;
+            pnlCurrentUser.Location = new Point(0, 0);
+            pnlCurrentUser.Name = "pnlCurrentUser";
+            pnlCurrentUser.Size = new Size(250, 120);
+            pnlCurrentUser.TabIndex = 0;
             // 
             // pnlTopBar
             // 
             pnlTopBar.BackColor = Color.White;
             pnlTopBar.Controls.Add(lblPageTitle);
             pnlTopBar.Controls.Add(iconCurrentPage);
-            pnlTopBar.Controls.Add(pnlUserInfo);
             pnlTopBar.Dock = DockStyle.Top;
             pnlTopBar.Location = new Point(250, 0);
             pnlTopBar.Name = "pnlTopBar";
@@ -378,29 +370,15 @@
             iconCurrentPage.TabIndex = 0;
             iconCurrentPage.TabStop = false;
             // 
-            // pnlUserInfo
-            // 
-            pnlUserInfo.Controls.Add(picUserAvatar);
-            pnlUserInfo.Controls.Add(lblBranchName);
-            pnlUserInfo.Controls.Add(btnLogOut);
-            pnlUserInfo.Controls.Add(lblUserRole);
-            pnlUserInfo.Controls.Add(lblUsername);
-            pnlUserInfo.Dock = DockStyle.Right;
-            pnlUserInfo.Location = new Point(581, 0);
-            pnlUserInfo.Name = "pnlUserInfo";
-            pnlUserInfo.Size = new Size(369, 80);
-            pnlUserInfo.TabIndex = 1;
-            // 
             // picUserAvatar
             // 
             picUserAvatar.BackColor = Color.White;
-            picUserAvatar.Dock = DockStyle.Left;
             picUserAvatar.ForeColor = SystemColors.ControlText;
             picUserAvatar.IconChar = FontAwesome.Sharp.IconChar.None;
             picUserAvatar.IconColor = SystemColors.ControlText;
             picUserAvatar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             picUserAvatar.IconSize = 80;
-            picUserAvatar.Location = new Point(0, 0);
+            picUserAvatar.Location = new Point(151, 20);
             picUserAvatar.Name = "picUserAvatar";
             picUserAvatar.Size = new Size(80, 80);
             picUserAvatar.TabIndex = 0;
@@ -410,8 +388,8 @@
             // 
             lblBranchName.AutoSize = true;
             lblBranchName.Font = new Font("Segoe UI", 9F);
-            lblBranchName.ForeColor = Color.Gray;
-            lblBranchName.Location = new Point(96, 54);
+            lblBranchName.ForeColor = Color.White;
+            lblBranchName.Location = new Point(13, 65);
             lblBranchName.Name = "lblBranchName";
             lblBranchName.Size = new Size(44, 15);
             lblBranchName.TabIndex = 3;
@@ -421,6 +399,7 @@
             // 
             btnLogOut.Anchor = AnchorStyles.Right;
             btnLogOut.BackColor = Color.Transparent;
+            btnLogOut.Cursor = Cursors.Hand;
             btnLogOut.FlatAppearance.BorderSize = 0;
             btnLogOut.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnLogOut.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -429,7 +408,7 @@
             btnLogOut.IconColor = Color.FromArgb(49, 76, 143);
             btnLogOut.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnLogOut.IconSize = 35;
-            btnLogOut.Location = new Point(313, 25);
+            btnLogOut.Location = new Point(99, 70);
             btnLogOut.Name = "btnLogOut";
             btnLogOut.Size = new Size(30, 30);
             btnLogOut.TabIndex = 9;
@@ -440,8 +419,8 @@
             // 
             lblUserRole.AutoSize = true;
             lblUserRole.Font = new Font("Segoe UI", 9F);
-            lblUserRole.ForeColor = Color.Gray;
-            lblUserRole.Location = new Point(95, 34);
+            lblUserRole.ForeColor = Color.White;
+            lblUserRole.Location = new Point(12, 45);
             lblUserRole.Name = "lblUserRole";
             lblUserRole.Size = new Size(30, 15);
             lblUserRole.TabIndex = 2;
@@ -451,8 +430,8 @@
             // 
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblUsername.ForeColor = Color.FromArgb(49, 76, 143);
-            lblUsername.Location = new Point(95, 9);
+            lblUsername.ForeColor = Color.White;
+            lblUsername.Location = new Point(12, 20);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(117, 20);
             lblUsername.TabIndex = 1;
@@ -482,13 +461,11 @@
             WindowState = FormWindowState.Maximized;
             Load += MainPage_Load;
             pnlSideMenu.ResumeLayout(false);
-            pnlLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)iconLogo).EndInit();
+            pnlCurrentUser.ResumeLayout(false);
+            pnlCurrentUser.PerformLayout();
             pnlTopBar.ResumeLayout(false);
             pnlTopBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)iconCurrentPage).EndInit();
-            pnlUserInfo.ResumeLayout(false);
-            pnlUserInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picUserAvatar).EndInit();
             ResumeLayout(false);
         }
@@ -496,9 +473,7 @@
         #endregion
 
         private Panel pnlSideMenu;
-        private Panel pnlLogo;
-        private FontAwesome.Sharp.IconPictureBox iconLogo;
-        private Label lblLogoText;
+        private Panel pnlCurrentUser;
         private FontAwesome.Sharp.IconButton btnMainPage;
         private FontAwesome.Sharp.IconButton btnDashboard;
         private FontAwesome.Sharp.IconButton btnCustomers;
@@ -513,7 +488,6 @@
         private Panel pnlTopBar;
         private FontAwesome.Sharp.IconPictureBox iconCurrentPage;
         private Label lblPageTitle;
-        private Panel pnlUserInfo;
         private Label lblUsername;
         private Label lblUserRole;
         private Label lblBranchName;

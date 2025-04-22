@@ -23,7 +23,6 @@ namespace car_rental_sales_desktop.Forms.Pages
             btnEye.MouseDown += BtnEye_MouseDown;
             btnEye.MouseUp += BtnEye_MouseUp;
 
-            txtPassword.Text = "Enter your password";
             txtPassword.PasswordChar = '\0';
             txtPassword.Enter += TxtBoxPassword_Enter;
             txtPassword.Leave += TxtBoxPassword_Leave;
@@ -48,7 +47,11 @@ namespace car_rental_sales_desktop.Forms.Pages
 
         private void iconClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            var result = MessageBox.Show("Are you sure you want to exit the application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void lnkForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -117,8 +120,6 @@ namespace car_rental_sales_desktop.Forms.Pages
             }
         }
 
-        // TR: Bu metod, kullanıcı adı ve şifre alanlarına Enter tuşuna basıldığında giriş işlemini gerçekleştirir.
-        // EN: This method performs the login operation when the Enter key is pressed in the username and password fields.
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

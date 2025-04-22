@@ -2,13 +2,11 @@
 {
     partial class LoginPage
     {
-        private System.ComponentModel.IContainer components = null;
 
         #region Windows Form Designer generated code
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginPage));
             pnlContent = new Panel();
             lblStatus = new Label();
             lblVersion = new Label();
@@ -75,6 +73,7 @@
             // 
             lnkForgotPassword.ActiveLinkColor = Color.FromArgb(26, 115, 232);
             lnkForgotPassword.AutoSize = true;
+            lnkForgotPassword.Cursor = Cursors.Hand;
             lnkForgotPassword.Font = new Font("Segoe UI", 10F);
             lnkForgotPassword.LinkColor = Color.FromArgb(49, 76, 143);
             lnkForgotPassword.Location = new Point(285, 378);
@@ -89,6 +88,7 @@
             // btnLogin
             // 
             btnLogin.BackColor = Color.FromArgb(49, 76, 143);
+            btnLogin.Cursor = Cursors.Hand;
             btnLogin.FlatAppearance.BorderSize = 0;
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
@@ -126,6 +126,7 @@
             // btnClose
             // 
             btnClose.BackColor = Color.Transparent;
+            btnClose.Cursor = Cursors.Hand;
             btnClose.FlatAppearance.BorderSize = 0;
             btnClose.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnClose.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -144,6 +145,7 @@
             // btnMinimize
             // 
             btnMinimize.BackColor = Color.Transparent;
+            btnMinimize.Cursor = Cursors.Hand;
             btnMinimize.FlatAppearance.BorderSize = 0;
             btnMinimize.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnMinimize.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -174,6 +176,7 @@
             // 
             btnEye.Anchor = AnchorStyles.None;
             btnEye.BackColor = Color.Transparent;
+            btnEye.Cursor = Cursors.Hand;
             btnEye.FlatAppearance.BorderSize = 0;
             btnEye.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnEye.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -208,6 +211,7 @@
             // 
             txtPassword.BackColor = SystemColors.Control;
             txtPassword.BorderStyle = BorderStyle.None;
+            txtPassword.Cursor = Cursors.IBeam;
             txtPassword.Font = new Font("Segoe UI", 12F);
             txtPassword.ForeColor = Color.FromArgb(64, 64, 64);
             txtPassword.Location = new Point(43, 9);
@@ -246,6 +250,7 @@
             // 
             txtUsername.BackColor = SystemColors.Control;
             txtUsername.BorderStyle = BorderStyle.None;
+            txtUsername.Cursor = Cursors.IBeam;
             txtUsername.Font = new Font("Segoe UI", 12F);
             txtUsername.ForeColor = Color.FromArgb(64, 64, 64);
             txtUsername.Location = new Point(43, 9);
@@ -257,7 +262,7 @@
             // picLogin
             // 
             picLogin.Dock = DockStyle.Left;
-            picLogin.Image = (Image)resources.GetObject("picLogin.Image");
+            picLogin.Image = Properties.Resources.company_logo;
             picLogin.Location = new Point(0, 0);
             picLogin.Name = "picLogin";
             picLogin.Size = new Size(350, 600);
