@@ -12,7 +12,7 @@ namespace car_rental_sales_desktop
         // Fields
         private User _currentUser;
         private IconButton _currentButton;
-        private Color _activeButtonColor = Color.FromArgb(0, 120, 109);
+        private Color _activeButtonColor = Color.FromArgb(49, 76, 143);
 
         // Constructor
         public MainPage(User currentUser)

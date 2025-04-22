@@ -403,6 +403,7 @@ namespace car_rental_sales_desktop
             Controls.Add(pnlContent);
             Controls.Add(pnlTop);
             Controls.Add(pnlSide);
+            FormBorderStyle = FormBorderStyle.None;
             MinimumSize = new Size(877, 565);
             Name = "MainPage";
             StartPosition = FormStartPosition.CenterScreen;
