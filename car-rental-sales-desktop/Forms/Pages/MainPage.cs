@@ -65,7 +65,7 @@ namespace car_rental_sales_desktop
         {
             ActivateButton(btnCustomers);
             lblPageTitle.Text = "Customers";
-            MainMethods.LoadUserControl(pnlContent, new UserControl());
+            MainMethods.LoadUserControl(pnlContent, new Forms.Controls.CustomerControl());
         }
 
         private void btnVehicles_Click(object sender, EventArgs e)
