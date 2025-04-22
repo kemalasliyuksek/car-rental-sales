@@ -16,7 +16,7 @@ namespace car_rental_sales_desktop.Utils
 
         public static int? BranchID => _user?.BranchID;
 
-        public static string BranchName => _user?.Branch?.BranchName ?? "Main Branch";
+        public static string BranchName => _user?.Branch?.BranchName ?? string.Empty;
 
         public static int RoleID => _user?.RoleID ?? 0;
 

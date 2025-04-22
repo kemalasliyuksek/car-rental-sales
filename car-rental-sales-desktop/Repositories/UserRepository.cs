@@ -99,7 +99,6 @@ namespace car_rental_sales_desktop.Repositories
 
                 if (dataTable.Rows.Count > 0)
                 {
-                    // Update last login time
                     UpdateLastLogin(dataTable.Rows[0].GetValue<int>("UserID"));
                     return true;
                 }
