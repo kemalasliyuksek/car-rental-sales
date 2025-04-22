@@ -33,14 +33,10 @@ namespace car_rental_sales_desktop.Utils
             if (user == null || !user.IsActive)
                 return false;
 
-            var userRepository = new UserRepository();
-
-            _user = userRepository.GetById(user.UserID);
-
-            if (_user == null)
-                return false;
-
+            _user = user;
             LoginTime = DateTime.Now;
+
+            var userRepository = new UserRepository();
             userRepository.UpdateLastLogin(user.UserID);
 
             return true;
