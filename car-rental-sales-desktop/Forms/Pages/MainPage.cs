@@ -34,6 +34,6 @@ namespace car_rental_sales_desktop.Forms.Pages
                 LoginPage loginPage = new LoginPage();
                 loginPage.Show();
             }
-        }
+        }        
     }
 }

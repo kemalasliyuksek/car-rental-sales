@@ -500,6 +500,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Car Rental and Sales System";
             WindowState = FormWindowState.Maximized;
+            Load += MainPage_Load;
             pnlSideMenu.ResumeLayout(false);
             pnlLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)iconLogo).EndInit();
