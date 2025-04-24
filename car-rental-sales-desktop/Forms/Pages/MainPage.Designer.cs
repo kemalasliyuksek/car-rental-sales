@@ -20,6 +20,7 @@
             btnDashboard = new FontAwesome.Sharp.IconButton();
             btnMainPage = new FontAwesome.Sharp.IconButton();
             pnlCurrentUser = new Panel();
+            lblBranchName = new Label();
             pnlDivider = new Panel();
             btnLogOut = new FontAwesome.Sharp.IconButton();
             picUserAvatar = new FontAwesome.Sharp.IconPictureBox();
@@ -29,8 +30,7 @@
             lblPageTitle = new Label();
             iconCurrentPage = new FontAwesome.Sharp.IconPictureBox();
             pnlContent = new Panel();
-            toolTip = new ToolTip(components);
-            lblBranchName = new Label();
+            toolTipLogOut = new ToolTip(components);
             pnlSideMenu.SuspendLayout();
             pnlCurrentUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picUserAvatar).BeginInit();
@@ -338,6 +338,17 @@
             pnlCurrentUser.Size = new Size(250, 120);
             pnlCurrentUser.TabIndex = 0;
             // 
+            // lblBranchName
+            // 
+            lblBranchName.AutoSize = true;
+            lblBranchName.Font = new Font("Segoe UI", 9F);
+            lblBranchName.ForeColor = Color.FromArgb(200, 200, 255);
+            lblBranchName.Location = new Point(90, 75);
+            lblBranchName.Name = "lblBranchName";
+            lblBranchName.Size = new Size(79, 15);
+            lblBranchName.TabIndex = 11;
+            lblBranchName.Text = "Branch Name";
+            // 
             // pnlDivider
             // 
             pnlDivider.BackColor = Color.FromArgb(70, 100, 170);
@@ -363,7 +374,7 @@
             btnLogOut.Name = "btnLogOut";
             btnLogOut.Size = new Size(30, 30);
             btnLogOut.TabIndex = 9;
-            toolTip.SetToolTip(btnLogOut, "Logout");
+            toolTipLogOut.SetToolTip(btnLogOut, "Log Out");
             btnLogOut.UseVisualStyleBackColor = false;
             btnLogOut.Click += btnLogOut_Click;
             // 
@@ -385,7 +396,7 @@
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblUsername.ForeColor = Color.White;
-            lblUsername.Location = new Point(90, 20);
+            lblUsername.Location = new Point(90, 30);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(41, 20);
             lblUsername.TabIndex = 1;
@@ -396,7 +407,7 @@
             lblUserRole.AutoSize = true;
             lblUserRole.Font = new Font("Segoe UI", 9F);
             lblUserRole.ForeColor = Color.FromArgb(200, 200, 255);
-            lblUserRole.Location = new Point(90, 45);
+            lblUserRole.Location = new Point(90, 55);
             lblUserRole.Name = "lblUserRole";
             lblUserRole.Size = new Size(30, 15);
             lblUserRole.TabIndex = 2;
@@ -447,17 +458,6 @@
             pnlContent.Size = new Size(950, 720);
             pnlContent.TabIndex = 2;
             // 
-            // lblBranchName
-            // 
-            lblBranchName.AutoSize = true;
-            lblBranchName.Font = new Font("Segoe UI", 9F);
-            lblBranchName.ForeColor = Color.FromArgb(200, 200, 255);
-            lblBranchName.Location = new Point(90, 65);
-            lblBranchName.Name = "lblBranchName";
-            lblBranchName.Size = new Size(79, 15);
-            lblBranchName.TabIndex = 11;
-            lblBranchName.Text = "Branch Name";
-            // 
             // MainPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -506,8 +506,8 @@
         private FontAwesome.Sharp.IconButton btnLogOut;
         private FontAwesome.Sharp.IconPictureBox picUserAvatar;
         private Panel pnlDivider;
-        private ToolTip toolTip;
         private System.ComponentModel.IContainer components;
         private Label lblBranchName;
+        private ToolTip toolTipLogOut;
     }
 }

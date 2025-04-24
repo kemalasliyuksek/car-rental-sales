@@ -33,9 +33,7 @@ namespace car_rental_sales_desktop.Repositories
 
                 // Navigation properties
                 Role = GetUserRole(row.GetValue<int>("UserRoleID")),
-                Branch = row.GetValue<int?>("UserBranchID").HasValue
-                    ? GetUserBranch(row.GetValue<int>("UserBranchID"))
-                    : null
+                Branch = row["UserBranchID"] != DBNull.Value ? GetUserBranch(Convert.ToInt32(row["UserBranchID"])) : null
             };
         }
 
