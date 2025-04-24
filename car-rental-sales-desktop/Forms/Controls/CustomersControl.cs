@@ -29,6 +29,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             LoadCustomers();
         }
 
+        // TR: Bu metot, müşteri verilerini yüklemek için kullanılır.
+        // EN: This method is used to load customer data.
         private void LoadCustomers()
         {
             try
@@ -44,6 +46,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
+        // TR: Bu metot, müşteri verileri tablosında gösterilirken satır stillerini ayarlamak için kullanılır.
+        // EN: This method is used to set row styles when displaying customer data in the table.
         private void SfDataGridCustomers_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
             if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
@@ -51,9 +55,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (e.RowIndex % 2 == 0)
                     e.Style.BackColor = Color.White;
                 else
-                    e.Style.BackColor = Color.FromArgb(240, 245, 255); // Açık mavi tonu
+                    e.Style.BackColor = Color.FromArgb(240, 245, 255); 
             }
         }
-
     }
 }

@@ -33,35 +33,31 @@ namespace car_rental_sales_desktop.Forms.Controls
             LoadStaff();
         }
 
+        // TR: Bu metot, personel verilerini yükler ve veri tablosuna atar.
+        // EN: This method loads the staff data and assigns it to the data table.
         private void LoadStaff()
         {
             try
             {
-                // Get all users (staff members)
                 List<User> staff = _userRepository.GetAll();
 
-                // For each staff member, load their role and branch
                 foreach (var user in staff)
                 {
-                    // Always load the role information for proper display
                     if (user.UserRoleID > 0)
                     {
                         user.Role = _roleRepository.GetById(user.UserRoleID);
                     }
                     else
                     {
-                        // Create an empty role object to avoid null reference exceptions
                         user.Role = new Role { RoleName = "Not Assigned" };
                     }
 
-                    // Always load the branch information for proper display
                     if (user.UserBranchID.HasValue && user.UserBranchID.Value > 0)
                     {
                         user.Branch = _branchRepository.GetById(user.UserBranchID.Value);
                     }
                     else
                     {
-                        // Create an empty branch object to avoid null reference exceptions
                         user.Branch = new Branch { BranchName = "Not Assigned" };
                     }
                 }
@@ -75,6 +71,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
+        // TR: Bu metot, veri tablosundaki satırların stilini özelleştirir.
+        // EN: This method customizes the style of the rows in the data table.
         private void SfDataGridStaff_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
             if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
