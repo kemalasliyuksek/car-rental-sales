@@ -71,6 +71,7 @@
             tabPageCustomersList.ImageSize = new Size(16, 16);
             tabPageCustomersList.Location = new Point(1, 33);
             tabPageCustomersList.Name = "tabPageCustomersList";
+            tabPageCustomersList.Padding = new Padding(20);
             tabPageCustomersList.ShowCloseButton = true;
             tabPageCustomersList.Size = new Size(1667, 965);
             tabPageCustomersList.TabFont = new Font("Segoe UI", 12F);
@@ -81,63 +82,79 @@
             // sfDataGridCustomers
             // 
             sfDataGridCustomers.AccessibleName = "Table";
-            sfDataGridCustomers.AllowResizingColumns = true;
+            sfDataGridCustomers.AllowEditing = false;
             sfDataGridCustomers.AutoGenerateColumns = false;
+            gridNumericColumn1.AllowEditing = false;
             gridNumericColumn1.AllowResizing = true;
             gridNumericColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridNumericColumn1.Format = "0";
             gridNumericColumn1.HeaderText = "ID";
             gridNumericColumn1.MappingName = "CustomerID";
             gridNumericColumn1.Width = 50D;
+            gridTextColumn1.AllowEditing = false;
             gridTextColumn1.AllowResizing = true;
             gridTextColumn1.HeaderText = "First Name";
             gridTextColumn1.MappingName = "CustomerFirstName";
             gridTextColumn1.Width = 100D;
+            gridTextColumn2.AllowEditing = false;
             gridTextColumn2.AllowResizing = true;
             gridTextColumn2.HeaderText = "Last Name";
             gridTextColumn2.MappingName = "CustomerLastName";
-            gridTextColumn2.Width = 120D;
+            gridTextColumn2.Width = 100D;
+            gridTextColumn3.AllowEditing = false;
             gridTextColumn3.AllowResizing = true;
             gridTextColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridTextColumn3.Format = "0";
             gridTextColumn3.HeaderText = "National ID";
             gridTextColumn3.MappingName = "CustomerNationalID";
-            gridTextColumn3.Width = 115D;
+            gridTextColumn3.Width = 100D;
+            gridDateTimeColumn1.AllowEditing = false;
             gridDateTimeColumn1.AllowResizing = true;
             gridDateTimeColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn1.Format = "dd.MM.yyyy";
             gridDateTimeColumn1.HeaderText = "Birth Date";
             gridDateTimeColumn1.MappingName = "CustomerDateOfBirth";
             gridDateTimeColumn1.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn1.Width = 100D;
+            gridDateTimeColumn1.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn1.Width = 80D;
+            gridTextColumn4.AllowEditing = false;
             gridTextColumn4.AllowResizing = true;
             gridTextColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridTextColumn4.HeaderText = "License No";
             gridTextColumn4.MappingName = "CustomerLicenseNumber";
             gridTextColumn4.Width = 100D;
+            gridTextColumn5.AllowEditing = false;
             gridTextColumn5.AllowResizing = true;
             gridTextColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridTextColumn5.HeaderText = "License";
             gridTextColumn5.MappingName = "CustomerLicenseClass";
             gridTextColumn5.Width = 80D;
+            gridDateTimeColumn2.AllowEditing = false;
             gridDateTimeColumn2.AllowResizing = true;
             gridDateTimeColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn2.Format = "dd.MM.yyyy";
             gridDateTimeColumn2.HeaderText = "License Date";
             gridDateTimeColumn2.MappingName = "CustomerLicenseDate";
             gridDateTimeColumn2.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn2.Width = 120D;
+            gridDateTimeColumn2.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn2.Width = 85D;
+            gridTextColumn6.AllowEditing = false;
             gridTextColumn6.AllowResizing = true;
             gridTextColumn6.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridTextColumn6.HeaderText = "Phone No";
             gridTextColumn6.MappingName = "CustomerPhone";
             gridTextColumn6.Width = 120D;
+            gridTextColumn7.AllowEditing = false;
             gridTextColumn7.AllowResizing = true;
             gridTextColumn7.HeaderText = "Email";
             gridTextColumn7.MappingName = "CustomerEmail";
             gridTextColumn7.Width = 170D;
+            gridTextColumn8.AllowEditing = false;
             gridTextColumn8.AllowResizing = true;
             gridTextColumn8.HeaderText = "Address";
             gridTextColumn8.MappingName = "CustomerAddress";
-            gridTextColumn8.Width = 170D;
+            gridTextColumn8.Width = 250D;
+            gridDateTimeColumn3.AllowEditing = false;
             gridDateTimeColumn3.AllowResizing = true;
             gridDateTimeColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridDateTimeColumn3.Format = "dd.MM.yyyy HH:mm:ss";
@@ -146,22 +163,31 @@
             gridDateTimeColumn3.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             gridDateTimeColumn3.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
             gridDateTimeColumn3.Width = 130D;
+            gridCheckBoxColumn1.AllowEditing = false;
             gridCheckBoxColumn1.AllowResizing = true;
             gridCheckBoxColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridCheckBoxColumn1.HeaderText = "Active";
             gridCheckBoxColumn1.MappingName = "CustomerAvailable";
-            gridCheckBoxColumn1.Width = 80D;
+            gridCheckBoxColumn1.Width = 50D;
+            gridComboBoxColumn1.AllowEditing = false;
             gridComboBoxColumn1.AllowResizing = true;
             gridComboBoxColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridComboBoxColumn1.DataSource = new string[]
+    {
+    "Individual",
+    "Corporate"
+    };
             gridComboBoxColumn1.HeaderText = "Type";
             gridComboBoxColumn1.MappingName = "CustomerType";
             gridComboBoxColumn1.Width = 80D;
+            gridDateTimeColumn4.AllowEditing = false;
             gridDateTimeColumn4.AllowResizing = true;
             gridDateTimeColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn4.Format = "dd.MM.yyyy HH:mm:ss";
             gridDateTimeColumn4.HeaderText = "Updated";
             gridDateTimeColumn4.MappingName = "CustomerUpdatedAt";
             gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.LongTime;
+            gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
             gridDateTimeColumn4.Width = 130D;
             sfDataGridCustomers.Columns.Add(gridNumericColumn1);
             sfDataGridCustomers.Columns.Add(gridTextColumn1);
@@ -179,15 +205,21 @@
             sfDataGridCustomers.Columns.Add(gridComboBoxColumn1);
             sfDataGridCustomers.Columns.Add(gridDateTimeColumn4);
             sfDataGridCustomers.Dock = DockStyle.Fill;
-            sfDataGridCustomers.Location = new Point(0, 0);
+            sfDataGridCustomers.Location = new Point(20, 20);
             sfDataGridCustomers.Name = "sfDataGridCustomers";
-            sfDataGridCustomers.Size = new Size(1667, 965);
-            sfDataGridCustomers.Style.AddNewRowStyle.BackColor = Color.FromArgb(242, 242, 242);
+            sfDataGridCustomers.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
+            sfDataGridCustomers.Size = new Size(1627, 925);
+            sfDataGridCustomers.Style.AddNewRowStyle.BackColor = Color.Transparent;
             sfDataGridCustomers.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridCustomers.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             sfDataGridCustomers.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
             sfDataGridCustomers.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            sfDataGridCustomers.Style.CurrentCellStyle.BackColor = Color.FromArgb(166, 216, 255);
+            sfDataGridCustomers.Style.CurrentCellStyle.BorderColor = Color.FromArgb(166, 216, 255);
+            sfDataGridCustomers.Style.CurrentCellStyle.BorderThickness = Syncfusion.WinForms.DataGrid.Styles.GridBorderWeight.ExtraThin;
+            sfDataGridCustomers.Style.CurrentCellStyle.TextColor = Color.Black;
             sfDataGridCustomers.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            sfDataGridCustomers.Style.SelectionStyle.TextColor = Color.Black;
             sfDataGridCustomers.TabIndex = 0;
             // 
             // tabPageCustomerAdd
@@ -215,12 +247,6 @@
             tabPageCustomersList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).EndInit();
             ResumeLayout(false);
-            //
-            // Grid ComboBox Column
-            //
-            gridComboBoxColumn1.DataSource = new string[] { "Individual", "Corporate" };
-            gridComboBoxColumn1.DisplayMember = null;
-            gridComboBoxColumn1.ValueMember = null;
         }
 
         #endregion

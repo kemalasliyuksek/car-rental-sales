@@ -204,5 +204,13 @@ namespace car_rental_sales_desktop.Repositories
 
             return ConvertDataTableToList(dataTable);
         }
+
+        // Get all customers
+        public List<Customer> GetAllCustomers()
+        {
+            string query = "SELECT * FROM Customers";
+            var dataTable = DatabaseHelper.ExecuteQuery(query);
+            return ConvertDataTableToList(dataTable);
+        }
     }
 }

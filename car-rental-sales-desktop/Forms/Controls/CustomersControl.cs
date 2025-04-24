@@ -33,7 +33,7 @@ namespace car_rental_sales_desktop.Forms.Controls
         {
             try
             {
-                List<Customer> customers = _customerRepository.GetActiveCustomers();
+                List<Customer> customers = _customerRepository.GetAllCustomers();
 
                 sfDataGridCustomers.DataSource = customers;
             }
