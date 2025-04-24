@@ -74,7 +74,7 @@
             btnSettings.ImageAlign = ContentAlignment.MiddleLeft;
             btnSettings.Location = new Point(0, 620);
             btnSettings.Name = "btnSettings";
-            btnSettings.Padding = new Padding(10, 0, 0, 0);
+            btnSettings.Padding = new Padding(20, 0, 0, 0);
             btnSettings.Size = new Size(250, 50);
             btnSettings.TabIndex = 10;
             btnSettings.Text = "  Settings";
@@ -98,7 +98,7 @@
             btnService.ImageAlign = ContentAlignment.MiddleLeft;
             btnService.Location = new Point(0, 570);
             btnService.Name = "btnService";
-            btnService.Padding = new Padding(10, 0, 0, 0);
+            btnService.Padding = new Padding(20, 0, 0, 0);
             btnService.Size = new Size(250, 50);
             btnService.TabIndex = 9;
             btnService.Text = "  Service";
@@ -122,7 +122,7 @@
             btnReports.ImageAlign = ContentAlignment.MiddleLeft;
             btnReports.Location = new Point(0, 520);
             btnReports.Name = "btnReports";
-            btnReports.Padding = new Padding(10, 0, 0, 0);
+            btnReports.Padding = new Padding(20, 0, 0, 0);
             btnReports.Size = new Size(250, 50);
             btnReports.TabIndex = 8;
             btnReports.Text = "  Reports";
@@ -146,7 +146,7 @@
             btnStaff.ImageAlign = ContentAlignment.MiddleLeft;
             btnStaff.Location = new Point(0, 470);
             btnStaff.Name = "btnStaff";
-            btnStaff.Padding = new Padding(10, 0, 0, 0);
+            btnStaff.Padding = new Padding(20, 0, 0, 0);
             btnStaff.Size = new Size(250, 50);
             btnStaff.TabIndex = 7;
             btnStaff.Text = "  Staff";
@@ -170,7 +170,7 @@
             btnBranches.ImageAlign = ContentAlignment.MiddleLeft;
             btnBranches.Location = new Point(0, 420);
             btnBranches.Name = "btnBranches";
-            btnBranches.Padding = new Padding(10, 0, 0, 0);
+            btnBranches.Padding = new Padding(20, 0, 0, 0);
             btnBranches.Size = new Size(250, 50);
             btnBranches.TabIndex = 6;
             btnBranches.Text = "  Branches";
@@ -194,7 +194,7 @@
             btnSales.ImageAlign = ContentAlignment.MiddleLeft;
             btnSales.Location = new Point(0, 370);
             btnSales.Name = "btnSales";
-            btnSales.Padding = new Padding(10, 0, 0, 0);
+            btnSales.Padding = new Padding(20, 0, 0, 0);
             btnSales.Size = new Size(250, 50);
             btnSales.TabIndex = 5;
             btnSales.Text = "  Sales";
@@ -218,7 +218,7 @@
             btnRentals.ImageAlign = ContentAlignment.MiddleLeft;
             btnRentals.Location = new Point(0, 320);
             btnRentals.Name = "btnRentals";
-            btnRentals.Padding = new Padding(10, 0, 0, 0);
+            btnRentals.Padding = new Padding(20, 0, 0, 0);
             btnRentals.Size = new Size(250, 50);
             btnRentals.TabIndex = 4;
             btnRentals.Text = "  Rentals";
@@ -242,7 +242,7 @@
             btnVehicles.ImageAlign = ContentAlignment.MiddleLeft;
             btnVehicles.Location = new Point(0, 270);
             btnVehicles.Name = "btnVehicles";
-            btnVehicles.Padding = new Padding(10, 0, 0, 0);
+            btnVehicles.Padding = new Padding(20, 0, 0, 0);
             btnVehicles.Size = new Size(250, 50);
             btnVehicles.TabIndex = 3;
             btnVehicles.Text = "  Vehicles";
@@ -266,7 +266,7 @@
             btnCustomers.ImageAlign = ContentAlignment.MiddleLeft;
             btnCustomers.Location = new Point(0, 220);
             btnCustomers.Name = "btnCustomers";
-            btnCustomers.Padding = new Padding(10, 0, 0, 0);
+            btnCustomers.Padding = new Padding(20, 0, 0, 0);
             btnCustomers.Size = new Size(250, 50);
             btnCustomers.TabIndex = 2;
             btnCustomers.Text = "  Customers";
@@ -290,7 +290,7 @@
             btnDashboard.ImageAlign = ContentAlignment.MiddleLeft;
             btnDashboard.Location = new Point(0, 170);
             btnDashboard.Name = "btnDashboard";
-            btnDashboard.Padding = new Padding(10, 0, 0, 0);
+            btnDashboard.Padding = new Padding(20, 0, 0, 0);
             btnDashboard.Size = new Size(250, 50);
             btnDashboard.TabIndex = 1;
             btnDashboard.Text = "  Dashboard";
@@ -314,7 +314,7 @@
             btnMainPage.ImageAlign = ContentAlignment.MiddleLeft;
             btnMainPage.Location = new Point(0, 120);
             btnMainPage.Name = "btnMainPage";
-            btnMainPage.Padding = new Padding(10, 0, 0, 0);
+            btnMainPage.Padding = new Padding(20, 0, 0, 0);
             btnMainPage.Size = new Size(250, 50);
             btnMainPage.TabIndex = 11;
             btnMainPage.Text = "  Main Page";
