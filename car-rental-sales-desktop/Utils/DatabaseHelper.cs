@@ -65,9 +65,24 @@ namespace car_rental_sales_desktop.Utils
                 return default;
 
             object value = row[columnName];
+            Type targetType = typeof(T);
+
+            // Nullable tipleri doğru işle
+            if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                targetType = Nullable.GetUnderlyingType(targetType);
+            }
+
             try
             {
-                return (T)Convert.ChangeType(value, typeof(T));
+                // DateTime özel işleme
+                if (targetType == typeof(DateTime) && value is string dateStr)
+                {
+                    if (DateTime.TryParse(dateStr, out DateTime date))
+                        return (T)(object)date;
+                }
+
+                return (T)Convert.ChangeType(value, targetType);
             }
             catch
             {

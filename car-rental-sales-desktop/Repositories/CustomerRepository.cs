@@ -15,24 +15,35 @@ namespace car_rental_sales_desktop.Repositories
 
         protected override Customer MapToModel(DataRow row)
         {
-            return new Customer
+            var customer = new Customer
             {
                 CustomerID = row.GetValue<int>("CustomerID"),
                 CustomerFirstName = row.GetValue<string>("CustomerFirstName"),
                 CustomerLastName = row.GetValue<string>("CustomerLastName"),
                 CustomerNationalID = row.GetValue<string>("CustomerNationalID"),
-                CustomerDateOfBirth = row.GetValue<DateTime?>("CustomerDateOfBirth"),//
                 CustomerLicenseNumber = row.GetValue<string>("CustomerLicenseNumber"),
                 CustomerLicenseClass = row.GetValue<string>("CustomerLicenseClass"),
-                CustomerLicenseDate = row.GetValue<DateTime?>("CustomerLicenseDate"),//
                 CustomerPhone = row.GetValue<string>("CustomerPhone"),
                 CustomerEmail = row.GetValue<string>("CustomerEmail"),
                 CustomerAddress = row.GetValue<string>("CustomerAddress"),
                 CustomerRegistrationDate = row.GetValue<DateTime>("CustomerRegistrationDate"),
-                CustomerAvailable = row.GetValue<bool>("CustomerAvailable"),
-                CustomerType = row.GetValue<string>("CustomerType"),//
-                CustomerUpdatedAt = row.GetValue<DateTime?>("CustomerUpdatedAt")//
+                CustomerAvailable = row.GetValue<bool>("CustomerAvailable")
             };
+
+            // Sorunlu alanlara doğrudan erişim
+            if (row["CustomerDateOfBirth"] != DBNull.Value)
+                customer.CustomerDateOfBirth = Convert.ToDateTime(row["CustomerDateOfBirth"]);
+
+            if (row["CustomerLicenseDate"] != DBNull.Value)
+                customer.CustomerLicenseDate = Convert.ToDateTime(row["CustomerLicenseDate"]);
+
+            if (row["CustomerType"] != DBNull.Value)
+                customer.CustomerType = row["CustomerType"].ToString();
+
+            if (row["CustomerUpdatedAt"] != DBNull.Value)
+                customer.CustomerUpdatedAt = Convert.ToDateTime(row["CustomerUpdatedAt"]);
+
+            return customer;
         }
 
         protected override Dictionary<string, object> GetInsertParameters(Customer entity)

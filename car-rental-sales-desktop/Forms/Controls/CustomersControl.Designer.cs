@@ -137,13 +137,15 @@
             gridTextColumn8.AllowResizing = true;
             gridTextColumn8.HeaderText = "Address";
             gridTextColumn8.MappingName = "CustomerAddress";
-            gridTextColumn8.Width = 200D;
+            gridTextColumn8.Width = 170D;
             gridDateTimeColumn3.AllowResizing = true;
             gridDateTimeColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn3.Format = "dd.MM.yyyy HH:mm:ss";
             gridDateTimeColumn3.HeaderText = "Reg Date";
             gridDateTimeColumn3.MappingName = "CustomerRegistrationDate";
             gridDateTimeColumn3.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn3.Width = 100D;
+            gridDateTimeColumn3.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn3.Width = 130D;
             gridCheckBoxColumn1.AllowResizing = true;
             gridCheckBoxColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridCheckBoxColumn1.HeaderText = "Active";
@@ -159,7 +161,7 @@
             gridDateTimeColumn4.HeaderText = "Updated";
             gridDateTimeColumn4.MappingName = "CustomerUpdatedAt";
             gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.FullDateTime;
+            gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.LongTime;
             gridDateTimeColumn4.Width = 130D;
             sfDataGridCustomers.Columns.Add(gridNumericColumn1);
             sfDataGridCustomers.Columns.Add(gridTextColumn1);
@@ -180,6 +182,7 @@
             sfDataGridCustomers.Location = new Point(0, 0);
             sfDataGridCustomers.Name = "sfDataGridCustomers";
             sfDataGridCustomers.Size = new Size(1667, 965);
+            sfDataGridCustomers.Style.AddNewRowStyle.BackColor = Color.FromArgb(242, 242, 242);
             sfDataGridCustomers.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridCustomers.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             sfDataGridCustomers.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
