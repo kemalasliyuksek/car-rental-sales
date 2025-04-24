@@ -128,7 +128,7 @@
             gridTextColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridTextColumn5.HeaderText = "License";
             gridTextColumn5.MappingName = "CustomerLicenseClass";
-            gridTextColumn5.Width = 80D;
+            gridTextColumn5.Width = 66D;
             gridDateTimeColumn2.AllowEditing = false;
             gridDateTimeColumn2.AllowResizing = true;
             gridDateTimeColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
@@ -184,7 +184,7 @@
             gridDateTimeColumn4.AllowResizing = true;
             gridDateTimeColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridDateTimeColumn4.Format = "dd.MM.yyyy HH:mm:ss";
-            gridDateTimeColumn4.HeaderText = "Updated";
+            gridDateTimeColumn4.HeaderText = "Updated At";
             gridDateTimeColumn4.MappingName = "CustomerUpdatedAt";
             gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
