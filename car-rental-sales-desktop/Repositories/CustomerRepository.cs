@@ -21,17 +21,17 @@ namespace car_rental_sales_desktop.Repositories
                 CustomerFirstName = row.GetValue<string>("CustomerFirstName"),
                 CustomerLastName = row.GetValue<string>("CustomerLastName"),
                 CustomerNationalID = row.GetValue<string>("CustomerNationalID"),
-                CustomerDateOfBirth = row.GetValue<DateTime?>("CustomerDateOfBirth"),
+                CustomerDateOfBirth = row.GetValue<DateTime?>("CustomerDateOfBirth"),//
                 CustomerLicenseNumber = row.GetValue<string>("CustomerLicenseNumber"),
                 CustomerLicenseClass = row.GetValue<string>("CustomerLicenseClass"),
-                CustomerLicenseDate = row.GetValue<DateTime?>("CustomerLicenseDate"),
+                CustomerLicenseDate = row.GetValue<DateTime?>("CustomerLicenseDate"),//
                 CustomerPhone = row.GetValue<string>("CustomerPhone"),
                 CustomerEmail = row.GetValue<string>("CustomerEmail"),
                 CustomerAddress = row.GetValue<string>("CustomerAddress"),
                 CustomerRegistrationDate = row.GetValue<DateTime>("CustomerRegistrationDate"),
                 CustomerAvailable = row.GetValue<bool>("CustomerAvailable"),
-                CustomerType = row.GetValue<string>("CustomerType"),
-                CustomerUpdatedAt = row.GetValue<DateTime?>("CustomerUpdatedAt")
+                CustomerType = row.GetValue<string>("CustomerType"),//
+                CustomerUpdatedAt = row.GetValue<DateTime?>("CustomerUpdatedAt")//
             };
         }
 

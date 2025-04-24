@@ -58,12 +58,12 @@ INSERT INTO Vehicles (VehiclePlateNumber, VehicleBrand, VehicleModel, VehicleYea
 
 -- Müşteri verileri
 INSERT INTO Customers (CustomerFirstName, CustomerLastName, CustomerNationalID, CustomerDateOfBirth, CustomerLicenseNumber, CustomerLicenseClass, CustomerLicenseDate, CustomerPhone, CustomerEmail, CustomerAddress, CustomerType) VALUES 
-('Ahmet', 'Yılmaz', '12345678901', '1985-05-10', 'LIC123456', 'B', '2010-06-15', '05551234567', 'ahmet@email.com', 'Atatürk Caddesi No:15, Beşiktaş, İstanbul', 'Individual'),
-('Ayşe', 'Kaya', '23456789012', '1990-08-22', 'LIC234567', 'B', '2012-09-30', '05552345678', 'ayse@email.com', 'Cumhuriyet Caddesi No:8, Çankaya, Ankara', 'Individual'),
-('Mehmet', 'Demir', '34567890123', '1978-03-15', 'LIC345678', 'B,E', '2005-04-20', '05553456789', 'mehmet@email.com', 'İnönü Caddesi No:42, Konak, İzmir', 'Individual'),
-('Zeynep', 'Çelik', '45678901234', '1995-11-30', 'LIC456789', 'B', '2018-12-05', '05554567890', 'zeynep@email.com', 'Lara Caddesi No:24, Muratpaşa, Antalya', 'Individual'),
-('Mustafa', 'Öztürk', '56789012345', '1982-07-18', 'LIC567890', 'B,C', '2008-08-22', '05555678901', 'mustafa@email.com', 'Meydan Sokak No:7, Bodrum, Muğla', 'Individual'),
-('Anadolu', 'Lojistik', '67890123456', NULL, NULL, NULL, NULL, '08502345678', 'info@anadolulojistik.com', 'Organize Sanayi Bölgesi, No:15, Kocaeli', 'Corporate');
+('Ahmet', 'Yılmaz', '12345678901', '1985-05-10', 'LIC123456', 'B', '2010-06-15', '905551234567', 'ahmet@email.com', 'Atatürk Caddesi No:15, Beşiktaş, İstanbul', 'Individual'),
+('Ayşe', 'Kaya', '23456789012', '1990-08-22', 'LIC234567', 'B', '2012-09-30', '905552345678', 'ayse@email.com', 'Cumhuriyet Caddesi No:8, Çankaya, Ankara', 'Individual'),
+('Mehmet', 'Demir', '34567890123', '1978-03-15', 'LIC345678', 'B,E', '2005-04-20', '905553456789', 'mehmet@email.com', 'İnönü Caddesi No:42, Konak, İzmir', 'Individual'),
+('Zeynep', 'Çelik', '45678901234', '1995-11-30', 'LIC456789', 'B', '2018-12-05', '905554567890', 'zeynep@email.com', 'Lara Caddesi No:24, Muratpaşa, Antalya', 'Individual'),
+('Mustafa', 'Öztürk', '56789012345', '1982-07-18', 'LIC567890', 'B,C', '2008-08-22', '905555678901', 'mustafa@email.com', 'Meydan Sokak No:7, Bodrum, Muğla', 'Individual'),
+('Anadolu', 'Lojistik', '67890123456', '2002-01-20', 'LIC5657891', 'B,C,E', '2004-07-12', '908502345678', 'info@anadolulojistik.com', 'Organize Sanayi Bölgesi, No:15, Kocaeli', 'Corporate');
 
 -- Kullanıcı verileri
 INSERT INTO Users (UserFirstName, UserLastName, Username, UserPassword, UserEmail, UserPhone, UserRoleID, UserBranchID) VALUES 
