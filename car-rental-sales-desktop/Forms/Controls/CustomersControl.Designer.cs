@@ -215,6 +215,12 @@
             tabPageCustomersList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).EndInit();
             ResumeLayout(false);
+            //
+            // Grid ComboBox Column
+            //
+            gridComboBoxColumn1.DataSource = new string[] { "Individual", "Corporate" };
+            gridComboBoxColumn1.DisplayMember = null;
+            gridComboBoxColumn1.ValueMember = null;
         }
 
         #endregion
