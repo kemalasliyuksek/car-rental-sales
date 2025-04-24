@@ -23,6 +23,8 @@ namespace car_rental_sales_desktop.Forms.Pages
             lblUsername.Text = Utils.CurrentUser.FullName;
             lblUserRole.Text = Utils.CurrentUser.RoleName;
             lblBranchName.Text = Utils.CurrentUser.BranchName;
+
+            btnMainPage_Click(sender, e);
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
