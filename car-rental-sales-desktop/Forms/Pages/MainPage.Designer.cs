@@ -24,13 +24,13 @@
             btnLogOut = new FontAwesome.Sharp.IconButton();
             picUserAvatar = new FontAwesome.Sharp.IconPictureBox();
             lblUsername = new Label();
-            lblBranchName = new Label();
             lblUserRole = new Label();
             pnlTopBar = new Panel();
             lblPageTitle = new Label();
             iconCurrentPage = new FontAwesome.Sharp.IconPictureBox();
             pnlContent = new Panel();
             toolTip = new ToolTip(components);
+            lblBranchName = new Label();
             pnlSideMenu.SuspendLayout();
             pnlCurrentUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picUserAvatar).BeginInit();
@@ -326,11 +326,11 @@
             // pnlCurrentUser
             // 
             pnlCurrentUser.BackColor = Color.FromArgb(33, 50, 100);
+            pnlCurrentUser.Controls.Add(lblBranchName);
             pnlCurrentUser.Controls.Add(pnlDivider);
             pnlCurrentUser.Controls.Add(btnLogOut);
             pnlCurrentUser.Controls.Add(picUserAvatar);
             pnlCurrentUser.Controls.Add(lblUsername);
-            pnlCurrentUser.Controls.Add(lblBranchName);
             pnlCurrentUser.Controls.Add(lblUserRole);
             pnlCurrentUser.Dock = DockStyle.Top;
             pnlCurrentUser.Location = new Point(0, 0);
@@ -387,20 +387,9 @@
             lblUsername.ForeColor = Color.White;
             lblUsername.Location = new Point(90, 20);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(117, 20);
+            lblUsername.Size = new Size(41, 20);
             lblUsername.TabIndex = 1;
-            lblUsername.Text = "Name Surname";
-            // 
-            // lblBranchName
-            // 
-            lblBranchName.AutoSize = true;
-            lblBranchName.Font = new Font("Segoe UI", 9F);
-            lblBranchName.ForeColor = Color.FromArgb(180, 180, 235);
-            lblBranchName.Location = new Point(90, 65);
-            lblBranchName.Name = "lblBranchName";
-            lblBranchName.Size = new Size(77, 15);
-            lblBranchName.TabIndex = 3;
-            lblBranchName.Text = "Branch: Main";
+            lblUsername.Text = "User";
             // 
             // lblUserRole
             // 
@@ -409,9 +398,9 @@
             lblUserRole.ForeColor = Color.FromArgb(200, 200, 255);
             lblUserRole.Location = new Point(90, 45);
             lblUserRole.Name = "lblUserRole";
-            lblUserRole.Size = new Size(72, 15);
+            lblUserRole.Size = new Size(30, 15);
             lblUserRole.TabIndex = 2;
-            lblUserRole.Text = "Role: Admin";
+            lblUserRole.Text = "Role";
             // 
             // pnlTopBar
             // 
@@ -458,6 +447,17 @@
             pnlContent.Size = new Size(950, 720);
             pnlContent.TabIndex = 2;
             // 
+            // lblBranchName
+            // 
+            lblBranchName.AutoSize = true;
+            lblBranchName.Font = new Font("Segoe UI", 9F);
+            lblBranchName.ForeColor = Color.FromArgb(200, 200, 255);
+            lblBranchName.Location = new Point(90, 65);
+            lblBranchName.Name = "lblBranchName";
+            lblBranchName.Size = new Size(79, 15);
+            lblBranchName.TabIndex = 11;
+            lblBranchName.Text = "Branch Name";
+            // 
             // MainPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -502,12 +502,12 @@
         private Label lblPageTitle;
         private Label lblUsername;
         private Label lblUserRole;
-        private Label lblBranchName;
         private Panel pnlContent;
         private FontAwesome.Sharp.IconButton btnLogOut;
         private FontAwesome.Sharp.IconPictureBox picUserAvatar;
         private Panel pnlDivider;
         private ToolTip toolTip;
         private System.ComponentModel.IContainer components;
+        private Label lblBranchName;
     }
 }
