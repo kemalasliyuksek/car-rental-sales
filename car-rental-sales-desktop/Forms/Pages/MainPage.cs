@@ -24,7 +24,13 @@ namespace car_rental_sales_desktop.Forms.Pages
             lblUserRole.Text = Utils.CurrentUser.RoleName;
             lblBranchName.Text = Utils.CurrentUser.BranchName;
 
-            btnMainPage_Click(sender, e);
+            ResetButtons();
+            SetActiveButton(btnMainPage);
+
+            pnlContent.Controls.Clear();
+            var mainPageControl = new MainPageControl();
+            mainPageControl.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(mainPageControl);
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -39,9 +45,38 @@ namespace car_rental_sales_desktop.Forms.Pages
             }
         }
 
+        private void ResetButtons()
+        {
+            foreach (Control control in pnlSideMenu.Controls)
+            {
+                if (control is FontAwesome.Sharp.IconButton)
+                {
+                    control.BackColor = Color.FromArgb(49, 76, 143);
+                    control.ForeColor = Color.White;
+                }
+            }
+        }
+
+        private void SetActiveButton(object button)
+        {
+            if (button != null)
+            {
+                ((FontAwesome.Sharp.IconButton)button).BackColor = Color.FromArgb(73, 113, 194);
+
+                ((FontAwesome.Sharp.IconButton)button).ForeColor = Color.White;
+
+                iconCurrentPage.IconChar = ((FontAwesome.Sharp.IconButton)button).IconChar;
+                lblPageTitle.Text = ((FontAwesome.Sharp.IconButton)button).Text.Trim();
+            }
+        }
+
+
         // MainPage UserControl
         private void btnMainPage_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var mainPageControl = new MainPageControl();
             mainPageControl.Dock = DockStyle.Fill;
@@ -52,6 +87,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Dashboard UserControl
         private void btnDashboard_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var dashboardControl = new DashboardControl();
             dashboardControl.Dock = DockStyle.Fill;
@@ -61,6 +99,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Customers UserControl
         private void btnCustomers_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var customersControl = new CustomersControl();
             customersControl.Dock = DockStyle.Fill;
@@ -70,6 +111,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Vehicles UserControl
         private void btnVehicles_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var vehiclesControl = new VehiclesControl();
             vehiclesControl.Dock = DockStyle.Fill;
@@ -79,6 +123,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Rentals UserControl
         private void btnRentals_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var rentalsControl = new RentalsControl();
             rentalsControl.Dock = DockStyle.Fill;
@@ -88,6 +135,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Sales UserControl
         private void btnSales_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var salesControl = new SalesControl();
             salesControl.Dock = DockStyle.Fill;
@@ -97,6 +147,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Branches UserControl
         private void btnBranches_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var branchesControl = new BranchesControl();
             branchesControl.Dock = DockStyle.Fill;
@@ -106,6 +159,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Staff UserControl
         private void btnStaff_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var staffControl = new StaffControl();
             staffControl.Dock = DockStyle.Fill;
@@ -115,6 +171,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Reports UserControl
         private void btnReports_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var reportsControl = new ReportsControl();
             reportsControl.Dock = DockStyle.Fill;
@@ -124,6 +183,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Service UserControl
         private void btnService_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var serviceControl = new ServiceControl();
             serviceControl.Dock = DockStyle.Fill;
@@ -133,6 +195,9 @@ namespace car_rental_sales_desktop.Forms.Pages
         // Settings UserControl
         private void btnSettings_Click(object sender, EventArgs e)
         {
+            ResetButtons();
+            SetActiveButton(sender);
+
             pnlContent.Controls.Clear();
             var settingsControl = new SettingsControl();
             settingsControl.Dock = DockStyle.Fill;

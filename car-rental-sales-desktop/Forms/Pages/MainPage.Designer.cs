@@ -441,7 +441,7 @@
             iconCurrentPage.ForeColor = Color.FromArgb(49, 76, 143);
             iconCurrentPage.IconChar = FontAwesome.Sharp.IconChar.House;
             iconCurrentPage.IconColor = Color.FromArgb(49, 76, 143);
-            iconCurrentPage.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconCurrentPage.IconFont = FontAwesome.Sharp.IconFont.Solid;
             iconCurrentPage.IconSize = 40;
             iconCurrentPage.Location = new Point(23, 20);
             iconCurrentPage.Name = "iconCurrentPage";
