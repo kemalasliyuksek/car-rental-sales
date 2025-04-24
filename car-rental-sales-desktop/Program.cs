@@ -7,6 +7,7 @@ namespace car_rental_sales_desktop
         [STAThread]
         static void Main()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NNaF5cXmpCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXtcdHVURmNeUEVyW0RWYUA=");
             ApplicationConfiguration.Initialize();
             Application.Run(new LoginPage());
         }
