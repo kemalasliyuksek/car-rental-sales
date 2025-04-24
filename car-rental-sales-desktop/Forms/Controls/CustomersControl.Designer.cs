@@ -143,26 +143,26 @@
             gridTextColumn6.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
             gridTextColumn6.HeaderText = "Phone No";
             gridTextColumn6.MappingName = "CustomerPhone";
-            gridTextColumn6.Width = 120D;
+            gridTextColumn6.Width = 110D;
             gridTextColumn7.AllowEditing = false;
             gridTextColumn7.AllowResizing = true;
             gridTextColumn7.HeaderText = "Email";
             gridTextColumn7.MappingName = "CustomerEmail";
-            gridTextColumn7.Width = 170D;
+            gridTextColumn7.Width = 180D;
             gridTextColumn8.AllowEditing = false;
             gridTextColumn8.AllowResizing = true;
             gridTextColumn8.HeaderText = "Address";
             gridTextColumn8.MappingName = "CustomerAddress";
-            gridTextColumn8.Width = 250D;
+            gridTextColumn8.Width = 230D;
             gridDateTimeColumn3.AllowEditing = false;
             gridDateTimeColumn3.AllowResizing = true;
             gridDateTimeColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn3.Format = "dd.MM.yyyy HH:mm:ss";
+            gridDateTimeColumn3.Format = "dd.MM.yyyy - HH:mm:ss";
             gridDateTimeColumn3.HeaderText = "Reg Date";
             gridDateTimeColumn3.MappingName = "CustomerRegistrationDate";
             gridDateTimeColumn3.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             gridDateTimeColumn3.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn3.Width = 130D;
+            gridDateTimeColumn3.Width = 140D;
             gridCheckBoxColumn1.AllowEditing = false;
             gridCheckBoxColumn1.AllowResizing = true;
             gridCheckBoxColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
@@ -183,12 +183,12 @@
             gridDateTimeColumn4.AllowEditing = false;
             gridDateTimeColumn4.AllowResizing = true;
             gridDateTimeColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn4.Format = "dd.MM.yyyy HH:mm:ss";
+            gridDateTimeColumn4.Format = "dd.MM.yyyy - HH:mm:ss";
             gridDateTimeColumn4.HeaderText = "Updated At";
             gridDateTimeColumn4.MappingName = "CustomerUpdatedAt";
             gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn4.Width = 130D;
+            gridDateTimeColumn4.Width = 140D;
             sfDataGridCustomers.Columns.Add(gridNumericColumn1);
             sfDataGridCustomers.Columns.Add(gridTextColumn1);
             sfDataGridCustomers.Columns.Add(gridTextColumn2);
@@ -221,6 +221,7 @@
             sfDataGridCustomers.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
             sfDataGridCustomers.Style.SelectionStyle.TextColor = Color.Black;
             sfDataGridCustomers.TabIndex = 0;
+            sfDataGridCustomers.QueryRowStyle += SfDataGridCustomers_QueryRowStyle;
             // 
             // tabPageCustomerAdd
             // 

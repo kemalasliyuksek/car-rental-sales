@@ -74,5 +74,17 @@ namespace car_rental_sales_desktop.Forms.Controls
                     "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void SfDataGridStaff_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
+        {
+            if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
+            {
+                if (e.RowIndex % 2 == 0)
+                    e.Style.BackColor = Color.White;
+                else
+                    e.Style.BackColor = Color.FromArgb(240, 245, 255); // Açık mavi tonu
+            }
+        }
+
     }
 }
