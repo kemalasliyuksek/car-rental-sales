@@ -31,11 +31,11 @@
             tabControlCustomers = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageCustomersList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             tabPageCustomerAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            sfDataGrid1 = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            sfDataGridCustomers = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             ((System.ComponentModel.ISupportInitialize)tabControlCustomers).BeginInit();
             tabControlCustomers.SuspendLayout();
             tabPageCustomersList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)sfDataGrid1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).BeginInit();
             SuspendLayout();
             // 
             // tabControlCustomers
@@ -51,7 +51,7 @@
             // 
             // tabPageCustomersList
             // 
-            tabPageCustomersList.Controls.Add(sfDataGrid1);
+            tabPageCustomersList.Controls.Add(sfDataGridCustomers);
             tabPageCustomersList.Image = null;
             tabPageCustomersList.ImageSize = new Size(16, 16);
             tabPageCustomersList.Location = new Point(1, 33);
@@ -76,20 +76,19 @@
             tabPageCustomerAdd.Text = "Customer Add";
             tabPageCustomerAdd.ThemesEnabled = false;
             // 
-            // sfDataGrid1
+            // sfDataGridCustomers
             // 
-            sfDataGrid1.AccessibleName = "Table";
-            sfDataGrid1.Dock = DockStyle.Fill;
-            sfDataGrid1.Location = new Point(0, 0);
-            sfDataGrid1.Name = "sfDataGrid1";
-            sfDataGrid1.Size = new Size(1667, 965);
-            sfDataGrid1.Style.BorderColor = Color.FromArgb(100, 100, 100);
-            sfDataGrid1.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.TabIndex = 0;
-            sfDataGrid1.Text = "sfDataGridCustomersList";
+            sfDataGridCustomers.AccessibleName = "Table";
+            sfDataGridCustomers.Dock = DockStyle.Fill;
+            sfDataGridCustomers.Location = new Point(0, 0);
+            sfDataGridCustomers.Name = "sfDataGridCustomers";
+            sfDataGridCustomers.Size = new Size(1667, 965);
+            sfDataGridCustomers.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            sfDataGridCustomers.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            sfDataGridCustomers.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            sfDataGridCustomers.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            sfDataGridCustomers.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            sfDataGridCustomers.TabIndex = 0;
             // 
             // CustomersControl
             // 
@@ -101,7 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)tabControlCustomers).EndInit();
             tabControlCustomers.ResumeLayout(false);
             tabPageCustomersList.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)sfDataGrid1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).EndInit();
             ResumeLayout(false);
         }
 
@@ -110,6 +109,6 @@
         private Syncfusion.Windows.Forms.Tools.TabControlAdv tabControlCustomers;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageCustomersList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageCustomerAdd;
-        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid1;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridCustomers;
     }
 }
