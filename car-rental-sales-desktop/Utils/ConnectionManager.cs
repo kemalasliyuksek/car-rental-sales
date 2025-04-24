@@ -10,10 +10,8 @@ namespace car_rental_sales_desktop.Utils
 
         public static string GetConnectionString()
         {
-            // Direkt App.config'ten bağlantı dizesini al
             string connectionName = UseRemoteDatabase ? "AracDB_Remote" : "AracDB_Local";
 
-            // ConnectionStrings bölümünden doğrudan al
             ConnectionStringSettings connectionSettings = ConfigurationManager.ConnectionStrings[connectionName];
 
             if (connectionSettings == null || string.IsNullOrEmpty(connectionSettings.ConnectionString))
