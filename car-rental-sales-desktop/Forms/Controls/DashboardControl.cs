@@ -16,7 +16,6 @@ namespace car_rental_sales_desktop.Forms.Controls
         {
             InitializeComponent();
 
-            // Initialize repositories
             _reportRepository = new ReportRepository();
             _rentalRepository = new RentalRepository();
             _saleRepository = new SaleRepository();
@@ -37,27 +36,21 @@ namespace car_rental_sales_desktop.Forms.Controls
 
         private void LoadStatistics()
         {
-            // Get dashboard summary data
             DataTable dashboardData = _reportRepository.GetDashboardSummary();
             if (dashboardData != null && dashboardData.Rows.Count > 0)
             {
                 DataRow row = dashboardData.Rows[0];
 
-                // 3. Active Rentals
                 lblActiveRentalsCount.Text = row["ActiveRentals"].ToString();
 
-                // 4. Recent Sales (Last 30 days)
                 lblMonthlyRentalsCount.Text = row["RecentSales"].ToString();
 
-                // 5. Overdue Rentals (Using this as Canceled Rentals for now)
                 lblCanceledRentalsCount.Text = row["OverdueRentals"].ToString();
             }
 
-            // Get total rentals count
             int totalRentalsCount = GetTotalRentalsCount();
             lblTotalRentalsCount.Text = totalRentalsCount.ToString();
 
-            // Get total sales count
             int totalSalesCount = GetTotalSalesCount();
             lblTotalSalesCount.Text = totalSalesCount.ToString();
         }

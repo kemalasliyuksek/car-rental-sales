@@ -78,6 +78,7 @@
             // pnlRentCard5
             // 
             pnlRentCard5.BackColor = Color.FromArgb(255, 158, 158);
+            pnlRentCard5.BorderStyle = BorderStyle.FixedSingle;
             pnlRentCard5.Controls.Add(lblCanceledRentalsTitle);
             pnlRentCard5.Controls.Add(lblCanceledRentalsCount);
             pnlRentCard5.Controls.Add(iconCanceledRentals);
@@ -90,7 +91,7 @@
             // 
             // lblCanceledRentalsTitle
             // 
-            lblCanceledRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCanceledRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblCanceledRentalsTitle.ForeColor = Color.FromArgb(50, 50, 50);
             lblCanceledRentalsTitle.Location = new Point(20, 200);
             lblCanceledRentalsTitle.Name = "lblCanceledRentalsTitle";
@@ -101,7 +102,7 @@
             // 
             // lblCanceledRentalsCount
             // 
-            lblCanceledRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCanceledRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             lblCanceledRentalsCount.ForeColor = Color.FromArgb(50, 50, 50);
             lblCanceledRentalsCount.Location = new Point(20, 120);
             lblCanceledRentalsCount.Name = "lblCanceledRentalsCount";
@@ -127,6 +128,7 @@
             // pnlRentCard4
             // 
             pnlRentCard4.BackColor = Color.FromArgb(255, 213, 128);
+            pnlRentCard4.BorderStyle = BorderStyle.FixedSingle;
             pnlRentCard4.Controls.Add(lblMonthlyRentalsTitle);
             pnlRentCard4.Controls.Add(lblMonthlyRentalsCount);
             pnlRentCard4.Controls.Add(iconMonthlyRentals);
@@ -139,7 +141,7 @@
             // 
             // lblMonthlyRentalsTitle
             // 
-            lblMonthlyRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMonthlyRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblMonthlyRentalsTitle.ForeColor = Color.FromArgb(50, 50, 50);
             lblMonthlyRentalsTitle.Location = new Point(20, 200);
             lblMonthlyRentalsTitle.Name = "lblMonthlyRentalsTitle";
@@ -150,7 +152,7 @@
             // 
             // lblMonthlyRentalsCount
             // 
-            lblMonthlyRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMonthlyRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             lblMonthlyRentalsCount.ForeColor = Color.FromArgb(50, 50, 50);
             lblMonthlyRentalsCount.Location = new Point(20, 120);
             lblMonthlyRentalsCount.Name = "lblMonthlyRentalsCount";
@@ -176,6 +178,7 @@
             // pnlRentCard3
             // 
             pnlRentCard3.BackColor = Color.FromArgb(135, 206, 250);
+            pnlRentCard3.BorderStyle = BorderStyle.FixedSingle;
             pnlRentCard3.Controls.Add(lblActiveRentalsTitle);
             pnlRentCard3.Controls.Add(lblActiveRentalsCount);
             pnlRentCard3.Controls.Add(iconActiveRentals);
@@ -188,7 +191,7 @@
             // 
             // lblActiveRentalsTitle
             // 
-            lblActiveRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblActiveRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblActiveRentalsTitle.ForeColor = Color.FromArgb(50, 50, 50);
             lblActiveRentalsTitle.Location = new Point(20, 200);
             lblActiveRentalsTitle.Name = "lblActiveRentalsTitle";
@@ -199,7 +202,7 @@
             // 
             // lblActiveRentalsCount
             // 
-            lblActiveRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            lblActiveRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             lblActiveRentalsCount.ForeColor = Color.FromArgb(50, 50, 50);
             lblActiveRentalsCount.Location = new Point(20, 120);
             lblActiveRentalsCount.Name = "lblActiveRentalsCount";
@@ -225,6 +228,7 @@
             // pnlRentCard2
             // 
             pnlRentCard2.BackColor = Color.FromArgb(144, 238, 144);
+            pnlRentCard2.BorderStyle = BorderStyle.FixedSingle;
             pnlRentCard2.Controls.Add(lblTotalSalesTitle);
             pnlRentCard2.Controls.Add(lblTotalSalesCount);
             pnlRentCard2.Controls.Add(iconTotalSales);
@@ -237,7 +241,7 @@
             // 
             // lblTotalSalesTitle
             // 
-            lblTotalSalesTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalSalesTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTotalSalesTitle.ForeColor = Color.FromArgb(50, 50, 50);
             lblTotalSalesTitle.Location = new Point(20, 200);
             lblTotalSalesTitle.Name = "lblTotalSalesTitle";
@@ -248,7 +252,7 @@
             // 
             // lblTotalSalesCount
             // 
-            lblTotalSalesCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalSalesCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             lblTotalSalesCount.ForeColor = Color.FromArgb(50, 50, 50);
             lblTotalSalesCount.Location = new Point(20, 120);
             lblTotalSalesCount.Name = "lblTotalSalesCount";
@@ -274,6 +278,7 @@
             // pnlRentCard1
             // 
             pnlRentCard1.BackColor = Color.FromArgb(171, 197, 255);
+            pnlRentCard1.BorderStyle = BorderStyle.FixedSingle;
             pnlRentCard1.Controls.Add(lblTotalRentalsTitle);
             pnlRentCard1.Controls.Add(lblTotalRentalsCount);
             pnlRentCard1.Controls.Add(iconTotalRentals);
@@ -286,7 +291,7 @@
             // 
             // lblTotalRentalsTitle
             // 
-            lblTotalRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalRentalsTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTotalRentalsTitle.ForeColor = Color.FromArgb(50, 50, 50);
             lblTotalRentalsTitle.Location = new Point(20, 200);
             lblTotalRentalsTitle.Name = "lblTotalRentalsTitle";
@@ -297,7 +302,7 @@
             // 
             // lblTotalRentalsCount
             // 
-            lblTotalRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalRentalsCount.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             lblTotalRentalsCount.ForeColor = Color.FromArgb(50, 50, 50);
             lblTotalRentalsCount.Location = new Point(20, 120);
             lblTotalRentalsCount.Name = "lblTotalRentalsCount";
@@ -366,10 +371,5 @@
         private Label lblCanceledRentalsTitle;
         private Label lblCanceledRentalsCount;
         private FontAwesome.Sharp.IconPictureBox iconCanceledRentals;
-        private Panel pnlCharts;
-        private Panel pnlVehicleChart;
-        private Label lblVehicleChartTitle;
-        private Panel pnlRevenueChart;
-        private Label lblRevenueChartTitle;
     }
 }
