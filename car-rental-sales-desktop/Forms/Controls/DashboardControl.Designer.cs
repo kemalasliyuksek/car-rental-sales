@@ -29,66 +29,66 @@
         private void InitializeComponent()
         {
             pnlCards = new Panel();
-            panel1 = new Panel();
-            panel2 = new Panel();
-            panel3 = new Panel();
-            panel4 = new Panel();
-            panel5 = new Panel();
+            pnlRentCard1 = new Panel();
+            pnlRentCard2 = new Panel();
+            pnlRentCard3 = new Panel();
+            pnlRentCard4 = new Panel();
+            pnlRentCard5 = new Panel();
             pnlCards.SuspendLayout();
             SuspendLayout();
             // 
             // pnlCards
             // 
-            pnlCards.Controls.Add(panel5);
-            pnlCards.Controls.Add(panel4);
-            pnlCards.Controls.Add(panel3);
-            pnlCards.Controls.Add(panel2);
-            pnlCards.Controls.Add(panel1);
+            pnlCards.Controls.Add(pnlRentCard5);
+            pnlCards.Controls.Add(pnlRentCard4);
+            pnlCards.Controls.Add(pnlRentCard3);
+            pnlCards.Controls.Add(pnlRentCard2);
+            pnlCards.Controls.Add(pnlRentCard1);
             pnlCards.Dock = DockStyle.Top;
             pnlCards.Location = new Point(50, 50);
             pnlCards.Name = "pnlCards";
             pnlCards.Size = new Size(1570, 300);
             pnlCards.TabIndex = 0;
             // 
-            // panel1
+            // pnlRentCard1
             // 
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(314, 300);
-            panel1.TabIndex = 0;
+            pnlRentCard1.Dock = DockStyle.Left;
+            pnlRentCard1.Location = new Point(0, 0);
+            pnlRentCard1.Name = "pnlRentCard1";
+            pnlRentCard1.Size = new Size(314, 300);
+            pnlRentCard1.TabIndex = 0;
             // 
-            // panel2
+            // pnlRentCard2
             // 
-            panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(314, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(314, 300);
-            panel2.TabIndex = 1;
+            pnlRentCard2.Dock = DockStyle.Left;
+            pnlRentCard2.Location = new Point(314, 0);
+            pnlRentCard2.Name = "pnlRentCard2";
+            pnlRentCard2.Size = new Size(314, 300);
+            pnlRentCard2.TabIndex = 1;
             // 
-            // panel3
+            // pnlRentCard3
             // 
-            panel3.Dock = DockStyle.Left;
-            panel3.Location = new Point(628, 0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(314, 300);
-            panel3.TabIndex = 2;
+            pnlRentCard3.Dock = DockStyle.Left;
+            pnlRentCard3.Location = new Point(628, 0);
+            pnlRentCard3.Name = "pnlRentCard3";
+            pnlRentCard3.Size = new Size(314, 300);
+            pnlRentCard3.TabIndex = 2;
             // 
-            // panel4
+            // pnlRentCard4
             // 
-            panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(942, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(314, 300);
-            panel4.TabIndex = 3;
+            pnlRentCard4.Dock = DockStyle.Left;
+            pnlRentCard4.Location = new Point(942, 0);
+            pnlRentCard4.Name = "pnlRentCard4";
+            pnlRentCard4.Size = new Size(314, 300);
+            pnlRentCard4.TabIndex = 3;
             // 
-            // panel5
+            // pnlRentCard5
             // 
-            panel5.Dock = DockStyle.Left;
-            panel5.Location = new Point(1256, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(314, 300);
-            panel5.TabIndex = 4;
+            pnlRentCard5.Dock = DockStyle.Left;
+            pnlRentCard5.Location = new Point(1256, 0);
+            pnlRentCard5.Name = "pnlRentCard5";
+            pnlRentCard5.Size = new Size(314, 300);
+            pnlRentCard5.TabIndex = 4;
             // 
             // DashboardControl
             // 
@@ -105,10 +105,10 @@
         #endregion
 
         private Panel pnlCards;
-        private Panel panel5;
-        private Panel panel4;
-        private Panel panel3;
-        private Panel panel2;
-        private Panel panel1;
+        private Panel pnlRentCard5;
+        private Panel pnlRentCard4;
+        private Panel pnlRentCard3;
+        private Panel pnlRentCard2;
+        private Panel pnlRentCard1;
     }
 }
