@@ -36,10 +36,14 @@
             tabPageRentalsList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             sfDataGridRentals = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageRentalAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
+            sfDataGrid1 = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)tabControlRentals).BeginInit();
             tabControlRentals.SuspendLayout();
             tabPageRentalsList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridRentals).BeginInit();
+            tabPageRentalAdd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sfDataGrid1).BeginInit();
             SuspendLayout();
             // 
             // tabControlRentals
@@ -96,7 +100,7 @@
             gridTextColumn2.AllowResizing = true;
             gridTextColumn2.HeaderText = "Vehicle Plate";
             gridTextColumn2.MappingName = "Vehicle.VehiclePlateNumber";
-            gridTextColumn2.Width = 105D;
+            gridTextColumn2.Width = 111D;
             gridDateTimeColumn1.AllowEditing = false;
             gridDateTimeColumn1.AllowResizing = true;
             gridDateTimeColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
@@ -171,7 +175,7 @@
             gridDateTimeColumn4.MappingName = "RentalCreatedAt";
             gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn4.Width = 150D;
+            gridDateTimeColumn4.Width = 140D;
             gridDateTimeColumn5.AllowEditing = false;
             gridDateTimeColumn5.AllowResizing = true;
             gridDateTimeColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
@@ -180,7 +184,7 @@
             gridDateTimeColumn5.MappingName = "RentalUpdatedAt";
             gridDateTimeColumn5.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             gridDateTimeColumn5.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn5.Width = 150D;
+            gridDateTimeColumn5.Width = 140D;
             sfDataGridRentals.Columns.Add(gridNumericColumn1);
             sfDataGridRentals.Columns.Add(gridNumericColumn2);
             sfDataGridRentals.Columns.Add(gridTextColumn1);
@@ -217,16 +221,42 @@
             // 
             // tabPageRentalAdd
             // 
+            tabPageRentalAdd.Controls.Add(panel1);
+            tabPageRentalAdd.Controls.Add(sfDataGrid1);
             tabPageRentalAdd.Image = null;
             tabPageRentalAdd.ImageSize = new Size(16, 16);
             tabPageRentalAdd.Location = new Point(1, 33);
             tabPageRentalAdd.Name = "tabPageRentalAdd";
+            tabPageRentalAdd.Padding = new Padding(20);
             tabPageRentalAdd.ShowCloseButton = true;
             tabPageRentalAdd.Size = new Size(1667, 965);
             tabPageRentalAdd.TabFont = new Font("Segoe UI", 12F);
             tabPageRentalAdd.TabIndex = 2;
             tabPageRentalAdd.Text = "Rental Add";
             tabPageRentalAdd.ThemesEnabled = false;
+            // 
+            // sfDataGrid1
+            // 
+            sfDataGrid1.AccessibleName = "Table";
+            sfDataGrid1.Dock = DockStyle.Right;
+            sfDataGrid1.Location = new Point(1047, 20);
+            sfDataGrid1.Name = "sfDataGrid1";
+            sfDataGrid1.Size = new Size(600, 925);
+            sfDataGrid1.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            sfDataGrid1.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            sfDataGrid1.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            sfDataGrid1.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            sfDataGrid1.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            sfDataGrid1.TabIndex = 0;
+            sfDataGrid1.Text = "sfDataGridLastRental";
+            // 
+            // panel1
+            // 
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(20, 20);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1007, 925);
+            panel1.TabIndex = 1;
             // 
             // RentalsControl
             // 
@@ -239,6 +269,8 @@
             tabControlRentals.ResumeLayout(false);
             tabPageRentalsList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridRentals).EndInit();
+            tabPageRentalAdd.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)sfDataGrid1).EndInit();
             ResumeLayout(false);
         }
 
@@ -248,5 +280,7 @@
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageRentalsList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageRentalAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridRentals;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid1;
+        private Panel panel1;
     }
 }
