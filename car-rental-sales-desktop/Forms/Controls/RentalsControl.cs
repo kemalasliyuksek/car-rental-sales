@@ -69,8 +69,14 @@ namespace car_rental_sales_desktop.Forms.Controls
                     }
                 }
 
-                // Set the data source for the grid
+                // Set the data source for the main grid
                 sfDataGridRentals.DataSource = rentals;
+
+                // Create a sorted list for the latest rentals grid (most recent first)
+                var latestRentals = rentals.OrderByDescending(r => r.RentalCreatedAt).ToList();
+
+                // Set the data source for the latest rentals grid
+                sfDataGridLastRentals.DataSource = latestRentals;
             }
             catch (Exception ex)
             {
@@ -82,6 +88,19 @@ namespace car_rental_sales_desktop.Forms.Controls
         // TR: Bu metot, kiralama verileri tablosunda gösterilirken satır stillerini ayarlamak için kullanılır.
         // EN: This method is used to set row styles when displaying rental data in the table.
         private void SfDataGridRentals_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
+        {
+            if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
+            {
+                if (e.RowIndex % 2 == 0)
+                    e.Style.BackColor = Color.White;
+                else
+                    e.Style.BackColor = Color.FromArgb(240, 245, 255); // Light blue tone
+            }
+        }
+
+        // TR: Bu metot, son kiralamalar tablosunda gösterilirken satır stillerini ayarlamak için kullanılır.
+        // EN: This method is used to set row styles when displaying latest rentals data in the table.
+        private void SfDataGridLastRentals_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
             if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
             {
