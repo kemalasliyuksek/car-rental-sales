@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using car_rental_sales_desktop.Models;
 using car_rental_sales_desktop.Repositories;
 using System.Drawing;
+using Org.BouncyCastle.Asn1.Pkcs;
 
 namespace car_rental_sales_desktop.Forms.Controls
 {
@@ -410,8 +411,249 @@ namespace car_rental_sales_desktop.Forms.Controls
             CalculateRentalAmount();
         }
 
+        private void ClearForm()
+        {
+            // Clear customer info
+            txtBoxSearchCustomer.Text = string.Empty;
+            txtBoxCustomerFullName.Text = string.Empty;
+            tctBoxNationalID.Text = string.Empty;
+            txtBoxPhoneNo.Text = string.Empty;
+            txtBoxEmail.Text = string.Empty;
+            txtBoxAddress.Text = string.Empty;
+            txtBoxLicenseNo.Text = string.Empty;
+            txtBoxLicenseClass.Text = string.Empty;
+            dtpLicenseDate.Value = dtpLicenseDate.MinDate;
+            dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
+
+            // Clear vehicle info
+            textBoxSearchVehicle.Text = string.Empty;
+            txtBoxVehiclePlate.Text = string.Empty;
+            txtBoxVehicleBrand.Text = string.Empty;
+            txtBoxVehicleModel.Text = string.Empty;
+            txtBoxVehicleYear.Text = string.Empty;
+            txtBoxVehicleColor.Text = string.Empty;
+            txtBoxVehicleFuelType.Text = string.Empty;
+            txtBoxVehicleTransmission.Text = string.Empty;
+            txtBoxVehicleMileage.Text = string.Empty;
+            txtBoxVehicleLocation.Text = string.Empty;
+            txtBoxVehicleStatus.Text = string.Empty;
+
+            // Clear rental info
+            dtpRentalStartDate.Value = DateTime.Now;
+            dtpRentalEndDate.Value = DateTime.Now.AddDays(1);
+            txtBoxRentalStartMileage.Text = string.Empty;
+            textBox8.Text = string.Empty; // This seems to be the end mileage
+            txtBoxRentalPaymentType.Text = "Nakit"; // Default to cash
+            txtBoxRentalAmount.Text = string.Empty;
+            txtBoxRentalDeposit.Text = string.Empty;
+            txtBoxRentalNote.Text = string.Empty;
+        }
+
+        private bool ValidateRentalForm()
+        {
+            // Check if customer is selected
+            if (string.IsNullOrEmpty(txtBoxCustomerFullName.Text))
+            {
+                lblProgressWarning.Text = "Please select a customer.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            // Check if vehicle is selected
+            if (string.IsNullOrEmpty(txtBoxVehiclePlate.Text))
+            {
+                lblProgressWarning.Text = "Please select a vehicle.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            // Check if rental dates are valid
+            if (dtpRentalEndDate.Value < dtpRentalStartDate.Value)
+            {
+                lblProgressWarning.Text = "End date cannot be earlier than start date.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            // Check if rental amount is calculated
+            if (string.IsNullOrEmpty(txtBoxRentalAmount.Text))
+            {
+                lblProgressWarning.Text = "Rental amount is not calculated.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            // Check if starting mileage is entered
+            if (string.IsNullOrEmpty(txtBoxRentalStartMileage.Text))
+            {
+                lblProgressWarning.Text = "Starting mileage must be entered.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            // Check if payment type is entered
+            if (string.IsNullOrEmpty(txtBoxRentalPaymentType.Text))
+            {
+                lblProgressWarning.Text = "Payment type must be entered.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            return true;
+        }
+
+        private void CreateRental()
+        {
+            try
+            {
+                // Find the selected customer
+                Customer selectedCustomer = FindCustomerByFullName(txtBoxCustomerFullName.Text);
+                if (selectedCustomer == null)
+                {
+                    lblProgressWarning.Text = "Selected customer not found.";
+                    lblProgressWarning.ForeColor = Color.Red;
+                    return;
+                }
+
+                // Find the selected vehicle
+                Vehicle selectedVehicle = FindVehicleByPlate(txtBoxVehiclePlate.Text);
+                if (selectedVehicle == null)
+                {
+                    lblProgressWarning.Text = "Selected vehicle not found.";
+                    lblProgressWarning.ForeColor = Color.Red;
+                    return;
+                }
+
+                // Parse rental amount
+                string amountText = txtBoxRentalAmount.Text.Replace("₺", "").Trim();
+                if (!decimal.TryParse(amountText, out decimal rentalAmount))
+                {
+                    lblProgressWarning.Text = "Invalid rental amount.";
+                    lblProgressWarning.ForeColor = Color.Red;
+                    return;
+                }
+
+                // Parse deposit amount
+                decimal? depositAmount = null;
+                if (!string.IsNullOrEmpty(txtBoxRentalDeposit.Text))
+                {
+                    string depositText = txtBoxRentalDeposit.Text.Replace("₺", "").Trim();
+                    if (decimal.TryParse(depositText, out decimal deposit))
+                    {
+                        depositAmount = deposit;
+                    }
+                }
+
+                // Parse starting mileage
+                if (!int.TryParse(txtBoxRentalStartMileage.Text.Replace("KM", "").Trim(), out int startKm))
+                {
+                    lblProgressWarning.Text = "Invalid starting mileage.";
+                    lblProgressWarning.ForeColor = Color.Red;
+                    return;
+                }
+
+                // Create new rental object
+                Rental newRental = new Rental
+                {
+                    RentalCustomerID = selectedCustomer.CustomerID,
+                    RentalVehicleID = selectedVehicle.VehicleID,
+                    RentalStartDate = dtpRentalStartDate.Value,
+                    RentalEndDate = dtpRentalEndDate.Value,
+                    RentalReturnDate = null, // Not returned yet
+                    RentalStartKm = startKm,
+                    RentalEndKm = null, // Not returned yet
+                    RentalAmount = rentalAmount,
+                    RentalDepositAmount = depositAmount,
+                    RentalPaymentType = txtBoxRentalPaymentType.Text,
+                    RentalContractID = null, // No contract yet
+                    RentalUserID = Utils.CurrentUser.UserID, // Current logged in user
+                };
+
+                // Add rental note if provided
+                string noteText = txtBoxRentalNote.Text;
+                int rentalId;
+
+                if (!string.IsNullOrEmpty(noteText))
+                {
+                    // Use the special method to create rental with note
+                    rentalId = _rentalRepository.CreateRentalWithNote(newRental, noteText);
+                }
+                else
+                {
+                    // If we're using regular Insert, we need to manually update vehicle status
+                    rentalId = _rentalRepository.Insert(newRental);
+
+                    if (rentalId > 0)
+                    {
+                        // Update vehicle status to Rented (status ID 3)
+                        _vehicleRepository.UpdateVehicleStatus(selectedVehicle.VehicleID, 3);
+                    }
+                }
+
+                if (rentalId > 0)
+                {
+                    // If there's a deposit, create a payment record
+                    if (depositAmount.HasValue && depositAmount.Value > 0)
+                    {
+                        Payment depositPayment = new Payment
+                        {
+                            PaymentTransactionType = "Rental",
+                            PaymentTransactionID = rentalId,
+                            PaymentCustomerID = selectedCustomer.CustomerID,
+                            PaymentAmount = depositAmount.Value,
+                            PaymentDate = DateTime.Now,
+                            PaymentType = "Deposit",
+                            PaymentNote = "Rental deposit",
+                            PaymentUserID = Utils.CurrentUser.UserID
+                        };
+
+                        var paymentRepository = new PaymentRepository();
+                        paymentRepository.Insert(depositPayment);
+                    }
+
+                    lblProgressWarning.Text = "Rental successfully created!";
+                    lblProgressWarning.ForeColor = Color.Green;
+
+                    // Refresh the data grids
+                    LoadRentals();
+
+                    // Clear the form for new entry
+                    ClearForm();
+                }
+                else
+                {
+                    lblProgressWarning.Text = "Failed to create rental.";
+                    lblProgressWarning.ForeColor = Color.Red;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblProgressWarning.Text = $"Error creating rental: {ex.Message}";
+                lblProgressWarning.ForeColor = Color.Red;
+            }
+        }
+
         #endregion
 
-        // Diğer gerekli metodlar ve özellikler buraya eklenebilir
+        private void btnAddRental_Click_1(object sender, EventArgs e)
+        {
+            if (ValidateRentalForm())
+            {
+                CreateRental();
+            }
+        }
+
+        private void btnCancelRental_Click_1(object sender, EventArgs e)
+        {
+            ClearForm();
+            lblProgressWarning.Text = "Form cleared. Ready for new rental entry.";
+            lblProgressWarning.ForeColor = Color.Blue;
+        }
+
+        private void RentalsControl_Load_1(object sender, EventArgs e)
+        {
+            dtpRentalStartDate.MinDate = DateTime.Today;
+            dtpRentalEndDate.MinDate = DateTime.Today.AddDays(1);
+        }
     }
 }
