@@ -57,12 +57,10 @@
             txtBoxRentalPaymentType = new TextBox();
             textBox8 = new TextBox();
             txtBoxRentalStartMileage = new TextBox();
-            txtBoxRentalEndDate = new TextBox();
             lblRentalEndMileage = new Label();
             lblRentalStartMileage = new Label();
             lblRentalEndDate = new Label();
             lblRentalStartDate = new Label();
-            txtBoxRentalStartDate = new TextBox();
             groupBoxVehicleInfo = new GroupBox();
             txtBoxVehicleStatus = new TextBox();
             lblVehicleStatus = new Label();
@@ -87,10 +85,6 @@
             btnVehicleLoad = new FontAwesome.Sharp.IconButton();
             textBoxSearchVehicle = new TextBox();
             groupBoxCustomerInfo = new GroupBox();
-            txtBoxDateOfBirth = new TextBox();
-            txtBoxLicenseDate = new TextBox();
-            txtBoxLicenseClass = new TextBox();
-            txtBoxLicenseNo = new TextBox();
             txtBoxAddress = new TextBox();
             txtBoxEmail = new TextBox();
             txtBoxPhoneNo = new TextBox();
@@ -110,6 +104,15 @@
             btnAddRental = new FontAwesome.Sharp.IconButton();
             btnCancelRental = new FontAwesome.Sharp.IconButton();
             lblProgressWarning = new Label();
+
+            // DateTimePicker bileşenleri
+            dtpRentalStartDate = new DateTimePicker();
+            dtpRentalEndDate = new DateTimePicker();
+            dtpLicenseDate = new DateTimePicker();
+            dtpDateOfBirth = new DateTimePicker();
+            txtBoxLicenseNo = new TextBox();
+            txtBoxLicenseClass = new TextBox();
+
             ((System.ComponentModel.ISupportInitialize)tabControlRentals).BeginInit();
             tabControlRentals.SuspendLayout();
             tabPageRentalsList.SuspendLayout();
@@ -435,12 +438,12 @@
             groupBoxRentalInfo.Controls.Add(txtBoxRentalPaymentType);
             groupBoxRentalInfo.Controls.Add(textBox8);
             groupBoxRentalInfo.Controls.Add(txtBoxRentalStartMileage);
-            groupBoxRentalInfo.Controls.Add(txtBoxRentalEndDate);
             groupBoxRentalInfo.Controls.Add(lblRentalEndMileage);
             groupBoxRentalInfo.Controls.Add(lblRentalStartMileage);
             groupBoxRentalInfo.Controls.Add(lblRentalEndDate);
             groupBoxRentalInfo.Controls.Add(lblRentalStartDate);
-            groupBoxRentalInfo.Controls.Add(txtBoxRentalStartDate);
+            groupBoxRentalInfo.Controls.Add(dtpRentalStartDate);
+            groupBoxRentalInfo.Controls.Add(dtpRentalEndDate);
             groupBoxRentalInfo.Dock = DockStyle.Bottom;
             groupBoxRentalInfo.Font = new Font("Segoe UI", 20F, FontStyle.Underline);
             groupBoxRentalInfo.Location = new Point(0, 665);
@@ -449,6 +452,26 @@
             groupBoxRentalInfo.TabIndex = 2;
             groupBoxRentalInfo.TabStop = false;
             groupBoxRentalInfo.Text = "Rental Info";
+            // 
+            // dtpRentalStartDate
+            // 
+            dtpRentalStartDate.Font = new Font("Segoe UI", 14F);
+            dtpRentalStartDate.Format = DateTimePickerFormat.Short;
+            dtpRentalStartDate.Location = new Point(209, 67);
+            dtpRentalStartDate.Name = "dtpRentalStartDate";
+            dtpRentalStartDate.Size = new Size(250, 32);
+            dtpRentalStartDate.TabIndex = 25;
+            groupBoxRentalInfo.Controls.Add(dtpRentalStartDate);
+            // 
+            // dtpRentalEndDate
+            // 
+            dtpRentalEndDate.Font = new Font("Segoe UI", 14F);
+            dtpRentalEndDate.Format = DateTimePickerFormat.Short;
+            dtpRentalEndDate.Location = new Point(209, 108);
+            dtpRentalEndDate.Name = "dtpRentalEndDate";
+            dtpRentalEndDate.Size = new Size(250, 32);
+            dtpRentalEndDate.TabIndex = 30;
+            groupBoxRentalInfo.Controls.Add(dtpRentalEndDate);
             // 
             // txtBoxRentalNote
             // 
@@ -550,16 +573,6 @@
             txtBoxRentalStartMileage.Size = new Size(250, 32);
             txtBoxRentalStartMileage.TabIndex = 31;
             // 
-            // txtBoxRentalEndDate
-            // 
-            txtBoxRentalEndDate.BorderStyle = BorderStyle.FixedSingle;
-            txtBoxRentalEndDate.Font = new Font("Segoe UI", 14F, FontStyle.Underline);
-            txtBoxRentalEndDate.Location = new Point(209, 108);
-            txtBoxRentalEndDate.Name = "txtBoxRentalEndDate";
-            txtBoxRentalEndDate.ReadOnly = true;
-            txtBoxRentalEndDate.Size = new Size(250, 32);
-            txtBoxRentalEndDate.TabIndex = 30;
-            // 
             // lblRentalEndMileage
             // 
             lblRentalEndMileage.AutoSize = true;
@@ -599,16 +612,6 @@
             lblRentalStartDate.Size = new Size(107, 25);
             lblRentalStartDate.TabIndex = 26;
             lblRentalStartDate.Text = "Start Date:";
-            // 
-            // txtBoxRentalStartDate
-            // 
-            txtBoxRentalStartDate.BorderStyle = BorderStyle.FixedSingle;
-            txtBoxRentalStartDate.Font = new Font("Segoe UI", 14F, FontStyle.Underline);
-            txtBoxRentalStartDate.Location = new Point(209, 67);
-            txtBoxRentalStartDate.Name = "txtBoxRentalStartDate";
-            txtBoxRentalStartDate.ReadOnly = true;
-            txtBoxRentalStartDate.Size = new Size(250, 32);
-            txtBoxRentalStartDate.TabIndex = 25;
             // 
             // groupBoxVehicleInfo
             // 
@@ -875,8 +878,6 @@
             // 
             // groupBoxCustomerInfo
             // 
-            groupBoxCustomerInfo.Controls.Add(txtBoxDateOfBirth);
-            groupBoxCustomerInfo.Controls.Add(txtBoxLicenseDate);
             groupBoxCustomerInfo.Controls.Add(txtBoxLicenseClass);
             groupBoxCustomerInfo.Controls.Add(txtBoxLicenseNo);
             groupBoxCustomerInfo.Controls.Add(txtBoxAddress);
@@ -895,6 +896,8 @@
             groupBoxCustomerInfo.Controls.Add(txtBoxCustomerFullName);
             groupBoxCustomerInfo.Controls.Add(btnCustomerLoad);
             groupBoxCustomerInfo.Controls.Add(txtBoxSearchCustomer);
+            groupBoxCustomerInfo.Controls.Add(dtpLicenseDate);
+            groupBoxCustomerInfo.Controls.Add(dtpDateOfBirth);
             groupBoxCustomerInfo.Dock = DockStyle.Top;
             groupBoxCustomerInfo.Font = new Font("Segoe UI", 20F, FontStyle.Underline);
             groupBoxCustomerInfo.Location = new Point(0, 0);
@@ -904,35 +907,27 @@
             groupBoxCustomerInfo.TabStop = false;
             groupBoxCustomerInfo.Text = "Customer Info";
             // 
-            // txtBoxDateOfBirth
+            // dtpLicenseDate
             // 
-            txtBoxDateOfBirth.BorderStyle = BorderStyle.FixedSingle;
-            txtBoxDateOfBirth.Font = new Font("Segoe UI", 14F, FontStyle.Underline);
-            txtBoxDateOfBirth.Location = new Point(682, 239);
-            txtBoxDateOfBirth.Name = "txtBoxDateOfBirth";
-            txtBoxDateOfBirth.ReadOnly = true;
-            txtBoxDateOfBirth.Size = new Size(250, 32);
-            txtBoxDateOfBirth.TabIndex = 19;
+            dtpLicenseDate.Font = new Font("Segoe UI", 14F);
+            dtpLicenseDate.Format = DateTimePickerFormat.Short;
+            dtpLicenseDate.Location = new Point(682, 198);
+            dtpLicenseDate.Name = "dtpLicenseDate";
+            dtpLicenseDate.Size = new Size(250, 32);
+            dtpLicenseDate.TabIndex = 18;
+            dtpLicenseDate.Enabled = false;
+            groupBoxCustomerInfo.Controls.Add(dtpLicenseDate);
             // 
-            // txtBoxLicenseDate
+            // dtpDateOfBirth
             // 
-            txtBoxLicenseDate.BorderStyle = BorderStyle.FixedSingle;
-            txtBoxLicenseDate.Font = new Font("Segoe UI", 14F, FontStyle.Underline);
-            txtBoxLicenseDate.Location = new Point(682, 198);
-            txtBoxLicenseDate.Name = "txtBoxLicenseDate";
-            txtBoxLicenseDate.ReadOnly = true;
-            txtBoxLicenseDate.Size = new Size(250, 32);
-            txtBoxLicenseDate.TabIndex = 18;
-            // 
-            // txtBoxLicenseClass
-            // 
-            txtBoxLicenseClass.BorderStyle = BorderStyle.FixedSingle;
-            txtBoxLicenseClass.Font = new Font("Segoe UI", 14F, FontStyle.Underline);
-            txtBoxLicenseClass.Location = new Point(682, 157);
-            txtBoxLicenseClass.Name = "txtBoxLicenseClass";
-            txtBoxLicenseClass.ReadOnly = true;
-            txtBoxLicenseClass.Size = new Size(250, 32);
-            txtBoxLicenseClass.TabIndex = 17;
+            dtpDateOfBirth.Font = new Font("Segoe UI", 14F);
+            dtpDateOfBirth.Format = DateTimePickerFormat.Short;
+            dtpDateOfBirth.Location = new Point(682, 239);
+            dtpDateOfBirth.Name = "dtpDateOfBirth";
+            dtpDateOfBirth.Size = new Size(250, 32);
+            dtpDateOfBirth.TabIndex = 19;
+            dtpDateOfBirth.Enabled = false;
+            groupBoxCustomerInfo.Controls.Add(dtpDateOfBirth);
             // 
             // txtBoxLicenseNo
             // 
@@ -943,6 +938,16 @@
             txtBoxLicenseNo.ReadOnly = true;
             txtBoxLicenseNo.Size = new Size(250, 32);
             txtBoxLicenseNo.TabIndex = 16;
+            // 
+            // txtBoxLicenseClass
+            // 
+            txtBoxLicenseClass.BorderStyle = BorderStyle.FixedSingle;
+            txtBoxLicenseClass.Font = new Font("Segoe UI", 14F, FontStyle.Underline);
+            txtBoxLicenseClass.Location = new Point(682, 157);
+            txtBoxLicenseClass.Name = "txtBoxLicenseClass";
+            txtBoxLicenseClass.ReadOnly = true;
+            txtBoxLicenseClass.Size = new Size(250, 32);
+            txtBoxLicenseClass.TabIndex = 17;
             // 
             // txtBoxAddress
             // 
@@ -1209,8 +1214,6 @@
         private Label lblNationalID;
         private Label lblCustomerFullName;
         private TextBox txtBoxCustomerFullName;
-        private TextBox txtBoxDateOfBirth;
-        private TextBox txtBoxLicenseDate;
         private TextBox txtBoxLicenseClass;
         private TextBox txtBoxLicenseNo;
         private TextBox txtBoxAddress;
@@ -1239,12 +1242,10 @@
         private Label lblVehicleFuelType;
         private TextBox textBox8;
         private TextBox txtBoxRentalStartMileage;
-        private TextBox txtBoxRentalEndDate;
         private Label lblRentalEndMileage;
         private Label lblRentalStartMileage;
         private Label lblRentalEndDate;
         private Label lblRentalStartDate;
-        private TextBox txtBoxRentalStartDate;
         private TextBox txtBoxRentalNote;
         private TextBox txtBoxRentalDeposit;
         private TextBox txtBoxRentalAmount;
@@ -1258,5 +1259,9 @@
         private FontAwesome.Sharp.IconButton btnCancelRental;
         private FontAwesome.Sharp.IconButton btnAddRental;
         private Label lblProgressWarning;
+        private DateTimePicker dtpRentalStartDate;
+        private DateTimePicker dtpRentalEndDate;
+        private DateTimePicker dtpLicenseDate;
+        private DateTimePicker dtpDateOfBirth;
     }
 }

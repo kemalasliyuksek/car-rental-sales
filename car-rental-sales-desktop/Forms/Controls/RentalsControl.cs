@@ -1,14 +1,9 @@
-﻿using car_rental_sales_desktop.Models;
-using car_rental_sales_desktop.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using car_rental_sales_desktop.Models;
+using car_rental_sales_desktop.Repositories;
+using System.Drawing;
 
 namespace car_rental_sales_desktop.Forms.Controls
 {
@@ -18,6 +13,8 @@ namespace car_rental_sales_desktop.Forms.Controls
         private CustomerRepository _customerRepository;
         private VehicleRepository _vehicleRepository;
         private UserRepository _userRepository;
+        private List<Customer> _customers; // Müşteri listesi
+        private List<Vehicle> _vehicles; // Araç listesi
 
         public RentalsControl()
         {
@@ -31,11 +28,19 @@ namespace car_rental_sales_desktop.Forms.Controls
 
             // Register event handlers
             this.Load += RentalsControl_Load;
+            btnCustomerLoad.Click += BtnCustomerLoad_Click;
+            btnVehicleLoad.Click += BtnVehicleLoad_Click;
+
+            // Register date picker events
+            dtpRentalStartDate.ValueChanged += DtpRentalStartDate_ValueChanged;
+            dtpRentalEndDate.ValueChanged += DtpRentalEndDate_ValueChanged;
         }
 
         private void RentalsControl_Load(object sender, EventArgs e)
         {
             LoadRentals();
+            LoadCustomersForAutoComplete();
+            LoadVehiclesForAutoComplete();
         }
 
         // TR: Bu metot, kiralama verilerini yüklemek için kullanılır.
@@ -110,5 +115,303 @@ namespace car_rental_sales_desktop.Forms.Controls
                     e.Style.BackColor = Color.FromArgb(240, 245, 255); // Light blue tone
             }
         }
+
+        #region Customer Operations
+
+        // TR: Bu metot, müşterileri otomatik tamamlama için yüklemek için kullanılır.
+        // EN: This method is used to load customers for autocomplete.
+        private void LoadCustomersForAutoComplete()
+        {
+            try
+            {
+                // Get all active customers
+                _customers = _customerRepository.GetActiveCustomers();
+
+                // Create AutoCompleteStringCollection
+                AutoCompleteStringCollection autoCompleteSource = new AutoCompleteStringCollection();
+
+                // Add customer names to the collection
+                foreach (var customer in _customers)
+                {
+                    string fullName = $"{customer.CustomerFirstName} {customer.CustomerLastName}";
+                    autoCompleteSource.Add(fullName);
+                }
+
+                // Set autocomplete properties
+                txtBoxSearchCustomer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtBoxSearchCustomer.AutoCompleteCustomSource = autoCompleteSource;
+                txtBoxSearchCustomer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Müşteri verileri yüklenirken hata oluştu: {ex.Message}",
+                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // TR: Bu metot, btnCustomerLoad düğmesine tıklandığında çalışır ve seçilen müşterinin bilgilerini yükler.
+        // EN: This method runs when the btnCustomerLoad button is clicked and loads the selected customer's information.
+        private void BtnCustomerLoad_Click(object sender, EventArgs e)
+        {
+            string searchText = txtBoxSearchCustomer.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                MessageBox.Show("Lütfen bir müşteri seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Find the customer
+            Customer selectedCustomer = FindCustomerByFullName(searchText);
+
+            if (selectedCustomer != null)
+            {
+                // Load customer info to the form
+                LoadCustomerInfo(selectedCustomer);
+            }
+            else
+            {
+                MessageBox.Show("Müşteri bulunamadı. Lütfen geçerli bir müşteri seçiniz.",
+                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // TR: Bu metot, müşteriyi ad ve soyadına göre bulmak için kullanılır.
+        // EN: This method is used to find a customer by full name.
+        private Customer FindCustomerByFullName(string fullName)
+        {
+            // Split full name into first name and last name
+            string[] nameParts = fullName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (nameParts.Length < 2)
+                return null;
+
+            string firstName = nameParts[0];
+
+            // Last name might contain multiple words
+            string lastName = string.Join(" ", nameParts, 1, nameParts.Length - 1);
+
+            // Search for the customer
+            return _customers.Find(c =>
+                c.CustomerFirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                c.CustomerLastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        // TR: Bu metot, seçilen müşterinin bilgilerini form alanlarına yüklemek için kullanılır.
+        // EN: This method is used to load the selected customer's information into the form fields.
+        private void LoadCustomerInfo(Customer customer)
+        {
+            if (customer == null)
+                return;
+
+            // Update customer information fields
+            txtBoxCustomerFullName.Text = $"{customer.CustomerFirstName} {customer.CustomerLastName}";
+            tctBoxNationalID.Text = customer.CustomerNationalID;
+            txtBoxPhoneNo.Text = customer.CustomerPhone;
+            txtBoxEmail.Text = customer.CustomerEmail;
+            txtBoxAddress.Text = customer.CustomerAddress;
+            txtBoxLicenseNo.Text = customer.CustomerLicenseNumber;
+            txtBoxLicenseClass.Text = customer.CustomerLicenseClass;
+
+            // Format dates if they exist using DateTimePickers
+            if (customer.CustomerLicenseDate.HasValue)
+                dtpLicenseDate.Value = customer.CustomerLicenseDate.Value;
+            else
+                dtpLicenseDate.Value = dtpLicenseDate.MinDate; // Minimum tarih değeri
+
+            if (customer.CustomerDateOfBirth.HasValue)
+                dtpDateOfBirth.Value = customer.CustomerDateOfBirth.Value;
+            else
+                dtpDateOfBirth.Value = dtpDateOfBirth.MinDate; // Minimum tarih değeri
+
+            // Show success message
+            lblProgressWarning.Text = "Müşteri bilgileri başarıyla yüklendi.";
+            lblProgressWarning.ForeColor = Color.Green;
+        }
+
+        #endregion
+
+        #region Vehicle Operations
+
+        // TR: Bu metot, araçları otomatik tamamlama için yüklemek için kullanılır.
+        // EN: This method is used to load vehicles for autocomplete.
+        private void LoadVehiclesForAutoComplete()
+        {
+            try
+            {
+                // Get all available vehicles
+                _vehicles = _vehicleRepository.GetAvailableVehicles();
+
+                // Create AutoCompleteStringCollection
+                AutoCompleteStringCollection autoCompleteSource = new AutoCompleteStringCollection();
+
+                // Add vehicle plate numbers to the collection
+                foreach (var vehicle in _vehicles)
+                {
+                    autoCompleteSource.Add(vehicle.VehiclePlateNumber);
+                }
+
+                // Set autocomplete properties
+                textBoxSearchVehicle.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                textBoxSearchVehicle.AutoCompleteCustomSource = autoCompleteSource;
+                textBoxSearchVehicle.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Araç verileri yüklenirken hata oluştu: {ex.Message}",
+                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // TR: Bu metot, btnVehicleLoad düğmesine tıklandığında çalışır ve seçilen aracın bilgilerini yükler.
+        // EN: This method runs when the btnVehicleLoad button is clicked and loads the selected vehicle's information.
+        private void BtnVehicleLoad_Click(object sender, EventArgs e)
+        {
+            string searchText = textBoxSearchVehicle.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                MessageBox.Show("Lütfen bir araç seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Find the vehicle
+            Vehicle selectedVehicle = FindVehicleByPlate(searchText);
+
+            if (selectedVehicle != null)
+            {
+                // Load vehicle info to the form
+                LoadVehicleInfo(selectedVehicle);
+            }
+            else
+            {
+                MessageBox.Show("Araç bulunamadı. Lütfen geçerli bir araç plakası giriniz.",
+                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // TR: Bu metot, aracı plaka numarasına göre bulmak için kullanılır.
+        // EN: This method is used to find a vehicle by plate number.
+        private Vehicle FindVehicleByPlate(string plateNumber)
+        {
+            // Search for the vehicle by plate number
+            return _vehicles.Find(v =>
+                v.VehiclePlateNumber.Equals(plateNumber, StringComparison.OrdinalIgnoreCase));
+        }
+
+        // TR: Bu metot, seçilen aracın bilgilerini form alanlarına yüklemek için kullanılır.
+        // EN: This method is used to load the selected vehicle's information into the form fields.
+        private void LoadVehicleInfo(Vehicle vehicle)
+        {
+            if (vehicle == null)
+                return;
+
+            // Update vehicle information fields
+            txtBoxVehiclePlate.Text = vehicle.VehiclePlateNumber;
+            txtBoxVehicleBrand.Text = vehicle.VehicleBrand;
+            txtBoxVehicleModel.Text = vehicle.VehicleModel;
+            txtBoxVehicleYear.Text = vehicle.VehicleYear.ToString();
+            txtBoxVehicleColor.Text = vehicle.VehicleColor;
+            txtBoxVehicleFuelType.Text = vehicle.VehicleFuelType;
+            txtBoxVehicleTransmission.Text = vehicle.VehicleTransmissionType;
+            txtBoxVehicleMileage.Text = $"{vehicle.VehicleMileage} KM";
+
+            // Set vehicle location (branch name)
+            if (vehicle.Branch != null)
+            {
+                txtBoxVehicleLocation.Text = vehicle.Branch.BranchName;
+            }
+            else
+            {
+                txtBoxVehicleLocation.Text = "Belirsiz";
+            }
+
+            // Set vehicle status
+            if (vehicle.VehicleStatus != null)
+            {
+                txtBoxVehicleStatus.Text = vehicle.VehicleStatus.VehicleStatusName;
+            }
+            else
+            {
+                txtBoxVehicleStatus.Text = "Belirsiz";
+            }
+
+            // Set rental information fields with DateTimePickers
+            // Assuming the current date for rental start
+            DateTime rentalStartDate = DateTime.Now;
+            // Default rental period: 1 day
+            DateTime rentalEndDate = rentalStartDate.AddDays(1);
+
+            dtpRentalStartDate.Value = rentalStartDate;
+            dtpRentalEndDate.Value = rentalEndDate;
+            txtBoxRentalStartMileage.Text = vehicle.VehicleMileage.ToString();
+
+            // Calculate rental amount based on vehicle class if available
+            CalculateRentalAmount();
+
+            // Show success message
+            lblProgressWarning.Text = "Araç bilgileri başarıyla yüklendi.";
+            lblProgressWarning.ForeColor = Color.Green;
+        }
+
+        #endregion
+
+        #region Rental Calculations
+
+        // TR: Bu metot, kiralama tutarını hesaplamak için kullanılır.
+        // EN: This method is used to calculate the rental amount.
+        private void CalculateRentalAmount()
+        {
+            // Eğer araç seçili değilse hesaplama yapma
+            if (string.IsNullOrEmpty(txtBoxVehiclePlate.Text))
+                return;
+
+            // Seçili aracı bul
+            Vehicle selectedVehicle = FindVehicleByPlate(txtBoxVehiclePlate.Text);
+            if (selectedVehicle == null || !selectedVehicle.VehicleClassID.HasValue)
+                return;
+
+            // Tarih aralığını hesapla
+            TimeSpan rentalPeriod = dtpRentalEndDate.Value.Date - dtpRentalStartDate.Value.Date;
+            int days = rentalPeriod.Days + 1; // Son günü de dahil et
+
+            // Eğer başlangıç bitiş tarihinden sonra ise düzelt
+            if (days <= 0)
+            {
+                dtpRentalEndDate.Value = dtpRentalStartDate.Value.AddDays(1);
+                days = 2;
+            }
+
+            // Günlük kiralama tutarını al
+            var classRepository = new VehicleClassRepository();
+            decimal dailyRate = classRepository.GetRentalPrice(selectedVehicle.VehicleClassID.Value, RentalType.Daily);
+
+            // Toplam tutarı hesapla
+            decimal totalAmount = dailyRate * days;
+            txtBoxRentalAmount.Text = totalAmount.ToString("N2") + " ₺";
+
+            // Depozitoyu güncelle (Kiralama tutarının %50'si)
+            decimal depositAmount = totalAmount * 0.5m;
+            txtBoxRentalDeposit.Text = depositAmount.ToString("N2") + " ₺";
+
+            // Default payment type: Cash
+            txtBoxRentalPaymentType.Text = "Nakit";
+        }
+
+        // TR: DateTimePicker olay işleyicileri
+        // EN: DateTimePicker event handlers
+        private void DtpRentalStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateRentalAmount();
+        }
+
+        private void DtpRentalEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateRentalAmount();
+        }
+
+        #endregion
+
+        // Diğer gerekli metodlar ve özellikler buraya eklenebilir
     }
 }
