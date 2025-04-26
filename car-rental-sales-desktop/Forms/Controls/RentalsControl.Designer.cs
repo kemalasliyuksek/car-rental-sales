@@ -36,14 +36,13 @@
             tabPageRentalsList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             sfDataGridRentals = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageRentalAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            sfDataGrid1 = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             panel1 = new Panel();
+            pnlLastRental = new Panel();
             ((System.ComponentModel.ISupportInitialize)tabControlRentals).BeginInit();
             tabControlRentals.SuspendLayout();
             tabPageRentalsList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridRentals).BeginInit();
             tabPageRentalAdd.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)sfDataGrid1).BeginInit();
             SuspendLayout();
             // 
             // tabControlRentals
@@ -221,8 +220,8 @@
             // 
             // tabPageRentalAdd
             // 
+            tabPageRentalAdd.Controls.Add(pnlLastRental);
             tabPageRentalAdd.Controls.Add(panel1);
-            tabPageRentalAdd.Controls.Add(sfDataGrid1);
             tabPageRentalAdd.Image = null;
             tabPageRentalAdd.ImageSize = new Size(16, 16);
             tabPageRentalAdd.Location = new Point(1, 33);
@@ -235,21 +234,6 @@
             tabPageRentalAdd.Text = "Rental Add";
             tabPageRentalAdd.ThemesEnabled = false;
             // 
-            // sfDataGrid1
-            // 
-            sfDataGrid1.AccessibleName = "Table";
-            sfDataGrid1.Dock = DockStyle.Right;
-            sfDataGrid1.Location = new Point(1047, 20);
-            sfDataGrid1.Name = "sfDataGrid1";
-            sfDataGrid1.Size = new Size(600, 925);
-            sfDataGrid1.Style.BorderColor = Color.FromArgb(100, 100, 100);
-            sfDataGrid1.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
-            sfDataGrid1.TabIndex = 0;
-            sfDataGrid1.Text = "sfDataGridLastRental";
-            // 
             // panel1
             // 
             panel1.Dock = DockStyle.Left;
@@ -257,6 +241,14 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1007, 925);
             panel1.TabIndex = 1;
+            // 
+            // pnlLastRental
+            // 
+            pnlLastRental.Dock = DockStyle.Right;
+            pnlLastRental.Location = new Point(1047, 20);
+            pnlLastRental.Name = "pnlLastRental";
+            pnlLastRental.Size = new Size(600, 925);
+            pnlLastRental.TabIndex = 2;
             // 
             // RentalsControl
             // 
@@ -270,7 +262,6 @@
             tabPageRentalsList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridRentals).EndInit();
             tabPageRentalAdd.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)sfDataGrid1).EndInit();
             ResumeLayout(false);
         }
 
@@ -280,7 +271,7 @@
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageRentalsList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageRentalAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridRentals;
-        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid1;
         private Panel panel1;
+        private Panel pnlLastRental;
     }
 }
