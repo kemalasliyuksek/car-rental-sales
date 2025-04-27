@@ -35,6 +35,13 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Register date picker events
             dtpRentalStartDate.ValueChanged += DtpRentalStartDate_ValueChanged;
             dtpRentalEndDate.ValueChanged += DtpRentalEndDate_ValueChanged;
+
+            dtpLicenseDate.Value = dtpLicenseDate.MinDate;
+            dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
+            dtpRentalStartDate.Value = DateTime.Now;
+            dtpRentalEndDate.Value = DateTime.Now.AddDays(1);
+            txtBoxRentalPaymentType.Text = "Nakit";
+
         }
 
         private void RentalsControl_Load(object sender, EventArgs e)
