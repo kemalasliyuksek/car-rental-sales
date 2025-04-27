@@ -18,10 +18,15 @@
         private void InitializeComponent()
         {
             Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn9 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn10 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
             Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
             Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn10 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn7 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn1 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn2 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn8 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn9 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn11 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
@@ -32,14 +37,20 @@
             Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn10 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn11 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn3 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn4 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             tabControlRentals = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageRentalAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             pnlLastRentals = new Panel();
+            pnlRentalListTransection = new Panel();
+            lblSelectedRentalTransactions = new Label();
+            btnCancelRental = new FontAwesome.Sharp.IconButton();
+            btnShowRental = new FontAwesome.Sharp.IconButton();
+            pnlLastRentalsList = new Panel();
+            lblLatestRentals = new Label();
+            sfDataGridLastRentals = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            pnlProgress = new Panel();
+            lblProgressWarning = new Label();
+            btnClearRentalForm = new FontAwesome.Sharp.IconButton();
+            btnAddRental = new FontAwesome.Sharp.IconButton();
             panel1 = new Panel();
             groupBoxRentalInfo = new GroupBox();
             txtBoxRentalNote = new TextBox();
@@ -104,31 +115,20 @@
             dtpDateOfBirth = new DateTimePicker();
             tabPageRentalsList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             sfDataGridRentals = new Syncfusion.WinForms.DataGrid.SfDataGrid();
-            btnAddRental = new FontAwesome.Sharp.IconButton();
-            btnClearRentalForm = new FontAwesome.Sharp.IconButton();
-            lblProgressWarning = new Label();
-            pnlProgress = new Panel();
-            panel2 = new Panel();
-            ıconButton1 = new FontAwesome.Sharp.IconButton();
-            ıconButton2 = new FontAwesome.Sharp.IconButton();
-            pnlLastRentalsList = new Panel();
-            lblLatestRentals = new Label();
-            sfDataGridLastRentals = new Syncfusion.WinForms.DataGrid.SfDataGrid();
-            lblSelectedRentalTransactions = new Label();
             ((System.ComponentModel.ISupportInitialize)tabControlRentals).BeginInit();
             tabControlRentals.SuspendLayout();
             tabPageRentalAdd.SuspendLayout();
             pnlLastRentals.SuspendLayout();
+            pnlRentalListTransection.SuspendLayout();
+            pnlLastRentalsList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sfDataGridLastRentals).BeginInit();
+            pnlProgress.SuspendLayout();
             panel1.SuspendLayout();
             groupBoxRentalInfo.SuspendLayout();
             groupBoxVehicleInfo.SuspendLayout();
             groupBoxCustomerInfo.SuspendLayout();
             tabPageRentalsList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridRentals).BeginInit();
-            pnlProgress.SuspendLayout();
-            panel2.SuspendLayout();
-            pnlLastRentalsList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)sfDataGridLastRentals).BeginInit();
             SuspendLayout();
             // 
             // tabControlRentals
@@ -160,7 +160,7 @@
             // 
             // pnlLastRentals
             // 
-            pnlLastRentals.Controls.Add(panel2);
+            pnlLastRentals.Controls.Add(pnlRentalListTransection);
             pnlLastRentals.Controls.Add(pnlLastRentalsList);
             pnlLastRentals.Controls.Add(pnlProgress);
             pnlLastRentals.Dock = DockStyle.Right;
@@ -169,6 +169,226 @@
             pnlLastRentals.Padding = new Padding(10);
             pnlLastRentals.Size = new Size(600, 925);
             pnlLastRentals.TabIndex = 2;
+            // 
+            // pnlRentalListTransection
+            // 
+            pnlRentalListTransection.BackColor = Color.Transparent;
+            pnlRentalListTransection.Controls.Add(lblSelectedRentalTransactions);
+            pnlRentalListTransection.Controls.Add(btnCancelRental);
+            pnlRentalListTransection.Controls.Add(btnShowRental);
+            pnlRentalListTransection.Dock = DockStyle.Bottom;
+            pnlRentalListTransection.Location = new Point(10, 815);
+            pnlRentalListTransection.Name = "pnlRentalListTransection";
+            pnlRentalListTransection.Padding = new Padding(10);
+            pnlRentalListTransection.Size = new Size(580, 100);
+            pnlRentalListTransection.TabIndex = 4;
+            // 
+            // lblSelectedRentalTransactions
+            // 
+            lblSelectedRentalTransactions.Dock = DockStyle.Top;
+            lblSelectedRentalTransactions.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblSelectedRentalTransactions.Location = new Point(10, 10);
+            lblSelectedRentalTransactions.Name = "lblSelectedRentalTransactions";
+            lblSelectedRentalTransactions.Size = new Size(560, 33);
+            lblSelectedRentalTransactions.TabIndex = 2;
+            lblSelectedRentalTransactions.Text = "Selected Rental Transactions";
+            lblSelectedRentalTransactions.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // btnCancelRental
+            // 
+            btnCancelRental.BackColor = Color.Crimson;
+            btnCancelRental.Cursor = Cursors.Hand;
+            btnCancelRental.FlatAppearance.BorderSize = 0;
+            btnCancelRental.FlatStyle = FlatStyle.Flat;
+            btnCancelRental.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnCancelRental.ForeColor = Color.White;
+            btnCancelRental.IconChar = FontAwesome.Sharp.IconChar.None;
+            btnCancelRental.IconColor = Color.Black;
+            btnCancelRental.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnCancelRental.Location = new Point(20, 47);
+            btnCancelRental.Name = "btnCancelRental";
+            btnCancelRental.Size = new Size(250, 40);
+            btnCancelRental.TabIndex = 1;
+            btnCancelRental.Text = "Cancel Rental";
+            btnCancelRental.UseVisualStyleBackColor = false;
+            // 
+            // btnShowRental
+            // 
+            btnShowRental.BackColor = Color.ForestGreen;
+            btnShowRental.Cursor = Cursors.Hand;
+            btnShowRental.FlatAppearance.BorderSize = 0;
+            btnShowRental.FlatStyle = FlatStyle.Flat;
+            btnShowRental.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnShowRental.ForeColor = Color.White;
+            btnShowRental.IconChar = FontAwesome.Sharp.IconChar.None;
+            btnShowRental.IconColor = Color.Black;
+            btnShowRental.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnShowRental.Location = new Point(307, 47);
+            btnShowRental.Name = "btnShowRental";
+            btnShowRental.Size = new Size(250, 40);
+            btnShowRental.TabIndex = 0;
+            btnShowRental.Text = "Show Rental";
+            btnShowRental.UseVisualStyleBackColor = false;
+            // 
+            // pnlLastRentalsList
+            // 
+            pnlLastRentalsList.Controls.Add(lblLatestRentals);
+            pnlLastRentalsList.Controls.Add(sfDataGridLastRentals);
+            pnlLastRentalsList.Dock = DockStyle.Top;
+            pnlLastRentalsList.Location = new Point(10, 100);
+            pnlLastRentalsList.Name = "pnlLastRentalsList";
+            pnlLastRentalsList.Size = new Size(580, 710);
+            pnlLastRentalsList.TabIndex = 4;
+            // 
+            // lblLatestRentals
+            // 
+            lblLatestRentals.Dock = DockStyle.Top;
+            lblLatestRentals.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblLatestRentals.ForeColor = Color.FromArgb(49, 76, 143);
+            lblLatestRentals.Location = new Point(0, 0);
+            lblLatestRentals.Name = "lblLatestRentals";
+            lblLatestRentals.Size = new Size(580, 40);
+            lblLatestRentals.TabIndex = 4;
+            lblLatestRentals.Text = "Latest Rentals";
+            lblLatestRentals.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // sfDataGridLastRentals
+            // 
+            sfDataGridLastRentals.AccessibleName = "Table";
+            sfDataGridLastRentals.AllowEditing = false;
+            sfDataGridLastRentals.AutoGenerateColumns = false;
+            gridNumericColumn9.AllowEditing = false;
+            gridNumericColumn9.AllowResizing = true;
+            gridNumericColumn9.CellStyle.Font.Size = 12F;
+            gridNumericColumn9.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridNumericColumn9.Format = "0";
+            gridNumericColumn9.HeaderStyle.Font.Bold = true;
+            gridNumericColumn9.HeaderStyle.Font.Size = 12F;
+            gridNumericColumn9.HeaderText = "ID";
+            gridNumericColumn9.MappingName = "RentalID";
+            gridNumericColumn9.Width = 50D;
+            gridTextColumn7.AllowEditing = false;
+            gridTextColumn7.AllowResizing = true;
+            gridTextColumn7.CellStyle.Font.Size = 12F;
+            gridTextColumn7.HeaderStyle.Font.Bold = true;
+            gridTextColumn7.HeaderStyle.Font.Size = 12F;
+            gridTextColumn7.HeaderText = "Customer";
+            gridTextColumn7.MappingName = "Customer.FullName";
+            gridTextColumn7.Width = 156D;
+            gridTextColumn8.AllowEditing = false;
+            gridTextColumn8.AllowResizing = true;
+            gridTextColumn8.CellStyle.Font.Size = 12F;
+            gridTextColumn8.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn8.HeaderStyle.Font.Bold = true;
+            gridTextColumn8.HeaderStyle.Font.Size = 12F;
+            gridTextColumn8.HeaderText = "Vehicle";
+            gridTextColumn8.MappingName = "Vehicle.VehiclePlateNumber";
+            gridTextColumn8.Width = 120D;
+            gridNumericColumn10.AllowEditing = false;
+            gridNumericColumn10.AllowResizing = true;
+            gridNumericColumn10.CellStyle.Font.Size = 12F;
+            gridNumericColumn10.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
+            gridNumericColumn10.Format = "#,##0.00 ₺";
+            gridNumericColumn10.HeaderStyle.Font.Bold = true;
+            gridNumericColumn10.HeaderStyle.Font.Size = 12F;
+            gridNumericColumn10.HeaderText = "Amount";
+            gridNumericColumn10.MappingName = "RentalAmount";
+            gridNumericColumn10.Width = 110D;
+            gridDateTimeColumn7.AllowEditing = false;
+            gridDateTimeColumn7.AllowResizing = true;
+            gridDateTimeColumn7.CellStyle.Font.Size = 12F;
+            gridDateTimeColumn7.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn7.Format = "dd.MM.yyyy";
+            gridDateTimeColumn7.HeaderStyle.Font.Bold = true;
+            gridDateTimeColumn7.HeaderStyle.Font.Size = 12F;
+            gridDateTimeColumn7.HeaderText = "Date";
+            gridDateTimeColumn7.MappingName = "RentalStartDate";
+            gridDateTimeColumn7.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn7.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn7.Width = 142D;
+            sfDataGridLastRentals.Columns.Add(gridNumericColumn9);
+            sfDataGridLastRentals.Columns.Add(gridTextColumn7);
+            sfDataGridLastRentals.Columns.Add(gridTextColumn8);
+            sfDataGridLastRentals.Columns.Add(gridNumericColumn10);
+            sfDataGridLastRentals.Columns.Add(gridDateTimeColumn7);
+            sfDataGridLastRentals.Dock = DockStyle.Bottom;
+            sfDataGridLastRentals.Location = new Point(0, 40);
+            sfDataGridLastRentals.Name = "sfDataGridLastRentals";
+            sfDataGridLastRentals.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
+            sfDataGridLastRentals.Size = new Size(580, 670);
+            sfDataGridLastRentals.Style.AddNewRowStyle.BackColor = Color.Transparent;
+            sfDataGridLastRentals.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            sfDataGridLastRentals.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            sfDataGridLastRentals.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            sfDataGridLastRentals.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            sfDataGridLastRentals.Style.CurrentCellStyle.BackColor = Color.FromArgb(166, 216, 255);
+            sfDataGridLastRentals.Style.CurrentCellStyle.BorderColor = Color.FromArgb(166, 216, 255);
+            sfDataGridLastRentals.Style.CurrentCellStyle.BorderThickness = Syncfusion.WinForms.DataGrid.Styles.GridBorderWeight.ExtraThin;
+            sfDataGridLastRentals.Style.CurrentCellStyle.TextColor = Color.Black;
+            sfDataGridLastRentals.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            sfDataGridLastRentals.Style.SelectionStyle.TextColor = Color.Black;
+            sfDataGridLastRentals.TabIndex = 3;
+            // 
+            // pnlProgress
+            // 
+            pnlProgress.BackColor = Color.Transparent;
+            pnlProgress.Controls.Add(lblProgressWarning);
+            pnlProgress.Controls.Add(btnClearRentalForm);
+            pnlProgress.Controls.Add(btnAddRental);
+            pnlProgress.Dock = DockStyle.Top;
+            pnlProgress.Location = new Point(10, 10);
+            pnlProgress.Name = "pnlProgress";
+            pnlProgress.Padding = new Padding(10);
+            pnlProgress.Size = new Size(580, 90);
+            pnlProgress.TabIndex = 3;
+            // 
+            // lblProgressWarning
+            // 
+            lblProgressWarning.Dock = DockStyle.Bottom;
+            lblProgressWarning.Font = new Font("Segoe UI", 12F);
+            lblProgressWarning.Location = new Point(10, 56);
+            lblProgressWarning.Name = "lblProgressWarning";
+            lblProgressWarning.Size = new Size(560, 24);
+            lblProgressWarning.TabIndex = 2;
+            lblProgressWarning.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnClearRentalForm
+            // 
+            btnClearRentalForm.BackColor = Color.SaddleBrown;
+            btnClearRentalForm.Cursor = Cursors.Hand;
+            btnClearRentalForm.FlatAppearance.BorderSize = 0;
+            btnClearRentalForm.FlatStyle = FlatStyle.Flat;
+            btnClearRentalForm.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnClearRentalForm.ForeColor = Color.White;
+            btnClearRentalForm.IconChar = FontAwesome.Sharp.IconChar.None;
+            btnClearRentalForm.IconColor = Color.Black;
+            btnClearRentalForm.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnClearRentalForm.Location = new Point(20, 13);
+            btnClearRentalForm.Name = "btnClearRentalForm";
+            btnClearRentalForm.Size = new Size(250, 40);
+            btnClearRentalForm.TabIndex = 1;
+            btnClearRentalForm.Text = "Clear Rental Form";
+            btnClearRentalForm.UseVisualStyleBackColor = false;
+            btnClearRentalForm.Click += btnClearRentalForm_Click;
+            // 
+            // btnAddRental
+            // 
+            btnAddRental.BackColor = SystemColors.HotTrack;
+            btnAddRental.Cursor = Cursors.Hand;
+            btnAddRental.FlatAppearance.BorderSize = 0;
+            btnAddRental.FlatStyle = FlatStyle.Flat;
+            btnAddRental.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnAddRental.ForeColor = Color.White;
+            btnAddRental.IconChar = FontAwesome.Sharp.IconChar.None;
+            btnAddRental.IconColor = Color.Black;
+            btnAddRental.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAddRental.Location = new Point(307, 13);
+            btnAddRental.Name = "btnAddRental";
+            btnAddRental.Size = new Size(250, 40);
+            btnAddRental.TabIndex = 0;
+            btnAddRental.Text = "Add Rental";
+            btnAddRental.UseVisualStyleBackColor = false;
+            btnAddRental.Click += btnAddRental_Click;
             // 
             // panel1
             // 
@@ -919,39 +1139,39 @@
             sfDataGridRentals.AccessibleName = "Table";
             sfDataGridRentals.AllowEditing = false;
             sfDataGridRentals.AutoGenerateColumns = false;
-            gridNumericColumn9.AllowEditing = false;
-            gridNumericColumn9.AllowResizing = true;
-            gridNumericColumn9.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridNumericColumn9.Format = "0";
-            gridNumericColumn9.HeaderText = "ID";
-            gridNumericColumn9.MappingName = "RentalID";
-            gridNumericColumn9.Width = 50D;
-            gridNumericColumn10.AllowEditing = false;
-            gridNumericColumn10.AllowResizing = true;
-            gridNumericColumn10.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridNumericColumn10.Format = "0";
-            gridNumericColumn10.HeaderText = "C. ID";
-            gridNumericColumn10.MappingName = "RentalCustomerID";
-            gridNumericColumn10.Width = 50D;
-            gridTextColumn7.AllowEditing = false;
-            gridTextColumn7.AllowResizing = true;
-            gridTextColumn7.HeaderText = "Customer Name";
-            gridTextColumn7.MappingName = "Customer.FullName";
-            gridTextColumn7.Width = 140D;
-            gridTextColumn8.AllowEditing = false;
-            gridTextColumn8.AllowResizing = true;
-            gridTextColumn8.HeaderText = "Vehicle Plate";
-            gridTextColumn8.MappingName = "Vehicle.VehiclePlateNumber";
-            gridTextColumn8.Width = 111D;
-            gridDateTimeColumn7.AllowEditing = false;
-            gridDateTimeColumn7.AllowResizing = true;
-            gridDateTimeColumn7.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn7.Format = "dd.MM.yyyy";
-            gridDateTimeColumn7.HeaderText = "Start Date";
-            gridDateTimeColumn7.MappingName = "RentalStartDate";
-            gridDateTimeColumn7.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn7.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn7.Width = 120D;
+            gridNumericColumn1.AllowEditing = false;
+            gridNumericColumn1.AllowResizing = true;
+            gridNumericColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridNumericColumn1.Format = "0";
+            gridNumericColumn1.HeaderText = "ID";
+            gridNumericColumn1.MappingName = "RentalID";
+            gridNumericColumn1.Width = 50D;
+            gridNumericColumn2.AllowEditing = false;
+            gridNumericColumn2.AllowResizing = true;
+            gridNumericColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridNumericColumn2.Format = "0";
+            gridNumericColumn2.HeaderText = "C. ID";
+            gridNumericColumn2.MappingName = "RentalCustomerID";
+            gridNumericColumn2.Width = 50D;
+            gridTextColumn1.AllowEditing = false;
+            gridTextColumn1.AllowResizing = true;
+            gridTextColumn1.HeaderText = "Customer Name";
+            gridTextColumn1.MappingName = "Customer.FullName";
+            gridTextColumn1.Width = 140D;
+            gridTextColumn2.AllowEditing = false;
+            gridTextColumn2.AllowResizing = true;
+            gridTextColumn2.HeaderText = "Vehicle Plate";
+            gridTextColumn2.MappingName = "Vehicle.VehiclePlateNumber";
+            gridTextColumn2.Width = 111D;
+            gridDateTimeColumn1.AllowEditing = false;
+            gridDateTimeColumn1.AllowResizing = true;
+            gridDateTimeColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn1.Format = "dd.MM.yyyy";
+            gridDateTimeColumn1.HeaderText = "Start Date";
+            gridDateTimeColumn1.MappingName = "RentalStartDate";
+            gridDateTimeColumn1.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn1.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn1.Width = 120D;
             gridDateTimeColumn8.AllowEditing = false;
             gridDateTimeColumn8.AllowResizing = true;
             gridDateTimeColumn8.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
@@ -1027,11 +1247,11 @@
             gridDateTimeColumn11.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             gridDateTimeColumn11.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
             gridDateTimeColumn11.Width = 140D;
-            sfDataGridRentals.Columns.Add(gridNumericColumn9);
-            sfDataGridRentals.Columns.Add(gridNumericColumn10);
-            sfDataGridRentals.Columns.Add(gridTextColumn7);
-            sfDataGridRentals.Columns.Add(gridTextColumn8);
-            sfDataGridRentals.Columns.Add(gridDateTimeColumn7);
+            sfDataGridRentals.Columns.Add(gridNumericColumn1);
+            sfDataGridRentals.Columns.Add(gridNumericColumn2);
+            sfDataGridRentals.Columns.Add(gridTextColumn1);
+            sfDataGridRentals.Columns.Add(gridTextColumn2);
+            sfDataGridRentals.Columns.Add(gridDateTimeColumn1);
             sfDataGridRentals.Columns.Add(gridDateTimeColumn8);
             sfDataGridRentals.Columns.Add(gridDateTimeColumn9);
             sfDataGridRentals.Columns.Add(gridNumericColumn11);
@@ -1061,210 +1281,6 @@
             sfDataGridRentals.TabIndex = 0;
             sfDataGridRentals.QueryRowStyle += SfDataGridRentals_QueryRowStyle;
             // 
-            // btnAddRental
-            // 
-            btnAddRental.BackColor = SystemColors.HotTrack;
-            btnAddRental.Cursor = Cursors.Hand;
-            btnAddRental.FlatAppearance.BorderSize = 0;
-            btnAddRental.FlatStyle = FlatStyle.Flat;
-            btnAddRental.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            btnAddRental.ForeColor = Color.White;
-            btnAddRental.IconChar = FontAwesome.Sharp.IconChar.None;
-            btnAddRental.IconColor = Color.Black;
-            btnAddRental.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAddRental.Location = new Point(307, 13);
-            btnAddRental.Name = "btnAddRental";
-            btnAddRental.Size = new Size(250, 40);
-            btnAddRental.TabIndex = 0;
-            btnAddRental.Text = "Add Rental";
-            btnAddRental.UseVisualStyleBackColor = false;
-            btnAddRental.Click += btnAddRental_Click;
-            // 
-            // btnClearRentalForm
-            // 
-            btnClearRentalForm.BackColor = Color.SaddleBrown;
-            btnClearRentalForm.Cursor = Cursors.Hand;
-            btnClearRentalForm.FlatAppearance.BorderSize = 0;
-            btnClearRentalForm.FlatStyle = FlatStyle.Flat;
-            btnClearRentalForm.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            btnClearRentalForm.ForeColor = Color.White;
-            btnClearRentalForm.IconChar = FontAwesome.Sharp.IconChar.None;
-            btnClearRentalForm.IconColor = Color.Black;
-            btnClearRentalForm.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnClearRentalForm.Location = new Point(20, 13);
-            btnClearRentalForm.Name = "btnClearRentalForm";
-            btnClearRentalForm.Size = new Size(250, 40);
-            btnClearRentalForm.TabIndex = 1;
-            btnClearRentalForm.Text = "Clear Rental Form";
-            btnClearRentalForm.UseVisualStyleBackColor = false;
-            btnClearRentalForm.Click += btnClearRentalForm_Click;
-            // 
-            // lblProgressWarning
-            // 
-            lblProgressWarning.Dock = DockStyle.Bottom;
-            lblProgressWarning.Font = new Font("Segoe UI", 12F);
-            lblProgressWarning.Location = new Point(10, 65);
-            lblProgressWarning.Name = "lblProgressWarning";
-            lblProgressWarning.Size = new Size(560, 25);
-            lblProgressWarning.TabIndex = 2;
-            lblProgressWarning.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // pnlProgress
-            // 
-            pnlProgress.BackColor = Color.Transparent;
-            pnlProgress.Controls.Add(lblProgressWarning);
-            pnlProgress.Controls.Add(btnClearRentalForm);
-            pnlProgress.Controls.Add(btnAddRental);
-            pnlProgress.Dock = DockStyle.Top;
-            pnlProgress.Location = new Point(10, 10);
-            pnlProgress.Name = "pnlProgress";
-            pnlProgress.Padding = new Padding(10);
-            pnlProgress.Size = new Size(580, 100);
-            pnlProgress.TabIndex = 3;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.Transparent;
-            panel2.Controls.Add(lblSelectedRentalTransactions);
-            panel2.Controls.Add(ıconButton1);
-            panel2.Controls.Add(ıconButton2);
-            panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(10, 815);
-            panel2.Name = "panel2";
-            panel2.Padding = new Padding(10);
-            panel2.Size = new Size(580, 100);
-            panel2.TabIndex = 4;
-            // 
-            // ıconButton1
-            // 
-            ıconButton1.BackColor = Color.Crimson;
-            ıconButton1.Cursor = Cursors.Hand;
-            ıconButton1.FlatAppearance.BorderSize = 0;
-            ıconButton1.FlatStyle = FlatStyle.Flat;
-            ıconButton1.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            ıconButton1.ForeColor = Color.White;
-            ıconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            ıconButton1.IconColor = Color.Black;
-            ıconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton1.Location = new Point(20, 47);
-            ıconButton1.Name = "ıconButton1";
-            ıconButton1.Size = new Size(250, 40);
-            ıconButton1.TabIndex = 1;
-            ıconButton1.Text = "Cancel Rental";
-            ıconButton1.UseVisualStyleBackColor = false;
-            // 
-            // ıconButton2
-            // 
-            ıconButton2.BackColor = SystemColors.HotTrack;
-            ıconButton2.Cursor = Cursors.Hand;
-            ıconButton2.FlatAppearance.BorderSize = 0;
-            ıconButton2.FlatStyle = FlatStyle.Flat;
-            ıconButton2.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            ıconButton2.ForeColor = Color.White;
-            ıconButton2.IconChar = FontAwesome.Sharp.IconChar.None;
-            ıconButton2.IconColor = Color.Black;
-            ıconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton2.Location = new Point(307, 47);
-            ıconButton2.Name = "ıconButton2";
-            ıconButton2.Size = new Size(250, 40);
-            ıconButton2.TabIndex = 0;
-            ıconButton2.Text = "Show Rental";
-            ıconButton2.UseVisualStyleBackColor = false;
-            // 
-            // pnlLastRentalsList
-            // 
-            pnlLastRentalsList.Controls.Add(lblLatestRentals);
-            pnlLastRentalsList.Controls.Add(sfDataGridLastRentals);
-            pnlLastRentalsList.Dock = DockStyle.Top;
-            pnlLastRentalsList.Location = new Point(10, 110);
-            pnlLastRentalsList.Name = "pnlLastRentalsList";
-            pnlLastRentalsList.Size = new Size(580, 700);
-            pnlLastRentalsList.TabIndex = 4;
-            // 
-            // lblLatestRentals
-            // 
-            lblLatestRentals.Dock = DockStyle.Top;
-            lblLatestRentals.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            lblLatestRentals.ForeColor = Color.FromArgb(49, 76, 143);
-            lblLatestRentals.Location = new Point(0, 0);
-            lblLatestRentals.Name = "lblLatestRentals";
-            lblLatestRentals.Size = new Size(580, 40);
-            lblLatestRentals.TabIndex = 4;
-            lblLatestRentals.Text = "Latest Rentals";
-            lblLatestRentals.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // sfDataGridLastRentals
-            // 
-            sfDataGridLastRentals.AccessibleName = "Table";
-            sfDataGridLastRentals.AllowEditing = false;
-            sfDataGridLastRentals.AutoGenerateColumns = false;
-            gridNumericColumn3.AllowEditing = false;
-            gridNumericColumn3.AllowResizing = true;
-            gridNumericColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridNumericColumn3.Format = "0";
-            gridNumericColumn3.HeaderText = "ID";
-            gridNumericColumn3.MappingName = "RentalID";
-            gridNumericColumn3.Width = 50D;
-            gridTextColumn3.AllowEditing = false;
-            gridTextColumn3.AllowResizing = true;
-            gridTextColumn3.HeaderText = "Customer";
-            gridTextColumn3.MappingName = "Customer.FullName";
-            gridTextColumn3.Width = 136D;
-            gridTextColumn4.AllowEditing = false;
-            gridTextColumn4.AllowResizing = true;
-            gridTextColumn4.HeaderText = "Vehicle";
-            gridTextColumn4.MappingName = "Vehicle.VehiclePlateNumber";
-            gridTextColumn4.Width = 120D;
-            gridNumericColumn4.AllowEditing = false;
-            gridNumericColumn4.AllowResizing = true;
-            gridNumericColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
-            gridNumericColumn4.Format = "#,##0.00 ₺";
-            gridNumericColumn4.HeaderText = "Amount";
-            gridNumericColumn4.MappingName = "RentalAmount";
-            gridNumericColumn4.Width = 130D;
-            gridDateTimeColumn2.AllowEditing = false;
-            gridDateTimeColumn2.AllowResizing = true;
-            gridDateTimeColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn2.Format = "dd.MM.yyyy";
-            gridDateTimeColumn2.HeaderText = "Date";
-            gridDateTimeColumn2.MappingName = "RentalStartDate";
-            gridDateTimeColumn2.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn2.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn2.Width = 142D;
-            sfDataGridLastRentals.Columns.Add(gridNumericColumn3);
-            sfDataGridLastRentals.Columns.Add(gridTextColumn3);
-            sfDataGridLastRentals.Columns.Add(gridTextColumn4);
-            sfDataGridLastRentals.Columns.Add(gridNumericColumn4);
-            sfDataGridLastRentals.Columns.Add(gridDateTimeColumn2);
-            sfDataGridLastRentals.Dock = DockStyle.Bottom;
-            sfDataGridLastRentals.Location = new Point(0, 40);
-            sfDataGridLastRentals.Name = "sfDataGridLastRentals";
-            sfDataGridLastRentals.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridLastRentals.Size = new Size(580, 660);
-            sfDataGridLastRentals.Style.AddNewRowStyle.BackColor = Color.Transparent;
-            sfDataGridLastRentals.Style.BorderColor = Color.FromArgb(100, 100, 100);
-            sfDataGridLastRentals.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
-            sfDataGridLastRentals.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGridLastRentals.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGridLastRentals.Style.CurrentCellStyle.BackColor = Color.FromArgb(166, 216, 255);
-            sfDataGridLastRentals.Style.CurrentCellStyle.BorderColor = Color.FromArgb(166, 216, 255);
-            sfDataGridLastRentals.Style.CurrentCellStyle.BorderThickness = Syncfusion.WinForms.DataGrid.Styles.GridBorderWeight.ExtraThin;
-            sfDataGridLastRentals.Style.CurrentCellStyle.TextColor = Color.Black;
-            sfDataGridLastRentals.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
-            sfDataGridLastRentals.Style.SelectionStyle.TextColor = Color.Black;
-            sfDataGridLastRentals.TabIndex = 3;
-            // 
-            // lblSelectedRentalTransactions
-            // 
-            lblSelectedRentalTransactions.Dock = DockStyle.Top;
-            lblSelectedRentalTransactions.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblSelectedRentalTransactions.Location = new Point(10, 10);
-            lblSelectedRentalTransactions.Name = "lblSelectedRentalTransactions";
-            lblSelectedRentalTransactions.Size = new Size(560, 33);
-            lblSelectedRentalTransactions.TabIndex = 2;
-            lblSelectedRentalTransactions.Text = "Selected Rental Transactions";
-            lblSelectedRentalTransactions.TextAlign = ContentAlignment.TopCenter;
-            // 
             // RentalsControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1277,6 +1293,10 @@
             tabControlRentals.ResumeLayout(false);
             tabPageRentalAdd.ResumeLayout(false);
             pnlLastRentals.ResumeLayout(false);
+            pnlRentalListTransection.ResumeLayout(false);
+            pnlLastRentalsList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)sfDataGridLastRentals).EndInit();
+            pnlProgress.ResumeLayout(false);
             panel1.ResumeLayout(false);
             groupBoxRentalInfo.ResumeLayout(false);
             groupBoxRentalInfo.PerformLayout();
@@ -1286,10 +1306,6 @@
             groupBoxCustomerInfo.PerformLayout();
             tabPageRentalsList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridRentals).EndInit();
-            pnlProgress.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            pnlLastRentalsList.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)sfDataGridLastRentals).EndInit();
             ResumeLayout(false);
         }
 
@@ -1362,9 +1378,9 @@
         private DateTimePicker dtpRentalEndDate;
         private DateTimePicker dtpLicenseDate;
         private DateTimePicker dtpDateOfBirth;
-        private Panel panel2;
-        private FontAwesome.Sharp.IconButton ıconButton1;
-        private FontAwesome.Sharp.IconButton ıconButton2;
+        private Panel pnlRentalListTransection;
+        private FontAwesome.Sharp.IconButton btnCancelRental;
+        private FontAwesome.Sharp.IconButton btnShowRental;
         private Panel pnlLastRentalsList;
         private Label lblLatestRentals;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridLastRentals;

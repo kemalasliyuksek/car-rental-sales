@@ -42,6 +42,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             dtpRentalEndDate.Value = DateTime.Now.AddDays(1);
             txtBoxRentalPaymentType.Text = "Nakit";
 
+            sfDataGridLastRentals.QueryRowStyle += SfDataGridLastRentals_QueryRowStyle;
         }
 
         private void RentalsControl_Load(object sender, EventArgs e)
