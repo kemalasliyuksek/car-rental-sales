@@ -49,6 +49,9 @@ namespace car_rental_sales_desktop.Forms.Controls
             LoadRentals();
             LoadCustomersForAutoComplete();
             LoadVehiclesForAutoComplete();
+
+            dtpRentalStartDate.MinDate = DateTime.Today;
+            dtpRentalEndDate.MinDate = DateTime.Today.AddDays(1);
         }
 
         // TR: Bu metot, kiralama verilerini yüklemek için kullanılır.
@@ -642,7 +645,7 @@ namespace car_rental_sales_desktop.Forms.Controls
 
         #endregion
 
-        private void btnAddRental_Click_1(object sender, EventArgs e)
+        private void btnAddRental_Click(object sender, EventArgs e)
         {
             if (ValidateRentalForm())
             {
@@ -650,17 +653,11 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        private void btnCancelRental_Click_1(object sender, EventArgs e)
+        private void btnClearRentalForm_Click(object sender, EventArgs e)
         {
             ClearForm();
             lblProgressWarning.Text = "Form cleared. Ready for new rental entry.";
             lblProgressWarning.ForeColor = Color.Blue;
-        }
-
-        private void RentalsControl_Load_1(object sender, EventArgs e)
-        {
-            dtpRentalStartDate.MinDate = DateTime.Today;
-            dtpRentalEndDate.MinDate = DateTime.Today.AddDays(1);
         }
     }
 }
