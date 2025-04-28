@@ -36,6 +36,10 @@ namespace car_rental_sales_desktop.Forms.Controls
             dtpRentalStartDate.ValueChanged += DtpRentalStartDate_ValueChanged;
             dtpRentalEndDate.ValueChanged += DtpRentalEndDate_ValueChanged;
 
+            // Add event handlers for rental selection
+            sfDataGridLastRentals.CellDoubleClick += SfDataGridLastRentals_CellDoubleClick;
+            btnShowRental.Click += BtnShowRental_Click;
+
             dtpLicenseDate.Value = dtpLicenseDate.MinDate;
             dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
             dtpRentalStartDate.Value = DateTime.Now;
@@ -659,6 +663,156 @@ namespace car_rental_sales_desktop.Forms.Controls
             ClearForm();
             lblProgressWarning.Text = "Form cleared. Ready for new rental entry.";
             lblProgressWarning.ForeColor = Color.Blue;
+        }
+
+        // Handle double-click on a rental in the grid
+        private void SfDataGridLastRentals_CellDoubleClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
+        {
+            if (e.DataRow.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
+            {
+                LoadSelectedRental();
+            }
+        }
+
+        private void BtnShowRental_Click(object sender, EventArgs e)
+        {
+            LoadSelectedRental();
+        }
+
+        // Method to load the selected rental data into the form
+        private void LoadSelectedRental()
+        {
+            try
+            {
+                // Get the selected rental from the grid
+                Rental selectedRental = sfDataGridLastRentals.SelectedItem as Rental;
+
+                if (selectedRental == null)
+                {
+                    MessageBox.Show("Lütfen listeden bir kiralama seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Clear existing form data
+                ClearForm();
+
+                // Load customer information
+                if (selectedRental.Customer != null)
+                {
+                    LoadCustomerInfo(selectedRental.Customer);
+                }
+                else if (selectedRental.RentalCustomerID > 0)
+                {
+                    // If the customer object isn't loaded, try to fetch it
+                    Customer customer = _customerRepository.GetById(selectedRental.RentalCustomerID);
+                    if (customer != null)
+                    {
+                        LoadCustomerInfo(customer);
+                    }
+                }
+
+                // Load vehicle information
+                if (selectedRental.Vehicle != null)
+                {
+                    LoadVehicleInfo(selectedRental.Vehicle);
+                }
+                else if (selectedRental.RentalVehicleID > 0)
+                {
+                    // If the vehicle object isn't loaded, try to fetch it
+                    Vehicle vehicle = _vehicleRepository.GetById(selectedRental.RentalVehicleID);
+                    if (vehicle != null)
+                    {
+                        LoadVehicleInfo(vehicle);
+                    }
+                }
+
+                // *** FIX: Temporarily remove min/max date constraints ***
+                DateTime originalMinDateStart = dtpRentalStartDate.MinDate;
+                DateTime originalMinDateEnd = dtpRentalEndDate.MinDate;
+
+                try
+                {
+                    // Reset the MinDate to the minimum possible value
+                    dtpRentalStartDate.MinDate = DateTimePicker.MinimumDateTime;
+                    dtpRentalEndDate.MinDate = DateTimePicker.MinimumDateTime;
+
+                    // Load rental specific information
+                    dtpRentalStartDate.Value = selectedRental.RentalStartDate;
+                    dtpRentalEndDate.Value = selectedRental.RentalEndDate;
+                }
+                finally
+                {
+                    // Restore original constraints for new entries
+                    // Only if we're not in view mode
+                    if (!selectedRental.RentalReturnDate.HasValue)
+                    {
+                        dtpRentalStartDate.MinDate = originalMinDateStart;
+                        dtpRentalEndDate.MinDate = originalMinDateEnd;
+                    }
+                }
+
+                txtBoxRentalStartMileage.Text = selectedRental.RentalStartKm.ToString();
+
+                if (selectedRental.RentalEndKm.HasValue)
+                {
+                    textBox8.Text = selectedRental.RentalEndKm.Value.ToString();
+                }
+
+                txtBoxRentalPaymentType.Text = selectedRental.RentalPaymentType;
+                txtBoxRentalAmount.Text = selectedRental.RentalAmount.ToString("N2") + " ₺";
+
+                if (selectedRental.RentalDepositAmount.HasValue)
+                {
+                    txtBoxRentalDeposit.Text = selectedRental.RentalDepositAmount.Value.ToString("N2") + " ₺";
+                }
+
+                // Load the rental note
+                if (selectedRental.RentalID > 0)
+                {
+                    // Get all notes for this rental
+                    List<RentalNote> notes = _rentalRepository.GetNotes(selectedRental.RentalID);
+                    if (notes != null && notes.Count > 0)
+                    {
+                        // Use the first note for display (or concatenate all notes if needed)
+                        txtBoxRentalNote.Text = notes[0].RentalNoteText;
+                    }
+                }
+
+                // Make the form read-only since this is an existing rental
+                SetFormReadOnly(true);
+
+                // Display success message
+                lblProgressWarning.Text = "Kiralama bilgileri başarıyla yüklendi.";
+                lblProgressWarning.ForeColor = Color.Green;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Kiralama bilgileri yüklenirken hata oluştu: {ex.Message}",
+                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        // Method to set form fields as read-only when viewing an existing rental
+        private void SetFormReadOnly(bool isReadOnly)
+        {
+            // Disable date pickers and text inputs for editing
+            dtpRentalStartDate.Enabled = !isReadOnly;
+            dtpRentalEndDate.Enabled = !isReadOnly;
+            txtBoxRentalPaymentType.ReadOnly = true; // Always read-only
+            txtBoxRentalNote.ReadOnly = true; // Always read-only
+
+            // Hide or disable the add rental button when viewing
+            btnAddRental.Enabled = !isReadOnly;
+
+            if (isReadOnly)
+            {
+                btnAddRental.BackColor = Color.Gray;
+            }
+            else
+            {
+                btnAddRental.BackColor = SystemColors.HotTrack;
+            }
         }
     }
 }
