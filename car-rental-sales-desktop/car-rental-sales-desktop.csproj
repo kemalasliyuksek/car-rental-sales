@@ -16,12 +16,21 @@
   <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="MySql.Data" Version="9.3.0" />
+<<<<<<< Updated upstream
     <PackageReference Include="Syncfusion.Chart.Windows" Version="29.1.40" />
     <PackageReference Include="Syncfusion.Grid.Windows" Version="29.1.40" />
     <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="29.1.40" />
     <PackageReference Include="Syncfusion.SfInput.WinForms" Version="29.1.40" />
     <PackageReference Include="Syncfusion.SfListView.WinForms" Version="29.1.40" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="29.1.40" />
+=======
+    <PackageReference Include="Syncfusion.Chart.Windows" Version="29.1.41" />
+    <PackageReference Include="Syncfusion.Grid.Windows" Version="29.1.41" />
+    <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="29.1.41" />
+    <PackageReference Include="Syncfusion.SfInput.WinForms" Version="29.1.41" />
+    <PackageReference Include="Syncfusion.SfListView.WinForms" Version="29.1.41" />
+    <PackageReference Include="Syncfusion.Tools.Windows" Version="29.1.41" />
+>>>>>>> Stashed changes
   </ItemGroup>
 
   <ItemGroup>
