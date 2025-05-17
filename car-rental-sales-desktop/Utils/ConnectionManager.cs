@@ -6,7 +6,7 @@ namespace car_rental_sales_desktop.Utils
 {
     public static class ConnectionManager
     {
-        public static bool UseRemoteDatabase { get; set; } = true;
+        public static bool UseRemoteDatabase { get; set; } = false;
 
         public static string GetConnectionString()
         {
