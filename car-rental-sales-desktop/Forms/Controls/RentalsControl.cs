@@ -661,6 +661,7 @@ namespace car_rental_sales_desktop.Forms.Controls
         private void btnClearRentalForm_Click(object sender, EventArgs e)
         {
             ClearForm();
+            SetFormReadOnly(false);
             lblProgressWarning.Text = "Form cleared. Ready for new rental entry.";
             lblProgressWarning.ForeColor = Color.Blue;
         }
