@@ -144,10 +144,10 @@ INSERT INTO Users (UserFirstName, UserLastName, Username, UserPassword, UserEmai
 
 -- Banka verileri
 INSERT INTO Banks (BankName, BankDescription) VALUES 
-('Ziraat Bankası', 'Primary banking partner'),
-('İş Bankası', 'Secondary banking partner'),
+('Ziraat Bank', 'Primary banking partner'),
+('Is Bank', 'Secondary banking partner'),
 ('Akbank', 'Corporate accounts partner'),
-('Garanti Bankası', 'Staff banking partner');
+('Garanti Bank', 'Staff banking partner');
 
 -- Servis verileri
 INSERT INTO Services (ServiceName, ServiceAddress, ServicePhone, ServiceEmail, ServiceAuthorizedPersonID) VALUES 
