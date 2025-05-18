@@ -122,6 +122,17 @@ namespace car_rental_sales_desktop.Forms
                     // Show return information
                     lblReturnDateInfo.Text = _rental.RentalReturnDate.Value.ToString("dd.MM.yyyy");
                     lblReturnMileageInfo.Text = _rental.RentalEndKm.ToString() + " KM";
+
+                    // Hesapla ve driven distance'ı göster
+                    if (_rental.RentalEndKm.HasValue)
+                    {
+                        int mileageDifference = _rental.RentalEndKm.Value - _rental.RentalStartKm;
+                        lblMileageInfo.Text = $"Driven distance: {mileageDifference} KM";
+                    }
+                    else
+                    {
+                        lblMileageInfo.Text = "Driven distance: 0 KM";
+                    }
                 }
                 else
                 {

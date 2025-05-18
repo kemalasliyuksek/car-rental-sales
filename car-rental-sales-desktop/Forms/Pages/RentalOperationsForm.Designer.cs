@@ -501,6 +501,7 @@
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             // 
             // RentalOperationsForm
             // 
