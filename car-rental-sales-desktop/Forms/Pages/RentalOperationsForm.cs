@@ -111,8 +111,13 @@ namespace car_rental_sales_desktop.Forms
                     // Disable return operation controls
                     dtpReturnDate.Enabled = false;
                     numReturnMileage.Enabled = false;
-                    txtRentalNote.ReadOnly = true;
+                    // Note field remains editable
                     btnCompleteReturn.Enabled = false;
+
+                    // Change Complete Return button to Save Note button
+                    btnCompleteReturn.Text = "Save Note";
+                    btnCompleteReturn.Enabled = true;
+                    btnCompleteReturn.BackColor = System.Drawing.Color.DodgerBlue;
 
                     // Show return information
                     lblReturnDateInfo.Text = _rental.RentalReturnDate.Value.ToString("dd.MM.yyyy");
@@ -193,6 +198,48 @@ namespace car_rental_sales_desktop.Forms
         {
             try
             {
+                // Check if it's a completed rental (just saving a note)
+                if (_rental.RentalReturnDate.HasValue)
+                {
+                    string noteText = txtRentalNote.Text.Trim();
+                    if (!string.IsNullOrEmpty(noteText))
+                    {
+                        // Add a note to the rental - use a different variable name to avoid conflict
+                        bool noteSuccess = _rentalRepository.AddNote(_rental.RentalID, noteText, CurrentUser.UserID);
+
+                        if (noteSuccess)
+                        {
+                            MessageBox.Show(
+                                "Note has been successfully added to the rental.",
+                                "Success",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "An error occurred while saving the note.",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Please enter a note or click cancel.",
+                            "Warning",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                    }
+
+                    return;
+                }
+
+                // This is the original code for processing a return
                 // Confirm return
                 DialogResult result = MessageBox.Show(
                     "Are you sure you want to complete this rental return?",
@@ -258,7 +305,7 @@ namespace car_rental_sales_desktop.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing return: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error processing operation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
