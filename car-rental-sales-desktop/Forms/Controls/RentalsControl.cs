@@ -820,21 +820,21 @@ namespace car_rental_sales_desktop.Forms.Controls
 
         private void btnRentalOperations_Click(object sender, EventArgs e)
         {
-            // Seçili bir kiralama olup olmadığını kontrol et
+            // Check for a selected rental
             Rental selectedRental = sfDataGridLastRentals.SelectedItem as Rental;
 
             if (selectedRental == null)
             {
-                MessageBox.Show("Lütfen işlem yapmak için bir kiralama seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a rental to perform operations.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Kiralama operasyonları formunu aç
-            using (Forms.RentalOperationsForm operationsForm = new Forms.RentalOperationsForm(selectedRental.RentalID))
+            // Open the rental operations form
+            using (var operationsForm = new Forms.RentalOperationsForm(selectedRental.RentalID))
             {
                 DialogResult result = operationsForm.ShowDialog();
 
-                // Eğer form başarıyla kapatıldıysa kiralamalar listesini yenile
+                // If the form closed with OK (successful operation), refresh the rentals list
                 if (result == DialogResult.OK)
                 {
                     LoadRentals();
