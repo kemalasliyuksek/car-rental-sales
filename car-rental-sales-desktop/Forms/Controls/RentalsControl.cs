@@ -40,6 +40,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             sfDataGridLastRentals.CellDoubleClick += SfDataGridLastRentals_CellDoubleClick;
             btnShowRental.Click += BtnShowRental_Click;
 
+            btnRentalOperations.Click += btnRentalOperations_Click;
+
             dtpLicenseDate.Value = dtpLicenseDate.MinDate;
             dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
             dtpRentalStartDate.Value = DateTime.Now;
@@ -813,6 +815,30 @@ namespace car_rental_sales_desktop.Forms.Controls
             else
             {
                 btnAddRental.BackColor = SystemColors.HotTrack;
+            }
+        }
+
+        private void btnRentalOperations_Click(object sender, EventArgs e)
+        {
+            // Seçili bir kiralama olup olmadığını kontrol et
+            Rental selectedRental = sfDataGridLastRentals.SelectedItem as Rental;
+
+            if (selectedRental == null)
+            {
+                MessageBox.Show("Lütfen işlem yapmak için bir kiralama seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Kiralama operasyonları formunu aç
+            using (Forms.RentalOperationsForm operationsForm = new Forms.RentalOperationsForm(selectedRental.RentalID))
+            {
+                DialogResult result = operationsForm.ShowDialog();
+
+                // Eğer form başarıyla kapatıldıysa kiralamalar listesini yenile
+                if (result == DialogResult.OK)
+                {
+                    LoadRentals();
+                }
             }
         }
     }
