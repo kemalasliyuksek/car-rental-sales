@@ -45,8 +45,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             sfDataGridLastRentals.CellDoubleClick += SfDataGridLastRentals_CellDoubleClick;
             btnShowRental.Click += BtnShowRental_Click;
 
-            btnRentalOperations.Click += btnRentalOperations_Click;
-
             dtpLicenseDate.Value = dtpLicenseDate.MinDate;
             dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
             dtpRentalStartDate.Value = DateTime.Now;
