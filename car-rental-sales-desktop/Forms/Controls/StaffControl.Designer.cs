@@ -17,561 +17,568 @@
 
         private void InitializeComponent()
         {
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn2 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn9 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn11 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn12 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn13 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn14 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn4 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridCheckBoxColumn gridCheckBoxColumn2 = new Syncfusion.WinForms.DataGrid.GridCheckBoxColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn5 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn6 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            tabControlStaff = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
-            tabPageStaffList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            sfDataGridStaff = new Syncfusion.WinForms.DataGrid.SfDataGrid();
-            tabPageStaffAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            panelStaffInfo = new Panel();
-            labelStaffInfo = new Label();
-            checkBoxActive = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
-            comboBoxBranch = new Syncfusion.WinForms.ListView.SfComboBox();
-            comboBoxRole = new Syncfusion.WinForms.ListView.SfComboBox();
-            textBoxPhone = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            textBoxEmail = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            textBoxPassword = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            textBoxUsername = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            textBoxLastName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            textBoxFirstName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            labelActive = new Label();
-            labelBranch = new Label();
-            labelRole = new Label();
-            labelPhone = new Label();
-            labelEmail = new Label();
-            labelPassword = new Label();
-            labelUsername = new Label();
-            labelLastName = new Label();
-            labelFirstName = new Label();
-            panelButtons = new Panel();
-            buttonClear = new Syncfusion.WinForms.Controls.SfButton();
-            buttonSave = new Syncfusion.WinForms.Controls.SfButton();
-            ((System.ComponentModel.ISupportInitialize)tabControlStaff).BeginInit();
-            tabControlStaff.SuspendLayout();
-            tabPageStaffList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)sfDataGridStaff).BeginInit();
-            tabPageStaffAdd.SuspendLayout();
-            panelStaffInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)checkBoxActive).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxBranch).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxRole).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxPhone).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxEmail).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxPassword).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxUsername).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxLastName).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxFirstName).BeginInit();
-            panelButtons.SuspendLayout();
-            SuspendLayout();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn1 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridCheckBoxColumn gridCheckBoxColumn1 = new Syncfusion.WinForms.DataGrid.GridCheckBoxColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn3 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            this.tabControlStaff = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
+            this.tabPageStaffList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
+            this.panelStaffActions = new System.Windows.Forms.Panel();
+            this.btnEditStaff = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.btnDeleteStaff = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.btnToggleStatus = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.btnRefreshStaff = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.sfDataGridStaff = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.tabPageStaffAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
+            this.panelStaffForm = new System.Windows.Forms.Panel();
+            this.btnCancelStaff = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.btnSaveStaff = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.cmbBranch = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
+            this.cmbRole = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
+            this.chkUserActive = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
+            this.txtUserPhone = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            this.txtUserEmail = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            this.txtUserPassword = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            this.txtUsername = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            this.txtUserLastName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            this.txtUserFirstName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            this.lblBranch = new System.Windows.Forms.Label();
+            this.lblRole = new System.Windows.Forms.Label();
+            this.lblUserPhone = new System.Windows.Forms.Label();
+            this.lblUserEmail = new System.Windows.Forms.Label();
+            this.lblUserPassword = new System.Windows.Forms.Label();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.lblUserLastName = new System.Windows.Forms.Label();
+            this.lblUserFirstName = new System.Windows.Forms.Label();
+            this.lblStaffFormTitle = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.tabControlStaff)).BeginInit();
+            this.tabControlStaff.SuspendLayout();
+            this.tabPageStaffList.SuspendLayout();
+            this.panelStaffActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sfDataGridStaff)).BeginInit();
+            this.tabPageStaffAdd.SuspendLayout();
+            this.panelStaffForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbBranch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkUserActive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserPhone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserEmail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUsername)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserLastName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserFirstName)).BeginInit();
+            this.SuspendLayout();
             // 
             // tabControlStaff
             // 
-            tabControlStaff.BeforeTouchSize = new Size(1670, 1000);
-            tabControlStaff.Controls.Add(tabPageStaffList);
-            tabControlStaff.Controls.Add(tabPageStaffAdd);
-            tabControlStaff.Dock = DockStyle.Fill;
-            tabControlStaff.Location = new Point(0, 0);
-            tabControlStaff.Name = "tabControlStaff";
-            tabControlStaff.Size = new Size(1670, 1000);
-            tabControlStaff.TabIndex = 0;
+            this.tabControlStaff.BeforeTouchSize = new System.Drawing.Size(1670, 1000);
+            this.tabControlStaff.Controls.Add(this.tabPageStaffList);
+            this.tabControlStaff.Controls.Add(this.tabPageStaffAdd);
+            this.tabControlStaff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlStaff.Location = new System.Drawing.Point(0, 0);
+            this.tabControlStaff.Name = "tabControlStaff";
+            this.tabControlStaff.Size = new System.Drawing.Size(1670, 1000);
+            this.tabControlStaff.TabIndex = 0;
             // 
             // tabPageStaffList
             // 
-            tabPageStaffList.Controls.Add(sfDataGridStaff);
-            tabPageStaffList.Image = null;
-            tabPageStaffList.ImageSize = new Size(16, 16);
-            tabPageStaffList.Location = new Point(1, 33);
-            tabPageStaffList.Name = "tabPageStaffList";
-            tabPageStaffList.Padding = new Padding(20);
-            tabPageStaffList.ShowCloseButton = true;
-            tabPageStaffList.Size = new Size(1667, 965);
-            tabPageStaffList.TabFont = new Font("Segoe UI", 12F);
-            tabPageStaffList.TabIndex = 1;
-            tabPageStaffList.Text = "Staff List";
-            tabPageStaffList.ThemesEnabled = false;
+            this.tabPageStaffList.Controls.Add(this.panelStaffActions);
+            this.tabPageStaffList.Controls.Add(this.sfDataGridStaff);
+            this.tabPageStaffList.Image = null;
+            this.tabPageStaffList.ImageSize = new System.Drawing.Size(16, 16);
+            this.tabPageStaffList.Location = new System.Drawing.Point(1, 33);
+            this.tabPageStaffList.Name = "tabPageStaffList";
+            this.tabPageStaffList.Padding = new System.Windows.Forms.Padding(20);
+            this.tabPageStaffList.ShowCloseButton = true;
+            this.tabPageStaffList.Size = new System.Drawing.Size(1667, 965);
+            this.tabPageStaffList.TabFont = new System.Drawing.Font("Segoe UI", 12F);
+            this.tabPageStaffList.TabIndex = 1;
+            this.tabPageStaffList.Text = "Staff List";
+            this.tabPageStaffList.ThemesEnabled = false;
+            // 
+            // panelStaffActions
+            // 
+            this.panelStaffActions.Controls.Add(this.btnEditStaff);
+            this.panelStaffActions.Controls.Add(this.btnDeleteStaff);
+            this.panelStaffActions.Controls.Add(this.btnToggleStatus);
+            this.panelStaffActions.Controls.Add(this.btnRefreshStaff);
+            this.panelStaffActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelStaffActions.Location = new System.Drawing.Point(20, 20);
+            this.panelStaffActions.Name = "panelStaffActions";
+            this.panelStaffActions.Size = new System.Drawing.Size(1627, 60);
+            this.panelStaffActions.TabIndex = 1;
+            // 
+            // btnEditStaff
+            // 
+            this.btnEditStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.btnEditStaff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.btnEditStaff.BeforeTouchSize = new System.Drawing.Size(120, 35);
+            this.btnEditStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditStaff.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnEditStaff.ForeColor = System.Drawing.Color.White;
+            this.btnEditStaff.Location = new System.Drawing.Point(10, 15);
+            this.btnEditStaff.Name = "btnEditStaff";
+            this.btnEditStaff.Size = new System.Drawing.Size(120, 35);
+            this.btnEditStaff.TabIndex = 0;
+            this.btnEditStaff.Text = "Edit Staff";
+            this.btnEditStaff.UseVisualStyleBackColor = false;
+            this.btnEditStaff.Click += new System.EventHandler(this.BtnEditStaff_Click);
+            // 
+            // btnDeleteStaff
+            // 
+            this.btnDeleteStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.btnDeleteStaff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.btnDeleteStaff.BeforeTouchSize = new System.Drawing.Size(120, 35);
+            this.btnDeleteStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteStaff.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnDeleteStaff.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteStaff.Location = new System.Drawing.Point(140, 15);
+            this.btnDeleteStaff.Name = "btnDeleteStaff";
+            this.btnDeleteStaff.Size = new System.Drawing.Size(120, 35);
+            this.btnDeleteStaff.TabIndex = 1;
+            this.btnDeleteStaff.Text = "Delete Staff";
+            this.btnDeleteStaff.UseVisualStyleBackColor = false;
+            this.btnDeleteStaff.Click += new System.EventHandler(this.BtnDeleteStaff_Click);
+            // 
+            // btnToggleStatus
+            // 
+            this.btnToggleStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.btnToggleStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(140)))), ((int)(((byte)(0)))));
+            this.btnToggleStatus.BeforeTouchSize = new System.Drawing.Size(140, 35);
+            this.btnToggleStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToggleStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnToggleStatus.ForeColor = System.Drawing.Color.White;
+            this.btnToggleStatus.Location = new System.Drawing.Point(270, 15);
+            this.btnToggleStatus.Name = "btnToggleStatus";
+            this.btnToggleStatus.Size = new System.Drawing.Size(140, 35);
+            this.btnToggleStatus.TabIndex = 2;
+            this.btnToggleStatus.Text = "Toggle Status";
+            this.btnToggleStatus.UseVisualStyleBackColor = false;
+            this.btnToggleStatus.Click += new System.EventHandler(this.BtnToggleStatus_Click);
+            // 
+            // btnRefreshStaff
+            // 
+            this.btnRefreshStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.btnRefreshStaff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(139)))), ((int)(((byte)(34)))));
+            this.btnRefreshStaff.BeforeTouchSize = new System.Drawing.Size(120, 35);
+            this.btnRefreshStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefreshStaff.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnRefreshStaff.ForeColor = System.Drawing.Color.White;
+            this.btnRefreshStaff.Location = new System.Drawing.Point(420, 15);
+            this.btnRefreshStaff.Name = "btnRefreshStaff";
+            this.btnRefreshStaff.Size = new System.Drawing.Size(120, 35);
+            this.btnRefreshStaff.TabIndex = 3;
+            this.btnRefreshStaff.Text = "Refresh";
+            this.btnRefreshStaff.UseVisualStyleBackColor = false;
+            this.btnRefreshStaff.Click += new System.EventHandler(this.BtnRefreshStaff_Click);
             // 
             // sfDataGridStaff
             // 
-            sfDataGridStaff.AccessibleName = "Table";
-            sfDataGridStaff.AllowEditing = false;
-            sfDataGridStaff.AutoGenerateColumns = false;
-            gridNumericColumn2.AllowEditing = false;
-            gridNumericColumn2.AllowResizing = true;
-            gridNumericColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridNumericColumn2.Format = "0";
-            gridNumericColumn2.HeaderText = "ID";
-            gridNumericColumn2.MappingName = "UserID";
-            gridNumericColumn2.Width = 50D;
-            gridTextColumn8.AllowEditing = false;
-            gridTextColumn8.AllowResizing = true;
-            gridTextColumn8.HeaderText = "First Name";
-            gridTextColumn8.MappingName = "UserFirstName";
-            gridTextColumn8.Width = 110D;
-            gridTextColumn9.AllowEditing = false;
-            gridTextColumn9.AllowResizing = true;
-            gridTextColumn9.HeaderText = "Last Name";
-            gridTextColumn9.MappingName = "UserLastName";
-            gridTextColumn9.Width = 110D;
-            gridTextColumn10.AllowEditing = false;
-            gridTextColumn10.AllowResizing = true;
-            gridTextColumn10.HeaderText = "Username";
-            gridTextColumn10.MappingName = "Username";
-            gridTextColumn10.Width = 120D;
-            gridTextColumn11.AllowEditing = false;
-            gridTextColumn11.AllowResizing = true;
-            gridTextColumn11.HeaderText = "Email";
-            gridTextColumn11.MappingName = "UserEmail";
-            gridTextColumn11.Width = 231D;
-            gridTextColumn12.AllowEditing = false;
-            gridTextColumn12.AllowResizing = true;
-            gridTextColumn12.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn12.HeaderText = "Phone No";
-            gridTextColumn12.MappingName = "UserPhone";
-            gridTextColumn12.Width = 130D;
-            gridTextColumn13.AllowEditing = false;
-            gridTextColumn13.AllowResizing = true;
-            gridTextColumn13.HeaderText = "Role";
-            gridTextColumn13.MappingName = "Role.RoleName";
-            gridTextColumn13.Width = 150D;
-            gridTextColumn14.AllowEditing = false;
-            gridTextColumn14.AllowResizing = true;
-            gridTextColumn14.HeaderText = "Branch Name";
-            gridTextColumn14.MappingName = "Branch.BranchName";
-            gridTextColumn14.Width = 160D;
-            gridDateTimeColumn4.AllowEditing = false;
-            gridDateTimeColumn4.AllowResizing = true;
-            gridDateTimeColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn4.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn4.HeaderText = "Last Login";
-            gridDateTimeColumn4.MappingName = "UserLastLogin";
-            gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn4.Width = 160D;
-            gridCheckBoxColumn2.AllowEditing = false;
-            gridCheckBoxColumn2.AllowResizing = true;
-            gridCheckBoxColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridCheckBoxColumn2.HeaderText = "Active";
-            gridCheckBoxColumn2.MappingName = "UserActive";
-            gridCheckBoxColumn2.Width = 70D;
-            gridDateTimeColumn5.AllowEditing = false;
-            gridDateTimeColumn5.AllowResizing = true;
-            gridDateTimeColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn5.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn5.HeaderText = "Created At";
-            gridDateTimeColumn5.MappingName = "UserCreatedAt";
-            gridDateTimeColumn5.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn5.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn5.Width = 160D;
-            gridDateTimeColumn6.AllowEditing = false;
-            gridDateTimeColumn6.AllowResizing = true;
-            gridDateTimeColumn6.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn6.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn6.HeaderText = "Updated At";
-            gridDateTimeColumn6.MappingName = "UserUpdatedAt";
-            gridDateTimeColumn6.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn6.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn6.Width = 160D;
-            sfDataGridStaff.Columns.Add(gridNumericColumn2);
-            sfDataGridStaff.Columns.Add(gridTextColumn8);
-            sfDataGridStaff.Columns.Add(gridTextColumn9);
-            sfDataGridStaff.Columns.Add(gridTextColumn10);
-            sfDataGridStaff.Columns.Add(gridTextColumn11);
-            sfDataGridStaff.Columns.Add(gridTextColumn12);
-            sfDataGridStaff.Columns.Add(gridTextColumn13);
-            sfDataGridStaff.Columns.Add(gridTextColumn14);
-            sfDataGridStaff.Columns.Add(gridDateTimeColumn4);
-            sfDataGridStaff.Columns.Add(gridCheckBoxColumn2);
-            sfDataGridStaff.Columns.Add(gridDateTimeColumn5);
-            sfDataGridStaff.Columns.Add(gridDateTimeColumn6);
-            sfDataGridStaff.Dock = DockStyle.Fill;
-            sfDataGridStaff.Location = new Point(20, 20);
-            sfDataGridStaff.Name = "sfDataGridStaff";
-            sfDataGridStaff.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridStaff.Size = new Size(1627, 925);
-            sfDataGridStaff.Style.AddNewRowStyle.BackColor = Color.Transparent;
-            sfDataGridStaff.Style.BorderColor = Color.FromArgb(100, 100, 100);
-            sfDataGridStaff.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
-            sfDataGridStaff.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGridStaff.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
-            sfDataGridStaff.Style.CurrentCellStyle.BackColor = Color.FromArgb(166, 216, 255);
-            sfDataGridStaff.Style.CurrentCellStyle.BorderColor = Color.FromArgb(166, 216, 255);
-            sfDataGridStaff.Style.CurrentCellStyle.BorderThickness = Syncfusion.WinForms.DataGrid.Styles.GridBorderWeight.ExtraThin;
-            sfDataGridStaff.Style.CurrentCellStyle.TextColor = Color.Black;
-            sfDataGridStaff.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
-            sfDataGridStaff.Style.SelectionStyle.TextColor = Color.Black;
-            sfDataGridStaff.TabIndex = 0;
-            sfDataGridStaff.QueryRowStyle += SfDataGridStaff_QueryRowStyle;
+            this.sfDataGridStaff.AccessibleName = "Table";
+            this.sfDataGridStaff.AllowEditing = false;
+            this.sfDataGridStaff.AutoGenerateColumns = false;
+            gridNumericColumn1.AllowEditing = false;
+            gridNumericColumn1.AllowResizing = true;
+            gridNumericColumn1.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            gridNumericColumn1.Format = "0";
+            gridNumericColumn1.HeaderText = "ID";
+            gridNumericColumn1.MappingName = "UserID";
+            gridNumericColumn1.Width = 50D;
+            gridTextColumn1.AllowEditing = false;
+            gridTextColumn1.AllowResizing = true;
+            gridTextColumn1.HeaderText = "First Name";
+            gridTextColumn1.MappingName = "UserFirstName";
+            gridTextColumn1.Width = 110D;
+            gridTextColumn2.AllowEditing = false;
+            gridTextColumn2.AllowResizing = true;
+            gridTextColumn2.HeaderText = "Last Name";
+            gridTextColumn2.MappingName = "UserLastName";
+            gridTextColumn2.Width = 110D;
+            gridTextColumn3.AllowEditing = false;
+            gridTextColumn3.AllowResizing = true;
+            gridTextColumn3.HeaderText = "Username";
+            gridTextColumn3.MappingName = "Username";
+            gridTextColumn3.Width = 120D;
+            gridTextColumn4.AllowEditing = false;
+            gridTextColumn4.AllowResizing = true;
+            gridTextColumn4.HeaderText = "Email";
+            gridTextColumn4.MappingName = "UserEmail";
+            gridTextColumn4.Width = 231D;
+            gridTextColumn5.AllowEditing = false;
+            gridTextColumn5.AllowResizing = true;
+            gridTextColumn5.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            gridTextColumn5.HeaderText = "Phone No";
+            gridTextColumn5.MappingName = "UserPhone";
+            gridTextColumn5.Width = 130D;
+            gridTextColumn6.AllowEditing = false;
+            gridTextColumn6.AllowResizing = true;
+            gridTextColumn6.HeaderText = "Role";
+            gridTextColumn6.MappingName = "Role.RoleName";
+            gridTextColumn6.Width = 150D;
+            gridTextColumn7.AllowEditing = false;
+            gridTextColumn7.AllowResizing = true;
+            gridTextColumn7.HeaderText = "Branch Name";
+            gridTextColumn7.MappingName = "Branch.BranchName";
+            gridTextColumn7.Width = 160D;
+            gridDateTimeColumn1.AllowEditing = false;
+            gridDateTimeColumn1.AllowResizing = true;
+            gridDateTimeColumn1.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            gridDateTimeColumn1.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn1.HeaderText = "Last Login";
+            gridDateTimeColumn1.MappingName = "UserLastLogin";
+            gridDateTimeColumn1.MaxDateTime = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn1.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn1.Width = 160D;
+            gridCheckBoxColumn1.AllowEditing = false;
+            gridCheckBoxColumn1.AllowResizing = true;
+            gridCheckBoxColumn1.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            gridCheckBoxColumn1.HeaderText = "Active";
+            gridCheckBoxColumn1.MappingName = "UserActive";
+            gridCheckBoxColumn1.Width = 70D;
+            gridDateTimeColumn2.AllowEditing = false;
+            gridDateTimeColumn2.AllowResizing = true;
+            gridDateTimeColumn2.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            gridDateTimeColumn2.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn2.HeaderText = "Created At";
+            gridDateTimeColumn2.MappingName = "UserCreatedAt";
+            gridDateTimeColumn2.MaxDateTime = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn2.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn2.Width = 160D;
+            gridDateTimeColumn3.AllowEditing = false;
+            gridDateTimeColumn3.AllowResizing = true;
+            gridDateTimeColumn3.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            gridDateTimeColumn3.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn3.HeaderText = "Updated At";
+            gridDateTimeColumn3.MappingName = "UserUpdatedAt";
+            gridDateTimeColumn3.MaxDateTime = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn3.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn3.Width = 160D;
+            this.sfDataGridStaff.Columns.Add(gridNumericColumn1);
+            this.sfDataGridStaff.Columns.Add(gridTextColumn1);
+            this.sfDataGridStaff.Columns.Add(gridTextColumn2);
+            this.sfDataGridStaff.Columns.Add(gridTextColumn3);
+            this.sfDataGridStaff.Columns.Add(gridTextColumn4);
+            this.sfDataGridStaff.Columns.Add(gridTextColumn5);
+            this.sfDataGridStaff.Columns.Add(gridTextColumn6);
+            this.sfDataGridStaff.Columns.Add(gridTextColumn7);
+            this.sfDataGridStaff.Columns.Add(gridDateTimeColumn1);
+            this.sfDataGridStaff.Columns.Add(gridCheckBoxColumn1);
+            this.sfDataGridStaff.Columns.Add(gridDateTimeColumn2);
+            this.sfDataGridStaff.Columns.Add(gridDateTimeColumn3);
+            this.sfDataGridStaff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sfDataGridStaff.Location = new System.Drawing.Point(20, 80);
+            this.sfDataGridStaff.Name = "sfDataGridStaff";
+            this.sfDataGridStaff.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
+            this.sfDataGridStaff.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Single;
+            this.sfDataGridStaff.Size = new System.Drawing.Size(1627, 865);
+            this.sfDataGridStaff.Style.AddNewRowStyle.BackColor = System.Drawing.Color.Transparent;
+            this.sfDataGridStaff.Style.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.sfDataGridStaff.Style.CheckBoxStyle.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.sfDataGridStaff.Style.CheckBoxStyle.CheckedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.sfDataGridStaff.Style.CheckBoxStyle.IndeterminateBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.sfDataGridStaff.Style.CurrentCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(216)))), ((int)(((byte)(255)))));
+            this.sfDataGridStaff.Style.CurrentCellStyle.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(216)))), ((int)(((byte)(255)))));
+            this.sfDataGridStaff.Style.CurrentCellStyle.BorderThickness = Syncfusion.WinForms.DataGrid.Styles.GridBorderWeight.ExtraThin;
+            this.sfDataGridStaff.Style.CurrentCellStyle.TextColor = System.Drawing.Color.Black;
+            this.sfDataGridStaff.Style.HyperlinkStyle.DefaultLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.sfDataGridStaff.Style.SelectionStyle.TextColor = System.Drawing.Color.Black;
+            this.sfDataGridStaff.TabIndex = 0;
+            this.sfDataGridStaff.QueryRowStyle += new Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventHandler(this.SfDataGridStaff_QueryRowStyle);
             // 
             // tabPageStaffAdd
             // 
-            tabPageStaffAdd.Controls.Add(panelStaffInfo);
-            tabPageStaffAdd.Controls.Add(panelButtons);
-            tabPageStaffAdd.Image = null;
-            tabPageStaffAdd.ImageSize = new Size(16, 16);
-            tabPageStaffAdd.Location = new Point(1, 33);
-            tabPageStaffAdd.Name = "tabPageStaffAdd";
-            tabPageStaffAdd.Padding = new Padding(20);
-            tabPageStaffAdd.ShowCloseButton = true;
-            tabPageStaffAdd.Size = new Size(1667, 965);
-            tabPageStaffAdd.TabFont = new Font("Segoe UI", 12F);
-            tabPageStaffAdd.TabIndex = 2;
-            tabPageStaffAdd.Text = "Staff Add";
-            tabPageStaffAdd.ThemesEnabled = false;
+            this.tabPageStaffAdd.Controls.Add(this.panelStaffForm);
+            this.tabPageStaffAdd.Image = null;
+            this.tabPageStaffAdd.ImageSize = new System.Drawing.Size(16, 16);
+            this.tabPageStaffAdd.Location = new System.Drawing.Point(1, 33);
+            this.tabPageStaffAdd.Name = "tabPageStaffAdd";
+            this.tabPageStaffAdd.Padding = new System.Windows.Forms.Padding(20);
+            this.tabPageStaffAdd.ShowCloseButton = true;
+            this.tabPageStaffAdd.Size = new System.Drawing.Size(1667, 965);
+            this.tabPageStaffAdd.TabFont = new System.Drawing.Font("Segoe UI", 12F);
+            this.tabPageStaffAdd.TabIndex = 2;
+            this.tabPageStaffAdd.Text = "Staff Add/Edit";
+            this.tabPageStaffAdd.ThemesEnabled = false;
             // 
-            // panelStaffInfo
+            // panelStaffForm
             // 
-            panelStaffInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panelStaffInfo.BorderStyle = BorderStyle.FixedSingle;
-            panelStaffInfo.Controls.Add(labelStaffInfo);
-            panelStaffInfo.Controls.Add(checkBoxActive);
-            panelStaffInfo.Controls.Add(comboBoxBranch);
-            panelStaffInfo.Controls.Add(comboBoxRole);
-            panelStaffInfo.Controls.Add(textBoxPhone);
-            panelStaffInfo.Controls.Add(textBoxEmail);
-            panelStaffInfo.Controls.Add(textBoxPassword);
-            panelStaffInfo.Controls.Add(textBoxUsername);
-            panelStaffInfo.Controls.Add(textBoxLastName);
-            panelStaffInfo.Controls.Add(textBoxFirstName);
-            panelStaffInfo.Controls.Add(labelActive);
-            panelStaffInfo.Controls.Add(labelBranch);
-            panelStaffInfo.Controls.Add(labelRole);
-            panelStaffInfo.Controls.Add(labelPhone);
-            panelStaffInfo.Controls.Add(labelEmail);
-            panelStaffInfo.Controls.Add(labelPassword);
-            panelStaffInfo.Controls.Add(labelUsername);
-            panelStaffInfo.Controls.Add(labelLastName);
-            panelStaffInfo.Controls.Add(labelFirstName);
-            panelStaffInfo.Location = new Point(508, 152);
-            panelStaffInfo.Name = "panelStaffInfo";
-            panelStaffInfo.Size = new Size(650, 560);
-            panelStaffInfo.TabIndex = 0;
+            this.panelStaffForm.AutoScroll = true;
+            this.panelStaffForm.Controls.Add(this.btnCancelStaff);
+            this.panelStaffForm.Controls.Add(this.btnSaveStaff);
+            this.panelStaffForm.Controls.Add(this.cmbBranch);
+            this.panelStaffForm.Controls.Add(this.cmbRole);
+            this.panelStaffForm.Controls.Add(this.chkUserActive);
+            this.panelStaffForm.Controls.Add(this.txtUserPhone);
+            this.panelStaffForm.Controls.Add(this.txtUserEmail);
+            this.panelStaffForm.Controls.Add(this.txtUserPassword);
+            this.panelStaffForm.Controls.Add(this.txtUsername);
+            this.panelStaffForm.Controls.Add(this.txtUserLastName);
+            this.panelStaffForm.Controls.Add(this.txtUserFirstName);
+            this.panelStaffForm.Controls.Add(this.lblBranch);
+            this.panelStaffForm.Controls.Add(this.lblRole);
+            this.panelStaffForm.Controls.Add(this.lblUserPhone);
+            this.panelStaffForm.Controls.Add(this.lblUserEmail);
+            this.panelStaffForm.Controls.Add(this.lblUserPassword);
+            this.panelStaffForm.Controls.Add(this.lblUsername);
+            this.panelStaffForm.Controls.Add(this.lblUserLastName);
+            this.panelStaffForm.Controls.Add(this.lblUserFirstName);
+            this.panelStaffForm.Controls.Add(this.lblStaffFormTitle);
+            this.panelStaffForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelStaffForm.Location = new System.Drawing.Point(20, 20);
+            this.panelStaffForm.Name = "panelStaffForm";
+            this.panelStaffForm.Size = new System.Drawing.Size(1627, 925);
+            this.panelStaffForm.TabIndex = 0;
             // 
-            // labelStaffInfo
+            // btnCancelStaff
             // 
-            labelStaffInfo.AutoSize = true;
-            labelStaffInfo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelStaffInfo.ForeColor = Color.FromArgb(68, 68, 68);
-            labelStaffInfo.Location = new Point(253, 13);
-            labelStaffInfo.Name = "labelStaffInfo";
-            labelStaffInfo.Size = new Size(142, 21);
-            labelStaffInfo.TabIndex = 18;
-            labelStaffInfo.Text = "Staff Information";
+            this.btnCancelStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.btnCancelStaff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(117)))), ((int)(((byte)(125)))));
+            this.btnCancelStaff.BeforeTouchSize = new System.Drawing.Size(150, 45);
+            this.btnCancelStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelStaff.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
+            this.btnCancelStaff.ForeColor = System.Drawing.Color.White;
+            this.btnCancelStaff.Location = new System.Drawing.Point(380, 600);
+            this.btnCancelStaff.Name = "btnCancelStaff";
+            this.btnCancelStaff.Size = new System.Drawing.Size(150, 45);
+            this.btnCancelStaff.TabIndex = 19;
+            this.btnCancelStaff.Text = "Cancel";
+            this.btnCancelStaff.UseVisualStyleBackColor = false;
+            this.btnCancelStaff.Click += new System.EventHandler(this.BtnCancelStaff_Click);
             // 
-            // checkBoxActive
+            // btnSaveStaff
             // 
-            checkBoxActive.AccessibilityEnabled = true;
-            checkBoxActive.BeforeTouchSize = new Size(150, 35);
-            checkBoxActive.BorderColor = Color.FromArgb(197, 197, 197);
-            checkBoxActive.Checked = true;
-            checkBoxActive.CheckState = CheckState.Checked;
-            checkBoxActive.Font = new Font("Segoe UI", 11F);
-            checkBoxActive.ForeColor = Color.FromArgb(68, 68, 68);
-            checkBoxActive.HotBorderColor = Color.FromArgb(150, 150, 150);
-            checkBoxActive.Location = new Point(250, 510);
-            checkBoxActive.Name = "checkBoxActive";
-            checkBoxActive.Size = new Size(150, 35);
-            checkBoxActive.Style = Syncfusion.Windows.Forms.Tools.CheckBoxAdvStyle.Metro;
-            checkBoxActive.TabIndex = 17;
-            checkBoxActive.Text = "Active";
-            checkBoxActive.ThemeName = "Metro";
+            this.btnSaveStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.btnSaveStaff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
+            this.btnSaveStaff.BeforeTouchSize = new System.Drawing.Size(150, 45);
+            this.btnSaveStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveStaff.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
+            this.btnSaveStaff.ForeColor = System.Drawing.Color.White;
+            this.btnSaveStaff.Location = new System.Drawing.Point(220, 600);
+            this.btnSaveStaff.Name = "btnSaveStaff";
+            this.btnSaveStaff.Size = new System.Drawing.Size(150, 45);
+            this.btnSaveStaff.TabIndex = 18;
+            this.btnSaveStaff.Text = "Save Staff";
+            this.btnSaveStaff.UseVisualStyleBackColor = false;
+            this.btnSaveStaff.Click += new System.EventHandler(this.BtnSaveStaff_Click);
             // 
-            // comboBoxBranch
+            // cmbBranch
             // 
-            comboBoxBranch.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            comboBoxBranch.DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList;
-            comboBoxBranch.Font = new Font("Segoe UI", 11F);
-            comboBoxBranch.Location = new Point(250, 450);
-            comboBoxBranch.Name = "comboBoxBranch";
-            comboBoxBranch.Size = new Size(350, 35);
-            comboBoxBranch.Style.DropDownStyle.BorderColor = Color.FromArgb(100, 100, 100);
-            comboBoxBranch.Style.EditorStyle.Font = new Font("Segoe UI", 11F);
-            comboBoxBranch.Style.ReadOnlyEditorStyle.BorderColor = Color.FromArgb(100, 100, 100);
-            comboBoxBranch.Style.ReadOnlyEditorStyle.Font = new Font("Segoe UI", 11F);
-            comboBoxBranch.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
-            comboBoxBranch.Style.TokenStyle.Font = new Font("Segoe UI", 11F);
-            comboBoxBranch.TabIndex = 16;
-            comboBoxBranch.ThemeName = "Default";
+            this.cmbBranch.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.cmbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBranch.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cmbBranch.Location = new System.Drawing.Point(220, 520);
+            this.cmbBranch.Name = "cmbBranch";
+            this.cmbBranch.Size = new System.Drawing.Size(310, 35);
+            this.cmbBranch.TabIndex = 17;
             // 
-            // comboBoxRole
+            // cmbRole
             // 
-            comboBoxRole.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            comboBoxRole.DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList;
-            comboBoxRole.Font = new Font("Segoe UI", 11F);
-            comboBoxRole.Location = new Point(250, 386);
-            comboBoxRole.Name = "comboBoxRole";
-            comboBoxRole.Size = new Size(350, 35);
-            comboBoxRole.Style.DropDownStyle.BorderColor = Color.FromArgb(100, 100, 100);
-            comboBoxRole.Style.EditorStyle.Font = new Font("Segoe UI", 11F);
-            comboBoxRole.Style.ReadOnlyEditorStyle.BorderColor = Color.FromArgb(100, 100, 100);
-            comboBoxRole.Style.ReadOnlyEditorStyle.Font = new Font("Segoe UI", 11F);
-            comboBoxRole.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
-            comboBoxRole.Style.TokenStyle.Font = new Font("Segoe UI", 11F);
-            comboBoxRole.TabIndex = 15;
-            comboBoxRole.ThemeName = "Default";
+            this.cmbRole.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.cmbRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRole.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cmbRole.Location = new System.Drawing.Point(220, 470);
+            this.cmbRole.Name = "cmbRole";
+            this.cmbRole.Size = new System.Drawing.Size(310, 35);
+            this.cmbRole.TabIndex = 16;
             // 
-            // textBoxPhone
+            // chkUserActive
             // 
-            textBoxPhone.BeforeTouchSize = new Size(350, 27);
-            textBoxPhone.BorderColor = Color.FromArgb(100, 100, 100);
-            textBoxPhone.BorderStyle = BorderStyle.FixedSingle;
-            textBoxPhone.Font = new Font("Segoe UI", 11F);
-            textBoxPhone.Location = new Point(250, 330);
-            textBoxPhone.Name = "textBoxPhone";
-            textBoxPhone.Size = new Size(350, 27);
-            textBoxPhone.TabIndex = 14;
-            textBoxPhone.ThemeName = "Default";
+            this.chkUserActive.BeforeTouchSize = new System.Drawing.Size(156, 21);
+            this.chkUserActive.Checked = true;
+            this.chkUserActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUserActive.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.chkUserActive.Location = new System.Drawing.Point(50, 570);
+            this.chkUserActive.Name = "chkUserActive";
+            this.chkUserActive.Size = new System.Drawing.Size(156, 21);
+            this.chkUserActive.TabIndex = 15;
+            this.chkUserActive.Text = "User is Active";
+            this.chkUserActive.ThemesEnabled = false;
             // 
-            // textBoxEmail
+            // txtUserPhone
             // 
-            textBoxEmail.BeforeTouchSize = new Size(350, 27);
-            textBoxEmail.BorderColor = Color.FromArgb(100, 100, 100);
-            textBoxEmail.BorderStyle = BorderStyle.FixedSingle;
-            textBoxEmail.Font = new Font("Segoe UI", 11F);
-            textBoxEmail.Location = new Point(250, 274);
-            textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(350, 27);
-            textBoxEmail.TabIndex = 13;
-            textBoxEmail.ThemeName = "Default";
+            this.txtUserPhone.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.txtUserPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUserPhone.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtUserPhone.Location = new System.Drawing.Point(220, 420);
+            this.txtUserPhone.Name = "txtUserPhone";
+            this.txtUserPhone.Size = new System.Drawing.Size(310, 35);
+            this.txtUserPhone.TabIndex = 14;
             // 
-            // textBoxPassword
+            // txtUserEmail
             // 
-            textBoxPassword.BeforeTouchSize = new Size(350, 27);
-            textBoxPassword.BorderColor = Color.FromArgb(100, 100, 100);
-            textBoxPassword.BorderStyle = BorderStyle.FixedSingle;
-            textBoxPassword.Font = new Font("Segoe UI", 11F);
-            textBoxPassword.Location = new Point(250, 218);
-            textBoxPassword.Name = "textBoxPassword";
-            textBoxPassword.PasswordChar = '*';
-            textBoxPassword.Size = new Size(350, 27);
-            textBoxPassword.TabIndex = 12;
-            textBoxPassword.ThemeName = "Default";
+            this.txtUserEmail.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.txtUserEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUserEmail.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtUserEmail.Location = new System.Drawing.Point(220, 370);
+            this.txtUserEmail.Name = "txtUserEmail";
+            this.txtUserEmail.Size = new System.Drawing.Size(310, 35);
+            this.txtUserEmail.TabIndex = 13;
             // 
-            // textBoxUsername
+            // txtUserPassword
             // 
-            textBoxUsername.BeforeTouchSize = new Size(350, 27);
-            textBoxUsername.BorderColor = Color.FromArgb(100, 100, 100);
-            textBoxUsername.BorderStyle = BorderStyle.FixedSingle;
-            textBoxUsername.Font = new Font("Segoe UI", 11F);
-            textBoxUsername.Location = new Point(250, 162);
-            textBoxUsername.Name = "textBoxUsername";
-            textBoxUsername.Size = new Size(350, 27);
-            textBoxUsername.TabIndex = 11;
-            textBoxUsername.ThemeName = "Default";
+            this.txtUserPassword.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.txtUserPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUserPassword.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtUserPassword.Location = new System.Drawing.Point(220, 320);
+            this.txtUserPassword.Name = "txtUserPassword";
+            this.txtUserPassword.PasswordChar = '*';
+            this.txtUserPassword.Size = new System.Drawing.Size(310, 35);
+            this.txtUserPassword.TabIndex = 12;
             // 
-            // textBoxLastName
+            // txtUsername
             // 
-            textBoxLastName.BeforeTouchSize = new Size(350, 27);
-            textBoxLastName.BorderColor = Color.FromArgb(100, 100, 100);
-            textBoxLastName.BorderStyle = BorderStyle.FixedSingle;
-            textBoxLastName.Font = new Font("Segoe UI", 11F);
-            textBoxLastName.Location = new Point(250, 106);
-            textBoxLastName.Name = "textBoxLastName";
-            textBoxLastName.Size = new Size(350, 27);
-            textBoxLastName.TabIndex = 10;
-            textBoxLastName.ThemeName = "Default";
+            this.txtUsername.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtUsername.Location = new System.Drawing.Point(220, 270);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(310, 35);
+            this.txtUsername.TabIndex = 11;
             // 
-            // textBoxFirstName
+            // txtUserLastName
             // 
-            textBoxFirstName.BeforeTouchSize = new Size(350, 27);
-            textBoxFirstName.BorderColor = Color.FromArgb(100, 100, 100);
-            textBoxFirstName.BorderStyle = BorderStyle.FixedSingle;
-            textBoxFirstName.Font = new Font("Segoe UI", 11F);
-            textBoxFirstName.Location = new Point(250, 50);
-            textBoxFirstName.Name = "textBoxFirstName";
-            textBoxFirstName.Size = new Size(350, 27);
-            textBoxFirstName.TabIndex = 9;
-            textBoxFirstName.ThemeName = "Default";
+            this.txtUserLastName.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.txtUserLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUserLastName.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtUserLastName.Location = new System.Drawing.Point(220, 220);
+            this.txtUserLastName.Name = "txtUserLastName";
+            this.txtUserLastName.Size = new System.Drawing.Size(310, 35);
+            this.txtUserLastName.TabIndex = 10;
             // 
-            // labelActive
+            // txtUserFirstName
             // 
-            labelActive.AutoSize = true;
-            labelActive.Font = new Font("Segoe UI", 11F);
-            labelActive.ForeColor = Color.FromArgb(68, 68, 68);
-            labelActive.Location = new Point(31, 515);
-            labelActive.Name = "labelActive";
-            labelActive.Size = new Size(57, 20);
-            labelActive.TabIndex = 8;
-            labelActive.Text = "Active :";
+            this.txtUserFirstName.BeforeTouchSize = new System.Drawing.Size(310, 35);
+            this.txtUserFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUserFirstName.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtUserFirstName.Location = new System.Drawing.Point(220, 170);
+            this.txtUserFirstName.Name = "txtUserFirstName";
+            this.txtUserFirstName.Size = new System.Drawing.Size(310, 35);
+            this.txtUserFirstName.TabIndex = 9;
             // 
-            // labelBranch
+            // lblBranch
             // 
-            labelBranch.AutoSize = true;
-            labelBranch.Font = new Font("Segoe UI", 11F);
-            labelBranch.ForeColor = Color.FromArgb(68, 68, 68);
-            labelBranch.Location = new Point(31, 465);
-            labelBranch.Name = "labelBranch";
-            labelBranch.Size = new Size(61, 20);
-            labelBranch.TabIndex = 7;
-            labelBranch.Text = "Branch :";
+            this.lblBranch.AutoSize = true;
+            this.lblBranch.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblBranch.Location = new System.Drawing.Point(50, 530);
+            this.lblBranch.Name = "lblBranch";
+            this.lblBranch.Size = new System.Drawing.Size(58, 20);
+            this.lblBranch.TabIndex = 8;
+            this.lblBranch.Text = "Branch:";
             // 
-            // labelRole
+            // lblRole
             // 
-            labelRole.AutoSize = true;
-            labelRole.Font = new Font("Segoe UI", 11F);
-            labelRole.ForeColor = Color.FromArgb(68, 68, 68);
-            labelRole.Location = new Point(31, 401);
-            labelRole.Name = "labelRole";
-            labelRole.Size = new Size(46, 20);
-            labelRole.TabIndex = 6;
-            labelRole.Text = "Role :";
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblRole.Location = new System.Drawing.Point(50, 480);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(41, 20);
+            this.lblRole.TabIndex = 7;
+            this.lblRole.Text = "Role:";
             // 
-            // labelPhone
+            // lblUserPhone
             // 
-            labelPhone.AutoSize = true;
-            labelPhone.Font = new Font("Segoe UI", 11F);
-            labelPhone.ForeColor = Color.FromArgb(68, 68, 68);
-            labelPhone.Location = new Point(30, 337);
-            labelPhone.Name = "labelPhone";
-            labelPhone.Size = new Size(57, 20);
-            labelPhone.TabIndex = 5;
-            labelPhone.Text = "Phone :";
+            this.lblUserPhone.AutoSize = true;
+            this.lblUserPhone.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblUserPhone.Location = new System.Drawing.Point(50, 430);
+            this.lblUserPhone.Name = "lblUserPhone";
+            this.lblUserPhone.Size = new System.Drawing.Size(54, 20);
+            this.lblUserPhone.TabIndex = 6;
+            this.lblUserPhone.Text = "Phone:";
             // 
-            // labelEmail
+            // lblUserEmail
             // 
-            labelEmail.AutoSize = true;
-            labelEmail.Font = new Font("Segoe UI", 11F);
-            labelEmail.ForeColor = Color.FromArgb(68, 68, 68);
-            labelEmail.Location = new Point(30, 281);
-            labelEmail.Name = "labelEmail";
-            labelEmail.Size = new Size(53, 20);
-            labelEmail.TabIndex = 4;
-            labelEmail.Text = "Email :";
+            this.lblUserEmail.AutoSize = true;
+            this.lblUserEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblUserEmail.Location = new System.Drawing.Point(50, 380);
+            this.lblUserEmail.Name = "lblUserEmail";
+            this.lblUserEmail.Size = new System.Drawing.Size(49, 20);
+            this.lblUserEmail.TabIndex = 5;
+            this.lblUserEmail.Text = "Email:";
             // 
-            // labelPassword
+            // lblUserPassword
             // 
-            labelPassword.AutoSize = true;
-            labelPassword.Font = new Font("Segoe UI", 11F);
-            labelPassword.ForeColor = Color.FromArgb(68, 68, 68);
-            labelPassword.Location = new Point(31, 225);
-            labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(77, 20);
-            labelPassword.TabIndex = 3;
-            labelPassword.Text = "Password :";
+            this.lblUserPassword.AutoSize = true;
+            this.lblUserPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblUserPassword.Location = new System.Drawing.Point(50, 330);
+            this.lblUserPassword.Name = "lblUserPassword";
+            this.lblUserPassword.Size = new System.Drawing.Size(73, 20);
+            this.lblUserPassword.TabIndex = 4;
+            this.lblUserPassword.Text = "Password:";
             // 
-            // labelUsername
+            // lblUsername
             // 
-            labelUsername.AutoSize = true;
-            labelUsername.Font = new Font("Segoe UI", 11F);
-            labelUsername.ForeColor = Color.FromArgb(68, 68, 68);
-            labelUsername.Location = new Point(30, 169);
-            labelUsername.Name = "labelUsername";
-            labelUsername.Size = new Size(82, 20);
-            labelUsername.TabIndex = 2;
-            labelUsername.Text = "Username :";
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblUsername.Location = new System.Drawing.Point(50, 280);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(81, 20);
+            this.lblUsername.TabIndex = 3;
+            this.lblUsername.Text = "Username:";
             // 
-            // labelLastName
+            // lblUserLastName
             // 
-            labelLastName.AutoSize = true;
-            labelLastName.Font = new Font("Segoe UI", 11F);
-            labelLastName.ForeColor = Color.FromArgb(68, 68, 68);
-            labelLastName.Location = new Point(31, 113);
-            labelLastName.Name = "labelLastName";
-            labelLastName.Size = new Size(86, 20);
-            labelLastName.TabIndex = 1;
-            labelLastName.Text = "Last Name :";
+            this.lblUserLastName.AutoSize = true;
+            this.lblUserLastName.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblUserLastName.Location = new System.Drawing.Point(50, 230);
+            this.lblUserLastName.Name = "lblUserLastName";
+            this.lblUserLastName.Size = new System.Drawing.Size(84, 20);
+            this.lblUserLastName.TabIndex = 2;
+            this.lblUserLastName.Text = "Last Name:";
             // 
-            // labelFirstName
+            // lblUserFirstName
             // 
-            labelFirstName.AutoSize = true;
-            labelFirstName.Font = new Font("Segoe UI", 11F);
-            labelFirstName.ForeColor = Color.FromArgb(68, 68, 68);
-            labelFirstName.Location = new Point(30, 57);
-            labelFirstName.Name = "labelFirstName";
-            labelFirstName.Size = new Size(87, 20);
-            labelFirstName.TabIndex = 0;
-            labelFirstName.Text = "First Name :";
+            this.lblUserFirstName.AutoSize = true;
+            this.lblUserFirstName.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
+            this.lblUserFirstName.Location = new System.Drawing.Point(50, 180);
+            this.lblUserFirstName.Name = "lblUserFirstName";
+            this.lblUserFirstName.Size = new System.Drawing.Size(86, 20);
+            this.lblUserFirstName.TabIndex = 1;
+            this.lblUserFirstName.Text = "First Name:";
             // 
-            // panelButtons
+            // lblStaffFormTitle
             // 
-            panelButtons.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panelButtons.Controls.Add(buttonClear);
-            panelButtons.Controls.Add(buttonSave);
-            panelButtons.Location = new Point(508, 732);
-            panelButtons.Name = "panelButtons";
-            panelButtons.Size = new Size(650, 80);
-            panelButtons.TabIndex = 1;
-            // 
-            // buttonClear
-            // 
-            buttonClear.AccessibleName = "Button";
-            buttonClear.BackColor = Color.FromArgb(255, 128, 128);
-            buttonClear.Font = new Font("Segoe UI", 12F);
-            buttonClear.ForeColor = Color.White;
-            buttonClear.Location = new Point(330, 20);
-            buttonClear.Name = "buttonClear";
-            buttonClear.Size = new Size(150, 40);
-            buttonClear.Style.BackColor = Color.FromArgb(255, 128, 128);
-            buttonClear.Style.FocusedBackColor = Color.FromArgb(255, 100, 100);
-            buttonClear.Style.FocusedForeColor = Color.White;
-            buttonClear.Style.ForeColor = Color.White;
-            buttonClear.Style.HoverBackColor = Color.FromArgb(255, 100, 100);
-            buttonClear.Style.HoverForeColor = Color.White;
-            buttonClear.Style.PressedBackColor = Color.FromArgb(200, 80, 80);
-            buttonClear.Style.PressedForeColor = Color.White;
-            buttonClear.TabIndex = 1;
-            buttonClear.Text = "Clear";
-            buttonClear.ThemeName = "Default";
-            buttonClear.UseVisualStyleBackColor = false;
-            buttonClear.Click += ButtonClear_Click;
-            // 
-            // buttonSave
-            // 
-            buttonSave.AccessibleName = "Button";
-            buttonSave.BackColor = Color.FromArgb(0, 120, 215);
-            buttonSave.Font = new Font("Segoe UI", 12F);
-            buttonSave.ForeColor = Color.White;
-            buttonSave.Location = new Point(170, 20);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(150, 40);
-            buttonSave.Style.BackColor = Color.FromArgb(0, 120, 215);
-            buttonSave.Style.FocusedBackColor = Color.FromArgb(0, 100, 180);
-            buttonSave.Style.FocusedForeColor = Color.White;
-            buttonSave.Style.ForeColor = Color.White;
-            buttonSave.Style.HoverBackColor = Color.FromArgb(0, 100, 180);
-            buttonSave.Style.HoverForeColor = Color.White;
-            buttonSave.Style.PressedBackColor = Color.FromArgb(0, 80, 140);
-            buttonSave.Style.PressedForeColor = Color.White;
-            buttonSave.TabIndex = 0;
-            buttonSave.Text = "Save";
-            buttonSave.ThemeName = "Default";
-            buttonSave.UseVisualStyleBackColor = false;
-            buttonSave.Click += ButtonSave_Click;
+            this.lblStaffFormTitle.AutoSize = true;
+            this.lblStaffFormTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.lblStaffFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.lblStaffFormTitle.Location = new System.Drawing.Point(50, 50);
+            this.lblStaffFormTitle.Name = "lblStaffFormTitle";
+            this.lblStaffFormTitle.Size = new System.Drawing.Size(158, 32);
+            this.lblStaffFormTitle.TabIndex = 0;
+            this.lblStaffFormTitle.Text = "Add New Staff";
             // 
             // StaffControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(tabControlStaff);
-            Name = "StaffControl";
-            Size = new Size(1670, 1000);
-            ((System.ComponentModel.ISupportInitialize)tabControlStaff).EndInit();
-            tabControlStaff.ResumeLayout(false);
-            tabPageStaffList.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)sfDataGridStaff).EndInit();
-            tabPageStaffAdd.ResumeLayout(false);
-            panelStaffInfo.ResumeLayout(false);
-            panelStaffInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)checkBoxActive).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxBranch).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxRole).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxPhone).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxEmail).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxPassword).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxUsername).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxLastName).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textBoxFirstName).EndInit();
-            panelButtons.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabControlStaff);
+            this.Name = "StaffControl";
+            this.Size = new System.Drawing.Size(1670, 1000);
+            ((System.ComponentModel.ISupportInitialize)(this.tabControlStaff)).EndInit();
+            this.tabControlStaff.ResumeLayout(false);
+            this.tabPageStaffList.ResumeLayout(false);
+            this.panelStaffActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sfDataGridStaff)).EndInit();
+            this.tabPageStaffAdd.ResumeLayout(false);
+            this.panelStaffForm.ResumeLayout(false);
+            this.panelStaffForm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbBranch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkUserActive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserPhone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserEmail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUsername)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserLastName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserFirstName)).EndInit();
+            this.ResumeLayout(false);
         }
 
         #endregion
@@ -580,28 +587,31 @@
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageStaffList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageStaffAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridStaff;
-        private System.Windows.Forms.Panel panelStaffInfo;
-        private System.Windows.Forms.Label labelStaffInfo;
-        private System.Windows.Forms.Label labelFirstName;
-        private System.Windows.Forms.Label labelLastName;
-        private System.Windows.Forms.Label labelUsername;
-        private System.Windows.Forms.Label labelPassword;
-        private System.Windows.Forms.Label labelEmail;
-        private System.Windows.Forms.Label labelPhone;
-        private System.Windows.Forms.Label labelRole;
-        private System.Windows.Forms.Label labelBranch;
-        private System.Windows.Forms.Label labelActive;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxFirstName;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxLastName;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxUsername;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxPassword;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxEmail;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxPhone;
-        private Syncfusion.WinForms.ListView.SfComboBox comboBoxRole;
-        private Syncfusion.WinForms.ListView.SfComboBox comboBoxBranch;
-        private Syncfusion.Windows.Forms.Tools.CheckBoxAdv checkBoxActive;
-        private System.Windows.Forms.Panel panelButtons;
-        private Syncfusion.WinForms.Controls.SfButton buttonSave;
-        private Syncfusion.WinForms.Controls.SfButton buttonClear;
+        private System.Windows.Forms.Panel panelStaffActions;
+        private Syncfusion.Windows.Forms.ButtonAdv btnEditStaff;
+        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteStaff;
+        private Syncfusion.Windows.Forms.ButtonAdv btnToggleStatus;
+        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshStaff;
+        private System.Windows.Forms.Panel panelStaffForm;
+        private System.Windows.Forms.Label lblStaffFormTitle;
+        private System.Windows.Forms.Label lblUserFirstName;
+        private System.Windows.Forms.Label lblUserLastName;
+        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.Label lblUserPassword;
+        private System.Windows.Forms.Label lblUserEmail;
+        private System.Windows.Forms.Label lblUserPhone;
+        private System.Windows.Forms.Label lblRole;
+        private System.Windows.Forms.Label lblBranch;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtUserFirstName;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtUserLastName;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtUsername;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtUserPassword;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtUserEmail;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtUserPhone;
+        private Syncfusion.Windows.Forms.Tools.CheckBoxAdv chkUserActive;
+        private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cmbRole;
+        private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cmbBranch;
+        private Syncfusion.Windows.Forms.ButtonAdv btnSaveStaff;
+        private Syncfusion.Windows.Forms.ButtonAdv btnCancelStaff;
     }
 }
