@@ -17,6 +17,7 @@
 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn1 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
             Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
             Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
@@ -34,14 +35,14 @@
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn4 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             tabControlCustomers = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageCustomersList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            panelCustomerActions = new System.Windows.Forms.Panel();
+            panelCustomerActions = new Panel();
             btnEditCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
             btnDeleteCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
             btnToggleCustomerStatus = new Syncfusion.Windows.Forms.ButtonAdv();
             btnRefreshCustomers = new Syncfusion.Windows.Forms.ButtonAdv();
             sfDataGridCustomers = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageCustomerAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            panelCustomerForm = new System.Windows.Forms.Panel();
+            panelCustomerForm = new Panel();
             btnCancelCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
             btnSaveCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
             cmbCustomerType = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
@@ -56,18 +57,18 @@
             txtCustomerNationalID = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             txtCustomerLastName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             txtCustomerFirstName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            lblCustomerType = new System.Windows.Forms.Label();
-            lblCustomerAddress = new System.Windows.Forms.Label();
-            lblCustomerEmail = new System.Windows.Forms.Label();
-            lblCustomerPhone = new System.Windows.Forms.Label();
-            lblCustomerLicenseDate = new System.Windows.Forms.Label();
-            lblCustomerLicenseClass = new System.Windows.Forms.Label();
-            lblCustomerLicenseNumber = new System.Windows.Forms.Label();
-            lblCustomerDateOfBirth = new System.Windows.Forms.Label();
-            lblCustomerNationalID = new System.Windows.Forms.Label();
-            lblCustomerLastName = new System.Windows.Forms.Label();
-            lblCustomerFirstName = new System.Windows.Forms.Label();
-            lblCustomerFormTitle = new System.Windows.Forms.Label();
+            lblCustomerType = new Label();
+            lblCustomerAddress = new Label();
+            lblCustomerEmail = new Label();
+            lblCustomerPhone = new Label();
+            lblCustomerLicenseDate = new Label();
+            lblCustomerLicenseClass = new Label();
+            lblCustomerLicenseNumber = new Label();
+            lblCustomerDateOfBirth = new Label();
+            lblCustomerNationalID = new Label();
+            lblCustomerLastName = new Label();
+            lblCustomerFirstName = new Label();
+            lblCustomerFormTitle = new Label();
             ((System.ComponentModel.ISupportInitialize)tabControlCustomers).BeginInit();
             tabControlCustomers.SuspendLayout();
             tabPageCustomersList.SuspendLayout();
@@ -77,7 +78,9 @@
             panelCustomerForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)cmbCustomerType).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dtpLicenseDate).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dtpLicenseDate.Calendar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dtpDateOfBirth).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dtpDateOfBirth.Calendar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chkCustomerAvailable).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtCustomerAddress).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtCustomerEmail).BeginInit();
@@ -141,6 +144,7 @@
             btnEditCustomer.Size = new Size(140, 35);
             btnEditCustomer.TabIndex = 0;
             btnEditCustomer.Text = "Edit Customer";
+            btnEditCustomer.ThemeName = "Metro";
             btnEditCustomer.UseVisualStyleBackColor = false;
             btnEditCustomer.Click += BtnEditCustomer_Click;
             // 
@@ -157,6 +161,7 @@
             btnDeleteCustomer.Size = new Size(140, 35);
             btnDeleteCustomer.TabIndex = 1;
             btnDeleteCustomer.Text = "Delete Customer";
+            btnDeleteCustomer.ThemeName = "Metro";
             btnDeleteCustomer.UseVisualStyleBackColor = false;
             btnDeleteCustomer.Click += BtnDeleteCustomer_Click;
             // 
@@ -173,6 +178,7 @@
             btnToggleCustomerStatus.Size = new Size(140, 35);
             btnToggleCustomerStatus.TabIndex = 2;
             btnToggleCustomerStatus.Text = "Toggle Status";
+            btnToggleCustomerStatus.ThemeName = "Metro";
             btnToggleCustomerStatus.UseVisualStyleBackColor = false;
             btnToggleCustomerStatus.Click += BtnToggleCustomerStatus_Click;
             // 
@@ -189,6 +195,7 @@
             btnRefreshCustomers.Size = new Size(120, 35);
             btnRefreshCustomers.TabIndex = 3;
             btnRefreshCustomers.Text = "Refresh";
+            btnRefreshCustomers.ThemeName = "Metro";
             btnRefreshCustomers.UseVisualStyleBackColor = false;
             btnRefreshCustomers.Click += BtnRefreshCustomers_Click;
             // 
@@ -318,11 +325,10 @@
             sfDataGridCustomers.Columns.Add(gridComboBoxColumn1);
             sfDataGridCustomers.Columns.Add(gridDateTimeColumn4);
             sfDataGridCustomers.Dock = DockStyle.Fill;
-            sfDataGridCustomers.Location = new Point(20, 80);
+            sfDataGridCustomers.Location = new Point(20, 20);
             sfDataGridCustomers.Name = "sfDataGridCustomers";
             sfDataGridCustomers.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridCustomers.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Single;
-            sfDataGridCustomers.Size = new Size(1627, 865);
+            sfDataGridCustomers.Size = new Size(1627, 925);
             sfDataGridCustomers.Style.AddNewRowStyle.BackColor = Color.Transparent;
             sfDataGridCustomers.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridCustomers.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
@@ -395,11 +401,12 @@
             btnCancelCustomer.FlatStyle = FlatStyle.Flat;
             btnCancelCustomer.Font = new Font("Segoe UI Semibold", 12F);
             btnCancelCustomer.ForeColor = Color.White;
-            btnCancelCustomer.Location = new Point(400, 750);
+            btnCancelCustomer.Location = new Point(818, 767);
             btnCancelCustomer.Name = "btnCancelCustomer";
             btnCancelCustomer.Size = new Size(150, 45);
             btnCancelCustomer.TabIndex = 25;
             btnCancelCustomer.Text = "Cancel";
+            btnCancelCustomer.ThemeName = "Metro";
             btnCancelCustomer.UseVisualStyleBackColor = false;
             btnCancelCustomer.Click += BtnCancelCustomer_Click;
             // 
@@ -411,145 +418,189 @@
             btnSaveCustomer.FlatStyle = FlatStyle.Flat;
             btnSaveCustomer.Font = new Font("Segoe UI Semibold", 12F);
             btnSaveCustomer.ForeColor = Color.White;
-            btnSaveCustomer.Location = new Point(240, 750);
+            btnSaveCustomer.Location = new Point(658, 767);
             btnSaveCustomer.Name = "btnSaveCustomer";
             btnSaveCustomer.Size = new Size(150, 45);
             btnSaveCustomer.TabIndex = 24;
             btnSaveCustomer.Text = "Save Customer";
+            btnSaveCustomer.ThemeName = "Metro";
             btnSaveCustomer.UseVisualStyleBackColor = false;
             btnSaveCustomer.Click += BtnSaveCustomer_Click;
             // 
             // cmbCustomerType
             // 
-            cmbCustomerType.BeforeTouchSize = new Size(310, 35);
             cmbCustomerType.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbCustomerType.Font = new Font("Segoe UI", 11F);
+            cmbCustomerType.Height = 28;
             cmbCustomerType.Items.AddRange(new object[] { "Individual", "Corporate" });
-            cmbCustomerType.Location = new Point(240, 660);
+            cmbCustomerType.Location = new Point(711, 650);
             cmbCustomerType.Name = "cmbCustomerType";
-            cmbCustomerType.Size = new Size(310, 35);
+            cmbCustomerType.Size = new Size(310, 28);
             cmbCustomerType.TabIndex = 23;
+            cmbCustomerType.Text = "Individual";
             // 
             // dtpLicenseDate
             // 
+            dtpLicenseDate.BorderColor = Color.Empty;
+            // 
+            // 
+            // 
+            dtpLicenseDate.Calendar.BottomHeight = 0;
+            dtpLicenseDate.Calendar.Font = new Font("Segoe UI", 11F);
+            dtpLicenseDate.Calendar.Location = new Point(0, 0);
+            dtpLicenseDate.Calendar.Name = "monthCalendar";
+            dtpLicenseDate.Calendar.TabIndex = 0;
+            // 
+            // 
+            // 
+            dtpLicenseDate.Calendar.NoneButton.Location = new Point(78, 0);
+            // 
+            // 
+            // 
+            dtpLicenseDate.Calendar.TodayButton.Location = new Point(0, 0);
+            dtpLicenseDate.CalendarFont = new Font("Segoe UI", 9F);
             dtpLicenseDate.CalendarSize = new Size(189, 176);
+            dtpLicenseDate.DropDownImage = null;
             dtpLicenseDate.Font = new Font("Segoe UI", 11F);
-            dtpLicenseDate.Location = new Point(240, 420);
+            dtpLicenseDate.Location = new Point(711, 439);
+            dtpLicenseDate.MetroColor = Color.FromArgb(22, 165, 220);
+            dtpLicenseDate.MinValue = new DateTime(0L);
             dtpLicenseDate.Name = "dtpLicenseDate";
-            dtpLicenseDate.ShowCheckBox = true;
             dtpLicenseDate.Size = new Size(310, 35);
             dtpLicenseDate.TabIndex = 22;
+            dtpLicenseDate.Value = new DateTime(2025, 5, 25, 17, 27, 9, 321);
             // 
             // dtpDateOfBirth
             // 
+            dtpDateOfBirth.BorderColor = Color.Empty;
+            // 
+            // 
+            // 
+            dtpDateOfBirth.Calendar.BottomHeight = 0;
+            dtpDateOfBirth.Calendar.Font = new Font("Segoe UI", 11F);
+            dtpDateOfBirth.Calendar.Location = new Point(0, 0);
+            dtpDateOfBirth.Calendar.Name = "monthCalendar";
+            dtpDateOfBirth.Calendar.TabIndex = 0;
+            // 
+            // 
+            // 
+            dtpDateOfBirth.Calendar.NoneButton.Location = new Point(78, 0);
+            // 
+            // 
+            // 
+            dtpDateOfBirth.Calendar.TodayButton.Location = new Point(0, 0);
+            dtpDateOfBirth.CalendarFont = new Font("Segoe UI", 9F);
             dtpDateOfBirth.CalendarSize = new Size(189, 176);
+            dtpDateOfBirth.DropDownImage = null;
             dtpDateOfBirth.Font = new Font("Segoe UI", 11F);
-            dtpDateOfBirth.Location = new Point(240, 270);
+            dtpDateOfBirth.Location = new Point(711, 289);
+            dtpDateOfBirth.MetroColor = Color.FromArgb(22, 165, 220);
+            dtpDateOfBirth.MinValue = new DateTime(0L);
             dtpDateOfBirth.Name = "dtpDateOfBirth";
-            dtpDateOfBirth.ShowCheckBox = true;
             dtpDateOfBirth.Size = new Size(310, 35);
             dtpDateOfBirth.TabIndex = 21;
+            dtpDateOfBirth.Value = new DateTime(2025, 5, 25, 17, 27, 9, 329);
             // 
             // chkCustomerAvailable
             // 
+            chkCustomerAvailable.AccessibilityEnabled = true;
             chkCustomerAvailable.BeforeTouchSize = new Size(156, 21);
             chkCustomerAvailable.Checked = true;
             chkCustomerAvailable.CheckState = CheckState.Checked;
             chkCustomerAvailable.Font = new Font("Segoe UI Semibold", 11F);
-            chkCustomerAvailable.Location = new Point(70, 710);
+            chkCustomerAvailable.Location = new Point(865, 704);
             chkCustomerAvailable.Name = "chkCustomerAvailable";
             chkCustomerAvailable.Size = new Size(156, 21);
             chkCustomerAvailable.TabIndex = 20;
             chkCustomerAvailable.Text = "Customer is Active";
-            chkCustomerAvailable.ThemesEnabled = false;
             // 
             // txtCustomerAddress
             // 
-            txtCustomerAddress.BeforeTouchSize = new Size(310, 35);
+            txtCustomerAddress.BeforeTouchSize = new Size(310, 27);
             txtCustomerAddress.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerAddress.Font = new Font("Segoe UI", 11F);
-            txtCustomerAddress.Location = new Point(240, 610);
+            txtCustomerAddress.Location = new Point(711, 600);
             txtCustomerAddress.Name = "txtCustomerAddress";
-            txtCustomerAddress.Size = new Size(310, 35);
+            txtCustomerAddress.Size = new Size(310, 27);
             txtCustomerAddress.TabIndex = 19;
             // 
             // txtCustomerEmail
             // 
-            txtCustomerEmail.BeforeTouchSize = new Size(310, 35);
+            txtCustomerEmail.BeforeTouchSize = new Size(310, 27);
             txtCustomerEmail.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerEmail.Font = new Font("Segoe UI", 11F);
-            txtCustomerEmail.Location = new Point(240, 560);
+            txtCustomerEmail.Location = new Point(711, 550);
             txtCustomerEmail.Name = "txtCustomerEmail";
-            txtCustomerEmail.Size = new Size(310, 35);
+            txtCustomerEmail.Size = new Size(310, 27);
             txtCustomerEmail.TabIndex = 18;
             // 
             // txtCustomerPhone
             // 
-            txtCustomerPhone.BeforeTouchSize = new Size(310, 35);
+            txtCustomerPhone.BeforeTouchSize = new Size(310, 27);
             txtCustomerPhone.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerPhone.Font = new Font("Segoe UI", 11F);
-            txtCustomerPhone.Location = new Point(240, 510);
+            txtCustomerPhone.Location = new Point(711, 500);
             txtCustomerPhone.Name = "txtCustomerPhone";
-            txtCustomerPhone.Size = new Size(310, 35);
+            txtCustomerPhone.Size = new Size(310, 27);
             txtCustomerPhone.TabIndex = 17;
             // 
             // txtCustomerLicenseClass
             // 
-            txtCustomerLicenseClass.BeforeTouchSize = new Size(310, 35);
+            txtCustomerLicenseClass.BeforeTouchSize = new Size(310, 27);
             txtCustomerLicenseClass.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerLicenseClass.Font = new Font("Segoe UI", 11F);
-            txtCustomerLicenseClass.Location = new Point(240, 370);
+            txtCustomerLicenseClass.Location = new Point(711, 389);
             txtCustomerLicenseClass.Name = "txtCustomerLicenseClass";
-            txtCustomerLicenseClass.Size = new Size(310, 35);
+            txtCustomerLicenseClass.Size = new Size(310, 27);
             txtCustomerLicenseClass.TabIndex = 16;
             // 
             // txtCustomerLicenseNumber
             // 
-            txtCustomerLicenseNumber.BeforeTouchSize = new Size(310, 35);
+            txtCustomerLicenseNumber.BeforeTouchSize = new Size(310, 27);
             txtCustomerLicenseNumber.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerLicenseNumber.Font = new Font("Segoe UI", 11F);
-            txtCustomerLicenseNumber.Location = new Point(240, 320);
+            txtCustomerLicenseNumber.Location = new Point(711, 339);
             txtCustomerLicenseNumber.Name = "txtCustomerLicenseNumber";
-            txtCustomerLicenseNumber.Size = new Size(310, 35);
+            txtCustomerLicenseNumber.Size = new Size(310, 27);
             txtCustomerLicenseNumber.TabIndex = 15;
             // 
             // txtCustomerNationalID
             // 
-            txtCustomerNationalID.BeforeTouchSize = new Size(310, 35);
+            txtCustomerNationalID.BeforeTouchSize = new Size(310, 27);
             txtCustomerNationalID.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerNationalID.Font = new Font("Segoe UI", 11F);
-            txtCustomerNationalID.Location = new Point(240, 220);
+            txtCustomerNationalID.Location = new Point(711, 239);
             txtCustomerNationalID.Name = "txtCustomerNationalID";
-            txtCustomerNationalID.Size = new Size(310, 35);
+            txtCustomerNationalID.Size = new Size(310, 27);
             txtCustomerNationalID.TabIndex = 14;
             // 
             // txtCustomerLastName
             // 
-            txtCustomerLastName.BeforeTouchSize = new Size(310, 35);
+            txtCustomerLastName.BeforeTouchSize = new Size(310, 27);
             txtCustomerLastName.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerLastName.Font = new Font("Segoe UI", 11F);
-            txtCustomerLastName.Location = new Point(240, 170);
+            txtCustomerLastName.Location = new Point(711, 189);
             txtCustomerLastName.Name = "txtCustomerLastName";
-            txtCustomerLastName.Size = new Size(310, 35);
+            txtCustomerLastName.Size = new Size(310, 27);
             txtCustomerLastName.TabIndex = 13;
             // 
             // txtCustomerFirstName
             // 
-            txtCustomerFirstName.BeforeTouchSize = new Size(310, 35);
+            txtCustomerFirstName.BeforeTouchSize = new Size(310, 27);
             txtCustomerFirstName.BorderStyle = BorderStyle.FixedSingle;
             txtCustomerFirstName.Font = new Font("Segoe UI", 11F);
-            txtCustomerFirstName.Location = new Point(240, 120);
+            txtCustomerFirstName.Location = new Point(711, 139);
             txtCustomerFirstName.Name = "txtCustomerFirstName";
-            txtCustomerFirstName.Size = new Size(310, 35);
+            txtCustomerFirstName.Size = new Size(310, 27);
             txtCustomerFirstName.TabIndex = 12;
             // 
             // lblCustomerType
             // 
             lblCustomerType.AutoSize = true;
             lblCustomerType.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerType.Location = new Point(70, 670);
+            lblCustomerType.Location = new Point(541, 658);
             lblCustomerType.Name = "lblCustomerType";
-            lblCustomerType.Size = new Size(42, 20);
+            lblCustomerType.Size = new Size(45, 20);
             lblCustomerType.TabIndex = 11;
             lblCustomerType.Text = "Type:";
             // 
@@ -557,9 +608,9 @@
             // 
             lblCustomerAddress.AutoSize = true;
             lblCustomerAddress.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerAddress.Location = new Point(70, 620);
+            lblCustomerAddress.Location = new Point(541, 607);
             lblCustomerAddress.Name = "lblCustomerAddress";
-            lblCustomerAddress.Size = new Size(66, 20);
+            lblCustomerAddress.Size = new Size(67, 20);
             lblCustomerAddress.TabIndex = 10;
             lblCustomerAddress.Text = "Address:";
             // 
@@ -567,9 +618,9 @@
             // 
             lblCustomerEmail.AutoSize = true;
             lblCustomerEmail.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerEmail.Location = new Point(70, 570);
+            lblCustomerEmail.Location = new Point(541, 557);
             lblCustomerEmail.Name = "lblCustomerEmail";
-            lblCustomerEmail.Size = new Size(49, 20);
+            lblCustomerEmail.Size = new Size(50, 20);
             lblCustomerEmail.TabIndex = 9;
             lblCustomerEmail.Text = "Email:";
             // 
@@ -577,9 +628,9 @@
             // 
             lblCustomerPhone.AutoSize = true;
             lblCustomerPhone.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerPhone.Location = new Point(70, 520);
+            lblCustomerPhone.Location = new Point(541, 507);
             lblCustomerPhone.Name = "lblCustomerPhone";
-            lblCustomerPhone.Size = new Size(54, 20);
+            lblCustomerPhone.Size = new Size(57, 20);
             lblCustomerPhone.TabIndex = 8;
             lblCustomerPhone.Text = "Phone:";
             // 
@@ -587,9 +638,9 @@
             // 
             lblCustomerLicenseDate.AutoSize = true;
             lblCustomerLicenseDate.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerLicenseDate.Location = new Point(70, 430);
+            lblCustomerLicenseDate.Location = new Point(541, 449);
             lblCustomerLicenseDate.Name = "lblCustomerLicenseDate";
-            lblCustomerLicenseDate.Size = new Size(99, 20);
+            lblCustomerLicenseDate.Size = new Size(98, 20);
             lblCustomerLicenseDate.TabIndex = 7;
             lblCustomerLicenseDate.Text = "License Date:";
             // 
@@ -597,9 +648,9 @@
             // 
             lblCustomerLicenseClass.AutoSize = true;
             lblCustomerLicenseClass.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerLicenseClass.Location = new Point(70, 380);
+            lblCustomerLicenseClass.Location = new Point(541, 399);
             lblCustomerLicenseClass.Name = "lblCustomerLicenseClass";
-            lblCustomerLicenseClass.Size = new Size(101, 20);
+            lblCustomerLicenseClass.Size = new Size(99, 20);
             lblCustomerLicenseClass.TabIndex = 6;
             lblCustomerLicenseClass.Text = "License Class:";
             // 
@@ -607,9 +658,9 @@
             // 
             lblCustomerLicenseNumber.AutoSize = true;
             lblCustomerLicenseNumber.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerLicenseNumber.Location = new Point(70, 330);
+            lblCustomerLicenseNumber.Location = new Point(541, 349);
             lblCustomerLicenseNumber.Name = "lblCustomerLicenseNumber";
-            lblCustomerLicenseNumber.Size = new Size(122, 20);
+            lblCustomerLicenseNumber.Size = new Size(124, 20);
             lblCustomerLicenseNumber.TabIndex = 5;
             lblCustomerLicenseNumber.Text = "License Number:";
             // 
@@ -617,9 +668,9 @@
             // 
             lblCustomerDateOfBirth.AutoSize = true;
             lblCustomerDateOfBirth.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerDateOfBirth.Location = new Point(70, 280);
+            lblCustomerDateOfBirth.Location = new Point(541, 299);
             lblCustomerDateOfBirth.Name = "lblCustomerDateOfBirth";
-            lblCustomerDateOfBirth.Size = new Size(102, 20);
+            lblCustomerDateOfBirth.Size = new Size(100, 20);
             lblCustomerDateOfBirth.TabIndex = 4;
             lblCustomerDateOfBirth.Text = "Date of Birth:";
             // 
@@ -627,9 +678,9 @@
             // 
             lblCustomerNationalID.AutoSize = true;
             lblCustomerNationalID.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerNationalID.Location = new Point(70, 230);
+            lblCustomerNationalID.Location = new Point(541, 249);
             lblCustomerNationalID.Name = "lblCustomerNationalID";
-            lblCustomerNationalID.Size = new Size(90, 20);
+            lblCustomerNationalID.Size = new Size(91, 20);
             lblCustomerNationalID.TabIndex = 3;
             lblCustomerNationalID.Text = "National ID:";
             // 
@@ -637,7 +688,7 @@
             // 
             lblCustomerLastName.AutoSize = true;
             lblCustomerLastName.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerLastName.Location = new Point(70, 180);
+            lblCustomerLastName.Location = new Point(541, 199);
             lblCustomerLastName.Name = "lblCustomerLastName";
             lblCustomerLastName.Size = new Size(84, 20);
             lblCustomerLastName.TabIndex = 2;
@@ -647,9 +698,9 @@
             // 
             lblCustomerFirstName.AutoSize = true;
             lblCustomerFirstName.Font = new Font("Segoe UI Semibold", 11F);
-            lblCustomerFirstName.Location = new Point(70, 130);
+            lblCustomerFirstName.Location = new Point(541, 149);
             lblCustomerFirstName.Name = "lblCustomerFirstName";
-            lblCustomerFirstName.Size = new Size(86, 20);
+            lblCustomerFirstName.Size = new Size(87, 20);
             lblCustomerFirstName.TabIndex = 1;
             lblCustomerFirstName.Text = "First Name:";
             // 
@@ -658,9 +709,9 @@
             lblCustomerFormTitle.AutoSize = true;
             lblCustomerFormTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblCustomerFormTitle.ForeColor = Color.FromArgb(0, 120, 215);
-            lblCustomerFormTitle.Location = new Point(70, 50);
+            lblCustomerFormTitle.Location = new Point(695, 41);
             lblCustomerFormTitle.Name = "lblCustomerFormTitle";
-            lblCustomerFormTitle.Size = new Size(205, 32);
+            lblCustomerFormTitle.Size = new Size(236, 32);
             lblCustomerFormTitle.TabIndex = 0;
             lblCustomerFormTitle.Text = "Add New Customer";
             // 
@@ -680,7 +731,9 @@
             panelCustomerForm.ResumeLayout(false);
             panelCustomerForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)cmbCustomerType).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dtpLicenseDate.Calendar).EndInit();
             ((System.ComponentModel.ISupportInitialize)dtpLicenseDate).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dtpDateOfBirth.Calendar).EndInit();
             ((System.ComponentModel.ISupportInitialize)dtpDateOfBirth).EndInit();
             ((System.ComponentModel.ISupportInitialize)chkCustomerAvailable).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtCustomerAddress).EndInit();
