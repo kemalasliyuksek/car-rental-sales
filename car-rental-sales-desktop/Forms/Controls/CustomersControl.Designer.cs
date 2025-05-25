@@ -34,12 +34,59 @@
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn4 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             tabControlCustomers = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageCustomersList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
+            panelCustomerActions = new System.Windows.Forms.Panel();
+            btnEditCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnDeleteCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnToggleCustomerStatus = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnRefreshCustomers = new Syncfusion.Windows.Forms.ButtonAdv();
             sfDataGridCustomers = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageCustomerAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
+            panelCustomerForm = new System.Windows.Forms.Panel();
+            btnCancelCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnSaveCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
+            cmbCustomerType = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
+            dtpLicenseDate = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
+            dtpDateOfBirth = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
+            chkCustomerAvailable = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
+            txtCustomerAddress = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtCustomerEmail = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtCustomerPhone = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtCustomerLicenseClass = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtCustomerLicenseNumber = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtCustomerNationalID = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtCustomerLastName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtCustomerFirstName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            lblCustomerType = new System.Windows.Forms.Label();
+            lblCustomerAddress = new System.Windows.Forms.Label();
+            lblCustomerEmail = new System.Windows.Forms.Label();
+            lblCustomerPhone = new System.Windows.Forms.Label();
+            lblCustomerLicenseDate = new System.Windows.Forms.Label();
+            lblCustomerLicenseClass = new System.Windows.Forms.Label();
+            lblCustomerLicenseNumber = new System.Windows.Forms.Label();
+            lblCustomerDateOfBirth = new System.Windows.Forms.Label();
+            lblCustomerNationalID = new System.Windows.Forms.Label();
+            lblCustomerLastName = new System.Windows.Forms.Label();
+            lblCustomerFirstName = new System.Windows.Forms.Label();
+            lblCustomerFormTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)tabControlCustomers).BeginInit();
             tabControlCustomers.SuspendLayout();
             tabPageCustomersList.SuspendLayout();
+            panelCustomerActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).BeginInit();
+            tabPageCustomerAdd.SuspendLayout();
+            panelCustomerForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)cmbCustomerType).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dtpLicenseDate).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dtpDateOfBirth).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chkCustomerAvailable).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerAddress).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerEmail).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerPhone).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerLicenseClass).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerLicenseNumber).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerNationalID).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerLastName).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerFirstName).BeginInit();
             SuspendLayout();
             // 
             // tabControlCustomers
@@ -55,6 +102,7 @@
             // 
             // tabPageCustomersList
             // 
+            tabPageCustomersList.Controls.Add(panelCustomerActions);
             tabPageCustomersList.Controls.Add(sfDataGridCustomers);
             tabPageCustomersList.Image = null;
             tabPageCustomersList.ImageSize = new Size(16, 16);
@@ -67,6 +115,82 @@
             tabPageCustomersList.TabIndex = 1;
             tabPageCustomersList.Text = "Customers List";
             tabPageCustomersList.ThemesEnabled = false;
+            // 
+            // panelCustomerActions
+            // 
+            panelCustomerActions.Controls.Add(btnEditCustomer);
+            panelCustomerActions.Controls.Add(btnDeleteCustomer);
+            panelCustomerActions.Controls.Add(btnToggleCustomerStatus);
+            panelCustomerActions.Controls.Add(btnRefreshCustomers);
+            panelCustomerActions.Dock = DockStyle.Top;
+            panelCustomerActions.Location = new Point(20, 20);
+            panelCustomerActions.Name = "panelCustomerActions";
+            panelCustomerActions.Size = new Size(1627, 60);
+            panelCustomerActions.TabIndex = 1;
+            // 
+            // btnEditCustomer
+            // 
+            btnEditCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnEditCustomer.BackColor = Color.FromArgb(0, 120, 215);
+            btnEditCustomer.BeforeTouchSize = new Size(140, 35);
+            btnEditCustomer.FlatStyle = FlatStyle.Flat;
+            btnEditCustomer.Font = new Font("Segoe UI Semibold", 10F);
+            btnEditCustomer.ForeColor = Color.White;
+            btnEditCustomer.Location = new Point(10, 15);
+            btnEditCustomer.Name = "btnEditCustomer";
+            btnEditCustomer.Size = new Size(140, 35);
+            btnEditCustomer.TabIndex = 0;
+            btnEditCustomer.Text = "Edit Customer";
+            btnEditCustomer.UseVisualStyleBackColor = false;
+            btnEditCustomer.Click += BtnEditCustomer_Click;
+            // 
+            // btnDeleteCustomer
+            // 
+            btnDeleteCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnDeleteCustomer.BackColor = Color.FromArgb(215, 55, 55);
+            btnDeleteCustomer.BeforeTouchSize = new Size(140, 35);
+            btnDeleteCustomer.FlatStyle = FlatStyle.Flat;
+            btnDeleteCustomer.Font = new Font("Segoe UI Semibold", 10F);
+            btnDeleteCustomer.ForeColor = Color.White;
+            btnDeleteCustomer.Location = new Point(160, 15);
+            btnDeleteCustomer.Name = "btnDeleteCustomer";
+            btnDeleteCustomer.Size = new Size(140, 35);
+            btnDeleteCustomer.TabIndex = 1;
+            btnDeleteCustomer.Text = "Delete Customer";
+            btnDeleteCustomer.UseVisualStyleBackColor = false;
+            btnDeleteCustomer.Click += BtnDeleteCustomer_Click;
+            // 
+            // btnToggleCustomerStatus
+            // 
+            btnToggleCustomerStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnToggleCustomerStatus.BackColor = Color.FromArgb(255, 140, 0);
+            btnToggleCustomerStatus.BeforeTouchSize = new Size(140, 35);
+            btnToggleCustomerStatus.FlatStyle = FlatStyle.Flat;
+            btnToggleCustomerStatus.Font = new Font("Segoe UI Semibold", 10F);
+            btnToggleCustomerStatus.ForeColor = Color.White;
+            btnToggleCustomerStatus.Location = new Point(310, 15);
+            btnToggleCustomerStatus.Name = "btnToggleCustomerStatus";
+            btnToggleCustomerStatus.Size = new Size(140, 35);
+            btnToggleCustomerStatus.TabIndex = 2;
+            btnToggleCustomerStatus.Text = "Toggle Status";
+            btnToggleCustomerStatus.UseVisualStyleBackColor = false;
+            btnToggleCustomerStatus.Click += BtnToggleCustomerStatus_Click;
+            // 
+            // btnRefreshCustomers
+            // 
+            btnRefreshCustomers.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnRefreshCustomers.BackColor = Color.FromArgb(34, 139, 34);
+            btnRefreshCustomers.BeforeTouchSize = new Size(120, 35);
+            btnRefreshCustomers.FlatStyle = FlatStyle.Flat;
+            btnRefreshCustomers.Font = new Font("Segoe UI Semibold", 10F);
+            btnRefreshCustomers.ForeColor = Color.White;
+            btnRefreshCustomers.Location = new Point(460, 15);
+            btnRefreshCustomers.Name = "btnRefreshCustomers";
+            btnRefreshCustomers.Size = new Size(120, 35);
+            btnRefreshCustomers.TabIndex = 3;
+            btnRefreshCustomers.Text = "Refresh";
+            btnRefreshCustomers.UseVisualStyleBackColor = false;
+            btnRefreshCustomers.Click += BtnRefreshCustomers_Click;
             // 
             // sfDataGridCustomers
             // 
@@ -194,10 +318,11 @@
             sfDataGridCustomers.Columns.Add(gridComboBoxColumn1);
             sfDataGridCustomers.Columns.Add(gridDateTimeColumn4);
             sfDataGridCustomers.Dock = DockStyle.Fill;
-            sfDataGridCustomers.Location = new Point(20, 20);
+            sfDataGridCustomers.Location = new Point(20, 80);
             sfDataGridCustomers.Name = "sfDataGridCustomers";
             sfDataGridCustomers.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridCustomers.Size = new Size(1627, 925);
+            sfDataGridCustomers.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Single;
+            sfDataGridCustomers.Size = new Size(1627, 865);
             sfDataGridCustomers.Style.AddNewRowStyle.BackColor = Color.Transparent;
             sfDataGridCustomers.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridCustomers.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
@@ -214,16 +339,330 @@
             // 
             // tabPageCustomerAdd
             // 
+            tabPageCustomerAdd.Controls.Add(panelCustomerForm);
             tabPageCustomerAdd.Image = null;
             tabPageCustomerAdd.ImageSize = new Size(16, 16);
             tabPageCustomerAdd.Location = new Point(1, 33);
             tabPageCustomerAdd.Name = "tabPageCustomerAdd";
+            tabPageCustomerAdd.Padding = new Padding(20);
             tabPageCustomerAdd.ShowCloseButton = true;
             tabPageCustomerAdd.Size = new Size(1667, 965);
             tabPageCustomerAdd.TabFont = new Font("Segoe UI", 12F);
             tabPageCustomerAdd.TabIndex = 2;
-            tabPageCustomerAdd.Text = "Customer Add";
+            tabPageCustomerAdd.Text = "Customer Add/Edit";
             tabPageCustomerAdd.ThemesEnabled = false;
+            // 
+            // panelCustomerForm
+            // 
+            panelCustomerForm.AutoScroll = true;
+            panelCustomerForm.Controls.Add(btnCancelCustomer);
+            panelCustomerForm.Controls.Add(btnSaveCustomer);
+            panelCustomerForm.Controls.Add(cmbCustomerType);
+            panelCustomerForm.Controls.Add(dtpLicenseDate);
+            panelCustomerForm.Controls.Add(dtpDateOfBirth);
+            panelCustomerForm.Controls.Add(chkCustomerAvailable);
+            panelCustomerForm.Controls.Add(txtCustomerAddress);
+            panelCustomerForm.Controls.Add(txtCustomerEmail);
+            panelCustomerForm.Controls.Add(txtCustomerPhone);
+            panelCustomerForm.Controls.Add(txtCustomerLicenseClass);
+            panelCustomerForm.Controls.Add(txtCustomerLicenseNumber);
+            panelCustomerForm.Controls.Add(txtCustomerNationalID);
+            panelCustomerForm.Controls.Add(txtCustomerLastName);
+            panelCustomerForm.Controls.Add(txtCustomerFirstName);
+            panelCustomerForm.Controls.Add(lblCustomerType);
+            panelCustomerForm.Controls.Add(lblCustomerAddress);
+            panelCustomerForm.Controls.Add(lblCustomerEmail);
+            panelCustomerForm.Controls.Add(lblCustomerPhone);
+            panelCustomerForm.Controls.Add(lblCustomerLicenseDate);
+            panelCustomerForm.Controls.Add(lblCustomerLicenseClass);
+            panelCustomerForm.Controls.Add(lblCustomerLicenseNumber);
+            panelCustomerForm.Controls.Add(lblCustomerDateOfBirth);
+            panelCustomerForm.Controls.Add(lblCustomerNationalID);
+            panelCustomerForm.Controls.Add(lblCustomerLastName);
+            panelCustomerForm.Controls.Add(lblCustomerFirstName);
+            panelCustomerForm.Controls.Add(lblCustomerFormTitle);
+            panelCustomerForm.Dock = DockStyle.Fill;
+            panelCustomerForm.Location = new Point(20, 20);
+            panelCustomerForm.Name = "panelCustomerForm";
+            panelCustomerForm.Size = new Size(1627, 925);
+            panelCustomerForm.TabIndex = 0;
+            // 
+            // btnCancelCustomer
+            // 
+            btnCancelCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnCancelCustomer.BackColor = Color.FromArgb(108, 117, 125);
+            btnCancelCustomer.BeforeTouchSize = new Size(150, 45);
+            btnCancelCustomer.FlatStyle = FlatStyle.Flat;
+            btnCancelCustomer.Font = new Font("Segoe UI Semibold", 12F);
+            btnCancelCustomer.ForeColor = Color.White;
+            btnCancelCustomer.Location = new Point(400, 750);
+            btnCancelCustomer.Name = "btnCancelCustomer";
+            btnCancelCustomer.Size = new Size(150, 45);
+            btnCancelCustomer.TabIndex = 25;
+            btnCancelCustomer.Text = "Cancel";
+            btnCancelCustomer.UseVisualStyleBackColor = false;
+            btnCancelCustomer.Click += BtnCancelCustomer_Click;
+            // 
+            // btnSaveCustomer
+            // 
+            btnSaveCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnSaveCustomer.BackColor = Color.FromArgb(40, 167, 69);
+            btnSaveCustomer.BeforeTouchSize = new Size(150, 45);
+            btnSaveCustomer.FlatStyle = FlatStyle.Flat;
+            btnSaveCustomer.Font = new Font("Segoe UI Semibold", 12F);
+            btnSaveCustomer.ForeColor = Color.White;
+            btnSaveCustomer.Location = new Point(240, 750);
+            btnSaveCustomer.Name = "btnSaveCustomer";
+            btnSaveCustomer.Size = new Size(150, 45);
+            btnSaveCustomer.TabIndex = 24;
+            btnSaveCustomer.Text = "Save Customer";
+            btnSaveCustomer.UseVisualStyleBackColor = false;
+            btnSaveCustomer.Click += BtnSaveCustomer_Click;
+            // 
+            // cmbCustomerType
+            // 
+            cmbCustomerType.BeforeTouchSize = new Size(310, 35);
+            cmbCustomerType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCustomerType.Font = new Font("Segoe UI", 11F);
+            cmbCustomerType.Items.AddRange(new object[] { "Individual", "Corporate" });
+            cmbCustomerType.Location = new Point(240, 660);
+            cmbCustomerType.Name = "cmbCustomerType";
+            cmbCustomerType.Size = new Size(310, 35);
+            cmbCustomerType.TabIndex = 23;
+            // 
+            // dtpLicenseDate
+            // 
+            dtpLicenseDate.CalendarSize = new Size(189, 176);
+            dtpLicenseDate.Font = new Font("Segoe UI", 11F);
+            dtpLicenseDate.Location = new Point(240, 420);
+            dtpLicenseDate.Name = "dtpLicenseDate";
+            dtpLicenseDate.ShowCheckBox = true;
+            dtpLicenseDate.Size = new Size(310, 35);
+            dtpLicenseDate.TabIndex = 22;
+            // 
+            // dtpDateOfBirth
+            // 
+            dtpDateOfBirth.CalendarSize = new Size(189, 176);
+            dtpDateOfBirth.Font = new Font("Segoe UI", 11F);
+            dtpDateOfBirth.Location = new Point(240, 270);
+            dtpDateOfBirth.Name = "dtpDateOfBirth";
+            dtpDateOfBirth.ShowCheckBox = true;
+            dtpDateOfBirth.Size = new Size(310, 35);
+            dtpDateOfBirth.TabIndex = 21;
+            // 
+            // chkCustomerAvailable
+            // 
+            chkCustomerAvailable.BeforeTouchSize = new Size(156, 21);
+            chkCustomerAvailable.Checked = true;
+            chkCustomerAvailable.CheckState = CheckState.Checked;
+            chkCustomerAvailable.Font = new Font("Segoe UI Semibold", 11F);
+            chkCustomerAvailable.Location = new Point(70, 710);
+            chkCustomerAvailable.Name = "chkCustomerAvailable";
+            chkCustomerAvailable.Size = new Size(156, 21);
+            chkCustomerAvailable.TabIndex = 20;
+            chkCustomerAvailable.Text = "Customer is Active";
+            chkCustomerAvailable.ThemesEnabled = false;
+            // 
+            // txtCustomerAddress
+            // 
+            txtCustomerAddress.BeforeTouchSize = new Size(310, 35);
+            txtCustomerAddress.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerAddress.Font = new Font("Segoe UI", 11F);
+            txtCustomerAddress.Location = new Point(240, 610);
+            txtCustomerAddress.Name = "txtCustomerAddress";
+            txtCustomerAddress.Size = new Size(310, 35);
+            txtCustomerAddress.TabIndex = 19;
+            // 
+            // txtCustomerEmail
+            // 
+            txtCustomerEmail.BeforeTouchSize = new Size(310, 35);
+            txtCustomerEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerEmail.Font = new Font("Segoe UI", 11F);
+            txtCustomerEmail.Location = new Point(240, 560);
+            txtCustomerEmail.Name = "txtCustomerEmail";
+            txtCustomerEmail.Size = new Size(310, 35);
+            txtCustomerEmail.TabIndex = 18;
+            // 
+            // txtCustomerPhone
+            // 
+            txtCustomerPhone.BeforeTouchSize = new Size(310, 35);
+            txtCustomerPhone.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerPhone.Font = new Font("Segoe UI", 11F);
+            txtCustomerPhone.Location = new Point(240, 510);
+            txtCustomerPhone.Name = "txtCustomerPhone";
+            txtCustomerPhone.Size = new Size(310, 35);
+            txtCustomerPhone.TabIndex = 17;
+            // 
+            // txtCustomerLicenseClass
+            // 
+            txtCustomerLicenseClass.BeforeTouchSize = new Size(310, 35);
+            txtCustomerLicenseClass.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerLicenseClass.Font = new Font("Segoe UI", 11F);
+            txtCustomerLicenseClass.Location = new Point(240, 370);
+            txtCustomerLicenseClass.Name = "txtCustomerLicenseClass";
+            txtCustomerLicenseClass.Size = new Size(310, 35);
+            txtCustomerLicenseClass.TabIndex = 16;
+            // 
+            // txtCustomerLicenseNumber
+            // 
+            txtCustomerLicenseNumber.BeforeTouchSize = new Size(310, 35);
+            txtCustomerLicenseNumber.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerLicenseNumber.Font = new Font("Segoe UI", 11F);
+            txtCustomerLicenseNumber.Location = new Point(240, 320);
+            txtCustomerLicenseNumber.Name = "txtCustomerLicenseNumber";
+            txtCustomerLicenseNumber.Size = new Size(310, 35);
+            txtCustomerLicenseNumber.TabIndex = 15;
+            // 
+            // txtCustomerNationalID
+            // 
+            txtCustomerNationalID.BeforeTouchSize = new Size(310, 35);
+            txtCustomerNationalID.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerNationalID.Font = new Font("Segoe UI", 11F);
+            txtCustomerNationalID.Location = new Point(240, 220);
+            txtCustomerNationalID.Name = "txtCustomerNationalID";
+            txtCustomerNationalID.Size = new Size(310, 35);
+            txtCustomerNationalID.TabIndex = 14;
+            // 
+            // txtCustomerLastName
+            // 
+            txtCustomerLastName.BeforeTouchSize = new Size(310, 35);
+            txtCustomerLastName.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerLastName.Font = new Font("Segoe UI", 11F);
+            txtCustomerLastName.Location = new Point(240, 170);
+            txtCustomerLastName.Name = "txtCustomerLastName";
+            txtCustomerLastName.Size = new Size(310, 35);
+            txtCustomerLastName.TabIndex = 13;
+            // 
+            // txtCustomerFirstName
+            // 
+            txtCustomerFirstName.BeforeTouchSize = new Size(310, 35);
+            txtCustomerFirstName.BorderStyle = BorderStyle.FixedSingle;
+            txtCustomerFirstName.Font = new Font("Segoe UI", 11F);
+            txtCustomerFirstName.Location = new Point(240, 120);
+            txtCustomerFirstName.Name = "txtCustomerFirstName";
+            txtCustomerFirstName.Size = new Size(310, 35);
+            txtCustomerFirstName.TabIndex = 12;
+            // 
+            // lblCustomerType
+            // 
+            lblCustomerType.AutoSize = true;
+            lblCustomerType.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerType.Location = new Point(70, 670);
+            lblCustomerType.Name = "lblCustomerType";
+            lblCustomerType.Size = new Size(42, 20);
+            lblCustomerType.TabIndex = 11;
+            lblCustomerType.Text = "Type:";
+            // 
+            // lblCustomerAddress
+            // 
+            lblCustomerAddress.AutoSize = true;
+            lblCustomerAddress.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerAddress.Location = new Point(70, 620);
+            lblCustomerAddress.Name = "lblCustomerAddress";
+            lblCustomerAddress.Size = new Size(66, 20);
+            lblCustomerAddress.TabIndex = 10;
+            lblCustomerAddress.Text = "Address:";
+            // 
+            // lblCustomerEmail
+            // 
+            lblCustomerEmail.AutoSize = true;
+            lblCustomerEmail.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerEmail.Location = new Point(70, 570);
+            lblCustomerEmail.Name = "lblCustomerEmail";
+            lblCustomerEmail.Size = new Size(49, 20);
+            lblCustomerEmail.TabIndex = 9;
+            lblCustomerEmail.Text = "Email:";
+            // 
+            // lblCustomerPhone
+            // 
+            lblCustomerPhone.AutoSize = true;
+            lblCustomerPhone.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerPhone.Location = new Point(70, 520);
+            lblCustomerPhone.Name = "lblCustomerPhone";
+            lblCustomerPhone.Size = new Size(54, 20);
+            lblCustomerPhone.TabIndex = 8;
+            lblCustomerPhone.Text = "Phone:";
+            // 
+            // lblCustomerLicenseDate
+            // 
+            lblCustomerLicenseDate.AutoSize = true;
+            lblCustomerLicenseDate.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerLicenseDate.Location = new Point(70, 430);
+            lblCustomerLicenseDate.Name = "lblCustomerLicenseDate";
+            lblCustomerLicenseDate.Size = new Size(99, 20);
+            lblCustomerLicenseDate.TabIndex = 7;
+            lblCustomerLicenseDate.Text = "License Date:";
+            // 
+            // lblCustomerLicenseClass
+            // 
+            lblCustomerLicenseClass.AutoSize = true;
+            lblCustomerLicenseClass.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerLicenseClass.Location = new Point(70, 380);
+            lblCustomerLicenseClass.Name = "lblCustomerLicenseClass";
+            lblCustomerLicenseClass.Size = new Size(101, 20);
+            lblCustomerLicenseClass.TabIndex = 6;
+            lblCustomerLicenseClass.Text = "License Class:";
+            // 
+            // lblCustomerLicenseNumber
+            // 
+            lblCustomerLicenseNumber.AutoSize = true;
+            lblCustomerLicenseNumber.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerLicenseNumber.Location = new Point(70, 330);
+            lblCustomerLicenseNumber.Name = "lblCustomerLicenseNumber";
+            lblCustomerLicenseNumber.Size = new Size(122, 20);
+            lblCustomerLicenseNumber.TabIndex = 5;
+            lblCustomerLicenseNumber.Text = "License Number:";
+            // 
+            // lblCustomerDateOfBirth
+            // 
+            lblCustomerDateOfBirth.AutoSize = true;
+            lblCustomerDateOfBirth.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerDateOfBirth.Location = new Point(70, 280);
+            lblCustomerDateOfBirth.Name = "lblCustomerDateOfBirth";
+            lblCustomerDateOfBirth.Size = new Size(102, 20);
+            lblCustomerDateOfBirth.TabIndex = 4;
+            lblCustomerDateOfBirth.Text = "Date of Birth:";
+            // 
+            // lblCustomerNationalID
+            // 
+            lblCustomerNationalID.AutoSize = true;
+            lblCustomerNationalID.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerNationalID.Location = new Point(70, 230);
+            lblCustomerNationalID.Name = "lblCustomerNationalID";
+            lblCustomerNationalID.Size = new Size(90, 20);
+            lblCustomerNationalID.TabIndex = 3;
+            lblCustomerNationalID.Text = "National ID:";
+            // 
+            // lblCustomerLastName
+            // 
+            lblCustomerLastName.AutoSize = true;
+            lblCustomerLastName.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerLastName.Location = new Point(70, 180);
+            lblCustomerLastName.Name = "lblCustomerLastName";
+            lblCustomerLastName.Size = new Size(84, 20);
+            lblCustomerLastName.TabIndex = 2;
+            lblCustomerLastName.Text = "Last Name:";
+            // 
+            // lblCustomerFirstName
+            // 
+            lblCustomerFirstName.AutoSize = true;
+            lblCustomerFirstName.Font = new Font("Segoe UI Semibold", 11F);
+            lblCustomerFirstName.Location = new Point(70, 130);
+            lblCustomerFirstName.Name = "lblCustomerFirstName";
+            lblCustomerFirstName.Size = new Size(86, 20);
+            lblCustomerFirstName.TabIndex = 1;
+            lblCustomerFirstName.Text = "First Name:";
+            // 
+            // lblCustomerFormTitle
+            // 
+            lblCustomerFormTitle.AutoSize = true;
+            lblCustomerFormTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblCustomerFormTitle.ForeColor = Color.FromArgb(0, 120, 215);
+            lblCustomerFormTitle.Location = new Point(70, 50);
+            lblCustomerFormTitle.Name = "lblCustomerFormTitle";
+            lblCustomerFormTitle.Size = new Size(205, 32);
+            lblCustomerFormTitle.TabIndex = 0;
+            lblCustomerFormTitle.Text = "Add New Customer";
             // 
             // CustomersControl
             // 
@@ -235,7 +674,23 @@
             ((System.ComponentModel.ISupportInitialize)tabControlCustomers).EndInit();
             tabControlCustomers.ResumeLayout(false);
             tabPageCustomersList.ResumeLayout(false);
+            panelCustomerActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).EndInit();
+            tabPageCustomerAdd.ResumeLayout(false);
+            panelCustomerForm.ResumeLayout(false);
+            panelCustomerForm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)cmbCustomerType).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dtpLicenseDate).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dtpDateOfBirth).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chkCustomerAvailable).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerAddress).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerEmail).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerPhone).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerLicenseClass).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerLicenseNumber).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerNationalID).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerLastName).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerFirstName).EndInit();
             ResumeLayout(false);
         }
 
@@ -245,5 +700,37 @@
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageCustomersList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageCustomerAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridCustomers;
+        private System.Windows.Forms.Panel panelCustomerActions;
+        private Syncfusion.Windows.Forms.ButtonAdv btnEditCustomer;
+        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteCustomer;
+        private Syncfusion.Windows.Forms.ButtonAdv btnToggleCustomerStatus;
+        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshCustomers;
+        private System.Windows.Forms.Panel panelCustomerForm;
+        private System.Windows.Forms.Label lblCustomerFormTitle;
+        private System.Windows.Forms.Label lblCustomerFirstName;
+        private System.Windows.Forms.Label lblCustomerLastName;
+        private System.Windows.Forms.Label lblCustomerNationalID;
+        private System.Windows.Forms.Label lblCustomerDateOfBirth;
+        private System.Windows.Forms.Label lblCustomerLicenseNumber;
+        private System.Windows.Forms.Label lblCustomerLicenseClass;
+        private System.Windows.Forms.Label lblCustomerLicenseDate;
+        private System.Windows.Forms.Label lblCustomerPhone;
+        private System.Windows.Forms.Label lblCustomerEmail;
+        private System.Windows.Forms.Label lblCustomerAddress;
+        private System.Windows.Forms.Label lblCustomerType;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerFirstName;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerLastName;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerNationalID;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerLicenseNumber;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerLicenseClass;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerPhone;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerEmail;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtCustomerAddress;
+        private Syncfusion.Windows.Forms.Tools.CheckBoxAdv chkCustomerAvailable;
+        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv dtpDateOfBirth;
+        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv dtpLicenseDate;
+        private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cmbCustomerType;
+        private Syncfusion.Windows.Forms.ButtonAdv btnSaveCustomer;
+        private Syncfusion.Windows.Forms.ButtonAdv btnCancelCustomer;
     }
 }
