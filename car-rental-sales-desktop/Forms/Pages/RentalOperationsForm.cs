@@ -31,7 +31,10 @@ namespace car_rental_sales_desktop.Forms
             dtpReturnDate.ValueChanged += DtpReturnDate_ValueChanged;
             numReturnMileage.ValueChanged += NumReturnMileage_ValueChanged;
             btnCompleteReturn.Click += BtnCompleteReturn_Click;
+
             btnCancel.Click += BtnCancel_Click;
+            
+            this.CancelButton = btnCancel;
         }
 
         private void RentalOperationsForm_Load(object sender, EventArgs e)
@@ -43,7 +46,6 @@ namespace car_rental_sales_desktop.Forms
         {
             try
             {
-                // Load rental details
                 _rental = _rentalRepository.GetById(_rentalId);
 
                 if (_rental == null)
@@ -53,19 +55,16 @@ namespace car_rental_sales_desktop.Forms
                     return;
                 }
 
-                // Load customer information
                 if (_rental.Customer == null && _rental.RentalCustomerID > 0)
                 {
                     _rental.Customer = _customerRepository.GetById(_rental.RentalCustomerID);
                 }
 
-                // Load vehicle information
                 if (_rental.Vehicle == null && _rental.RentalVehicleID > 0)
                 {
                     _rental.Vehicle = _vehicleRepository.GetById(_rental.RentalVehicleID);
                 }
 
-                // Display rental information
                 lblRentalID.Text = _rental.RentalID.ToString();
                 lblCustomerName.Text = _rental.Customer?.FullName ?? "Unknown Customer";
                 lblVehicleInfo.Text = _rental.Vehicle?.VehiclePlateNumber ?? "Unknown Vehicle";
@@ -74,22 +73,17 @@ namespace car_rental_sales_desktop.Forms
                 lblStartMileage.Text = _rental.RentalStartKm.ToString() + " KM";
                 lblAmount.Text = _rental.RentalAmount.ToString("N2") + " ₺";
 
-                // Set initial return values
                 dtpReturnDate.Value = DateTime.Now;
                 numReturnMileage.Value = _rental.RentalStartKm;
-                numReturnMileage.Minimum = _rental.RentalStartKm; // Ensure return mileage is not less than start mileage
+                numReturnMileage.Minimum = _rental.RentalStartKm;
 
-                // Load existing notes
                 if (_rental.RentalID > 0)
                 {
-                    // Get all notes for this rental
                     List<RentalNote> notes = _rentalRepository.GetNotes(_rental.RentalID);
                     if (notes != null && notes.Count > 0)
                     {
-                        // Show the most recent note in the note text box
                         txtRentalNote.Text = notes[0].RentalNoteText;
 
-                        // If multiple notes exist, append them with timestamps
                         if (notes.Count > 1)
                         {
                             txtRentalNote.Text += Environment.NewLine + Environment.NewLine + "Previous notes:";
@@ -102,30 +96,27 @@ namespace car_rental_sales_desktop.Forms
                     }
                 }
 
-                // Check if rental is already returned
                 if (_rental.RentalReturnDate.HasValue)
                 {
                     lblStatus.Text = "This rental has already been returned.";
                     lblStatus.ForeColor = Color.Blue;
 
-                    // Disable return operation controls
                     dtpReturnDate.Enabled = false;
                     numReturnMileage.Enabled = false;
-                    // Note field remains editable
                     btnCompleteReturn.Enabled = false;
 
-                    // Change Complete Return button to Save Note button
                     btnCompleteReturn.Text = "Save Note";
                     btnCompleteReturn.Enabled = true;
                     btnCompleteReturn.BackColor = System.Drawing.Color.DodgerBlue;
 
-                    // Show return information
                     lblReturnDateInfo.Text = _rental.RentalReturnDate.Value.ToString("dd.MM.yyyy");
                     lblReturnMileageInfo.Text = _rental.RentalEndKm.ToString() + " KM";
 
-                    // Hesapla ve driven distance'ı göster
+                    dtpReturnDate.Value = _rental.RentalReturnDate.Value;
+
                     if (_rental.RentalEndKm.HasValue)
                     {
+                        numReturnMileage.Value = _rental.RentalEndKm.Value;
                         int mileageDifference = _rental.RentalEndKm.Value - _rental.RentalStartKm;
                         lblMileageInfo.Text = $"Driven distance: {mileageDifference} KM";
                     }
@@ -133,13 +124,14 @@ namespace car_rental_sales_desktop.Forms
                     {
                         lblMileageInfo.Text = "Driven distance: 0 KM";
                     }
+
+                    CalculateReturnDetails();
                 }
                 else
                 {
                     lblStatus.Text = "This rental is active and can be returned.";
                     lblStatus.ForeColor = Color.Green;
 
-                    // Calculate initial return information
                     CalculateReturnDetails();
                 }
             }
@@ -153,21 +145,17 @@ namespace car_rental_sales_desktop.Forms
         {
             try
             {
-                // Get values
                 DateTime returnDate = dtpReturnDate.Value;
                 int returnMileage = (int)numReturnMileage.Value;
 
-                // Calculate late fee if returned after due date
                 _lateFee = 0;
                 if (returnDate > _rental.RentalEndDate)
                 {
                     int lateDays = (returnDate.Date - _rental.RentalEndDate.Date).Days;
 
-                    // Calculate daily rate (total rental / total days)
                     int rentalDays = (_rental.RentalEndDate.Date - _rental.RentalStartDate.Date).Days + 1;
                     decimal dailyRate = _rental.RentalAmount / rentalDays;
 
-                    // Apply late fee (1.5x daily rate per late day)
                     _lateFee = lateDays * dailyRate * 1.5m;
 
                     lblLateFee.Text = _lateFee.ToString("N2") + " ₺";
@@ -181,11 +169,9 @@ namespace car_rental_sales_desktop.Forms
                     pnlLateFee.Visible = false;
                 }
 
-                // Calculate total amount
                 _totalAmount = _rental.RentalAmount + _lateFee;
                 lblTotalAmount.Text = _totalAmount.ToString("N2") + " ₺";
 
-                // Display mileage information
                 int mileageDifference = returnMileage - _rental.RentalStartKm;
                 lblMileageInfo.Text = $"Driven distance: {mileageDifference} KM";
             }
@@ -209,13 +195,11 @@ namespace car_rental_sales_desktop.Forms
         {
             try
             {
-                // Check if it's a completed rental (just saving a note)
                 if (_rental.RentalReturnDate.HasValue)
                 {
                     string noteText = txtRentalNote.Text.Trim();
                     if (!string.IsNullOrEmpty(noteText))
                     {
-                        // Add a note to the rental - use a different variable name to avoid conflict
                         bool noteSuccess = _rentalRepository.AddNote(_rental.RentalID, noteText, CurrentUser.UserID);
 
                         if (noteSuccess)
@@ -227,7 +211,6 @@ namespace car_rental_sales_desktop.Forms
                                 MessageBoxIcon.Information);
 
                             this.DialogResult = DialogResult.OK;
-                            this.Close();
                         }
                         else
                         {
@@ -250,8 +233,6 @@ namespace car_rental_sales_desktop.Forms
                     return;
                 }
 
-                // This is the original code for processing a return
-                // Confirm return
                 DialogResult result = MessageBox.Show(
                     "Are you sure you want to complete this rental return?",
                     "Confirm Return",
@@ -261,7 +242,6 @@ namespace car_rental_sales_desktop.Forms
                 if (result == DialogResult.No)
                     return;
 
-                // Process the return
                 DateTime returnDate = dtpReturnDate.Value;
                 int returnMileage = (int)numReturnMileage.Value;
 
@@ -269,7 +249,6 @@ namespace car_rental_sales_desktop.Forms
 
                 if (success)
                 {
-                    // If late fee exists, create a payment record
                     if (_lateFee > 0)
                     {
                         Payment lateFeePayment = new Payment
@@ -288,11 +267,9 @@ namespace car_rental_sales_desktop.Forms
                         paymentRepository.Insert(lateFeePayment);
                     }
 
-                    // Add the return note if provided
                     string noteText = txtRentalNote.Text.Trim();
                     if (!string.IsNullOrEmpty(noteText))
                     {
-                        // Add a note to the rental
                         _rentalRepository.AddNote(_rental.RentalID, noteText, CurrentUser.UserID);
                     }
 
@@ -303,7 +280,6 @@ namespace car_rental_sales_desktop.Forms
                         MessageBoxIcon.Information);
 
                     this.DialogResult = DialogResult.OK;
-                    this.Close();
                 }
                 else
                 {
@@ -323,7 +299,6 @@ namespace car_rental_sales_desktop.Forms
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using car_rental_sales_desktop.Models;
 using car_rental_sales_desktop.Repositories;
 using System.Drawing;
+using System.Linq;
 using Org.BouncyCastle.Asn1.Pkcs;
 
 namespace car_rental_sales_desktop.Forms.Controls
@@ -14,29 +15,33 @@ namespace car_rental_sales_desktop.Forms.Controls
         private CustomerRepository _customerRepository;
         private VehicleRepository _vehicleRepository;
         private UserRepository _userRepository;
-        private List<Customer> _customers; // Müşteri listesi
-        private List<Vehicle> _vehicles; // Araç listesi
+        private List<Customer> _customers;
+        private List<Vehicle> _vehicles;
+
+        public enum RentalStatus
+        {
+            Active,
+            CompletedOnTime,
+            CompletedLate,
+            Overdue
+        }
 
         public RentalsControl()
         {
             InitializeComponent();
 
-            // Initialize repositories
             _rentalRepository = new RentalRepository();
             _customerRepository = new CustomerRepository();
             _vehicleRepository = new VehicleRepository();
             _userRepository = new UserRepository();
 
-            // Register event handlers
             this.Load += RentalsControl_Load;
             btnCustomerLoad.Click += BtnCustomerLoad_Click;
             btnVehicleLoad.Click += BtnVehicleLoad_Click;
 
-            // Register date picker events
             dtpRentalStartDate.ValueChanged += DtpRentalStartDate_ValueChanged;
             dtpRentalEndDate.ValueChanged += DtpRentalEndDate_ValueChanged;
 
-            // Add event handlers for rental selection
             sfDataGridLastRentals.CellDoubleClick += SfDataGridLastRentals_CellDoubleClick;
             btnShowRental.Click += BtnShowRental_Click;
 
@@ -49,6 +54,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             txtBoxRentalPaymentType.Text = "Nakit";
 
             sfDataGridLastRentals.QueryRowStyle += SfDataGridLastRentals_QueryRowStyle;
+            sfDataGridRentals.QueryRowStyle += SfDataGridRentals_QueryRowStyle;
         }
 
         private void RentalsControl_Load(object sender, EventArgs e)
@@ -61,44 +67,91 @@ namespace car_rental_sales_desktop.Forms.Controls
             dtpRentalEndDate.MinDate = DateTime.Today.AddDays(1);
         }
 
-        // TR: Bu metot, kiralama verilerini yüklemek için kullanılır.
-        // EN: This method is used to load rental data.
+        private RentalStatus GetRentalStatus(Rental rental)
+        {
+            DateTime today = DateTime.Today;
+
+            if (!rental.RentalReturnDate.HasValue)
+            {
+                if (rental.RentalEndDate.Date < today)
+                {
+                    return RentalStatus.Overdue;
+                }
+                return RentalStatus.Active;
+            }
+
+            if (rental.RentalReturnDate.Value.Date <= rental.RentalEndDate.Date)
+            {
+                return RentalStatus.CompletedOnTime;
+            }
+            else
+            {
+                return RentalStatus.CompletedLate;
+            }
+        }
+
+        private Color GetStatusColor(RentalStatus status)
+        {
+            switch (status)
+            {
+                case RentalStatus.Active:
+                    return Color.LightBlue;
+                case RentalStatus.CompletedOnTime:
+                    return Color.LightGreen;
+                case RentalStatus.CompletedLate:
+                    return Color.Orange;
+                case RentalStatus.Overdue:
+                    return Color.Crimson;
+                default:
+                    return Color.White;
+            }
+        }
+
+        private string GetStatusDescription(RentalStatus status)
+        {
+            switch (status)
+            {
+                case RentalStatus.Active:
+                    return "Aktif Kiralama";
+                case RentalStatus.CompletedOnTime:
+                    return "Zamanında Tamamlandı";
+                case RentalStatus.CompletedLate:
+                    return "Geç Tamamlandı (Cezalı)";
+                case RentalStatus.Overdue:
+                    return "Süresi Geçmiş";
+                default:
+                    return "Belirsiz";
+            }
+        }
+
         private void LoadRentals()
         {
             try
             {
-                // Get all rentals from the repository
                 List<Rental> rentals = _rentalRepository.GetAll();
 
-                // For each rental, load related data
                 foreach (var rental in rentals)
                 {
-                    // Load customer data
                     if (rental.RentalCustomerID > 0)
                     {
                         rental.Customer = _customerRepository.GetById(rental.RentalCustomerID);
                     }
 
-                    // Load vehicle data
                     if (rental.RentalVehicleID > 0)
                     {
                         rental.Vehicle = _vehicleRepository.GetById(rental.RentalVehicleID);
                     }
 
-                    // Load user data
                     if (rental.RentalUserID > 0)
                     {
                         rental.User = _userRepository.GetById(rental.RentalUserID);
                     }
                 }
 
-                // Set the data source for the main grid
                 sfDataGridRentals.DataSource = rentals;
 
-                // Create a sorted list for the latest rentals grid (most recent first)
                 var latestRentals = rentals.OrderByDescending(r => r.RentalCreatedAt).ToList();
 
-                // Set the data source for the latest rentals grid
                 sfDataGridLastRentals.DataSource = latestRentals;
             }
             catch (Exception ex)
@@ -108,54 +161,118 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, kiralama verileri tablosunda gösterilirken satır stillerini ayarlamak için kullanılır.
-        // EN: This method is used to set row styles when displaying rental data in the table.
         private void SfDataGridRentals_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
             if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
             {
-                if (e.RowIndex % 2 == 0)
-                    e.Style.BackColor = Color.White;
+                var rental = e.RowData as Rental;
+                if (rental != null)
+                {
+                    RentalStatus status = GetRentalStatus(rental);
+
+                    e.Style.BackColor = GetStatusColor(status);
+
+                    switch (status)
+                    {
+                        case RentalStatus.Overdue:
+                            e.Style.TextColor = Color.White;
+                            e.Style.Font.Bold = true;
+                            break;
+                        case RentalStatus.CompletedLate:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                        case RentalStatus.Active:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                        case RentalStatus.CompletedOnTime:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                        default:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                    }
+                }
                 else
-                    e.Style.BackColor = Color.FromArgb(240, 245, 255); // Light blue tone
+                {
+                    if (e.RowIndex % 2 == 0)
+                        e.Style.BackColor = Color.White;
+                    else
+                        e.Style.BackColor = Color.FromArgb(240, 245, 255);
+
+                    e.Style.TextColor = Color.Black;
+                    e.Style.Font.Bold = true;
+                }
             }
         }
 
-        // TR: Bu metot, son kiralamalar tablosunda gösterilirken satır stillerini ayarlamak için kullanılır.
-        // EN: This method is used to set row styles when displaying latest rentals data in the table.
         private void SfDataGridLastRentals_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
             if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
             {
-                if (e.RowIndex % 2 == 0)
-                    e.Style.BackColor = Color.White;
+                var rental = e.RowData as Rental;
+                if (rental != null)
+                {
+                    RentalStatus status = GetRentalStatus(rental);
+
+                    e.Style.BackColor = GetStatusColor(status);
+
+                    switch (status)
+                    {
+                        case RentalStatus.Overdue:
+                            e.Style.TextColor = Color.White;
+                            e.Style.Font.Bold = true;
+                            break;
+                        case RentalStatus.CompletedLate:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                        case RentalStatus.Active:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                        case RentalStatus.CompletedOnTime:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                        default:
+                            e.Style.TextColor = Color.Black;
+                            e.Style.Font.Bold = true;
+                            break;
+                    }
+                }
                 else
-                    e.Style.BackColor = Color.FromArgb(240, 245, 255); // Light blue tone
+                {
+                    if (e.RowIndex % 2 == 0)
+                        e.Style.BackColor = Color.White;
+                    else
+                        e.Style.BackColor = Color.FromArgb(240, 245, 255);
+
+                    e.Style.TextColor = Color.Black;
+                    e.Style.Font.Bold = true;
+                }
             }
         }
 
         #region Customer Operations
 
-        // TR: Bu metot, müşterileri otomatik tamamlama için yüklemek için kullanılır.
-        // EN: This method is used to load customers for autocomplete.
         private void LoadCustomersForAutoComplete()
         {
             try
             {
-                // Get all active customers
                 _customers = _customerRepository.GetActiveCustomers();
 
-                // Create AutoCompleteStringCollection
                 AutoCompleteStringCollection autoCompleteSource = new AutoCompleteStringCollection();
 
-                // Add customer names to the collection
                 foreach (var customer in _customers)
                 {
                     string fullName = $"{customer.CustomerFirstName} {customer.CustomerLastName}";
                     autoCompleteSource.Add(fullName);
                 }
 
-                // Set autocomplete properties
                 txtBoxSearchCustomer.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 txtBoxSearchCustomer.AutoCompleteCustomSource = autoCompleteSource;
                 txtBoxSearchCustomer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -167,8 +284,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, btnCustomerLoad düğmesine tıklandığında çalışır ve seçilen müşterinin bilgilerini yükler.
-        // EN: This method runs when the btnCustomerLoad button is clicked and loads the selected customer's information.
         private void BtnCustomerLoad_Click(object sender, EventArgs e)
         {
             string searchText = txtBoxSearchCustomer.Text.Trim();
@@ -179,13 +294,47 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
-            // Find the customer
             Customer selectedCustomer = FindCustomerByFullName(searchText);
 
             if (selectedCustomer != null)
             {
-                // Load customer info to the form
+                var customerActiveRentals = CheckCustomerActiveRentals(selectedCustomer.CustomerID);
+
+                if (customerActiveRentals.Count > 0)
+                {
+                    string activeRentalInfo = "";
+                    foreach (var rental in customerActiveRentals.Take(3))
+                    {
+                        activeRentalInfo += $"• Plaka: {rental.Vehicle?.VehiclePlateNumber ?? "Bilinmiyor"} - Bitiş: {rental.RentalEndDate:dd.MM.yyyy}\n";
+                    }
+
+                    if (customerActiveRentals.Count > 3)
+                    {
+                        activeRentalInfo += $"• ... ve {customerActiveRentals.Count - 3} kiralama daha\n";
+                    }
+
+                    DialogResult result = MessageBox.Show(
+                        $"UYARI: Bu müşterinin aktif {customerActiveRentals.Count} kiralaması bulunmaktadır:\n\n" +
+                        activeRentalInfo + "\n" +
+                        "Yine de bu müşteriyle yeni kiralama yapmak istiyor musunuz?",
+                        "Aktif Kiralama Uyarısı",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.No)
+                    {
+                        txtBoxSearchCustomer.Text = string.Empty;
+                        return;
+                    }
+                }
+
                 LoadCustomerInfo(selectedCustomer);
+
+                if (customerActiveRentals.Count > 0)
+                {
+                    lblProgressWarning.Text = $"Müşteri yüklendi. DİKKAT: {customerActiveRentals.Count} aktif kiralama var!";
+                    lblProgressWarning.ForeColor = Color.Orange;
+                }
             }
             else
             {
@@ -194,11 +343,31 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, müşteriyi ad ve soyadına göre bulmak için kullanılır.
-        // EN: This method is used to find a customer by full name.
+        private List<Rental> CheckCustomerActiveRentals(int customerId)
+        {
+            try
+            {
+                var activeRentals = _rentalRepository.GetActiveRentals();
+                var customerActiveRentals = activeRentals.Where(r => r.RentalCustomerID == customerId).ToList();
+
+                foreach (var rental in customerActiveRentals)
+                {
+                    if (rental.Vehicle == null && rental.RentalVehicleID > 0)
+                    {
+                        rental.Vehicle = _vehicleRepository.GetById(rental.RentalVehicleID);
+                    }
+                }
+
+                return customerActiveRentals;
+            }
+            catch (Exception)
+            {
+                return new List<Rental>();
+            }
+        }
+
         private Customer FindCustomerByFullName(string fullName)
         {
-            // Split full name into first name and last name
             string[] nameParts = fullName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (nameParts.Length < 2)
@@ -206,23 +375,18 @@ namespace car_rental_sales_desktop.Forms.Controls
 
             string firstName = nameParts[0];
 
-            // Last name might contain multiple words
             string lastName = string.Join(" ", nameParts, 1, nameParts.Length - 1);
 
-            // Search for the customer
             return _customers.Find(c =>
                 c.CustomerFirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
                 c.CustomerLastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
         }
 
-        // TR: Bu metot, seçilen müşterinin bilgilerini form alanlarına yüklemek için kullanılır.
-        // EN: This method is used to load the selected customer's information into the form fields.
         private void LoadCustomerInfo(Customer customer)
         {
             if (customer == null)
                 return;
 
-            // Update customer information fields
             txtBoxCustomerFullName.Text = $"{customer.CustomerFirstName} {customer.CustomerLastName}";
             tctBoxNationalID.Text = customer.CustomerNationalID;
             txtBoxPhoneNo.Text = customer.CustomerPhone;
@@ -231,18 +395,16 @@ namespace car_rental_sales_desktop.Forms.Controls
             txtBoxLicenseNo.Text = customer.CustomerLicenseNumber;
             txtBoxLicenseClass.Text = customer.CustomerLicenseClass;
 
-            // Format dates if they exist using DateTimePickers
             if (customer.CustomerLicenseDate.HasValue)
                 dtpLicenseDate.Value = customer.CustomerLicenseDate.Value;
             else
-                dtpLicenseDate.Value = dtpLicenseDate.MinDate; // Minimum tarih değeri
+                dtpLicenseDate.Value = dtpLicenseDate.MinDate;
 
             if (customer.CustomerDateOfBirth.HasValue)
                 dtpDateOfBirth.Value = customer.CustomerDateOfBirth.Value;
             else
-                dtpDateOfBirth.Value = dtpDateOfBirth.MinDate; // Minimum tarih değeri
+                dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
 
-            // Show success message
             lblProgressWarning.Text = "Müşteri bilgileri başarıyla yüklendi.";
             lblProgressWarning.ForeColor = Color.Green;
         }
@@ -251,25 +413,24 @@ namespace car_rental_sales_desktop.Forms.Controls
 
         #region Vehicle Operations
 
-        // TR: Bu metot, araçları otomatik tamamlama için yüklemek için kullanılır.
-        // EN: This method is used to load vehicles for autocomplete.
         private void LoadVehiclesForAutoComplete()
         {
             try
             {
-                // Get all available vehicles
                 _vehicles = _vehicleRepository.GetAvailableVehicles();
 
-                // Create AutoCompleteStringCollection
+                var activeRentals = _rentalRepository.GetActiveRentals();
+                var rentedVehicleIds = activeRentals.Select(r => r.RentalVehicleID).ToHashSet();
+
+                _vehicles = _vehicles.Where(v => !rentedVehicleIds.Contains(v.VehicleID)).ToList();
+
                 AutoCompleteStringCollection autoCompleteSource = new AutoCompleteStringCollection();
 
-                // Add vehicle plate numbers to the collection
                 foreach (var vehicle in _vehicles)
                 {
                     autoCompleteSource.Add(vehicle.VehiclePlateNumber);
                 }
 
-                // Set autocomplete properties
                 textBoxSearchVehicle.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 textBoxSearchVehicle.AutoCompleteCustomSource = autoCompleteSource;
                 textBoxSearchVehicle.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -281,8 +442,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, btnVehicleLoad düğmesine tıklandığında çalışır ve seçilen aracın bilgilerini yükler.
-        // EN: This method runs when the btnVehicleLoad button is clicked and loads the selected vehicle's information.
         private void BtnVehicleLoad_Click(object sender, EventArgs e)
         {
             string searchText = textBoxSearchVehicle.Text.Trim();
@@ -293,23 +452,49 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
-            // Find the vehicle
             Vehicle selectedVehicle = FindVehicleByPlate(searchText);
 
             if (selectedVehicle != null)
             {
-                // Load vehicle info to the form
+                if (!IsVehicleAvailableForRental(selectedVehicle))
+                {
+                    MessageBox.Show($"Seçilen araç ({selectedVehicle.VehiclePlateNumber}) şu anda kiralamaya uygun değil.\nAraç durumu kontrol edilip tekrardan deneyin.",
+                        "Araç İşgal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    LoadVehiclesForAutoComplete();
+                    textBoxSearchVehicle.Text = string.Empty;
+                    return;
+                }
+
                 LoadVehicleInfo(selectedVehicle);
             }
             else
             {
-                MessageBox.Show("Araç bulunamadı. Lütfen geçerli bir araç plakası giriniz.",
+                MessageBox.Show("Araç bulunamadı veya kiralamaya uygun değil. Lütfen listeden uygun bir araç seçiniz.",
                     "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        // TR: Bu metot, aracı plaka numarasına göre bulmak için kullanılır.
-        // EN: This method is used to find a vehicle by plate number.
+        private bool IsVehicleAvailableForRental(Vehicle vehicle)
+        {
+            try
+            {
+                if (vehicle.VehicleStatusID != 1 && vehicle.VehicleStatusID != 4)
+                {
+                    return false;
+                }
+
+                var activeRentals = _rentalRepository.GetActiveRentals();
+                bool isCurrentlyRented = activeRentals.Any(r => r.RentalVehicleID == vehicle.VehicleID);
+
+                return !isCurrentlyRented;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private Vehicle FindVehicleByPlate(string plateNumber)
         {
             // Search for the vehicle by plate number
@@ -317,14 +502,11 @@ namespace car_rental_sales_desktop.Forms.Controls
                 v.VehiclePlateNumber.Equals(plateNumber, StringComparison.OrdinalIgnoreCase));
         }
 
-        // TR: Bu metot, seçilen aracın bilgilerini form alanlarına yüklemek için kullanılır.
-        // EN: This method is used to load the selected vehicle's information into the form fields.
         private void LoadVehicleInfo(Vehicle vehicle)
         {
             if (vehicle == null)
                 return;
 
-            // Update vehicle information fields
             txtBoxVehiclePlate.Text = vehicle.VehiclePlateNumber;
             txtBoxVehicleBrand.Text = vehicle.VehicleBrand;
             txtBoxVehicleModel.Text = vehicle.VehicleModel;
@@ -334,7 +516,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             txtBoxVehicleTransmission.Text = vehicle.VehicleTransmissionType;
             txtBoxVehicleMileage.Text = $"{vehicle.VehicleMileage} KM";
 
-            // Set vehicle location (branch name)
             if (vehicle.Branch != null)
             {
                 txtBoxVehicleLocation.Text = vehicle.Branch.BranchName;
@@ -344,7 +525,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                 txtBoxVehicleLocation.Text = "Belirsiz";
             }
 
-            // Set vehicle status
             if (vehicle.VehicleStatus != null)
             {
                 txtBoxVehicleStatus.Text = vehicle.VehicleStatus.VehicleStatusName;
@@ -354,20 +534,15 @@ namespace car_rental_sales_desktop.Forms.Controls
                 txtBoxVehicleStatus.Text = "Belirsiz";
             }
 
-            // Set rental information fields with DateTimePickers
-            // Assuming the current date for rental start
             DateTime rentalStartDate = DateTime.Now;
-            // Default rental period: 1 day
             DateTime rentalEndDate = rentalStartDate.AddDays(1);
 
             dtpRentalStartDate.Value = rentalStartDate;
             dtpRentalEndDate.Value = rentalEndDate;
             txtBoxRentalStartMileage.Text = vehicle.VehicleMileage.ToString();
 
-            // Calculate rental amount based on vehicle class if available
             CalculateRentalAmount();
 
-            // Show success message
             lblProgressWarning.Text = "Araç bilgileri başarıyla yüklendi.";
             lblProgressWarning.ForeColor = Color.Green;
         }
@@ -376,48 +551,36 @@ namespace car_rental_sales_desktop.Forms.Controls
 
         #region Rental Calculations
 
-        // TR: Bu metot, kiralama tutarını hesaplamak için kullanılır.
-        // EN: This method is used to calculate the rental amount.
         private void CalculateRentalAmount()
         {
-            // Eğer araç seçili değilse hesaplama yapma
             if (string.IsNullOrEmpty(txtBoxVehiclePlate.Text))
                 return;
 
-            // Seçili aracı bul
             Vehicle selectedVehicle = FindVehicleByPlate(txtBoxVehiclePlate.Text);
             if (selectedVehicle == null || !selectedVehicle.VehicleClassID.HasValue)
                 return;
 
-            // Tarih aralığını hesapla
             TimeSpan rentalPeriod = dtpRentalEndDate.Value.Date - dtpRentalStartDate.Value.Date;
-            int days = rentalPeriod.Days + 1; // Son günü de dahil et
+            int days = rentalPeriod.Days + 1;
 
-            // Eğer başlangıç bitiş tarihinden sonra ise düzelt
             if (days <= 0)
             {
                 dtpRentalEndDate.Value = dtpRentalStartDate.Value.AddDays(1);
                 days = 2;
             }
 
-            // Günlük kiralama tutarını al
             var classRepository = new VehicleClassRepository();
             decimal dailyRate = classRepository.GetRentalPrice(selectedVehicle.VehicleClassID.Value, RentalType.Daily);
 
-            // Toplam tutarı hesapla
             decimal totalAmount = dailyRate * days;
             txtBoxRentalAmount.Text = totalAmount.ToString("N2") + " ₺";
 
-            // Depozitoyu güncelle (Kiralama tutarının %50'si)
             decimal depositAmount = totalAmount * 0.5m;
             txtBoxRentalDeposit.Text = depositAmount.ToString("N2") + " ₺";
 
-            // Default payment type: Cash
             txtBoxRentalPaymentType.Text = "Nakit";
         }
 
-        // TR: DateTimePicker olay işleyicileri
-        // EN: DateTimePicker event handlers
         private void DtpRentalStartDate_ValueChanged(object sender, EventArgs e)
         {
             CalculateRentalAmount();
@@ -430,7 +593,6 @@ namespace car_rental_sales_desktop.Forms.Controls
 
         private void ClearForm()
         {
-            // Clear customer info
             txtBoxSearchCustomer.Text = string.Empty;
             txtBoxCustomerFullName.Text = string.Empty;
             tctBoxNationalID.Text = string.Empty;
@@ -442,7 +604,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             dtpLicenseDate.Value = dtpLicenseDate.MinDate;
             dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
 
-            // Clear vehicle info
             textBoxSearchVehicle.Text = string.Empty;
             txtBoxVehiclePlate.Text = string.Empty;
             txtBoxVehicleBrand.Text = string.Empty;
@@ -455,20 +616,40 @@ namespace car_rental_sales_desktop.Forms.Controls
             txtBoxVehicleLocation.Text = string.Empty;
             txtBoxVehicleStatus.Text = string.Empty;
 
-            // Clear rental info
             dtpRentalStartDate.Value = DateTime.Now;
             dtpRentalEndDate.Value = DateTime.Now.AddDays(1);
             txtBoxRentalStartMileage.Text = string.Empty;
-            textBox8.Text = string.Empty; // This seems to be the end mileage
-            txtBoxRentalPaymentType.Text = "Nakit"; // Default to cash
+            textBox8.Text = string.Empty;
+            txtBoxRentalPaymentType.Text = "Nakit";
             txtBoxRentalAmount.Text = string.Empty;
             txtBoxRentalDeposit.Text = string.Empty;
             txtBoxRentalNote.Text = string.Empty;
+
+            try
+            {
+                sfDataGridRentals.SelectedItem = null;
+                sfDataGridRentals.SelectedIndex = -1;
+
+                sfDataGridLastRentals.SelectedItem = null;
+                sfDataGridLastRentals.SelectedIndex = -1;
+
+                var currentSelectionMode1 = sfDataGridRentals.SelectionMode;
+                var currentSelectionMode2 = sfDataGridLastRentals.SelectionMode;
+
+                sfDataGridRentals.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
+                sfDataGridRentals.SelectionMode = currentSelectionMode1;
+
+                sfDataGridLastRentals.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
+                sfDataGridLastRentals.SelectionMode = currentSelectionMode2;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Selection clearing failed: {ex.Message}");
+            }
         }
 
         private bool ValidateRentalForm()
         {
-            // Check if customer is selected
             if (string.IsNullOrEmpty(txtBoxCustomerFullName.Text))
             {
                 lblProgressWarning.Text = "Please select a customer.";
@@ -476,7 +657,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return false;
             }
 
-            // Check if vehicle is selected
             if (string.IsNullOrEmpty(txtBoxVehiclePlate.Text))
             {
                 lblProgressWarning.Text = "Please select a vehicle.";
@@ -484,7 +664,33 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return false;
             }
 
-            // Check if rental dates are valid
+            Customer selectedCustomer = FindCustomerByFullName(txtBoxCustomerFullName.Text);
+            if (selectedCustomer == null)
+            {
+                lblProgressWarning.Text = "Selected customer is not valid. Please select again.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            Vehicle selectedVehicle = FindVehicleByPlate(txtBoxVehiclePlate.Text);
+            if (selectedVehicle == null)
+            {
+                lblProgressWarning.Text = "Selected vehicle is not valid. Please select again.";
+                lblProgressWarning.ForeColor = Color.Red;
+                return false;
+            }
+
+            if (!IsVehicleAvailableForRental(selectedVehicle))
+            {
+                lblProgressWarning.Text = "Selected vehicle is no longer available for rental.";
+                lblProgressWarning.ForeColor = Color.Red;
+
+                LoadVehiclesForAutoComplete();
+                textBoxSearchVehicle.Text = string.Empty;
+                txtBoxVehiclePlate.Text = string.Empty;
+                return false;
+            }
+
             if (dtpRentalEndDate.Value < dtpRentalStartDate.Value)
             {
                 lblProgressWarning.Text = "End date cannot be earlier than start date.";
@@ -492,7 +698,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return false;
             }
 
-            // Check if rental amount is calculated
             if (string.IsNullOrEmpty(txtBoxRentalAmount.Text))
             {
                 lblProgressWarning.Text = "Rental amount is not calculated.";
@@ -500,7 +705,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return false;
             }
 
-            // Check if starting mileage is entered
             if (string.IsNullOrEmpty(txtBoxRentalStartMileage.Text))
             {
                 lblProgressWarning.Text = "Starting mileage must be entered.";
@@ -508,12 +712,29 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return false;
             }
 
-            // Check if payment type is entered
             if (string.IsNullOrEmpty(txtBoxRentalPaymentType.Text))
             {
                 lblProgressWarning.Text = "Payment type must be entered.";
                 lblProgressWarning.ForeColor = Color.Red;
                 return false;
+            }
+
+            var customerActiveRentals = CheckCustomerActiveRentals(selectedCustomer.CustomerID);
+            if (customerActiveRentals.Count > 0)
+            {
+                DialogResult result = MessageBox.Show(
+                    $"Son kontrol: Bu müşterinin {customerActiveRentals.Count} aktif kiralaması var.\n" +
+                    "Yeni kiralama yapmaya devam etmek istediğinizden emin misiniz?",
+                    "Final Uyarı - Aktif Kiralama",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                {
+                    lblProgressWarning.Text = "Kiralama işlemi iptal edildi.";
+                    lblProgressWarning.ForeColor = Color.Blue;
+                    return false;
+                }
             }
 
             return true;
@@ -523,7 +744,6 @@ namespace car_rental_sales_desktop.Forms.Controls
         {
             try
             {
-                // Find the selected customer
                 Customer selectedCustomer = FindCustomerByFullName(txtBoxCustomerFullName.Text);
                 if (selectedCustomer == null)
                 {
@@ -532,7 +752,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Find the selected vehicle
                 Vehicle selectedVehicle = FindVehicleByPlate(txtBoxVehiclePlate.Text);
                 if (selectedVehicle == null)
                 {
@@ -541,7 +760,21 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Parse rental amount
+                if (!IsVehicleAvailableForRental(selectedVehicle))
+                {
+                    lblProgressWarning.Text = "Vehicle became unavailable. Please select another vehicle.";
+                    lblProgressWarning.ForeColor = Color.Red;
+
+                    LoadVehiclesForAutoComplete();
+                    LoadRentals();
+
+                    textBoxSearchVehicle.Text = string.Empty;
+                    txtBoxVehiclePlate.Text = string.Empty;
+                    txtBoxVehicleBrand.Text = string.Empty;
+                    txtBoxVehicleModel.Text = string.Empty;
+                    return;
+                }
+
                 string amountText = txtBoxRentalAmount.Text.Replace("₺", "").Trim();
                 if (!decimal.TryParse(amountText, out decimal rentalAmount))
                 {
@@ -550,7 +783,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Parse deposit amount
                 decimal? depositAmount = null;
                 if (!string.IsNullOrEmpty(txtBoxRentalDeposit.Text))
                 {
@@ -561,7 +793,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                     }
                 }
 
-                // Parse starting mileage
                 if (!int.TryParse(txtBoxRentalStartMileage.Text.Replace("KM", "").Trim(), out int startKm))
                 {
                     lblProgressWarning.Text = "Invalid starting mileage.";
@@ -569,47 +800,41 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Create new rental object
                 Rental newRental = new Rental
                 {
                     RentalCustomerID = selectedCustomer.CustomerID,
                     RentalVehicleID = selectedVehicle.VehicleID,
                     RentalStartDate = dtpRentalStartDate.Value,
                     RentalEndDate = dtpRentalEndDate.Value,
-                    RentalReturnDate = null, // Not returned yet
+                    RentalReturnDate = null,
                     RentalStartKm = startKm,
-                    RentalEndKm = null, // Not returned yet
+                    RentalEndKm = null,
                     RentalAmount = rentalAmount,
                     RentalDepositAmount = depositAmount,
                     RentalPaymentType = txtBoxRentalPaymentType.Text,
-                    RentalContractID = null, // No contract yet
-                    RentalUserID = Utils.CurrentUser.UserID, // Current logged in user
+                    RentalContractID = null,
+                    RentalUserID = Utils.CurrentUser.UserID,
                 };
 
-                // Add rental note if provided
                 string noteText = txtBoxRentalNote.Text;
                 int rentalId;
 
                 if (!string.IsNullOrEmpty(noteText))
                 {
-                    // Use the special method to create rental with note
                     rentalId = _rentalRepository.CreateRentalWithNote(newRental, noteText);
                 }
                 else
                 {
-                    // If we're using regular Insert, we need to manually update vehicle status
                     rentalId = _rentalRepository.Insert(newRental);
 
                     if (rentalId > 0)
                     {
-                        // Update vehicle status to Rented (status ID 3)
-                        _vehicleRepository.UpdateVehicleStatus(selectedVehicle.VehicleID, 3);
+                        _vehicleRepository.UpdateVehicleStatus(selectedVehicle.VehicleID, 5);
                     }
                 }
 
                 if (rentalId > 0)
                 {
-                    // If there's a deposit, create a payment record
                     if (depositAmount.HasValue && depositAmount.Value > 0)
                     {
                         Payment depositPayment = new Payment
@@ -631,10 +856,9 @@ namespace car_rental_sales_desktop.Forms.Controls
                     lblProgressWarning.Text = "Rental successfully created!";
                     lblProgressWarning.ForeColor = Color.Green;
 
-                    // Refresh the data grids
                     LoadRentals();
+                    LoadVehiclesForAutoComplete();
 
-                    // Clear the form for new entry
                     ClearForm();
                 }
                 else
@@ -668,7 +892,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             lblProgressWarning.ForeColor = Color.Blue;
         }
 
-        // Handle double-click on a rental in the grid
         private void SfDataGridLastRentals_CellDoubleClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
         {
             if (e.DataRow.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
@@ -682,12 +905,10 @@ namespace car_rental_sales_desktop.Forms.Controls
             LoadSelectedRental();
         }
 
-        // Method to load the selected rental data into the form
         private void LoadSelectedRental()
         {
             try
             {
-                // Get the selected rental from the grid
                 Rental selectedRental = sfDataGridLastRentals.SelectedItem as Rental;
 
                 if (selectedRental == null)
@@ -696,17 +917,14 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Clear existing form data
                 ClearForm();
 
-                // Load customer information
                 if (selectedRental.Customer != null)
                 {
                     LoadCustomerInfo(selectedRental.Customer);
                 }
                 else if (selectedRental.RentalCustomerID > 0)
                 {
-                    // If the customer object isn't loaded, try to fetch it
                     Customer customer = _customerRepository.GetById(selectedRental.RentalCustomerID);
                     if (customer != null)
                     {
@@ -714,14 +932,12 @@ namespace car_rental_sales_desktop.Forms.Controls
                     }
                 }
 
-                // Load vehicle information
                 if (selectedRental.Vehicle != null)
                 {
                     LoadVehicleInfo(selectedRental.Vehicle);
                 }
                 else if (selectedRental.RentalVehicleID > 0)
                 {
-                    // If the vehicle object isn't loaded, try to fetch it
                     Vehicle vehicle = _vehicleRepository.GetById(selectedRental.RentalVehicleID);
                     if (vehicle != null)
                     {
@@ -729,24 +945,19 @@ namespace car_rental_sales_desktop.Forms.Controls
                     }
                 }
 
-                // *** FIX: Temporarily remove min/max date constraints ***
                 DateTime originalMinDateStart = dtpRentalStartDate.MinDate;
                 DateTime originalMinDateEnd = dtpRentalEndDate.MinDate;
 
                 try
                 {
-                    // Reset the MinDate to the minimum possible value
                     dtpRentalStartDate.MinDate = DateTimePicker.MinimumDateTime;
                     dtpRentalEndDate.MinDate = DateTimePicker.MinimumDateTime;
 
-                    // Load rental specific information
                     dtpRentalStartDate.Value = selectedRental.RentalStartDate;
                     dtpRentalEndDate.Value = selectedRental.RentalEndDate;
                 }
                 finally
                 {
-                    // Restore original constraints for new entries
-                    // Only if we're not in view mode
                     if (!selectedRental.RentalReturnDate.HasValue)
                     {
                         dtpRentalStartDate.MinDate = originalMinDateStart;
@@ -769,24 +980,20 @@ namespace car_rental_sales_desktop.Forms.Controls
                     txtBoxRentalDeposit.Text = selectedRental.RentalDepositAmount.Value.ToString("N2") + " ₺";
                 }
 
-                // Load the rental note
                 if (selectedRental.RentalID > 0)
                 {
-                    // Get all notes for this rental
                     List<RentalNote> notes = _rentalRepository.GetNotes(selectedRental.RentalID);
                     if (notes != null && notes.Count > 0)
                     {
-                        // Use the first note for display (or concatenate all notes if needed)
                         txtBoxRentalNote.Text = notes[0].RentalNoteText;
                     }
                 }
 
-                // Make the form read-only since this is an existing rental
                 SetFormReadOnly(true);
 
-                // Display success message
-                lblProgressWarning.Text = "Kiralama bilgileri başarıyla yüklendi.";
-                lblProgressWarning.ForeColor = Color.Green;
+                RentalStatus status = GetRentalStatus(selectedRental);
+                lblProgressWarning.Text = $"Kiralama Durumu: {GetStatusDescription(status)}";
+                lblProgressWarning.ForeColor = GetStatusTextColor(status);
             }
             catch (Exception ex)
             {
@@ -795,17 +1002,30 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
+        private Color GetStatusTextColor(RentalStatus status)
+        {
+            switch (status)
+            {
+                case RentalStatus.Active:
+                    return Color.Blue;
+                case RentalStatus.CompletedOnTime:
+                    return Color.Green;
+                case RentalStatus.CompletedLate:
+                    return Color.Orange;
+                case RentalStatus.Overdue:
+                    return Color.Red;
+                default:
+                    return Color.Black;
+            }
+        }
 
-        // Method to set form fields as read-only when viewing an existing rental
         private void SetFormReadOnly(bool isReadOnly)
         {
-            // Disable date pickers and text inputs for editing
             dtpRentalStartDate.Enabled = !isReadOnly;
             dtpRentalEndDate.Enabled = !isReadOnly;
-            txtBoxRentalPaymentType.ReadOnly = true; // Always read-only
-            txtBoxRentalNote.ReadOnly = true; // Always read-only
+            txtBoxRentalPaymentType.ReadOnly = true;
+            txtBoxRentalNote.ReadOnly = true;
 
-            // Hide or disable the add rental button when viewing
             btnAddRental.Enabled = !isReadOnly;
 
             if (isReadOnly)
@@ -820,7 +1040,6 @@ namespace car_rental_sales_desktop.Forms.Controls
 
         private void btnRentalOperations_Click(object sender, EventArgs e)
         {
-            // Check for a selected rental
             Rental selectedRental = sfDataGridLastRentals.SelectedItem as Rental;
 
             if (selectedRental == null)
@@ -829,16 +1048,18 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
-            // Open the rental operations form
-            using (var operationsForm = new Forms.RentalOperationsForm(selectedRental.RentalID))
-            {
-                DialogResult result = operationsForm.ShowDialog();
+            RentalOperationsForm operationsForm = new Forms.RentalOperationsForm(selectedRental.RentalID);
 
-                // If the form closed with OK (successful operation), refresh the rentals list
-                if (result == DialogResult.OK)
-                {
-                    LoadRentals();
-                }
+            DialogResult result = operationsForm.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                LoadRentals();
+                LoadVehiclesForAutoComplete();
+                LoadCustomersForAutoComplete();
+
+                lblProgressWarning.Text = "Rental operations completed. Data refreshed.";
+                lblProgressWarning.ForeColor = Color.Blue;
             }
         }
     }
