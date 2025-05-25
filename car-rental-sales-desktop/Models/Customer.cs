@@ -23,13 +23,12 @@ namespace car_rental_sales_desktop.Models
 
         // Navigation properties
         public virtual ICollection<Rental> Rentals { get; set; }
-        public virtual ICollection<Sale> Sales { get; set; }
+
         public virtual ICollection<Payment> Payments { get; set; }
 
         public Customer()
         {
             Rentals = new HashSet<Rental>();
-            Sales = new HashSet<Sale>();
             Payments = new HashSet<Payment>();
             CustomerRegistrationDate = DateTime.Now;
             CustomerAvailable = true;

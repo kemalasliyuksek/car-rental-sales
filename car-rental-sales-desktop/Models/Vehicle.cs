@@ -30,13 +30,11 @@ namespace car_rental_sales_desktop.Models
         public virtual Branch Branch { get; set; }
         public virtual VehicleClass VehicleClass { get; set; }
         public virtual ICollection<Rental> Rentals { get; set; }
-        public virtual ICollection<Sale> Sales { get; set; }
         public virtual ICollection<Maintenance> Maintenances { get; set; }
 
         public Vehicle()
         {
             Rentals = new HashSet<Rental>();
-            Sales = new HashSet<Sale>();
             Maintenances = new HashSet<Maintenance>();
             VehicleMileage = 0;
             VehicleCreatedAt = DateTime.Now;

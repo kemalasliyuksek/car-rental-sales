@@ -13,7 +13,6 @@
             btnReports = new FontAwesome.Sharp.IconButton();
             btnStaff = new FontAwesome.Sharp.IconButton();
             btnBranches = new FontAwesome.Sharp.IconButton();
-            btnSales = new FontAwesome.Sharp.IconButton();
             btnRentals = new FontAwesome.Sharp.IconButton();
             btnVehicles = new FontAwesome.Sharp.IconButton();
             btnCustomers = new FontAwesome.Sharp.IconButton();
@@ -46,7 +45,6 @@
             pnlSideMenu.Controls.Add(btnReports);
             pnlSideMenu.Controls.Add(btnStaff);
             pnlSideMenu.Controls.Add(btnBranches);
-            pnlSideMenu.Controls.Add(btnSales);
             pnlSideMenu.Controls.Add(btnRentals);
             pnlSideMenu.Controls.Add(btnVehicles);
             pnlSideMenu.Controls.Add(btnCustomers);
@@ -178,30 +176,7 @@
             btnBranches.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnBranches.UseVisualStyleBackColor = true;
             btnBranches.Click += btnBranches_Click;
-            // 
-            // btnSales
-            // 
-            btnSales.Cursor = Cursors.Hand;
-            btnSales.Dock = DockStyle.Top;
-            btnSales.FlatAppearance.BorderSize = 0;
-            btnSales.FlatStyle = FlatStyle.Flat;
-            btnSales.Font = new Font("Segoe UI", 11F);
-            btnSales.ForeColor = Color.White;
-            btnSales.IconChar = FontAwesome.Sharp.IconChar.Tags;
-            btnSales.IconColor = Color.White;
-            btnSales.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnSales.IconSize = 32;
-            btnSales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSales.Location = new Point(0, 370);
-            btnSales.Name = "btnSales";
-            btnSales.Padding = new Padding(20, 0, 0, 0);
-            btnSales.Size = new Size(250, 50);
-            btnSales.TabIndex = 5;
-            btnSales.Text = "  Sales";
-            btnSales.TextAlign = ContentAlignment.MiddleLeft;
-            btnSales.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnSales.UseVisualStyleBackColor = true;
-            btnSales.Click += btnSales_Click;
+       
             // 
             // btnRentals
             // 
@@ -491,7 +466,6 @@
         private FontAwesome.Sharp.IconButton btnCustomers;
         private FontAwesome.Sharp.IconButton btnVehicles;
         private FontAwesome.Sharp.IconButton btnRentals;
-        private FontAwesome.Sharp.IconButton btnSales;
         private FontAwesome.Sharp.IconButton btnBranches;
         private FontAwesome.Sharp.IconButton btnStaff;
         private FontAwesome.Sharp.IconButton btnReports;

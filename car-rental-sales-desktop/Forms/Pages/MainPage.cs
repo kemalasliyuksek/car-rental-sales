@@ -132,18 +132,6 @@ namespace car_rental_sales_desktop.Forms.Pages
             pnlContent.Controls.Add(rentalsControl);
         }
 
-        // Sales UserControl
-        private void btnSales_Click(object sender, EventArgs e)
-        {
-            ResetButtons();
-            SetActiveButton(sender);
-
-            pnlContent.Controls.Clear();
-            var salesControl = new SalesControl();
-            salesControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(salesControl);
-        }
-
         // Branches UserControl
         private void btnBranches_Click(object sender, EventArgs e)
         {

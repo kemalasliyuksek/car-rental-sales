@@ -9,7 +9,6 @@ namespace car_rental_sales_desktop.Forms.Controls
     {
         private ReportRepository _reportRepository;
         private RentalRepository _rentalRepository;
-        private SaleRepository _saleRepository;
         private VehicleRepository _vehicleRepository;
 
         public DashboardControl()
@@ -18,7 +17,6 @@ namespace car_rental_sales_desktop.Forms.Controls
 
             _reportRepository = new ReportRepository();
             _rentalRepository = new RentalRepository();
-            _saleRepository = new SaleRepository();
             _vehicleRepository = new VehicleRepository();
         }
 
@@ -43,16 +41,11 @@ namespace car_rental_sales_desktop.Forms.Controls
 
                 lblActiveRentalsCount.Text = row["ActiveRentals"].ToString();
 
-                lblMonthlyRentalsCount.Text = row["RecentSales"].ToString();
-
                 lblCanceledRentalsCount.Text = row["OverdueRentals"].ToString();
             }
 
             int totalRentalsCount = GetTotalRentalsCount();
             lblTotalRentalsCount.Text = totalRentalsCount.ToString();
-
-            int totalSalesCount = GetTotalSalesCount();
-            lblTotalSalesCount.Text = totalSalesCount.ToString();
         }
 
         private int GetTotalRentalsCount()
@@ -60,20 +53,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             try
             {
                 string query = "SELECT COUNT(*) FROM Rentals";
-                object result = Utils.DatabaseHelper.ExecuteScalar(query);
-                return Convert.ToInt32(result);
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-
-        private int GetTotalSalesCount()
-        {
-            try
-            {
-                string query = "SELECT COUNT(*) FROM Sales";
                 object result = Utils.DatabaseHelper.ExecuteScalar(query);
                 return Convert.ToInt32(result);
             }

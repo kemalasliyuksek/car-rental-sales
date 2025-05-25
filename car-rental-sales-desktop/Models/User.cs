@@ -24,7 +24,6 @@ namespace car_rental_sales_desktop.Models
         public virtual Role Role { get; set; }
         public virtual Branch Branch { get; set; }
         public virtual ICollection<Rental> Rentals { get; set; }
-        public virtual ICollection<Sale> Sales { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
         public virtual ICollection<RentalNote> RentalNotes { get; set; }
         public virtual ICollection<Maintenance> Maintenances { get; set; }
@@ -34,7 +33,6 @@ namespace car_rental_sales_desktop.Models
         public User()
         {
             Rentals = new HashSet<Rental>();
-            Sales = new HashSet<Sale>();
             Payments = new HashSet<Payment>();
             RentalNotes = new HashSet<RentalNote>();
             Maintenances = new HashSet<Maintenance>();
