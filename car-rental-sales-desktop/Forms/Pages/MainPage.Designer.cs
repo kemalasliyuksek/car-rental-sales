@@ -8,6 +8,7 @@
         {
             components = new System.ComponentModel.Container();
             pnlSideMenu = new Panel();
+            btnConfirmations = new FontAwesome.Sharp.IconButton();
             btnSettings = new FontAwesome.Sharp.IconButton();
             btnService = new FontAwesome.Sharp.IconButton();
             btnReports = new FontAwesome.Sharp.IconButton();
@@ -41,6 +42,7 @@
             // 
             pnlSideMenu.BackColor = Color.FromArgb(49, 76, 143);
             pnlSideMenu.Controls.Add(btnSettings);
+            pnlSideMenu.Controls.Add(btnConfirmations);
             pnlSideMenu.Controls.Add(btnService);
             pnlSideMenu.Controls.Add(btnReports);
             pnlSideMenu.Controls.Add(btnStaff);
@@ -56,6 +58,30 @@
             pnlSideMenu.Name = "pnlSideMenu";
             pnlSideMenu.Size = new Size(250, 800);
             pnlSideMenu.TabIndex = 0;
+            // 
+            // btnConfirmations
+            // 
+            btnConfirmations.Cursor = Cursors.Hand;
+            btnConfirmations.Dock = DockStyle.Top;
+            btnConfirmations.FlatAppearance.BorderSize = 0;
+            btnConfirmations.FlatStyle = FlatStyle.Flat;
+            btnConfirmations.Font = new Font("Segoe UI", 11F);
+            btnConfirmations.ForeColor = Color.White;
+            btnConfirmations.IconChar = FontAwesome.Sharp.IconChar.CheckCircle;
+            btnConfirmations.IconColor = Color.White;
+            btnConfirmations.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnConfirmations.IconSize = 32;
+            btnConfirmations.ImageAlign = ContentAlignment.MiddleLeft;
+            btnConfirmations.Location = new Point(0, 570);
+            btnConfirmations.Name = "btnConfirmations";
+            btnConfirmations.Padding = new Padding(20, 0, 0, 0);
+            btnConfirmations.Size = new Size(250, 50);
+            btnConfirmations.TabIndex = 5;
+            btnConfirmations.Text = "  Confirmations";
+            btnConfirmations.TextAlign = ContentAlignment.MiddleLeft;
+            btnConfirmations.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnConfirmations.UseVisualStyleBackColor = true;
+            btnConfirmations.Click += btnConfirmations_Click;
             // 
             // btnSettings
             // 
@@ -94,7 +120,7 @@
             btnService.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnService.IconSize = 32;
             btnService.ImageAlign = ContentAlignment.MiddleLeft;
-            btnService.Location = new Point(0, 570);
+            btnService.Location = new Point(0, 520);
             btnService.Name = "btnService";
             btnService.Padding = new Padding(20, 0, 0, 0);
             btnService.Size = new Size(250, 50);
@@ -118,7 +144,7 @@
             btnReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnReports.IconSize = 32;
             btnReports.ImageAlign = ContentAlignment.MiddleLeft;
-            btnReports.Location = new Point(0, 520);
+            btnReports.Location = new Point(0, 470);
             btnReports.Name = "btnReports";
             btnReports.Padding = new Padding(20, 0, 0, 0);
             btnReports.Size = new Size(250, 50);
@@ -142,7 +168,7 @@
             btnStaff.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnStaff.IconSize = 32;
             btnStaff.ImageAlign = ContentAlignment.MiddleLeft;
-            btnStaff.Location = new Point(0, 470);
+            btnStaff.Location = new Point(0, 420);
             btnStaff.Name = "btnStaff";
             btnStaff.Padding = new Padding(20, 0, 0, 0);
             btnStaff.Size = new Size(250, 50);
@@ -166,7 +192,7 @@
             btnBranches.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnBranches.IconSize = 32;
             btnBranches.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBranches.Location = new Point(0, 420);
+            btnBranches.Location = new Point(0, 370);
             btnBranches.Name = "btnBranches";
             btnBranches.Padding = new Padding(20, 0, 0, 0);
             btnBranches.Size = new Size(250, 50);
@@ -176,7 +202,6 @@
             btnBranches.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnBranches.UseVisualStyleBackColor = true;
             btnBranches.Click += btnBranches_Click;
-       
             // 
             // btnRentals
             // 
@@ -466,6 +491,7 @@
         private FontAwesome.Sharp.IconButton btnCustomers;
         private FontAwesome.Sharp.IconButton btnVehicles;
         private FontAwesome.Sharp.IconButton btnRentals;
+        private FontAwesome.Sharp.IconButton btnConfirmations; // Declaration moved here
         private FontAwesome.Sharp.IconButton btnBranches;
         private FontAwesome.Sharp.IconButton btnStaff;
         private FontAwesome.Sharp.IconButton btnReports;

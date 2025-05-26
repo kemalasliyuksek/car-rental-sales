@@ -13,183 +13,201 @@ namespace car_rental_sales_desktop.Forms.Pages
 {
     public partial class MainPage : Form
     {
+        // Ana sayfa formu oluşturulduğunda çalışan yapıcı metot.
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent(); // Formun bileşenlerini başlatan metot.
         }
 
+        // Ana sayfa formu yüklendiğinde çalışan metot.
         private void MainPage_Load(object sender, EventArgs e)
         {
-            lblUsername.Text = Utils.CurrentUser.FullName;
-            lblUserRole.Text = Utils.CurrentUser.RoleName;
-            lblBranchName.Text = Utils.CurrentUser.BranchName;
+            // Kullanıcı bilgilerini ilgili etiketlere atar.
+            lblUsername.Text = Utils.CurrentUser.FullName; // Kullanıcının tam adını gösterir.
+            lblUserRole.Text = Utils.CurrentUser.RoleName; // Kullanıcının rolünü gösterir.
+            lblBranchName.Text = Utils.CurrentUser.BranchName; // Kullanıcının şube adını gösterir.
 
-            ResetButtons();
-            SetActiveButton(btnMainPage);
+            ResetButtons(); // Yan menüdeki butonların görünümünü sıfırlar.
+            SetActiveButton(btnMainPage); // Ana sayfa butonunu aktif olarak ayarlar.
 
-            pnlContent.Controls.Clear();
-            var mainPageControl = new MainPageControl();
-            mainPageControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(mainPageControl);
+            pnlContent.Controls.Clear(); // İçerik panelindeki mevcut kontrolleri temizler.
+            var mainPageControl = new MainPageControl(); // Ana sayfa için kullanıcı kontrolü oluşturur.
+            mainPageControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(mainPageControl); // Kontrolü içerik paneline ekler.
         }
 
+        // Oturumu kapatma butonuna tıklandığında çalışan metot.
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            // Kullanıcıya oturumu kapatmak isteyip istemediğini sorar.
             var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            if (result == DialogResult.Yes) // Eğer kullanıcı "Evet" derse:
             {
-                Utils.CurrentUser.Logout();
-                this.Close();
-                LoginPage loginPage = new LoginPage();
-                loginPage.Show();
+                Utils.CurrentUser.Logout(); // Mevcut kullanıcının oturumunu kapatır.
+                this.Close(); // Ana sayfa formunu kapatır.
+                LoginPage loginPage = new LoginPage(); // Yeni bir giriş sayfası oluşturur.
+                loginPage.Show(); // Giriş sayfasını gösterir.
             }
         }
 
+        // Yan menüdeki tüm butonların görünümünü varsayılan durumuna sıfırlayan metot.
         private void ResetButtons()
         {
-            foreach (Control control in pnlSideMenu.Controls)
+            foreach (Control control in pnlSideMenu.Controls) // Yan menüdeki her bir kontrol için döngü başlatır.
             {
-                if (control is FontAwesome.Sharp.IconButton)
+                if (control is FontAwesome.Sharp.IconButton) // Eğer kontrol bir IconButton ise:
                 {
-                    control.BackColor = Color.FromArgb(49, 76, 143);
-                    control.ForeColor = Color.White;
+                    control.BackColor = Color.FromArgb(49, 76, 143); // Butonun arka plan rengini ayarlar.
+                    control.ForeColor = Color.White; // Butonun yazı rengini ayarlar.
                 }
             }
         }
 
+        // Tıklanan butonu aktif olarak işaretleyen ve sayfa başlığını güncelleyen metot.
         private void SetActiveButton(object button)
         {
-            if (button != null)
+            if (button != null) // Eğer buton nesnesi boş değilse:
             {
+                // Aktif butonun arka plan ve yazı rengini ayarlar.
                 ((FontAwesome.Sharp.IconButton)button).BackColor = Color.FromArgb(73, 113, 194);
-
                 ((FontAwesome.Sharp.IconButton)button).ForeColor = Color.White;
 
+                // Mevcut sayfanın ikonunu ve başlığını aktif butonun ikonuna ve metnine göre günceller.
                 iconCurrentPage.IconChar = ((FontAwesome.Sharp.IconButton)button).IconChar;
                 lblPageTitle.Text = ((FontAwesome.Sharp.IconButton)button).Text.Trim();
             }
         }
 
-
-        // MainPage UserControl
+        // Ana Sayfa butonuna tıklandığında çalışan metot.
         private void btnMainPage_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var mainPageControl = new MainPageControl();
-            mainPageControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(mainPageControl);
-
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var mainPageControl = new MainPageControl(); // Ana sayfa kontrolünü oluşturur.
+            mainPageControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(mainPageControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Dashboard UserControl
+        // Gösterge Paneli butonuna tıklandığında çalışan metot.
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var dashboardControl = new DashboardControl();
-            dashboardControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(dashboardControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var dashboardControl = new DashboardControl(); // Gösterge paneli kontrolünü oluşturur.
+            dashboardControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(dashboardControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Customers UserControl
+        // Müşteriler butonuna tıklandığında çalışan metot.
         private void btnCustomers_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var customersControl = new CustomersControl();
-            customersControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(customersControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var customersControl = new CustomersControl(); // Müşteriler kontrolünü oluşturur.
+            customersControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(customersControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Vehicles UserControl
+        // Araçlar butonuna tıklandığında çalışan metot.
         private void btnVehicles_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var vehiclesControl = new VehiclesControl();
-            vehiclesControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(vehiclesControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var vehiclesControl = new VehiclesControl(); // Araçlar kontrolünü oluşturur.
+            vehiclesControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(vehiclesControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Rentals UserControl
+        // Kiralamalar butonuna tıklandığında çalışan metot.
         private void btnRentals_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var rentalsControl = new RentalsControl();
-            rentalsControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(rentalsControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var rentalsControl = new RentalsControl(); // Kiralamalar kontrolünü oluşturur.
+            rentalsControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(rentalsControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Branches UserControl
+        // Şubeler butonuna tıklandığında çalışan metot.
         private void btnBranches_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var branchesControl = new BranchesControl();
-            branchesControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(branchesControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var branchesControl = new BranchesControl(); // Şubeler kontrolünü oluşturur.
+            branchesControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(branchesControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Staff UserControl
+        // Onaylar butonuna tıklandığında çalışan metot.
+        private void btnConfirmations_Click(object sender, EventArgs e)
+        {
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
+
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var confirmationsControl = new ConfirmationsControl(); // Onaylar kontrolünü oluşturur.
+            confirmationsControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(confirmationsControl); // Kontrolü içerik paneline ekler.
+        }
+
+        // Personel butonuna tıklandığında çalışan metot.
         private void btnStaff_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var staffControl = new StaffControl();
-            staffControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(staffControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var staffControl = new StaffControl(); // Personel kontrolünü oluşturur.
+            staffControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(staffControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Reports UserControl
+        // Raporlar butonuna tıklandığında çalışan metot.
         private void btnReports_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var reportsControl = new ReportsControl();
-            reportsControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(reportsControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var reportsControl = new ReportsControl(); // Raporlar kontrolünü oluşturur.
+            reportsControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(reportsControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Service UserControl
+        // Servis butonuna tıklandığında çalışan metot.
         private void btnService_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var serviceControl = new ServiceControl();
-            serviceControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(serviceControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var serviceControl = new ServiceControl(); // Servis kontrolünü oluşturur.
+            serviceControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(serviceControl); // Kontrolü içerik paneline ekler.
         }
 
-        // Settings UserControl
+        // Ayarlar butonuna tıklandığında çalışan metot.
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            ResetButtons();
-            SetActiveButton(sender);
+            ResetButtons(); // Butonları sıfırlar.
+            SetActiveButton(sender); // Tıklanan butonu aktif yapar.
 
-            pnlContent.Controls.Clear();
-            var settingsControl = new SettingsControl();
-            settingsControl.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(settingsControl);
+            pnlContent.Controls.Clear(); // İçerik panelini temizler.
+            var settingsControl = new SettingsControl(); // Ayarlar kontrolünü oluşturur.
+            settingsControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
+            pnlContent.Controls.Add(settingsControl); // Kontrolü içerik paneline ekler.
         }
     }
 }

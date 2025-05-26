@@ -26,6 +26,8 @@ namespace car_rental_sales_desktop.Forms.Controls
         private bool _isEditMode = false;
         private int _editingVehicleId = 0;
 
+        // Bu, VehiclesControl sınıfının yapıcı metodudur.
+        // Gerekli repository nesnelerini başlatır ve Load olayına bir olay dinleyici ekler.
         public VehiclesControl()
         {
             InitializeComponent();
@@ -36,6 +38,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             this.Load += VehiclesControl_Load;
         }
 
+        // Bu metot, kontrol yüklendiğinde çağrılır.
+        // Araçları, şubeleri, araç sınıflarını, araç durumlarını yükler ve ComboBox'ları ayarlar.
         private void VehiclesControl_Load(object sender, EventArgs e)
         {
             LoadVehicles();
@@ -46,8 +50,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             SetupTransmissionTypeComboBox();
         }
 
-        // TR: Bu metot, araç verilerini yüklemek için kullanılır.
-        // EN: This method is used to load vehicle data.
+        // Bu metot, araç verilerini veritabanından yükler ve DataGrid'e bağlar.
+        // Hata oluşursa kullanıcıya bir mesaj gösterir.
         private void LoadVehicles()
         {
             try
@@ -62,15 +66,14 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, şubeleri combobox'a yükler.
-        // EN: This method loads branches into the combobox.
+        // Bu metot, aktif şubeleri veritabanından yükler ve şube ComboBox'ını doldurur.
+        // "Atanmamış" seçeneğini de ComboBox'a ekler.
         private void LoadBranches()
         {
             try
             {
                 _branchList = _branchRepository.GetActiveBranches();
 
-                // Add "Not Assigned" option
                 var branchesWithEmpty = new List<Branch>
                 {
                     new Branch { BranchID = 0, BranchName = "Not Assigned" }
@@ -88,15 +91,14 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, araç sınıflarını combobox'a yükler.
-        // EN: This method loads vehicle classes into the combobox.
+        // Bu metot, araç sınıflarını veritabanından yükler ve araç sınıfı ComboBox'ını doldurur.
+        // "Atanmamış" seçeneğini de ComboBox'a ekler.
         private void LoadVehicleClasses()
         {
             try
             {
                 _vehicleClassList = _vehicleClassRepository.GetAll();
 
-                // Add "Not Assigned" option
                 var classesWithEmpty = new List<VehicleClass>
                 {
                     new VehicleClass { VehicleClassID = 0, VehicleClassName = "Not Assigned" }
@@ -114,13 +116,11 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, araç durumlarını combobox'a yükler.
-        // EN: This method loads vehicle statuses into the combobox.
+        // Bu metot, araç durumlarını (statik bir listeden) yükler ve araç durumu ComboBox'ını doldurur.
         private void LoadVehicleStatuses()
         {
             try
             {
-                // Statik liste kullanarak (VehicleStatusHelper'dan)
                 _vehicleStatusList = new List<VehicleStatus>
                 {
                     new VehicleStatus { VehicleStatusID = 1, VehicleStatusName = "Available" },
@@ -146,26 +146,26 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, yakıt tipi combobox'ını ayarlar.
-        // EN: This method sets up the fuel type combobox.
+        // Bu metot, yakıt tipi ComboBox'ını önceden tanımlanmış değerlerle ayarlar.
+        // Varsayılan olarak "Gasoline" seçilir.
         private void SetupFuelTypeComboBox()
         {
             cmbFuelType.Items.Clear();
             cmbFuelType.Items.AddRange(new string[] { "Gasoline", "Diesel", "Electric", "Hybrid", "Petrol" });
-            cmbFuelType.SelectedIndex = 0; // Default to Gasoline
+            cmbFuelType.SelectedIndex = 0;
         }
 
-        // TR: Bu metot, şanzıman tipi combobox'ını ayarlar.
-        // EN: This method sets up the transmission type combobox.
+        // Bu metot, şanzıman tipi ComboBox'ını önceden tanımlanmış değerlerle ayarlar.
+        // Varsayılan olarak "Manual" seçilir.
         private void SetupTransmissionTypeComboBox()
         {
             cmbTransmissionType.Items.Clear();
             cmbTransmissionType.Items.AddRange(new string[] { "Manual", "Automatic" });
-            cmbTransmissionType.SelectedIndex = 0; // Default to Manual
+            cmbTransmissionType.SelectedIndex = 0;
         }
 
-        // TR: Bu metot, seçili aracı döndürür.
-        // EN: This method returns the selected vehicle.
+        // Bu metot, DataGrid'de seçili olan aracı döndürür.
+        // Seçili bir araç yoksa veya bir hata oluşursa null döndürür.
         private Vehicle GetSelectedVehicle()
         {
             try
@@ -184,8 +184,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Bu metot, form alanlarını temizler.
-        // EN: This method clears the form fields.
+        // Bu metot, araç ekleme/düzenleme formundaki tüm alanları temizler.
+        // Ayrıca düzenleme modunu sıfırlar ve form başlığını/buton metnini günceller.
         private void ClearForm()
         {
             txtPlateNumber.Text = "";
@@ -202,8 +202,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             dtpAcquisitionDate.Checked = false;
             numPurchasePrice.Value = 0;
             numSalePrice.Value = 0;
-            cmbBranch.SelectedIndex = 0; // "Not Assigned"
-            cmbVehicleClass.SelectedIndex = 0; // "Not Assigned"
+            cmbBranch.SelectedIndex = 0;
+            cmbVehicleClass.SelectedIndex = 0;
 
             _isEditMode = false;
             _editingVehicleId = 0;
@@ -211,8 +211,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             btnSaveVehicle.Text = "Save Vehicle";
         }
 
-        // TR: Bu metot, seçili aracın bilgilerini forma doldurur.
-        // EN: This method fills the form with the selected vehicle's information.
+        // Bu metot, seçilen bir aracın bilgilerini araç ekleme/düzenleme formuna doldurur.
+        // Formu düzenleme moduna geçirir ve ilgili alanları günceller.
         private void FillFormWithVehicle(Vehicle vehicle)
         {
             if (vehicle == null) return;
@@ -228,24 +228,20 @@ namespace car_rental_sales_desktop.Forms.Controls
             numPurchasePrice.Value = vehicle.VehiclePurchasePrice ?? 0;
             numSalePrice.Value = vehicle.VehicleSalePrice ?? 0;
 
-            // Set fuel type
             if (!string.IsNullOrEmpty(vehicle.VehicleFuelType))
             {
                 int fuelIndex = cmbFuelType.Items.IndexOf(vehicle.VehicleFuelType);
                 cmbFuelType.SelectedIndex = fuelIndex >= 0 ? fuelIndex : 0;
             }
 
-            // Set transmission type
             if (!string.IsNullOrEmpty(vehicle.VehicleTransmissionType))
             {
                 int transIndex = cmbTransmissionType.Items.IndexOf(vehicle.VehicleTransmissionType);
                 cmbTransmissionType.SelectedIndex = transIndex >= 0 ? transIndex : 0;
             }
 
-            // Set vehicle status
             cmbVehicleStatus.SelectedValue = vehicle.VehicleStatusID;
 
-            // Set acquisition date
             if (vehicle.VehicleAcquisitionDate.HasValue)
             {
                 dtpAcquisitionDate.Value = vehicle.VehicleAcquisitionDate.Value;
@@ -256,24 +252,22 @@ namespace car_rental_sales_desktop.Forms.Controls
                 dtpAcquisitionDate.Checked = false;
             }
 
-            // Set branch
             if (vehicle.VehicleBranchID.HasValue && vehicle.VehicleBranchID.Value > 0)
             {
                 cmbBranch.SelectedValue = vehicle.VehicleBranchID.Value;
             }
             else
             {
-                cmbBranch.SelectedValue = 0; // "Not Assigned"
+                cmbBranch.SelectedValue = 0;
             }
 
-            // Set vehicle class
             if (vehicle.VehicleClassID.HasValue && vehicle.VehicleClassID.Value > 0)
             {
                 cmbVehicleClass.SelectedValue = vehicle.VehicleClassID.Value;
             }
             else
             {
-                cmbVehicleClass.SelectedValue = 0; // "Not Assigned"
+                cmbVehicleClass.SelectedValue = 0;
             }
 
             _isEditMode = true;
@@ -282,8 +276,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             btnSaveVehicle.Text = "Update Vehicle";
         }
 
-        // TR: Bu metot, veri tablosundaki satırların stilini özelleştirir.
-        // EN: This method customizes the style of the rows in the data table.
+        // Bu metot, DataGrid'deki satırların stilini özelleştirmek için kullanılır.
+        // Çift ve tek satırlara farklı arka plan renkleri atar.
         private void SfDataGridVehicles_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
             if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
@@ -291,12 +285,12 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (e.RowIndex % 2 == 0)
                     e.Style.BackColor = Color.White;
                 else
-                    e.Style.BackColor = Color.FromArgb(240, 245, 255); // Light blue tone
+                    e.Style.BackColor = Color.FromArgb(240, 245, 255);
             }
         }
 
-        // TR: Düzenle butonu tıklama olayı
-        // EN: Edit button click event
+        // "Düzenle" butonu tıklandığında çağrılır.
+        // Seçili aracı alır, formu bu araçla doldurur ve araç ekleme/düzenleme sekmesine geçer.
         private void BtnEditVehicle_Click(object sender, EventArgs e)
         {
             var selectedVehicle = GetSelectedVehicle();
@@ -308,11 +302,12 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
 
             FillFormWithVehicle(selectedVehicle);
-            tabControlVehicles.SelectedIndex = 1; // Switch to Vehicle Add/Edit tab
+            tabControlVehicles.SelectedIndex = 1;
         }
 
-        // TR: Sil butonu tıklama olayı
-        // EN: Delete button click event
+        // "Sil" butonu tıklandığında çağrılır.
+        // Seçili aracı silmeden önce kullanıcıdan onay alır.
+        // Silme işlemi başarılı olursa araç listesini yeniler.
         private void BtnDeleteVehicle_Click(object sender, EventArgs e)
         {
             var selectedVehicle = GetSelectedVehicle();
@@ -340,7 +335,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                     {
                         MessageBox.Show("Araç başarıyla silindi.",
                             "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadVehicles(); // Refresh the list
+                        LoadVehicles();
                     }
                     else
                     {
@@ -356,8 +351,9 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Durum değiştir butonu tıklama olayı
-        // EN: Toggle status button click event
+        // "Durum Değiştir" butonu tıklandığında çağrılır.
+        // Seçili aracın durumunu "Available" (Mevcut) ve "Maintenance" (Bakımda) arasında değiştirir.
+        // İşlem öncesi kullanıcıdan onay alır.
         private void BtnToggleVehicleStatus_Click(object sender, EventArgs e)
         {
             var selectedVehicle = GetSelectedVehicle();
@@ -368,7 +364,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
-            // Toggle between Available (1) and Maintenance (10)
             int newStatusId = selectedVehicle.VehicleStatusID == 1 ? 10 : 1;
             string newStatusName = newStatusId == 1 ? "Available" : "Maintenance";
 
@@ -387,7 +382,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                     {
                         MessageBox.Show($"Araç durumu başarıyla '{newStatusName}' olarak değiştirildi.",
                             "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadVehicles(); // Refresh the list
+                        LoadVehicles();
                     }
                     else
                     {
@@ -403,8 +398,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: Yenile butonu tıklama olayı
-        // EN: Refresh button click event
+        // "Yenile" butonu tıklandığında çağrılır.
+        // Araç listesini yeniden yükler ve kullanıcıya bilgi mesajı gösterir.
         private void BtnRefreshVehicles_Click(object sender, EventArgs e)
         {
             LoadVehicles();
@@ -412,13 +407,13 @@ namespace car_rental_sales_desktop.Forms.Controls
                 "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // TR: Kaydet butonu tıklama olayı
-        // EN: Save button click event
+        // "Kaydet" butonu tıklandığında çağrılır.
+        // Formdaki verileri doğrular, plaka ve şasi numarasının benzersizliğini kontrol eder.
+        // Yeni bir araç ekler veya mevcut bir aracı günceller.
         private void BtnSaveVehicle_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate required fields
                 if (string.IsNullOrEmpty(txtPlateNumber.Text) ||
                     string.IsNullOrEmpty(txtBrand.Text) ||
                     string.IsNullOrEmpty(txtModel.Text) ||
@@ -432,7 +427,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Check if plate number already exists (for new vehicles or different vehicles)
                 var existingVehicle = _vehicleRepository.GetByPlateNumber(txtPlateNumber.Text);
                 if (existingVehicle != null && (!_isEditMode || existingVehicle.VehicleID != _editingVehicleId))
                 {
@@ -441,7 +435,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Check if chassis number already exists
                 var existingVehicleByChassis = _vehicleRepository.GetByChassisNumber(txtChassisNumber.Text);
                 if (existingVehicleByChassis != null && (!_isEditMode || existingVehicleByChassis.VehicleID != _editingVehicleId))
                 {
@@ -450,7 +443,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Create or update vehicle object
                 Vehicle vehicle;
                 if (_isEditMode)
                 {
@@ -467,7 +459,6 @@ namespace car_rental_sales_desktop.Forms.Controls
                     vehicle = new Vehicle();
                 }
 
-                // Fill vehicle object
                 vehicle.VehiclePlateNumber = txtPlateNumber.Text.Trim();
                 vehicle.VehicleBrand = txtBrand.Text.Trim();
                 vehicle.VehicleModel = txtModel.Text.Trim();
@@ -484,10 +475,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 vehicle.VehicleBranchID = (int)cmbBranch.SelectedValue == 0 ? null : (int?)cmbBranch.SelectedValue;
                 vehicle.VehicleClassID = (int)cmbVehicleClass.SelectedValue == 0 ? null : (int?)cmbVehicleClass.SelectedValue;
 
-                // Set acquisition date
                 vehicle.VehicleAcquisitionDate = dtpAcquisitionDate.Checked ? dtpAcquisitionDate.Value : (DateTime?)null;
 
-                // Save to database
                 bool success;
                 if (_isEditMode)
                 {
@@ -505,8 +494,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     MessageBox.Show(message, "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     ClearForm();
-                    LoadVehicles(); // Refresh the list
-                    tabControlVehicles.SelectedIndex = 0; // Switch to Vehicles List tab
+                    LoadVehicles();
+                    tabControlVehicles.SelectedIndex = 0;
                 }
                 else
                 {
@@ -521,12 +510,12 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
         }
 
-        // TR: İptal butonu tıklama olayı
-        // EN: Cancel button click event
+        // "İptal" butonu tıklandığında çağrılır.
+        // Formu temizler ve araç listesi sekmesine geri döner.
         private void BtnCancelVehicle_Click(object sender, EventArgs e)
         {
             ClearForm();
-            tabControlVehicles.SelectedIndex = 0; // Switch to Vehicles List tab
+            tabControlVehicles.SelectedIndex = 0;
         }
     }
 }

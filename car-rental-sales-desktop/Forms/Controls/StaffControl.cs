@@ -13,214 +13,269 @@ using System.Windows.Forms;
 
 namespace car_rental_sales_desktop.Forms.Controls
 {
+    // Kullanıcı arayüzünde personel yönetimi ile ilgili işlemleri gerçekleştiren kontrolü temsil eder.
     public partial class StaffControl : UserControl
     {
+        // Veritabanındaki kullanıcı (personel) işlemleri için repository.
         private UserRepository _userRepository;
+        // Veritabanındaki rol işlemleri için repository.
         private RoleRepository _roleRepository;
+        // Veritabanındaki şube işlemleri için repository.
         private BranchRepository _branchRepository;
+        // Personel listesini tutar.
         private List<User> _staffList;
+        // Rol listesini tutar.
         private List<Role> _roleList;
+        // Şube listesini tutar.
         private List<Branch> _branchList;
+        // Formun düzenleme modunda olup olmadığını belirtir.
         private bool _isEditMode = false;
+        // Düzenlenen kullanıcının kimliğini tutar.
         private int _editingUserId = 0;
 
+        // StaffControl sınıfının yapıcı metodu.
+        // Gerekli repository nesnelerini başlatır ve Load olayını bağlar.
         public StaffControl()
         {
-            InitializeComponent();
-            _userRepository = new UserRepository();
-            _roleRepository = new RoleRepository();
-            _branchRepository = new BranchRepository();
+            InitializeComponent(); // Form bileşenlerini başlatır.
+            _userRepository = new UserRepository(); // Kullanıcı repository'sini oluşturur.
+            _roleRepository = new RoleRepository(); // Rol repository'sini oluşturur.
+            _branchRepository = new BranchRepository(); // Şube repository'sini oluşturur.
 
+            // Kontrol yüklendiğinde StaffControl_Load metodunu çağırır.
             this.Load += StaffControl_Load;
         }
 
+        // StaffControl yüklendiğinde çağrılan metot.
+        // Personel, rol ve şube verilerini yükler.
         private void StaffControl_Load(object sender, EventArgs e)
         {
-            LoadStaff();
-            LoadRoles();
-            LoadBranches();
+            LoadStaff(); // Personel verilerini yükler.
+            LoadRoles(); // Rol verilerini yükler.
+            LoadBranches(); // Şube verilerini yükler.
         }
 
-        // TR: Bu metot, personel verilerini yükler ve veri tablosuna atar.
-        // EN: This method loads the staff data and assigns it to the data table.
+        // Personel verilerini veritabanından yükler ve DataGrid'e bağlar.
         private void LoadStaff()
         {
             try
             {
+                // Tüm personelleri veritabanından alır.
                 _staffList = _userRepository.GetAll();
 
+                // Her bir personel için rol ve şube bilgilerini yükler.
                 foreach (var user in _staffList)
                 {
                     if (user.UserRoleID > 0)
                     {
+                        // Kullanıcının rolünü ID'sine göre bulur.
                         user.Role = _roleRepository.GetById(user.UserRoleID);
                     }
                     else
                     {
-                        user.Role = new Role { RoleName = "Not Assigned" };
+                        // Rol atanmamışsa varsayılan bir rol nesnesi oluşturur.
+                        user.Role = new Role { RoleName = "Atanmamış" };
                     }
 
                     if (user.UserBranchID.HasValue && user.UserBranchID.Value > 0)
                     {
+                        // Kullanıcının şubesini ID'sine göre bulur.
                         user.Branch = _branchRepository.GetById(user.UserBranchID.Value);
                     }
                     else
                     {
-                        user.Branch = new Branch { BranchName = "Not Assigned" };
+                        // Şube atanmamışsa varsayılan bir şube nesnesi oluşturur.
+                        user.Branch = new Branch { BranchName = "Atanmamış" };
                     }
                 }
 
+                // Personel listesini DataGrid'e veri kaynağı olarak atar.
                 sfDataGridStaff.DataSource = _staffList;
             }
             catch (Exception ex)
             {
+                // Hata durumunda kullanıcıya bilgi mesajı gösterir.
                 MessageBox.Show($"Personel verileri yüklenirken hata oluştu: {ex.Message}",
                     "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // TR: Bu metot, rolleri combobox'a yükler.
-        // EN: This method loads roles into the combobox.
+        // Rolleri veritabanından yükler ve ComboBox'a bağlar.
         private void LoadRoles()
         {
             try
             {
+                // Tüm rolleri veritabanından alır.
                 _roleList = _roleRepository.GetAll();
+                // Rol listesini ComboBox'a veri kaynağı olarak atar.
                 cmbRole.DataSource = _roleList;
+                // ComboBox'ta gösterilecek alan adını belirler (Rol Adı).
                 cmbRole.DisplayMember = "RoleName";
+                // ComboBox'ta değer olarak kullanılacak alan adını belirler (Rol ID).
                 cmbRole.ValueMember = "RoleID";
             }
             catch (Exception ex)
             {
+                // Hata durumunda kullanıcıya bilgi mesajı gösterir.
                 MessageBox.Show($"Rol verileri yüklenirken hata oluştu: {ex.Message}",
                     "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // TR: Bu metot, şubeleri combobox'a yükler.
-        // EN: This method loads branches into the combobox.
+        // Şubeleri veritabanından yükler ve ComboBox'a bağlar.
+        // "Atanmamış" seçeneğini de ekler.
         private void LoadBranches()
         {
             try
             {
+                // Aktif şubeleri veritabanından alır.
                 _branchList = _branchRepository.GetActiveBranches();
 
-                // Add "Not Assigned" option
+                // ComboBox için "Atanmamış" seçeneğini içeren yeni bir liste oluşturur.
                 var branchesWithEmpty = new List<Branch>
                 {
-                    new Branch { BranchID = 0, BranchName = "Not Assigned" }
+                    new Branch { BranchID = 0, BranchName = "Atanmamış" } // Varsayılan "Atanmamış" seçeneği.
                 };
+                // Mevcut şube listesini bu yeni listeye ekler.
                 branchesWithEmpty.AddRange(_branchList);
 
+                // Şube listesini ComboBox'a veri kaynağı olarak atar.
                 cmbBranch.DataSource = branchesWithEmpty;
+                // ComboBox'ta gösterilecek alan adını belirler (Şube Adı).
                 cmbBranch.DisplayMember = "BranchName";
+                // ComboBox'ta değer olarak kullanılacak alan adını belirler (Şube ID).
                 cmbBranch.ValueMember = "BranchID";
             }
             catch (Exception ex)
             {
+                // Hata durumunda kullanıcıya bilgi mesajı gösterir.
                 MessageBox.Show($"Şube verileri yüklenirken hata oluştu: {ex.Message}",
                     "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // TR: Bu metot, seçili kullanıcıyı döndürür.
-        // EN: This method returns the selected user.
+        // DataGrid'de seçili olan personeli döndürür.
         private User GetSelectedUser()
         {
             try
             {
+                // DataGrid'de geçerli bir satır seçilmişse ve bu satır personel listesi sınırları içindeyse,
+                // seçili personeli döndürür.
                 if (sfDataGridStaff.SelectedIndex >= 0 && sfDataGridStaff.SelectedIndex < _staffList.Count)
                 {
                     return _staffList[sfDataGridStaff.SelectedIndex];
                 }
+                // Seçili personel yoksa null döndürür.
                 return null;
             }
             catch (Exception ex)
             {
+                // Hata durumunda kullanıcıya bilgi mesajı gösterir.
                 MessageBox.Show($"Seçili kullanıcı alınırken hata oluştu: {ex.Message}",
                     "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
 
-        // TR: Bu metot, form alanlarını temizler.
-        // EN: This method clears the form fields.
+        // Personel ekleme/düzenleme formundaki alanları temizler.
+        // Formu yeni personel ekleme moduna ayarlar.
         private void ClearForm()
         {
+            // Metin kutularını temizler.
             txtUserFirstName.Text = "";
             txtUserLastName.Text = "";
             txtUsername.Text = "";
             txtUserPassword.Text = "";
             txtUserEmail.Text = "";
             txtUserPhone.Text = "";
+            // Rol ComboBox'ında seçimi kaldırır.
             cmbRole.SelectedIndex = -1;
-            cmbBranch.SelectedIndex = 0; // "Not Assigned"
+            // Şube ComboBox'ını "Atanmamış" olarak ayarlar.
+            cmbBranch.SelectedValue = 0; // "Atanmamış" seçeneğinin ID'si 0 olarak kabul edilir.
+            // Kullanıcı aktif mi kontrol kutusunu işaretler.
             chkUserActive.Checked = true;
 
+            // Düzenleme modunu kapatır.
             _isEditMode = false;
+            // Düzenlenen kullanıcı ID'sini sıfırlar.
             _editingUserId = 0;
-            lblStaffFormTitle.Text = "Add New Staff";
-            btnSaveStaff.Text = "Save Staff";
+            // Form başlığını "Yeni Personel Ekle" olarak ayarlar.
+            lblStaffFormTitle.Text = "Yeni Personel Ekle";
+            // Kaydet butonunun metnini "Personeli Kaydet" olarak ayarlar.
+            btnSaveStaff.Text = "Personeli Kaydet";
         }
 
-        // TR: Bu metot, seçili kullanıcının bilgilerini forma doldurur.
-        // EN: This method fills the form with the selected user's information.
+        // Seçili personelin bilgilerini personel ekleme/düzenleme formundaki alanlara doldurur.
+        // Formu düzenleme moduna ayarlar.
         private void FillFormWithUser(User user)
         {
+            // Eğer kullanıcı nesnesi null ise metottan çıkar.
             if (user == null) return;
 
+            // Kullanıcı bilgilerini ilgili metin kutularına doldurur.
             txtUserFirstName.Text = user.UserFirstName;
             txtUserLastName.Text = user.UserLastName;
             txtUsername.Text = user.Username;
-            txtUserPassword.Text = user.UserPassword;
+            txtUserPassword.Text = user.UserPassword; // Şifre alanı genellikle güvenlik nedeniyle doldurulmaz veya farklı yönetilir.
             txtUserEmail.Text = user.UserEmail;
             txtUserPhone.Text = user.UserPhone;
             chkUserActive.Checked = user.UserActive;
 
-            // Set role
+            // Kullanıcının rolünü ComboBox'ta seçer.
             if (user.UserRoleID > 0)
             {
                 cmbRole.SelectedValue = user.UserRoleID;
             }
             else
             {
+                // Rol atanmamışsa ComboBox'ta seçimi kaldırır.
                 cmbRole.SelectedIndex = -1;
             }
 
-            // Set branch
+            // Kullanıcının şubesini ComboBox'ta seçer.
             if (user.UserBranchID.HasValue && user.UserBranchID.Value > 0)
             {
                 cmbBranch.SelectedValue = user.UserBranchID.Value;
             }
             else
             {
-                cmbBranch.SelectedValue = 0; // "Not Assigned"
+                // Şube atanmamışsa "Atanmamış" seçeneğini seçer.
+                cmbBranch.SelectedValue = 0;
             }
 
+            // Düzenleme modunu açar.
             _isEditMode = true;
+            // Düzenlenen kullanıcı ID'sini ayarlar.
             _editingUserId = user.UserID;
-            lblStaffFormTitle.Text = "Edit Staff";
-            btnSaveStaff.Text = "Update Staff";
+            // Form başlığını "Personeli Düzenle" olarak ayarlar.
+            lblStaffFormTitle.Text = "Personeli Düzenle";
+            // Kaydet butonunun metnini "Personeli Güncelle" olarak ayarlar.
+            btnSaveStaff.Text = "Personeli Güncelle";
         }
 
-        // TR: Bu metot, veri tablosundaki satırların stilini özelleştirir.
-        // EN: This method customizes the style of the rows in the data table.
+        // DataGrid'deki satırların stilini özelleştirmek için kullanılan olay metodu.
+        // Satırları dönüşümlü olarak farklı arka plan renkleriyle boyar.
         private void SfDataGridStaff_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
+            // Sadece veri satırları için stil uygular.
             if (e.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
             {
+                // Çift sıralı satırların arka planını beyaz yapar.
                 if (e.RowIndex % 2 == 0)
                     e.Style.BackColor = Color.White;
+                // Tek sıralı satırların arka planını açık mavi yapar.
                 else
-                    e.Style.BackColor = Color.FromArgb(240, 245, 255); // Açık mavi tonu
+                    e.Style.BackColor = Color.FromArgb(240, 245, 255);
             }
         }
 
-        // TR: Düzenle butonu tıklama olayı
-        // EN: Edit button click event
+        // "Düzenle" butonuna tıklandığında çağrılan olay metodu.
+        // Seçili personelin bilgilerini forma yükler ve düzenleme sekmesine geçer.
         private void BtnEditStaff_Click(object sender, EventArgs e)
         {
+            // DataGrid'den seçili personeli alır.
             var selectedUser = GetSelectedUser();
+            // Eğer personel seçilmemişse uyarı mesajı gösterir ve metottan çıkar.
             if (selectedUser == null)
             {
                 MessageBox.Show("Lütfen düzenlemek için bir personel seçin.",
@@ -228,15 +283,19 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
+            // Seçili personelin bilgilerini forma doldurur.
             FillFormWithUser(selectedUser);
-            tabControlStaff.SelectedIndex = 1; // Switch to Staff Add/Edit tab
+            // Personel Ekle/Düzenle sekmesine geçer (TabControl'deki ikinci sekme).
+            tabControlStaff.SelectedIndex = 1;
         }
 
-        // TR: Sil butonu tıklama olayı
-        // EN: Delete button click event
+        // "Sil" butonuna tıklandığında çağrılan olay metodu.
+        // Seçili personeli silmeden önce onay ister.
         private void BtnDeleteStaff_Click(object sender, EventArgs e)
         {
+            // DataGrid'den seçili personeli alır.
             var selectedUser = GetSelectedUser();
+            // Eğer personel seçilmemişse uyarı mesajı gösterir ve metottan çıkar.
             if (selectedUser == null)
             {
                 MessageBox.Show("Lütfen silmek için bir personel seçin.",
@@ -244,14 +303,15 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
-            // Prevent deleting current user
-            if (selectedUser.UserID == CurrentUser.UserID)
+            // Kullanıcının kendi hesabını silmesini engeller.
+            if (selectedUser.UserID == CurrentUser.UserID) // CurrentUser, o an giriş yapmış kullanıcıyı temsil eder.
             {
                 MessageBox.Show("Kendi hesabınızı silemezsiniz.",
                     "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Silme işlemi için kullanıcıdan onay alır.
             var result = MessageBox.Show(
                 $"'{selectedUser.FullName}' adlı personeli silmek istediğinizden emin misiniz?\n\n" +
                 "Bu işlem geri alınamaz ve personelin tüm verilerini silecektir.",
@@ -259,36 +319,43 @@ namespace car_rental_sales_desktop.Forms.Controls
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
+            // Kullanıcı "Evet" derse silme işlemini gerçekleştirir.
             if (result == DialogResult.Yes)
             {
                 try
                 {
+                    // Personeli veritabanından siler.
                     bool success = _userRepository.Delete(selectedUser.UserID);
                     if (success)
                     {
+                        // Başarılı olursa bilgi mesajı gösterir ve personel listesini yeniler.
                         MessageBox.Show("Personel başarıyla silindi.",
                             "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadStaff(); // Refresh the list
+                        LoadStaff();
                     }
                     else
                     {
+                        // Başarısız olursa hata mesajı gösterir.
                         MessageBox.Show("Personel silinirken bir hata oluştu.",
                             "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
+                    // Hata durumunda kullanıcıya bilgi mesajı gösterir.
                     MessageBox.Show($"Personel silinirken hata oluştu: {ex.Message}",
                         "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        // TR: Durum değiştir butonu tıklama olayı
-        // EN: Toggle status button click event
+        // "Durum Değiştir" butonuna tıklandığında çağrılan olay metodu.
+        // Seçili personelin aktif/pasif durumunu değiştirir.
         private void BtnToggleStatus_Click(object sender, EventArgs e)
         {
+            // DataGrid'den seçili personeli alır.
             var selectedUser = GetSelectedUser();
+            // Eğer personel seçilmemişse uyarı mesajı gösterir ve metottan çıkar.
             if (selectedUser == null)
             {
                 MessageBox.Show("Lütfen durumunu değiştirmek için bir personel seçin.",
@@ -296,7 +363,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
-            // Prevent deactivating current user
+            // Kullanıcının kendi hesabını pasif hale getirmesini engeller.
             if (selectedUser.UserID == CurrentUser.UserID && selectedUser.UserActive)
             {
                 MessageBox.Show("Kendi hesabınızı pasif hale getiremezsiniz.",
@@ -304,69 +371,77 @@ namespace car_rental_sales_desktop.Forms.Controls
                 return;
             }
 
+            // Değiştirilecek durumu belirler (aktif ise pasif, pasif ise aktif).
             string statusText = selectedUser.UserActive ? "pasif" : "aktif";
+            // Durum değiştirme işlemi için kullanıcıdan onay alır.
             var result = MessageBox.Show(
                 $"'{selectedUser.FullName}' adlı personeli {statusText} hale getirmek istediğinizden emin misiniz?",
                 "Durum Değiştirme Onayı",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
+            // Kullanıcı "Evet" derse durum değiştirme işlemini gerçekleştirir.
             if (result == DialogResult.Yes)
             {
                 try
                 {
+                    // Personelin durumunu veritabanında günceller.
                     bool success = _userRepository.SetUserStatus(selectedUser.UserID, !selectedUser.UserActive);
                     if (success)
                     {
+                        // Başarılı olursa bilgi mesajı gösterir ve personel listesini yeniler.
                         MessageBox.Show($"Personel durumu başarıyla {statusText} hale getirildi.",
                             "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadStaff(); // Refresh the list
+                        LoadStaff();
                     }
                     else
                     {
+                        // Başarısız olursa hata mesajı gösterir.
                         MessageBox.Show("Personel durumu değiştirilirken bir hata oluştu.",
                             "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
+                    // Hata durumunda kullanıcıya bilgi mesajı gösterir.
                     MessageBox.Show($"Personel durumu değiştirilirken hata oluştu: {ex.Message}",
                         "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        // TR: Yenile butonu tıklama olayı
-        // EN: Refresh button click event
+        // "Yenile" butonuna tıklandığında çağrılan olay metodu.
+        // Personel listesini yeniden yükler.
         private void BtnRefreshStaff_Click(object sender, EventArgs e)
         {
-            LoadStaff();
+            LoadStaff(); // Personel verilerini yeniden yükler.
             MessageBox.Show("Personel listesi yenilendi.",
                 "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // TR: Kaydet butonu tıklama olayı
-        // EN: Save button click event
+        // "Kaydet" (veya "Güncelle") butonuna tıklandığında çağrılan olay metodu.
+        // Formdaki bilgileri kullanarak yeni personel ekler veya mevcut personeli günceller.
         private void BtnSaveStaff_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate required fields
+                // Gerekli alanların dolu olup olmadığını kontrol eder.
                 if (string.IsNullOrEmpty(txtUserFirstName.Text) ||
                     string.IsNullOrEmpty(txtUserLastName.Text) ||
                     string.IsNullOrEmpty(txtUsername.Text) ||
-                    string.IsNullOrEmpty(txtUserPassword.Text) ||
+                    string.IsNullOrEmpty(txtUserPassword.Text) || // Yeni kullanıcı eklerken veya şifre değiştirilirken şifre zorunludur.
                     string.IsNullOrEmpty(txtUserEmail.Text) ||
                     string.IsNullOrEmpty(txtUserPhone.Text) ||
-                    cmbRole.SelectedValue == null)
+                    cmbRole.SelectedValue == null) // Rol seçimi zorunludur.
                 {
                     MessageBox.Show("Lütfen tüm gerekli alanları doldurun.",
                         "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Check if username already exists (for new users or different users)
-                var existingUser = _userRepository.GetByUsername(txtUsername.Text);
+                // Kullanıcı adının mevcut olup olmadığını kontrol eder.
+                // Yeni kullanıcı eklerken veya farklı bir kullanıcı için kullanıcı adı değiştirilirken bu kontrol yapılır.
+                var existingUser = _userRepository.GetByUsername(txtUsername.Text.Trim());
                 if (existingUser != null && (!_isEditMode || existingUser.UserID != _editingUserId))
                 {
                     MessageBox.Show("Bu kullanıcı adı zaten kullanılmaktadır.",
@@ -374,9 +449,9 @@ namespace car_rental_sales_desktop.Forms.Controls
                     return;
                 }
 
-                // Create or update user object
+                // User nesnesini oluşturur veya günceller.
                 User user;
-                if (_isEditMode)
+                if (_isEditMode) // Düzenleme modundaysa mevcut kullanıcıyı alır.
                 {
                     user = _userRepository.GetById(_editingUserId);
                     if (user == null)
@@ -386,62 +461,66 @@ namespace car_rental_sales_desktop.Forms.Controls
                         return;
                     }
                 }
-                else
+                else // Yeni personel ekleme modundaysa yeni bir User nesnesi oluşturur.
                 {
                     user = new User();
                 }
 
-                // Fill user object
+                // User nesnesinin alanlarını formdaki değerlerle doldurur.
                 user.UserFirstName = txtUserFirstName.Text.Trim();
                 user.UserLastName = txtUserLastName.Text.Trim();
                 user.Username = txtUsername.Text.Trim();
-                user.UserPassword = txtUserPassword.Text;
+                user.UserPassword = txtUserPassword.Text; // Şifre olduğu gibi alınır, hash'leme işlemi repository katmanında yapılabilir.
                 user.UserEmail = txtUserEmail.Text.Trim();
                 user.UserPhone = txtUserPhone.Text.Trim();
                 user.UserRoleID = (int)cmbRole.SelectedValue;
+                // Şube ID'si 0 ise (yani "Atanmamış" seçiliyse) null olarak ayarlanır, değilse seçili değer atanır.
                 user.UserBranchID = (int)cmbBranch.SelectedValue == 0 ? null : (int?)cmbBranch.SelectedValue;
                 user.UserActive = chkUserActive.Checked;
 
-                // Save to database
+                // Veritabanına kaydeder (ekler veya günceller).
                 bool success;
                 if (_isEditMode)
                 {
-                    success = _userRepository.Update(user);
+                    success = _userRepository.Update(user); // Kullanıcıyı günceller.
                 }
                 else
                 {
-                    int newUserId = _userRepository.Insert(user);
-                    success = newUserId > 0;
+                    int newUserId = _userRepository.Insert(user); // Yeni kullanıcı ekler.
+                    success = newUserId > 0; // Ekleme başarılıysa ID 0'dan büyük olur.
                 }
 
                 if (success)
                 {
+                    // Başarılı olursa duruma göre mesaj gösterir.
                     string message = _isEditMode ? "Personel başarıyla güncellendi." : "Personel başarıyla eklendi.";
                     MessageBox.Show(message, "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    ClearForm();
-                    LoadStaff(); // Refresh the list
-                    tabControlStaff.SelectedIndex = 0; // Switch to Staff List tab
+                    ClearForm(); // Formu temizler.
+                    LoadStaff(); // Personel listesini yeniler.
+                    tabControlStaff.SelectedIndex = 0; // Personel Listesi sekmesine geçer.
                 }
                 else
                 {
+                    // Başarısız olursa duruma göre hata mesajı gösterir.
                     string message = _isEditMode ? "Personel güncellenirken bir hata oluştu." : "Personel eklenirken bir hata oluştu.";
                     MessageBox.Show(message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
+                // Genel bir hata durumunda kullanıcıya bilgi mesajı gösterir.
                 MessageBox.Show($"İşlem sırasında hata oluştu: {ex.Message}",
                     "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // TR: İptal butonu tıklama olayı
-        // EN: Cancel button click event
+        // "İptal" butonuna tıklandığında çağrılan olay metodu.
+        // Formu temizler ve personel listesi sekmesine geri döner.
         private void BtnCancelStaff_Click(object sender, EventArgs e)
         {
-            ClearForm();
-            tabControlStaff.SelectedIndex = 0; // Switch to Staff List tab
+            ClearForm(); // Formu temizler.
+            tabControlStaff.SelectedIndex = 0; // Personel Listesi sekmesine geçer.
         }
     }
 }

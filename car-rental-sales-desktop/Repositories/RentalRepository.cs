@@ -28,6 +28,7 @@ namespace car_rental_sales_desktop.Repositories
                 RentalAmount = row.GetValue<decimal>("RentalAmount"),
                 RentalDepositAmount = row.GetValue<decimal?>("RentalDepositAmount"),
                 RentalPaymentType = row.GetValue<string>("RentalPaymentType"),
+                RentalStatus = row.GetValue<string>("RentalStatus") ?? "Pending",
                 RentalNoteID = row.GetValue<int?>("RentalNoteID"),
                 RentalContractID = row.GetValue<int?>("RentalContractID"),
                 RentalUserID = row.GetValue<int>("RentalUserID"),
@@ -55,6 +56,7 @@ namespace car_rental_sales_desktop.Repositories
                 { "RentalAmount", entity.RentalAmount },
                 { "RentalDepositAmount", entity.RentalDepositAmount },
                 { "RentalPaymentType", entity.RentalPaymentType },
+                { "RentalStatus", entity.RentalStatus ?? "Pending" },
                 { "RentalNoteID", entity.RentalNoteID },
                 { "RentalContractID", entity.RentalContractID },
                 { "RentalUserID", entity.RentalUserID },
@@ -91,7 +93,7 @@ namespace car_rental_sales_desktop.Repositories
         // Get active rentals (not returned yet)
         public List<Rental> GetActiveRentals()
         {
-            string query = "SELECT * FROM Rentals WHERE RentalReturnDate IS NULL";
+            string query = "SELECT * FROM Rentals WHERE RentalReturnDate IS NULL AND RentalStatus <> 'Rejected'";
             var dataTable = DatabaseHelper.ExecuteQuery(query);
 
             return ConvertDataTableToList(dataTable);
@@ -397,6 +399,29 @@ namespace car_rental_sales_desktop.Repositories
                 DatabaseHelper.CreateParameter("@noteText", noteText),
                 DatabaseHelper.CreateParameter("@createdAt", DateTime.Now),
                 DatabaseHelper.CreateParameter("@userId", userId)
+            };
+
+            int affectedRows = DatabaseHelper.ExecuteNonQuery(query, parameters);
+            return affectedRows > 0;
+        }
+
+        // Yeni metod: Onay bekleyen kiralamaları getir
+        public List<Rental> GetPendingRentals()
+        {
+            string query = "SELECT * FROM Rentals WHERE RentalStatus = 'Pending' ORDER BY RentalCreatedAt DESC";
+            var dataTable = DatabaseHelper.ExecuteQuery(query);
+            return ConvertDataTableToList(dataTable);
+        }
+
+        // Yeni metod: Kiralama durumunu güncelle
+        public bool UpdateRentalStatus(int rentalId, string status)
+        {
+            string query = "UPDATE Rentals SET RentalStatus = @status, RentalUpdatedAt = @updatedAt WHERE RentalID = @rentalId";
+            var parameters = new[]
+            {
+                DatabaseHelper.CreateParameter("@status", status),
+                DatabaseHelper.CreateParameter("@updatedAt", DateTime.Now),
+                DatabaseHelper.CreateParameter("@rentalId", rentalId)
             };
 
             int affectedRows = DatabaseHelper.ExecuteNonQuery(query, parameters);

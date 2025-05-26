@@ -25,6 +25,42 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query);
         }
 
+        // Onaylı kiralamaların raporunu getir
+        public DataTable GetApprovedRentalsReport(DateTime startDate, DateTime endDate)
+        {
+            string query = @"
+        SELECT 
+            r.RentalID,
+            CONCAT(c.CustomerFirstName, ' ', c.CustomerLastName) AS CustomerName,
+            c.CustomerNationalID,
+            c.CustomerPhone,
+            v.VehiclePlateNumber,
+            CONCAT(v.VehicleBrand, ' ', v.VehicleModel) AS VehicleInfo,
+            r.RentalStartDate,
+            r.RentalEndDate,
+            r.RentalAmount,
+            r.RentalPaymentType,
+            r.RentalStatus,
+            CONCAT(u.UserFirstName, ' ', u.UserLastName) AS StaffName,
+            r.RentalCreatedAt,
+            r.RentalUpdatedAt
+        FROM Rentals r
+        INNER JOIN Customers c ON r.RentalCustomerID = c.CustomerID
+        INNER JOIN Vehicles v ON r.RentalVehicleID = v.VehicleID
+        INNER JOIN Users u ON r.RentalUserID = u.UserID
+        WHERE r.RentalStatus = 'Approved'
+        AND r.RentalCreatedAt BETWEEN @startDate AND @endDate
+        ORDER BY r.RentalCreatedAt DESC";
+
+            var parameters = new[]
+            {
+                DatabaseHelper.CreateParameter("@startDate", startDate),
+                DatabaseHelper.CreateParameter("@endDate", endDate)
+            };
+
+            return DatabaseHelper.ExecuteQuery(query, parameters);
+        }
+
         // Monthly rental income report
         public DataTable GetMonthlyRentalIncome(int year)
         {

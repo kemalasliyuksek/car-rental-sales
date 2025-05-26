@@ -16,6 +16,7 @@ namespace car_rental_sales_desktop.Models
         public decimal RentalAmount { get; set; }
         public decimal? RentalDepositAmount { get; set; }
         public string RentalPaymentType { get; set; }
+        public string RentalStatus { get; set; }
         public int? RentalNoteID { get; set; }
         public int? RentalContractID { get; set; }
         public int RentalUserID { get; set; }
@@ -34,6 +35,7 @@ namespace car_rental_sales_desktop.Models
         {
             RentalNotes = new HashSet<RentalNote>();
             RentalCreatedAt = DateTime.Now;
+            RentalStatus = "Pending";
         }
 
         // Helper method to calculate rental duration in days
