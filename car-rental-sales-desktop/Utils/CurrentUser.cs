@@ -67,11 +67,9 @@ namespace car_rental_sales_desktop.Utils
             if (string.IsNullOrEmpty(requiredRole) || string.IsNullOrEmpty(RoleName))
                 return false;
 
-            // Admin has access to everything
             if (IsAdmin())
                 return true;
 
-            // Direct role match
             return RoleName.ToLower() == requiredRole.ToLower();
         }
     }

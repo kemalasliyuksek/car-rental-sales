@@ -29,11 +29,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             tabControlBranch = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageBranchList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            panelBranchActions = new Panel();
-            btnEditBranch = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnDeleteBranch = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnToggleStatus = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnRefreshBranch = new Syncfusion.Windows.Forms.ButtonAdv();
             sfDataGridBranch = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageBranchAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             panelBranchForm = new Panel();
@@ -49,10 +44,14 @@ namespace car_rental_sales_desktop.Forms.Controls
             lblBranchAddress = new Label();
             lblBranchName = new Label();
             lblBranchFormTitle = new Label();
+            panelBranchActions = new Panel();
+            btnEditBranch = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnDeleteBranch = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnToggleStatus = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnRefreshBranch = new Syncfusion.Windows.Forms.ButtonAdv();
             ((System.ComponentModel.ISupportInitialize)tabControlBranch).BeginInit();
             tabControlBranch.SuspendLayout();
             tabPageBranchList.SuspendLayout();
-            panelBranchActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridBranch).BeginInit();
             tabPageBranchAdd.SuspendLayout();
             panelBranchForm.SuspendLayout();
@@ -61,6 +60,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             ((System.ComponentModel.ISupportInitialize)txtBranchPhone).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtBranchAddress).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtBranchName).BeginInit();
+            panelBranchActions.SuspendLayout();
             SuspendLayout();
             // 
             // tabControlBranch
@@ -89,86 +89,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             tabPageBranchList.TabIndex = 1;
             tabPageBranchList.Text = "Branch List";
             tabPageBranchList.ThemesEnabled = false;
-            // 
-            // panelBranchActions
-            // 
-            panelBranchActions.Controls.Add(btnEditBranch);
-            panelBranchActions.Controls.Add(btnDeleteBranch);
-            panelBranchActions.Controls.Add(btnToggleStatus);
-            panelBranchActions.Controls.Add(btnRefreshBranch);
-            panelBranchActions.Dock = DockStyle.Top;
-            panelBranchActions.Location = new Point(20, 20);
-            panelBranchActions.Name = "panelBranchActions";
-            panelBranchActions.Size = new Size(1627, 60);
-            panelBranchActions.TabIndex = 1;
-            // 
-            // btnEditBranch
-            // 
-            btnEditBranch.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnEditBranch.BackColor = Color.FromArgb(0, 120, 215);
-            btnEditBranch.BeforeTouchSize = new Size(120, 35);
-            btnEditBranch.FlatStyle = FlatStyle.Flat;
-            btnEditBranch.Font = new Font("Segoe UI Semibold", 10F);
-            btnEditBranch.ForeColor = Color.White;
-            btnEditBranch.Location = new Point(10, 15);
-            btnEditBranch.Name = "btnEditBranch";
-            btnEditBranch.Size = new Size(120, 35);
-            btnEditBranch.TabIndex = 0;
-            btnEditBranch.Text = "Edit Branch";
-            btnEditBranch.ThemeName = "Metro";
-            btnEditBranch.UseVisualStyleBackColor = false;
-            btnEditBranch.Click += BtnEditBranch_Click;
-            // 
-            // btnDeleteBranch
-            // 
-            btnDeleteBranch.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnDeleteBranch.BackColor = Color.FromArgb(215, 55, 55);
-            btnDeleteBranch.BeforeTouchSize = new Size(120, 35);
-            btnDeleteBranch.FlatStyle = FlatStyle.Flat;
-            btnDeleteBranch.Font = new Font("Segoe UI Semibold", 10F);
-            btnDeleteBranch.ForeColor = Color.White;
-            btnDeleteBranch.Location = new Point(140, 15);
-            btnDeleteBranch.Name = "btnDeleteBranch";
-            btnDeleteBranch.Size = new Size(120, 35);
-            btnDeleteBranch.TabIndex = 1;
-            btnDeleteBranch.Text = "Delete Branch";
-            btnDeleteBranch.ThemeName = "Metro";
-            btnDeleteBranch.UseVisualStyleBackColor = false;
-            btnDeleteBranch.Click += BtnDeleteBranch_Click;
-            // 
-            // btnToggleStatus
-            // 
-            btnToggleStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnToggleStatus.BackColor = Color.FromArgb(255, 140, 0);
-            btnToggleStatus.BeforeTouchSize = new Size(140, 35);
-            btnToggleStatus.FlatStyle = FlatStyle.Flat;
-            btnToggleStatus.Font = new Font("Segoe UI Semibold", 10F);
-            btnToggleStatus.ForeColor = Color.White;
-            btnToggleStatus.Location = new Point(270, 15);
-            btnToggleStatus.Name = "btnToggleStatus";
-            btnToggleStatus.Size = new Size(140, 35);
-            btnToggleStatus.TabIndex = 2;
-            btnToggleStatus.Text = "Toggle Status";
-            btnToggleStatus.ThemeName = "Metro";
-            btnToggleStatus.UseVisualStyleBackColor = false;
-            btnToggleStatus.Click += BtnToggleStatus_Click;
-            // 
-            // btnRefreshBranch
-            // 
-            btnRefreshBranch.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnRefreshBranch.BackColor = Color.FromArgb(34, 139, 34);
-            btnRefreshBranch.BeforeTouchSize = new Size(120, 35);
-            btnRefreshBranch.FlatStyle = FlatStyle.Flat;
-            btnRefreshBranch.Font = new Font("Segoe UI Semibold", 10F);
-            btnRefreshBranch.ForeColor = Color.White;
-            btnRefreshBranch.Location = new Point(420, 15);
-            btnRefreshBranch.Name = "btnRefreshBranch";
-            btnRefreshBranch.Size = new Size(120, 35);
-            btnRefreshBranch.TabIndex = 3;
-            btnRefreshBranch.Text = "Refresh";
-            btnRefreshBranch.ThemeName = "Metro";
-            btnRefreshBranch.UseVisualStyleBackColor = false;
-            btnRefreshBranch.Click += BtnRefreshBranch_Click;
             // 
             // sfDataGridBranch
             // 
@@ -225,11 +145,11 @@ namespace car_rental_sales_desktop.Forms.Controls
             sfDataGridBranch.Columns.Add(gridTextColumn4);
             sfDataGridBranch.Columns.Add(gridCheckBoxColumn1);
             sfDataGridBranch.Columns.Add(gridDateTimeColumn1);
-            sfDataGridBranch.Dock = DockStyle.Fill;
-            sfDataGridBranch.Location = new Point(20, 20);
+            sfDataGridBranch.Dock = DockStyle.Bottom;
+            sfDataGridBranch.Location = new Point(20, 80);
             sfDataGridBranch.Name = "sfDataGridBranch";
             sfDataGridBranch.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridBranch.Size = new Size(1627, 925);
+            sfDataGridBranch.Size = new Size(1627, 865);
             sfDataGridBranch.Style.AddNewRowStyle.BackColor = Color.Transparent;
             sfDataGridBranch.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridBranch.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
@@ -329,7 +249,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // 
             // txtBranchEmail
             // 
-            txtBranchEmail.BeforeTouchSize = new Size(310, 27);
+            txtBranchEmail.BeforeTouchSize = new Size(310, 100);
             txtBranchEmail.BorderStyle = BorderStyle.FixedSingle;
             txtBranchEmail.Font = new Font("Segoe UI", 11F);
             txtBranchEmail.Location = new Point(707, 455);
@@ -339,7 +259,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // 
             // txtBranchPhone
             // 
-            txtBranchPhone.BeforeTouchSize = new Size(310, 27);
+            txtBranchPhone.BeforeTouchSize = new Size(310, 100);
             txtBranchPhone.BorderStyle = BorderStyle.FixedSingle;
             txtBranchPhone.Font = new Font("Segoe UI", 11F);
             txtBranchPhone.Location = new Point(707, 405);
@@ -361,7 +281,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // 
             // txtBranchName
             // 
-            txtBranchName.BeforeTouchSize = new Size(310, 27);
+            txtBranchName.BeforeTouchSize = new Size(310, 100);
             txtBranchName.BorderStyle = BorderStyle.FixedSingle;
             txtBranchName.Font = new Font("Segoe UI", 11F);
             txtBranchName.Location = new Point(707, 225);
@@ -395,7 +315,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             lblBranchAddress.Font = new Font("Segoe UI Semibold", 11F);
             lblBranchAddress.Location = new Point(537, 285);
             lblBranchAddress.Name = "lblBranchAddress";
-            lblBranchAddress.Size = new Size(70, 20);
+            lblBranchAddress.Size = new Size(67, 20);
             lblBranchAddress.TabIndex = 2;
             lblBranchAddress.Text = "Address:";
             // 
@@ -405,7 +325,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             lblBranchName.Font = new Font("Segoe UI Semibold", 11F);
             lblBranchName.Location = new Point(537, 235);
             lblBranchName.Name = "lblBranchName";
-            lblBranchName.Size = new Size(105, 20);
+            lblBranchName.Size = new Size(106, 20);
             lblBranchName.TabIndex = 1;
             lblBranchName.Text = "Branch Name:";
             // 
@@ -416,21 +336,100 @@ namespace car_rental_sales_desktop.Forms.Controls
             lblBranchFormTitle.ForeColor = Color.FromArgb(0, 120, 215);
             lblBranchFormTitle.Location = new Point(720, 126);
             lblBranchFormTitle.Name = "lblBranchFormTitle";
-            lblBranchFormTitle.Size = new Size(193, 32);
+            lblBranchFormTitle.Size = new Size(205, 32);
             lblBranchFormTitle.TabIndex = 0;
             lblBranchFormTitle.Text = "Add New Branch";
             // 
-            // BranchControl
+            // panelBranchActions
+            // 
+            panelBranchActions.Controls.Add(btnEditBranch);
+            panelBranchActions.Controls.Add(btnDeleteBranch);
+            panelBranchActions.Controls.Add(btnToggleStatus);
+            panelBranchActions.Controls.Add(btnRefreshBranch);
+            panelBranchActions.Dock = DockStyle.Top;
+            panelBranchActions.Location = new Point(20, 20);
+            panelBranchActions.Name = "panelBranchActions";
+            panelBranchActions.Size = new Size(1627, 60);
+            panelBranchActions.TabIndex = 2;
+            // 
+            // btnEditBranch
+            // 
+            btnEditBranch.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnEditBranch.BackColor = Color.FromArgb(0, 120, 215);
+            btnEditBranch.BeforeTouchSize = new Size(120, 35);
+            btnEditBranch.FlatStyle = FlatStyle.Flat;
+            btnEditBranch.Font = new Font("Segoe UI Semibold", 10F);
+            btnEditBranch.ForeColor = Color.White;
+            btnEditBranch.Location = new Point(10, 15);
+            btnEditBranch.Name = "btnEditBranch";
+            btnEditBranch.Size = new Size(120, 35);
+            btnEditBranch.TabIndex = 0;
+            btnEditBranch.Text = "Edit Branch";
+            btnEditBranch.ThemeName = "Metro";
+            btnEditBranch.UseVisualStyleBackColor = false;
+            btnEditBranch.Click += BtnEditBranch_Click;
+            // 
+            // btnDeleteBranch
+            // 
+            btnDeleteBranch.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnDeleteBranch.BackColor = Color.FromArgb(215, 55, 55);
+            btnDeleteBranch.BeforeTouchSize = new Size(120, 35);
+            btnDeleteBranch.FlatStyle = FlatStyle.Flat;
+            btnDeleteBranch.Font = new Font("Segoe UI Semibold", 10F);
+            btnDeleteBranch.ForeColor = Color.White;
+            btnDeleteBranch.Location = new Point(140, 15);
+            btnDeleteBranch.Name = "btnDeleteBranch";
+            btnDeleteBranch.Size = new Size(120, 35);
+            btnDeleteBranch.TabIndex = 1;
+            btnDeleteBranch.Text = "Delete Branch";
+            btnDeleteBranch.ThemeName = "Metro";
+            btnDeleteBranch.UseVisualStyleBackColor = false;
+            btnDeleteBranch.Click += BtnDeleteBranch_Click;
+            // 
+            // btnToggleStatus
+            // 
+            btnToggleStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnToggleStatus.BackColor = Color.FromArgb(255, 140, 0);
+            btnToggleStatus.BeforeTouchSize = new Size(140, 35);
+            btnToggleStatus.FlatStyle = FlatStyle.Flat;
+            btnToggleStatus.Font = new Font("Segoe UI Semibold", 10F);
+            btnToggleStatus.ForeColor = Color.White;
+            btnToggleStatus.Location = new Point(270, 15);
+            btnToggleStatus.Name = "btnToggleStatus";
+            btnToggleStatus.Size = new Size(140, 35);
+            btnToggleStatus.TabIndex = 2;
+            btnToggleStatus.Text = "Toggle Status";
+            btnToggleStatus.ThemeName = "Metro";
+            btnToggleStatus.UseVisualStyleBackColor = false;
+            btnToggleStatus.Click += BtnToggleStatus_Click;
+            // 
+            // btnRefreshBranch
+            // 
+            btnRefreshBranch.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnRefreshBranch.BackColor = Color.FromArgb(34, 139, 34);
+            btnRefreshBranch.BeforeTouchSize = new Size(120, 35);
+            btnRefreshBranch.FlatStyle = FlatStyle.Flat;
+            btnRefreshBranch.Font = new Font("Segoe UI Semibold", 10F);
+            btnRefreshBranch.ForeColor = Color.White;
+            btnRefreshBranch.Location = new Point(420, 15);
+            btnRefreshBranch.Name = "btnRefreshBranch";
+            btnRefreshBranch.Size = new Size(120, 35);
+            btnRefreshBranch.TabIndex = 3;
+            btnRefreshBranch.Text = "Refresh";
+            btnRefreshBranch.ThemeName = "Metro";
+            btnRefreshBranch.UseVisualStyleBackColor = false;
+            btnRefreshBranch.Click += BtnRefreshBranch_Click;
+            // 
+            // BranchesControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tabControlBranch);
-            Name = "BranchControl";
+            Name = "BranchesControl";
             Size = new Size(1670, 1000);
             ((System.ComponentModel.ISupportInitialize)tabControlBranch).EndInit();
             tabControlBranch.ResumeLayout(false);
             tabPageBranchList.ResumeLayout(false);
-            panelBranchActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridBranch).EndInit();
             tabPageBranchAdd.ResumeLayout(false);
             panelBranchForm.ResumeLayout(false);
@@ -440,6 +439,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             ((System.ComponentModel.ISupportInitialize)txtBranchPhone).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtBranchAddress).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtBranchName).EndInit();
+            panelBranchActions.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -449,11 +449,6 @@ namespace car_rental_sales_desktop.Forms.Controls
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageBranchList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageBranchAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridBranch;
-        private System.Windows.Forms.Panel panelBranchActions;
-        private Syncfusion.Windows.Forms.ButtonAdv btnEditBranch;
-        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteBranch;
-        private Syncfusion.Windows.Forms.ButtonAdv btnToggleStatus;
-        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshBranch;
         private System.Windows.Forms.Panel panelBranchForm;
         private System.Windows.Forms.Label lblBranchFormTitle;
         private System.Windows.Forms.Label lblBranchName;
@@ -467,5 +462,10 @@ namespace car_rental_sales_desktop.Forms.Controls
         private Syncfusion.Windows.Forms.Tools.CheckBoxAdv chkBranchActive;
         private Syncfusion.Windows.Forms.ButtonAdv btnSaveBranch;
         private Syncfusion.Windows.Forms.ButtonAdv btnCancelBranch;
+        private Panel panelBranchActions;
+        private Syncfusion.Windows.Forms.ButtonAdv btnEditBranch;
+        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteBranch;
+        private Syncfusion.Windows.Forms.ButtonAdv btnToggleStatus;
+        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshBranch;
     }
 }

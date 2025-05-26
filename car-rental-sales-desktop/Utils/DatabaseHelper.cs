@@ -67,7 +67,6 @@ namespace car_rental_sales_desktop.Utils
             object value = row[columnName];
             Type targetType = typeof(T);
 
-            // Nullable tipleri doğru işle
             if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 targetType = Nullable.GetUnderlyingType(targetType);
@@ -75,7 +74,6 @@ namespace car_rental_sales_desktop.Utils
 
             try
             {
-                // DateTime özel işleme
                 if (targetType == typeof(DateTime) && value is string dateStr)
                 {
                     if (DateTime.TryParse(dateStr, out DateTime date))

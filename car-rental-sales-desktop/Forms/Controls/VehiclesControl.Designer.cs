@@ -18,30 +18,25 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn6 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn11 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn12 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn7 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn13 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn8 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn14 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn15 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn16 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn4 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn9 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn10 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn17 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn18 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn5 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn6 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn1 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn2 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn3 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn4 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn5 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn9 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn3 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             tabControlVehicles = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageVehiclesList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            panelVehicleActions = new Panel();
-            btnEditVehicle = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnDeleteVehicle = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnToggleVehicleStatus = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnRefreshVehicles = new Syncfusion.Windows.Forms.ButtonAdv();
             sfDataGridVehicles = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageVehicleAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             panelVehicleForm = new Panel();
@@ -80,10 +75,14 @@
             lblBrand = new Label();
             lblPlateNumber = new Label();
             lblVehicleFormTitle = new Label();
+            panelVehicleActions = new Panel();
+            btnEditVehicle = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnDeleteVehicle = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnToggleVehicleStatus = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnRefreshVehicles = new Syncfusion.Windows.Forms.ButtonAdv();
             ((System.ComponentModel.ISupportInitialize)tabControlVehicles).BeginInit();
             tabControlVehicles.SuspendLayout();
             tabPageVehiclesList.SuspendLayout();
-            panelVehicleActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridVehicles).BeginInit();
             tabPageVehicleAdd.SuspendLayout();
             panelVehicleForm.SuspendLayout();
@@ -104,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)txtModel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtBrand).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtPlateNumber).BeginInit();
+            panelVehicleActions.SuspendLayout();
             SuspendLayout();
             // 
             // tabControlVehicles
@@ -133,226 +133,146 @@
             tabPageVehiclesList.Text = "Vehicles List";
             tabPageVehiclesList.ThemesEnabled = false;
             // 
-            // panelVehicleActions
-            // 
-            panelVehicleActions.Controls.Add(btnEditVehicle);
-            panelVehicleActions.Controls.Add(btnDeleteVehicle);
-            panelVehicleActions.Controls.Add(btnToggleVehicleStatus);
-            panelVehicleActions.Controls.Add(btnRefreshVehicles);
-            panelVehicleActions.Dock = DockStyle.Top;
-            panelVehicleActions.Location = new Point(20, 20);
-            panelVehicleActions.Name = "panelVehicleActions";
-            panelVehicleActions.Size = new Size(1627, 60);
-            panelVehicleActions.TabIndex = 1;
-            // 
-            // btnEditVehicle
-            // 
-            btnEditVehicle.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnEditVehicle.BackColor = Color.FromArgb(0, 120, 215);
-            btnEditVehicle.BeforeTouchSize = new Size(120, 35);
-            btnEditVehicle.FlatStyle = FlatStyle.Flat;
-            btnEditVehicle.Font = new Font("Segoe UI Semibold", 10F);
-            btnEditVehicle.ForeColor = Color.White;
-            btnEditVehicle.Location = new Point(10, 15);
-            btnEditVehicle.Name = "btnEditVehicle";
-            btnEditVehicle.Size = new Size(120, 35);
-            btnEditVehicle.TabIndex = 0;
-            btnEditVehicle.Text = "Edit Vehicle";
-            btnEditVehicle.ThemeName = "Metro";
-            btnEditVehicle.UseVisualStyleBackColor = false;
-            btnEditVehicle.Click += BtnEditVehicle_Click;
-            // 
-            // btnDeleteVehicle
-            // 
-            btnDeleteVehicle.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnDeleteVehicle.BackColor = Color.FromArgb(215, 55, 55);
-            btnDeleteVehicle.BeforeTouchSize = new Size(130, 35);
-            btnDeleteVehicle.FlatStyle = FlatStyle.Flat;
-            btnDeleteVehicle.Font = new Font("Segoe UI Semibold", 10F);
-            btnDeleteVehicle.ForeColor = Color.White;
-            btnDeleteVehicle.Location = new Point(140, 15);
-            btnDeleteVehicle.Name = "btnDeleteVehicle";
-            btnDeleteVehicle.Size = new Size(130, 35);
-            btnDeleteVehicle.TabIndex = 1;
-            btnDeleteVehicle.Text = "Delete Vehicle";
-            btnDeleteVehicle.ThemeName = "Metro";
-            btnDeleteVehicle.UseVisualStyleBackColor = false;
-            btnDeleteVehicle.Click += BtnDeleteVehicle_Click;
-            // 
-            // btnToggleVehicleStatus
-            // 
-            btnToggleVehicleStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnToggleVehicleStatus.BackColor = Color.FromArgb(255, 140, 0);
-            btnToggleVehicleStatus.BeforeTouchSize = new Size(140, 35);
-            btnToggleVehicleStatus.FlatStyle = FlatStyle.Flat;
-            btnToggleVehicleStatus.Font = new Font("Segoe UI Semibold", 10F);
-            btnToggleVehicleStatus.ForeColor = Color.White;
-            btnToggleVehicleStatus.Location = new Point(280, 15);
-            btnToggleVehicleStatus.Name = "btnToggleVehicleStatus";
-            btnToggleVehicleStatus.Size = new Size(140, 35);
-            btnToggleVehicleStatus.TabIndex = 2;
-            btnToggleVehicleStatus.Text = "Toggle Status";
-            btnToggleVehicleStatus.ThemeName = "Metro";
-            btnToggleVehicleStatus.UseVisualStyleBackColor = false;
-            btnToggleVehicleStatus.Click += BtnToggleVehicleStatus_Click;
-            // 
-            // btnRefreshVehicles
-            // 
-            btnRefreshVehicles.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnRefreshVehicles.BackColor = Color.FromArgb(34, 139, 34);
-            btnRefreshVehicles.BeforeTouchSize = new Size(120, 35);
-            btnRefreshVehicles.FlatStyle = FlatStyle.Flat;
-            btnRefreshVehicles.Font = new Font("Segoe UI Semibold", 10F);
-            btnRefreshVehicles.ForeColor = Color.White;
-            btnRefreshVehicles.Location = new Point(430, 15);
-            btnRefreshVehicles.Name = "btnRefreshVehicles";
-            btnRefreshVehicles.Size = new Size(120, 35);
-            btnRefreshVehicles.TabIndex = 3;
-            btnRefreshVehicles.Text = "Refresh";
-            btnRefreshVehicles.ThemeName = "Metro";
-            btnRefreshVehicles.UseVisualStyleBackColor = false;
-            btnRefreshVehicles.Click += BtnRefreshVehicles_Click;
-            // 
             // sfDataGridVehicles
             // 
             sfDataGridVehicles.AccessibleName = "Table";
             sfDataGridVehicles.AllowEditing = false;
             sfDataGridVehicles.AutoGenerateColumns = false;
-            gridNumericColumn6.AllowEditing = false;
-            gridNumericColumn6.AllowResizing = true;
-            gridNumericColumn6.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridNumericColumn6.Format = "0";
-            gridNumericColumn6.HeaderText = "ID";
-            gridNumericColumn6.MappingName = "VehicleID";
-            gridNumericColumn6.Width = 50D;
-            gridTextColumn10.AllowEditing = false;
-            gridTextColumn10.AllowResizing = true;
-            gridTextColumn10.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn10.HeaderText = "Plate Number";
-            gridTextColumn10.MappingName = "VehiclePlateNumber";
-            gridTextColumn10.Width = 90D;
-            gridTextColumn11.AllowEditing = false;
-            gridTextColumn11.AllowResizing = true;
-            gridTextColumn11.HeaderText = "Brand";
-            gridTextColumn11.MappingName = "VehicleBrand";
-            gridTextColumn11.Width = 90D;
-            gridTextColumn12.AllowEditing = false;
-            gridTextColumn12.AllowResizing = true;
-            gridTextColumn12.HeaderText = "Model";
-            gridTextColumn12.MappingName = "VehicleModel";
-            gridTextColumn12.Width = 90D;
-            gridNumericColumn7.AllowEditing = false;
-            gridNumericColumn7.AllowResizing = true;
-            gridNumericColumn7.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridNumericColumn7.Format = "0";
-            gridNumericColumn7.HeaderText = "Year";
-            gridNumericColumn7.MappingName = "VehicleYear";
-            gridNumericColumn7.Width = 60D;
-            gridTextColumn13.AllowEditing = false;
-            gridTextColumn13.AllowResizing = true;
-            gridTextColumn13.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn13.HeaderText = "Color";
-            gridTextColumn13.MappingName = "VehicleColor";
-            gridTextColumn13.Width = 70D;
-            gridNumericColumn8.AllowEditing = false;
-            gridNumericColumn8.AllowResizing = true;
-            gridNumericColumn8.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
-            gridNumericColumn8.Format = "0' KM'";
-            gridNumericColumn8.HeaderText = "Mileage (KM)";
-            gridNumericColumn8.MappingName = "VehicleMileage";
-            gridNumericColumn8.Width = 90D;
-            gridTextColumn14.AllowEditing = false;
-            gridTextColumn14.AllowResizing = true;
-            gridTextColumn14.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn14.HeaderText = "Fuel Type";
-            gridTextColumn14.MappingName = "VehicleFuelType";
-            gridTextColumn14.Width = 80D;
-            gridTextColumn15.AllowEditing = false;
-            gridTextColumn15.AllowResizing = true;
-            gridTextColumn15.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn15.HeaderText = "Transmission";
-            gridTextColumn15.MappingName = "VehicleTransmissionType";
-            gridTextColumn15.Width = 90D;
-            gridTextColumn16.AllowEditing = false;
-            gridTextColumn16.AllowResizing = true;
-            gridTextColumn16.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn16.HeaderText = "Status";
-            gridTextColumn16.MappingName = "VehicleStatus.VehicleStatusName";
-            gridTextColumn16.Width = 80D;
-            gridDateTimeColumn4.AllowEditing = false;
-            gridDateTimeColumn4.AllowResizing = true;
-            gridDateTimeColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn4.Format = "dd.MM.yyyy";
-            gridDateTimeColumn4.HeaderText = "Acquisition Date";
-            gridDateTimeColumn4.MappingName = "VehicleAcquisitionDate";
-            gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn4.Width = 110D;
-            gridNumericColumn9.AllowEditing = false;
-            gridNumericColumn9.AllowResizing = true;
-            gridNumericColumn9.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
-            gridNumericColumn9.Format = "#,##0.00 ₺";
-            gridNumericColumn9.HeaderText = "Purchase Price (₺)";
-            gridNumericColumn9.MappingName = "VehiclePurchasePrice";
-            gridNumericColumn9.Width = 110D;
-            gridNumericColumn10.AllowEditing = false;
-            gridNumericColumn10.AllowResizing = true;
-            gridNumericColumn10.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
-            gridNumericColumn10.Format = "#,##0.00 ₺";
-            gridNumericColumn10.HeaderText = "Sale Price (₺)";
-            gridNumericColumn10.MappingName = "VehicleSalePrice";
-            gridNumericColumn10.Width = 100D;
-            gridTextColumn17.AllowEditing = false;
-            gridTextColumn17.AllowResizing = true;
-            gridTextColumn17.HeaderText = "Branch Name";
-            gridTextColumn17.MappingName = "Branch.BranchName";
-            gridTextColumn17.Width = 131D;
-            gridTextColumn18.AllowEditing = false;
-            gridTextColumn18.AllowResizing = true;
-            gridTextColumn18.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn18.HeaderText = "Class";
-            gridTextColumn18.MappingName = "VehicleClass.VehicleClassName";
-            gridTextColumn18.Width = 70D;
-            gridDateTimeColumn5.AllowEditing = false;
-            gridDateTimeColumn5.AllowResizing = true;
-            gridDateTimeColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn5.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn5.HeaderText = "Created At";
-            gridDateTimeColumn5.MappingName = "VehicleCreatedAt";
-            gridDateTimeColumn5.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn5.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn5.Width = 150D;
-            gridDateTimeColumn6.AllowEditing = false;
-            gridDateTimeColumn6.AllowResizing = true;
-            gridDateTimeColumn6.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn6.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn6.HeaderText = "Updated At";
-            gridDateTimeColumn6.MappingName = "VehicleUpdatedAt";
-            gridDateTimeColumn6.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn6.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn6.Width = 150D;
-            sfDataGridVehicles.Columns.Add(gridNumericColumn6);
-            sfDataGridVehicles.Columns.Add(gridTextColumn10);
-            sfDataGridVehicles.Columns.Add(gridTextColumn11);
-            sfDataGridVehicles.Columns.Add(gridTextColumn12);
-            sfDataGridVehicles.Columns.Add(gridNumericColumn7);
-            sfDataGridVehicles.Columns.Add(gridTextColumn13);
-            sfDataGridVehicles.Columns.Add(gridNumericColumn8);
-            sfDataGridVehicles.Columns.Add(gridTextColumn14);
-            sfDataGridVehicles.Columns.Add(gridTextColumn15);
-            sfDataGridVehicles.Columns.Add(gridTextColumn16);
-            sfDataGridVehicles.Columns.Add(gridDateTimeColumn4);
-            sfDataGridVehicles.Columns.Add(gridNumericColumn9);
-            sfDataGridVehicles.Columns.Add(gridNumericColumn10);
-            sfDataGridVehicles.Columns.Add(gridTextColumn17);
-            sfDataGridVehicles.Columns.Add(gridTextColumn18);
-            sfDataGridVehicles.Columns.Add(gridDateTimeColumn5);
-            sfDataGridVehicles.Columns.Add(gridDateTimeColumn6);
-            sfDataGridVehicles.Dock = DockStyle.Fill;
-            sfDataGridVehicles.Location = new Point(20, 20);
+            gridNumericColumn1.AllowEditing = false;
+            gridNumericColumn1.AllowResizing = true;
+            gridNumericColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridNumericColumn1.Format = "0";
+            gridNumericColumn1.HeaderText = "ID";
+            gridNumericColumn1.MappingName = "VehicleID";
+            gridNumericColumn1.Width = 50D;
+            gridTextColumn1.AllowEditing = false;
+            gridTextColumn1.AllowResizing = true;
+            gridTextColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn1.HeaderText = "Plate Number";
+            gridTextColumn1.MappingName = "VehiclePlateNumber";
+            gridTextColumn1.Width = 90D;
+            gridTextColumn2.AllowEditing = false;
+            gridTextColumn2.AllowResizing = true;
+            gridTextColumn2.HeaderText = "Brand";
+            gridTextColumn2.MappingName = "VehicleBrand";
+            gridTextColumn2.Width = 90D;
+            gridTextColumn3.AllowEditing = false;
+            gridTextColumn3.AllowResizing = true;
+            gridTextColumn3.HeaderText = "Model";
+            gridTextColumn3.MappingName = "VehicleModel";
+            gridTextColumn3.Width = 90D;
+            gridNumericColumn2.AllowEditing = false;
+            gridNumericColumn2.AllowResizing = true;
+            gridNumericColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridNumericColumn2.Format = "0";
+            gridNumericColumn2.HeaderText = "Year";
+            gridNumericColumn2.MappingName = "VehicleYear";
+            gridNumericColumn2.Width = 60D;
+            gridTextColumn4.AllowEditing = false;
+            gridTextColumn4.AllowResizing = true;
+            gridTextColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn4.HeaderText = "Color";
+            gridTextColumn4.MappingName = "VehicleColor";
+            gridTextColumn4.Width = 70D;
+            gridNumericColumn3.AllowEditing = false;
+            gridNumericColumn3.AllowResizing = true;
+            gridNumericColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
+            gridNumericColumn3.Format = "0' KM'";
+            gridNumericColumn3.HeaderText = "Mileage (KM)";
+            gridNumericColumn3.MappingName = "VehicleMileage";
+            gridNumericColumn3.Width = 90D;
+            gridTextColumn5.AllowEditing = false;
+            gridTextColumn5.AllowResizing = true;
+            gridTextColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn5.HeaderText = "Fuel Type";
+            gridTextColumn5.MappingName = "VehicleFuelType";
+            gridTextColumn5.Width = 80D;
+            gridTextColumn6.AllowEditing = false;
+            gridTextColumn6.AllowResizing = true;
+            gridTextColumn6.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn6.HeaderText = "Transmission";
+            gridTextColumn6.MappingName = "VehicleTransmissionType";
+            gridTextColumn6.Width = 90D;
+            gridTextColumn7.AllowEditing = false;
+            gridTextColumn7.AllowResizing = true;
+            gridTextColumn7.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn7.HeaderText = "Status";
+            gridTextColumn7.MappingName = "VehicleStatus.VehicleStatusName";
+            gridTextColumn7.Width = 80D;
+            gridDateTimeColumn1.AllowEditing = false;
+            gridDateTimeColumn1.AllowResizing = true;
+            gridDateTimeColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn1.Format = "dd.MM.yyyy";
+            gridDateTimeColumn1.HeaderText = "Acquisition Date";
+            gridDateTimeColumn1.MappingName = "VehicleAcquisitionDate";
+            gridDateTimeColumn1.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn1.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn1.Width = 110D;
+            gridNumericColumn4.AllowEditing = false;
+            gridNumericColumn4.AllowResizing = true;
+            gridNumericColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
+            gridNumericColumn4.Format = "#,##0.00 ₺";
+            gridNumericColumn4.HeaderText = "Purchase Price (₺)";
+            gridNumericColumn4.MappingName = "VehiclePurchasePrice";
+            gridNumericColumn4.Width = 110D;
+            gridNumericColumn5.AllowEditing = false;
+            gridNumericColumn5.AllowResizing = true;
+            gridNumericColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Left;
+            gridNumericColumn5.Format = "#,##0.00 ₺";
+            gridNumericColumn5.HeaderText = "Sale Price (₺)";
+            gridNumericColumn5.MappingName = "VehicleSalePrice";
+            gridNumericColumn5.Width = 100D;
+            gridTextColumn8.AllowEditing = false;
+            gridTextColumn8.AllowResizing = true;
+            gridTextColumn8.HeaderText = "Branch Name";
+            gridTextColumn8.MappingName = "Branch.BranchName";
+            gridTextColumn8.Width = 131D;
+            gridTextColumn9.AllowEditing = false;
+            gridTextColumn9.AllowResizing = true;
+            gridTextColumn9.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn9.HeaderText = "Class";
+            gridTextColumn9.MappingName = "VehicleClass.VehicleClassName";
+            gridTextColumn9.Width = 70D;
+            gridDateTimeColumn2.AllowEditing = false;
+            gridDateTimeColumn2.AllowResizing = true;
+            gridDateTimeColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn2.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn2.HeaderText = "Created At";
+            gridDateTimeColumn2.MappingName = "VehicleCreatedAt";
+            gridDateTimeColumn2.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn2.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn2.Width = 150D;
+            gridDateTimeColumn3.AllowEditing = false;
+            gridDateTimeColumn3.AllowResizing = true;
+            gridDateTimeColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn3.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn3.HeaderText = "Updated At";
+            gridDateTimeColumn3.MappingName = "VehicleUpdatedAt";
+            gridDateTimeColumn3.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn3.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn3.Width = 150D;
+            sfDataGridVehicles.Columns.Add(gridNumericColumn1);
+            sfDataGridVehicles.Columns.Add(gridTextColumn1);
+            sfDataGridVehicles.Columns.Add(gridTextColumn2);
+            sfDataGridVehicles.Columns.Add(gridTextColumn3);
+            sfDataGridVehicles.Columns.Add(gridNumericColumn2);
+            sfDataGridVehicles.Columns.Add(gridTextColumn4);
+            sfDataGridVehicles.Columns.Add(gridNumericColumn3);
+            sfDataGridVehicles.Columns.Add(gridTextColumn5);
+            sfDataGridVehicles.Columns.Add(gridTextColumn6);
+            sfDataGridVehicles.Columns.Add(gridTextColumn7);
+            sfDataGridVehicles.Columns.Add(gridDateTimeColumn1);
+            sfDataGridVehicles.Columns.Add(gridNumericColumn4);
+            sfDataGridVehicles.Columns.Add(gridNumericColumn5);
+            sfDataGridVehicles.Columns.Add(gridTextColumn8);
+            sfDataGridVehicles.Columns.Add(gridTextColumn9);
+            sfDataGridVehicles.Columns.Add(gridDateTimeColumn2);
+            sfDataGridVehicles.Columns.Add(gridDateTimeColumn3);
+            sfDataGridVehicles.Dock = DockStyle.Bottom;
+            sfDataGridVehicles.Location = new Point(20, 80);
             sfDataGridVehicles.Name = "sfDataGridVehicles";
             sfDataGridVehicles.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridVehicles.Size = new Size(1627, 925);
+            sfDataGridVehicles.Size = new Size(1627, 865);
             sfDataGridVehicles.Style.AddNewRowStyle.BackColor = Color.Transparent;
             sfDataGridVehicles.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridVehicles.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
@@ -508,20 +428,27 @@
             // 
             // 
             // 
-            dtpAcquisitionDate.Calendar.BottomHeight = 0;
+            dtpAcquisitionDate.Calendar.BottomHeight = 6;
+            dtpAcquisitionDate.Calendar.DayNamesFont = new Font("Verdana", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dtpAcquisitionDate.Calendar.DayNamesHeight = 23;
+            dtpAcquisitionDate.Calendar.DaysFont = new Font("Segoe UI", 11F);
             dtpAcquisitionDate.Calendar.Font = new Font("Segoe UI", 11F);
+            dtpAcquisitionDate.Calendar.HeaderFont = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dtpAcquisitionDate.Calendar.HeaderHeight = 38;
             dtpAcquisitionDate.Calendar.Location = new Point(0, 0);
             dtpAcquisitionDate.Calendar.Name = "monthCalendar";
+            dtpAcquisitionDate.Calendar.Size = new Size(200, 200);
             dtpAcquisitionDate.Calendar.TabIndex = 0;
             // 
             // 
             // 
-            dtpAcquisitionDate.Calendar.NoneButton.Location = new Point(78, 0);
+            dtpAcquisitionDate.Calendar.NoneButton.AutoSize = true;
+            dtpAcquisitionDate.Calendar.NoneButton.Location = new Point(128, 0);
             // 
             // 
             // 
+            dtpAcquisitionDate.Calendar.TodayButton.AutoSize = true;
             dtpAcquisitionDate.Calendar.TodayButton.Location = new Point(0, 0);
-            dtpAcquisitionDate.CalendarFont = new Font("Segoe UI", 9F);
             dtpAcquisitionDate.CalendarSize = new Size(189, 176);
             dtpAcquisitionDate.DropDownImage = null;
             dtpAcquisitionDate.Font = new Font("Segoe UI", 11F);
@@ -815,6 +742,86 @@
             lblVehicleFormTitle.TabIndex = 34;
             lblVehicleFormTitle.Text = "Add New Vehicle";
             // 
+            // panelVehicleActions
+            // 
+            panelVehicleActions.Controls.Add(btnEditVehicle);
+            panelVehicleActions.Controls.Add(btnDeleteVehicle);
+            panelVehicleActions.Controls.Add(btnToggleVehicleStatus);
+            panelVehicleActions.Controls.Add(btnRefreshVehicles);
+            panelVehicleActions.Dock = DockStyle.Top;
+            panelVehicleActions.Location = new Point(20, 20);
+            panelVehicleActions.Name = "panelVehicleActions";
+            panelVehicleActions.Size = new Size(1627, 60);
+            panelVehicleActions.TabIndex = 2;
+            // 
+            // btnEditVehicle
+            // 
+            btnEditVehicle.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnEditVehicle.BackColor = Color.FromArgb(0, 120, 215);
+            btnEditVehicle.BeforeTouchSize = new Size(120, 35);
+            btnEditVehicle.FlatStyle = FlatStyle.Flat;
+            btnEditVehicle.Font = new Font("Segoe UI Semibold", 10F);
+            btnEditVehicle.ForeColor = Color.White;
+            btnEditVehicle.Location = new Point(10, 15);
+            btnEditVehicle.Name = "btnEditVehicle";
+            btnEditVehicle.Size = new Size(120, 35);
+            btnEditVehicle.TabIndex = 0;
+            btnEditVehicle.Text = "Edit Vehicle";
+            btnEditVehicle.ThemeName = "Metro";
+            btnEditVehicle.UseVisualStyleBackColor = false;
+            btnEditVehicle.Click += BtnEditVehicle_Click;
+            // 
+            // btnDeleteVehicle
+            // 
+            btnDeleteVehicle.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnDeleteVehicle.BackColor = Color.FromArgb(215, 55, 55);
+            btnDeleteVehicle.BeforeTouchSize = new Size(130, 35);
+            btnDeleteVehicle.FlatStyle = FlatStyle.Flat;
+            btnDeleteVehicle.Font = new Font("Segoe UI Semibold", 10F);
+            btnDeleteVehicle.ForeColor = Color.White;
+            btnDeleteVehicle.Location = new Point(140, 15);
+            btnDeleteVehicle.Name = "btnDeleteVehicle";
+            btnDeleteVehicle.Size = new Size(130, 35);
+            btnDeleteVehicle.TabIndex = 1;
+            btnDeleteVehicle.Text = "Delete Vehicle";
+            btnDeleteVehicle.ThemeName = "Metro";
+            btnDeleteVehicle.UseVisualStyleBackColor = false;
+            btnDeleteVehicle.Click += BtnDeleteVehicle_Click;
+            // 
+            // btnToggleVehicleStatus
+            // 
+            btnToggleVehicleStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnToggleVehicleStatus.BackColor = Color.FromArgb(255, 140, 0);
+            btnToggleVehicleStatus.BeforeTouchSize = new Size(140, 35);
+            btnToggleVehicleStatus.FlatStyle = FlatStyle.Flat;
+            btnToggleVehicleStatus.Font = new Font("Segoe UI Semibold", 10F);
+            btnToggleVehicleStatus.ForeColor = Color.White;
+            btnToggleVehicleStatus.Location = new Point(280, 15);
+            btnToggleVehicleStatus.Name = "btnToggleVehicleStatus";
+            btnToggleVehicleStatus.Size = new Size(140, 35);
+            btnToggleVehicleStatus.TabIndex = 2;
+            btnToggleVehicleStatus.Text = "Toggle Status";
+            btnToggleVehicleStatus.ThemeName = "Metro";
+            btnToggleVehicleStatus.UseVisualStyleBackColor = false;
+            btnToggleVehicleStatus.Click += BtnToggleVehicleStatus_Click;
+            // 
+            // btnRefreshVehicles
+            // 
+            btnRefreshVehicles.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnRefreshVehicles.BackColor = Color.FromArgb(34, 139, 34);
+            btnRefreshVehicles.BeforeTouchSize = new Size(120, 35);
+            btnRefreshVehicles.FlatStyle = FlatStyle.Flat;
+            btnRefreshVehicles.Font = new Font("Segoe UI Semibold", 10F);
+            btnRefreshVehicles.ForeColor = Color.White;
+            btnRefreshVehicles.Location = new Point(430, 15);
+            btnRefreshVehicles.Name = "btnRefreshVehicles";
+            btnRefreshVehicles.Size = new Size(120, 35);
+            btnRefreshVehicles.TabIndex = 3;
+            btnRefreshVehicles.Text = "Refresh";
+            btnRefreshVehicles.ThemeName = "Metro";
+            btnRefreshVehicles.UseVisualStyleBackColor = false;
+            btnRefreshVehicles.Click += BtnRefreshVehicles_Click;
+            // 
             // VehiclesControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -825,7 +832,6 @@
             ((System.ComponentModel.ISupportInitialize)tabControlVehicles).EndInit();
             tabControlVehicles.ResumeLayout(false);
             tabPageVehiclesList.ResumeLayout(false);
-            panelVehicleActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridVehicles).EndInit();
             tabPageVehicleAdd.ResumeLayout(false);
             panelVehicleForm.ResumeLayout(false);
@@ -847,6 +853,7 @@
             ((System.ComponentModel.ISupportInitialize)txtModel).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtBrand).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtPlateNumber).EndInit();
+            panelVehicleActions.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -856,11 +863,6 @@
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageVehiclesList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageVehicleAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridVehicles;
-        private System.Windows.Forms.Panel panelVehicleActions;
-        private Syncfusion.Windows.Forms.ButtonAdv btnEditVehicle;
-        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteVehicle;
-        private Syncfusion.Windows.Forms.ButtonAdv btnToggleVehicleStatus;
-        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshVehicles;
         private System.Windows.Forms.Panel panelVehicleForm;
         private System.Windows.Forms.Label lblVehicleFormTitle;
         private System.Windows.Forms.Label lblPlateNumber;
@@ -897,5 +899,10 @@
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cmbVehicleClass;
         private Syncfusion.Windows.Forms.ButtonAdv btnSaveVehicle;
         private Syncfusion.Windows.Forms.ButtonAdv btnCancelVehicle;
+        private Panel panelVehicleActions;
+        private Syncfusion.Windows.Forms.ButtonAdv btnEditVehicle;
+        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteVehicle;
+        private Syncfusion.Windows.Forms.ButtonAdv btnToggleVehicleStatus;
+        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshVehicles;
     }
 }

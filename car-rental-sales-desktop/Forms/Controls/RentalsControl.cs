@@ -6,6 +6,10 @@ using car_rental_sales_desktop.Repositories;
 using System.Drawing;
 using System.Linq;
 using car_rental_sales_desktop.Methods;
+using Syncfusion.WinForms.DataGrid.Enums; // Added for RowType
+using Syncfusion.WinForms.DataGrid.Events; // Added for CellClickEventArgs
+using Syncfusion.Windows.Forms.Tools; // Added for TabControlAdv
+using Syncfusion.WinForms.DataGrid.Helpers; // Added for potential SfDataGrid extension methods
 
 namespace car_rental_sales_desktop.Forms.Controls
 {
@@ -39,12 +43,61 @@ namespace car_rental_sales_desktop.Forms.Controls
             dtpRentalEndDate.ValueChanged += DtpRentalEndDate_ValueChanged;
 
             sfDataGridLastRentals.CellDoubleClick += SfDataGridLastRentals_CellDoubleClick;
+            sfDataGridRentals.CellDoubleClick += SfDataGridRentals_CellDoubleClick; // Added this line
             btnShowRental.Click += BtnShowRental_Click;
 
             _formManager.InitializeFormDefaults();
 
             sfDataGridLastRentals.QueryRowStyle += SfDataGridLastRentals_QueryRowStyle;
             sfDataGridRentals.QueryRowStyle += SfDataGridRentals_QueryRowStyle;
+        }
+
+        // ... (rest of the existing code) ...
+
+        private void SfDataGridRentals_CellDoubleClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
+        {
+            if (e.DataRow != null && e.DataRow.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
+            {
+                var selectedRentalFromGrid = e.DataRow.RowData as Rental;
+                if (selectedRentalFromGrid != null)
+                {
+                    // Set selected item for sfDataGridRentals (this will be used by LoadSelectedRental if the item isn't found in sfDataGridLastRentals)
+                    sfDataGridRentals.SelectedItem = selectedRentalFromGrid;
+
+                    // Find and set the corresponding item in sfDataGridLastRentals
+                    var rentalInLastRentalsGrid = (sfDataGridLastRentals.DataSource as List<Rental>)?.FirstOrDefault(r => r.RentalID == selectedRentalFromGrid.RentalID);
+                    if (rentalInLastRentalsGrid != null)
+                    {
+                        sfDataGridLastRentals.SelectedItem = rentalInLastRentalsGrid;
+                        // The SfDataGrid often scrolls to the SelectedItem automatically.
+                        // The following lines are commented out to resolve CS1061.
+                        // If explicit scrolling is still needed, verify the API for your Syncfusion version.
+                        // var rowIndex = sfDataGridLastRentals.ResolveToRowIndex(rentalInLastRentalsGrid); // CS1061 here
+                        // if (rowIndex >= 0)
+                        // {
+                        //     sfDataGridLastRentals.ScrollInView(rowIndex); // CS1061 here
+                        // }
+                    }
+                    else
+                    {
+                        // If not found in the other grid, clear its selection or leave as is
+                        // sfDataGridLastRentals.ClearSelections(false); // Optional: if you want to clear selection
+                    }
+
+                    // Load the selected rental data into the form fields
+                    // LoadSelectedRental will use sfDataGridLastRentals.SelectedItem first, then sfDataGridRentals.SelectedItem
+                    LoadSelectedRental();
+
+                    // Switch to the Rental Add tab
+                    // Assuming tabPageRentalAdd is a TabPageAdv and its parent is a TabControlAdv
+                    if (tabPageRentalAdd != null && tabPageRentalAdd.Parent is TabControlAdv parentTabControl)
+                    {
+                        parentTabControl.SelectedTab = tabPageRentalAdd;
+                    }
+                    // Removed the else-if for System.Windows.Forms.TabControl to fix CS0029,
+                    // as tabPageRentalAdd (being a TabPageAdv) cannot be assigned to System.Windows.Forms.TabControl.SelectedTab.
+                }
+            }
         }
 
         private void RentalsControl_Load(object sender, EventArgs e)
@@ -469,12 +522,24 @@ namespace car_rental_sales_desktop.Forms.Controls
             if (e.DataRow != null && e.DataRow.RowType == Syncfusion.WinForms.DataGrid.Enums.RowType.DefaultRow)
             {
                 LoadSelectedRental();
+                // Switch to the Rental Add tab if not already there
+                if (tabPageRentalAdd != null && tabPageRentalAdd.Parent is TabControlAdv parentTabControl)
+                {
+                    parentTabControl.SelectedTab = tabPageRentalAdd;
+                }
+                // Removed the else-if for System.Windows.Forms.TabControl to fix CS0029
             }
         }
 
         private void BtnShowRental_Click(object sender, EventArgs e)
         {
             LoadSelectedRental();
+            // Switch to the Rental Add tab if not already there
+            if (tabPageRentalAdd != null && tabPageRentalAdd.Parent is TabControlAdv parentTabControl)
+            {
+                parentTabControl.SelectedTab = tabPageRentalAdd;
+            }
+            // Removed the else-if for System.Windows.Forms.TabControl to fix CS0029
         }
 
         private void LoadSelectedRental()
@@ -491,10 +556,23 @@ namespace car_rental_sales_desktop.Forms.Controls
                 _formManager.ClearFormInputs();
 
 
-                if (selectedRental.Customer == null && selectedRental.RentalCustomerID > 0)
+                if (selectedRental.RentalCustomerID > 0)
+                {
                     selectedRental.Customer = _customerRepository.GetById(selectedRental.RentalCustomerID);
-                if (selectedRental.Vehicle == null && selectedRental.RentalVehicleID > 0)
+                }
+                else
+                {
+                    selectedRental.Customer = null;
+                }
+
+                if (selectedRental.RentalVehicleID > 0)
+                {
                     selectedRental.Vehicle = _vehicleRepository.GetById(selectedRental.RentalVehicleID);
+                }
+                else
+                {
+                    selectedRental.Vehicle = null;
+                }
 
                 List<RentalNote> notes = (selectedRental.RentalID > 0) ? _rentalRepository.GetNotes(selectedRental.RentalID) : new List<RentalNote>();
 
@@ -551,21 +629,22 @@ namespace car_rental_sales_desktop.Forms.Controls
                 var refreshedRental = _rentalRepository.GetById(selectedRental.RentalID);
                 if (refreshedRental != null)
                 {
-                    var gridRental = (sfDataGridLastRentals.DataSource as List<Rental>)?.FirstOrDefault(r => r.RentalID == selectedRental.RentalID);
-                    if (gridRental == null) gridRental = (sfDataGridRentals.DataSource as List<Rental>)?.FirstOrDefault(r => r.RentalID == selectedRental.RentalID);
+                    // Try to reselect in the grids
+                    var rentalInLastRentalsGrid = (sfDataGridLastRentals.DataSource as List<Rental>)?.FirstOrDefault(r => r.RentalID == refreshedRental.RentalID);
+                    if (rentalInLastRentalsGrid != null) sfDataGridLastRentals.SelectedItem = rentalInLastRentalsGrid;
 
-                    if (gridRental != null)
+                    var rentalInRentalsGrid = (sfDataGridRentals.DataSource as List<Rental>)?.FirstOrDefault(r => r.RentalID == refreshedRental.RentalID);
+                    if (rentalInRentalsGrid != null) sfDataGridRentals.SelectedItem = rentalInRentalsGrid;
+
+                    // If the originally selected item (or its refreshed version) is still what we want to show:
+                    if ((sfDataGridLastRentals.SelectedItem as Rental)?.RentalID == refreshedRental.RentalID ||
+                         (sfDataGridRentals.SelectedItem as Rental)?.RentalID == refreshedRental.RentalID)
                     {
-                        if (sfDataGridLastRentals.DataSource == gridRental.GetType().Assembly)
-                            sfDataGridLastRentals.SelectedItem = gridRental;
-                        else if (sfDataGridRentals.DataSource == gridRental.GetType().Assembly)
-                            sfDataGridRentals.SelectedItem = gridRental;
-
                         LoadSelectedRental();
                     }
                     else
                     {
-                        ClearForm();
+                        ClearForm(); // Or select the refreshed rental if found and load it
                     }
                 }
                 else

@@ -18,25 +18,20 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn2 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn9 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn11 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn12 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn13 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn14 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn4 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridCheckBoxColumn gridCheckBoxColumn2 = new Syncfusion.WinForms.DataGrid.GridCheckBoxColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn5 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn6 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridNumericColumn gridNumericColumn1 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridCheckBoxColumn gridCheckBoxColumn1 = new Syncfusion.WinForms.DataGrid.GridCheckBoxColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn3 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             tabControlStaff = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageStaffList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            panelStaffActions = new Panel();
-            btnEditStaff = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnDeleteStaff = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnToggleStatus = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnRefreshStaff = new Syncfusion.Windows.Forms.ButtonAdv();
             sfDataGridStaff = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageStaffAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             panelStaffForm = new Panel();
@@ -60,10 +55,14 @@
             lblUserLastName = new Label();
             lblUserFirstName = new Label();
             lblStaffFormTitle = new Label();
+            panelStaffActions = new Panel();
+            btnEditStaff = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnDeleteStaff = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnToggleStatus = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnRefreshStaff = new Syncfusion.Windows.Forms.ButtonAdv();
             ((System.ComponentModel.ISupportInitialize)tabControlStaff).BeginInit();
             tabControlStaff.SuspendLayout();
             tabPageStaffList.SuspendLayout();
-            panelStaffActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridStaff).BeginInit();
             tabPageStaffAdd.SuspendLayout();
             panelStaffForm.SuspendLayout();
@@ -76,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)txtUsername).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtUserLastName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtUserFirstName).BeginInit();
+            panelStaffActions.SuspendLayout();
             SuspendLayout();
             // 
             // tabControlStaff
@@ -105,184 +105,104 @@
             tabPageStaffList.Text = "Staff List";
             tabPageStaffList.ThemesEnabled = false;
             // 
-            // panelStaffActions
-            // 
-            panelStaffActions.Controls.Add(btnEditStaff);
-            panelStaffActions.Controls.Add(btnDeleteStaff);
-            panelStaffActions.Controls.Add(btnToggleStatus);
-            panelStaffActions.Controls.Add(btnRefreshStaff);
-            panelStaffActions.Dock = DockStyle.Top;
-            panelStaffActions.Location = new Point(20, 20);
-            panelStaffActions.Name = "panelStaffActions";
-            panelStaffActions.Size = new Size(1627, 60);
-            panelStaffActions.TabIndex = 1;
-            // 
-            // btnEditStaff
-            // 
-            btnEditStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnEditStaff.BackColor = Color.FromArgb(0, 120, 215);
-            btnEditStaff.BeforeTouchSize = new Size(120, 35);
-            btnEditStaff.FlatStyle = FlatStyle.Flat;
-            btnEditStaff.Font = new Font("Segoe UI Semibold", 10F);
-            btnEditStaff.ForeColor = Color.White;
-            btnEditStaff.Location = new Point(10, 15);
-            btnEditStaff.Name = "btnEditStaff";
-            btnEditStaff.Size = new Size(120, 35);
-            btnEditStaff.TabIndex = 0;
-            btnEditStaff.Text = "Edit Staff";
-            btnEditStaff.ThemeName = "Metro";
-            btnEditStaff.UseVisualStyleBackColor = false;
-            btnEditStaff.Click += BtnEditStaff_Click;
-            // 
-            // btnDeleteStaff
-            // 
-            btnDeleteStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnDeleteStaff.BackColor = Color.FromArgb(215, 55, 55);
-            btnDeleteStaff.BeforeTouchSize = new Size(120, 35);
-            btnDeleteStaff.FlatStyle = FlatStyle.Flat;
-            btnDeleteStaff.Font = new Font("Segoe UI Semibold", 10F);
-            btnDeleteStaff.ForeColor = Color.White;
-            btnDeleteStaff.Location = new Point(140, 15);
-            btnDeleteStaff.Name = "btnDeleteStaff";
-            btnDeleteStaff.Size = new Size(120, 35);
-            btnDeleteStaff.TabIndex = 1;
-            btnDeleteStaff.Text = "Delete Staff";
-            btnDeleteStaff.ThemeName = "Metro";
-            btnDeleteStaff.UseVisualStyleBackColor = false;
-            btnDeleteStaff.Click += BtnDeleteStaff_Click;
-            // 
-            // btnToggleStatus
-            // 
-            btnToggleStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnToggleStatus.BackColor = Color.FromArgb(255, 140, 0);
-            btnToggleStatus.BeforeTouchSize = new Size(140, 35);
-            btnToggleStatus.FlatStyle = FlatStyle.Flat;
-            btnToggleStatus.Font = new Font("Segoe UI Semibold", 10F);
-            btnToggleStatus.ForeColor = Color.White;
-            btnToggleStatus.Location = new Point(270, 15);
-            btnToggleStatus.Name = "btnToggleStatus";
-            btnToggleStatus.Size = new Size(140, 35);
-            btnToggleStatus.TabIndex = 2;
-            btnToggleStatus.Text = "Toggle Status";
-            btnToggleStatus.ThemeName = "Metro";
-            btnToggleStatus.UseVisualStyleBackColor = false;
-            btnToggleStatus.Click += BtnToggleStatus_Click;
-            // 
-            // btnRefreshStaff
-            // 
-            btnRefreshStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnRefreshStaff.BackColor = Color.FromArgb(34, 139, 34);
-            btnRefreshStaff.BeforeTouchSize = new Size(120, 35);
-            btnRefreshStaff.FlatStyle = FlatStyle.Flat;
-            btnRefreshStaff.Font = new Font("Segoe UI Semibold", 10F);
-            btnRefreshStaff.ForeColor = Color.White;
-            btnRefreshStaff.Location = new Point(420, 15);
-            btnRefreshStaff.Name = "btnRefreshStaff";
-            btnRefreshStaff.Size = new Size(120, 35);
-            btnRefreshStaff.TabIndex = 3;
-            btnRefreshStaff.Text = "Refresh";
-            btnRefreshStaff.ThemeName = "Metro";
-            btnRefreshStaff.UseVisualStyleBackColor = false;
-            btnRefreshStaff.Click += BtnRefreshStaff_Click;
-            // 
             // sfDataGridStaff
             // 
             sfDataGridStaff.AccessibleName = "Table";
             sfDataGridStaff.AllowEditing = false;
             sfDataGridStaff.AutoGenerateColumns = false;
-            gridNumericColumn2.AllowEditing = false;
-            gridNumericColumn2.AllowResizing = true;
-            gridNumericColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridNumericColumn2.Format = "0";
-            gridNumericColumn2.HeaderText = "ID";
-            gridNumericColumn2.MappingName = "UserID";
-            gridNumericColumn2.Width = 50D;
-            gridTextColumn8.AllowEditing = false;
-            gridTextColumn8.AllowResizing = true;
-            gridTextColumn8.HeaderText = "First Name";
-            gridTextColumn8.MappingName = "UserFirstName";
-            gridTextColumn8.Width = 110D;
-            gridTextColumn9.AllowEditing = false;
-            gridTextColumn9.AllowResizing = true;
-            gridTextColumn9.HeaderText = "Last Name";
-            gridTextColumn9.MappingName = "UserLastName";
-            gridTextColumn9.Width = 110D;
-            gridTextColumn10.AllowEditing = false;
-            gridTextColumn10.AllowResizing = true;
-            gridTextColumn10.HeaderText = "Username";
-            gridTextColumn10.MappingName = "Username";
-            gridTextColumn10.Width = 120D;
-            gridTextColumn11.AllowEditing = false;
-            gridTextColumn11.AllowResizing = true;
-            gridTextColumn11.HeaderText = "Email";
-            gridTextColumn11.MappingName = "UserEmail";
-            gridTextColumn11.Width = 231D;
-            gridTextColumn12.AllowEditing = false;
-            gridTextColumn12.AllowResizing = true;
-            gridTextColumn12.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridTextColumn12.HeaderText = "Phone No";
-            gridTextColumn12.MappingName = "UserPhone";
-            gridTextColumn12.Width = 130D;
-            gridTextColumn13.AllowEditing = false;
-            gridTextColumn13.AllowResizing = true;
-            gridTextColumn13.HeaderText = "Role";
-            gridTextColumn13.MappingName = "Role.RoleName";
-            gridTextColumn13.Width = 150D;
-            gridTextColumn14.AllowEditing = false;
-            gridTextColumn14.AllowResizing = true;
-            gridTextColumn14.HeaderText = "Branch Name";
-            gridTextColumn14.MappingName = "Branch.BranchName";
-            gridTextColumn14.Width = 160D;
-            gridDateTimeColumn4.AllowEditing = false;
-            gridDateTimeColumn4.AllowResizing = true;
-            gridDateTimeColumn4.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn4.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn4.HeaderText = "Last Login";
-            gridDateTimeColumn4.MappingName = "UserLastLogin";
-            gridDateTimeColumn4.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn4.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn4.Width = 160D;
-            gridCheckBoxColumn2.AllowEditing = false;
-            gridCheckBoxColumn2.AllowResizing = true;
-            gridCheckBoxColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridCheckBoxColumn2.HeaderText = "Active";
-            gridCheckBoxColumn2.MappingName = "UserActive";
-            gridCheckBoxColumn2.Width = 70D;
-            gridDateTimeColumn5.AllowEditing = false;
-            gridDateTimeColumn5.AllowResizing = true;
-            gridDateTimeColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn5.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn5.HeaderText = "Created At";
-            gridDateTimeColumn5.MappingName = "UserCreatedAt";
-            gridDateTimeColumn5.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn5.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn5.Width = 160D;
-            gridDateTimeColumn6.AllowEditing = false;
-            gridDateTimeColumn6.AllowResizing = true;
-            gridDateTimeColumn6.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
-            gridDateTimeColumn6.Format = "dd.MM.yyyy - HH:mm:ss";
-            gridDateTimeColumn6.HeaderText = "Updated At";
-            gridDateTimeColumn6.MappingName = "UserUpdatedAt";
-            gridDateTimeColumn6.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
-            gridDateTimeColumn6.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
-            gridDateTimeColumn6.Width = 160D;
-            sfDataGridStaff.Columns.Add(gridNumericColumn2);
-            sfDataGridStaff.Columns.Add(gridTextColumn8);
-            sfDataGridStaff.Columns.Add(gridTextColumn9);
-            sfDataGridStaff.Columns.Add(gridTextColumn10);
-            sfDataGridStaff.Columns.Add(gridTextColumn11);
-            sfDataGridStaff.Columns.Add(gridTextColumn12);
-            sfDataGridStaff.Columns.Add(gridTextColumn13);
-            sfDataGridStaff.Columns.Add(gridTextColumn14);
-            sfDataGridStaff.Columns.Add(gridDateTimeColumn4);
-            sfDataGridStaff.Columns.Add(gridCheckBoxColumn2);
-            sfDataGridStaff.Columns.Add(gridDateTimeColumn5);
-            sfDataGridStaff.Columns.Add(gridDateTimeColumn6);
-            sfDataGridStaff.Dock = DockStyle.Fill;
-            sfDataGridStaff.Location = new Point(20, 20);
+            gridNumericColumn1.AllowEditing = false;
+            gridNumericColumn1.AllowResizing = true;
+            gridNumericColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridNumericColumn1.Format = "0";
+            gridNumericColumn1.HeaderText = "ID";
+            gridNumericColumn1.MappingName = "UserID";
+            gridNumericColumn1.Width = 50D;
+            gridTextColumn1.AllowEditing = false;
+            gridTextColumn1.AllowResizing = true;
+            gridTextColumn1.HeaderText = "First Name";
+            gridTextColumn1.MappingName = "UserFirstName";
+            gridTextColumn1.Width = 110D;
+            gridTextColumn2.AllowEditing = false;
+            gridTextColumn2.AllowResizing = true;
+            gridTextColumn2.HeaderText = "Last Name";
+            gridTextColumn2.MappingName = "UserLastName";
+            gridTextColumn2.Width = 110D;
+            gridTextColumn3.AllowEditing = false;
+            gridTextColumn3.AllowResizing = true;
+            gridTextColumn3.HeaderText = "Username";
+            gridTextColumn3.MappingName = "Username";
+            gridTextColumn3.Width = 120D;
+            gridTextColumn4.AllowEditing = false;
+            gridTextColumn4.AllowResizing = true;
+            gridTextColumn4.HeaderText = "Email";
+            gridTextColumn4.MappingName = "UserEmail";
+            gridTextColumn4.Width = 231D;
+            gridTextColumn5.AllowEditing = false;
+            gridTextColumn5.AllowResizing = true;
+            gridTextColumn5.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridTextColumn5.HeaderText = "Phone No";
+            gridTextColumn5.MappingName = "UserPhone";
+            gridTextColumn5.Width = 130D;
+            gridTextColumn6.AllowEditing = false;
+            gridTextColumn6.AllowResizing = true;
+            gridTextColumn6.HeaderText = "Role";
+            gridTextColumn6.MappingName = "Role.RoleName";
+            gridTextColumn6.Width = 150D;
+            gridTextColumn7.AllowEditing = false;
+            gridTextColumn7.AllowResizing = true;
+            gridTextColumn7.HeaderText = "Branch Name";
+            gridTextColumn7.MappingName = "Branch.BranchName";
+            gridTextColumn7.Width = 160D;
+            gridDateTimeColumn1.AllowEditing = false;
+            gridDateTimeColumn1.AllowResizing = true;
+            gridDateTimeColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn1.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn1.HeaderText = "Last Login";
+            gridDateTimeColumn1.MappingName = "UserLastLogin";
+            gridDateTimeColumn1.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn1.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn1.Width = 160D;
+            gridCheckBoxColumn1.AllowEditing = false;
+            gridCheckBoxColumn1.AllowResizing = true;
+            gridCheckBoxColumn1.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridCheckBoxColumn1.HeaderText = "Active";
+            gridCheckBoxColumn1.MappingName = "UserActive";
+            gridCheckBoxColumn1.Width = 70D;
+            gridDateTimeColumn2.AllowEditing = false;
+            gridDateTimeColumn2.AllowResizing = true;
+            gridDateTimeColumn2.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn2.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn2.HeaderText = "Created At";
+            gridDateTimeColumn2.MappingName = "UserCreatedAt";
+            gridDateTimeColumn2.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn2.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn2.Width = 160D;
+            gridDateTimeColumn3.AllowEditing = false;
+            gridDateTimeColumn3.AllowResizing = true;
+            gridDateTimeColumn3.CellStyle.HorizontalAlignment = HorizontalAlignment.Center;
+            gridDateTimeColumn3.Format = "dd.MM.yyyy - HH:mm:ss";
+            gridDateTimeColumn3.HeaderText = "Updated At";
+            gridDateTimeColumn3.MappingName = "UserUpdatedAt";
+            gridDateTimeColumn3.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn3.Pattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            gridDateTimeColumn3.Width = 160D;
+            sfDataGridStaff.Columns.Add(gridNumericColumn1);
+            sfDataGridStaff.Columns.Add(gridTextColumn1);
+            sfDataGridStaff.Columns.Add(gridTextColumn2);
+            sfDataGridStaff.Columns.Add(gridTextColumn3);
+            sfDataGridStaff.Columns.Add(gridTextColumn4);
+            sfDataGridStaff.Columns.Add(gridTextColumn5);
+            sfDataGridStaff.Columns.Add(gridTextColumn6);
+            sfDataGridStaff.Columns.Add(gridTextColumn7);
+            sfDataGridStaff.Columns.Add(gridDateTimeColumn1);
+            sfDataGridStaff.Columns.Add(gridCheckBoxColumn1);
+            sfDataGridStaff.Columns.Add(gridDateTimeColumn2);
+            sfDataGridStaff.Columns.Add(gridDateTimeColumn3);
+            sfDataGridStaff.Dock = DockStyle.Bottom;
+            sfDataGridStaff.Location = new Point(20, 80);
             sfDataGridStaff.Name = "sfDataGridStaff";
             sfDataGridStaff.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridStaff.Size = new Size(1627, 925);
+            sfDataGridStaff.Size = new Size(1627, 865);
             sfDataGridStaff.Style.AddNewRowStyle.BackColor = Color.Transparent;
             sfDataGridStaff.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridStaff.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
@@ -560,6 +480,86 @@
             lblStaffFormTitle.TabIndex = 0;
             lblStaffFormTitle.Text = "Add New Staff";
             // 
+            // panelStaffActions
+            // 
+            panelStaffActions.Controls.Add(btnEditStaff);
+            panelStaffActions.Controls.Add(btnDeleteStaff);
+            panelStaffActions.Controls.Add(btnToggleStatus);
+            panelStaffActions.Controls.Add(btnRefreshStaff);
+            panelStaffActions.Dock = DockStyle.Top;
+            panelStaffActions.Location = new Point(20, 20);
+            panelStaffActions.Name = "panelStaffActions";
+            panelStaffActions.Size = new Size(1627, 60);
+            panelStaffActions.TabIndex = 2;
+            // 
+            // btnEditStaff
+            // 
+            btnEditStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnEditStaff.BackColor = Color.FromArgb(0, 120, 215);
+            btnEditStaff.BeforeTouchSize = new Size(120, 35);
+            btnEditStaff.FlatStyle = FlatStyle.Flat;
+            btnEditStaff.Font = new Font("Segoe UI Semibold", 10F);
+            btnEditStaff.ForeColor = Color.White;
+            btnEditStaff.Location = new Point(10, 15);
+            btnEditStaff.Name = "btnEditStaff";
+            btnEditStaff.Size = new Size(120, 35);
+            btnEditStaff.TabIndex = 0;
+            btnEditStaff.Text = "Edit Staff";
+            btnEditStaff.ThemeName = "Metro";
+            btnEditStaff.UseVisualStyleBackColor = false;
+            btnEditStaff.Click += BtnEditStaff_Click;
+            // 
+            // btnDeleteStaff
+            // 
+            btnDeleteStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnDeleteStaff.BackColor = Color.FromArgb(215, 55, 55);
+            btnDeleteStaff.BeforeTouchSize = new Size(120, 35);
+            btnDeleteStaff.FlatStyle = FlatStyle.Flat;
+            btnDeleteStaff.Font = new Font("Segoe UI Semibold", 10F);
+            btnDeleteStaff.ForeColor = Color.White;
+            btnDeleteStaff.Location = new Point(140, 15);
+            btnDeleteStaff.Name = "btnDeleteStaff";
+            btnDeleteStaff.Size = new Size(120, 35);
+            btnDeleteStaff.TabIndex = 1;
+            btnDeleteStaff.Text = "Delete Staff";
+            btnDeleteStaff.ThemeName = "Metro";
+            btnDeleteStaff.UseVisualStyleBackColor = false;
+            btnDeleteStaff.Click += BtnDeleteStaff_Click;
+            // 
+            // btnToggleStatus
+            // 
+            btnToggleStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnToggleStatus.BackColor = Color.FromArgb(255, 140, 0);
+            btnToggleStatus.BeforeTouchSize = new Size(140, 35);
+            btnToggleStatus.FlatStyle = FlatStyle.Flat;
+            btnToggleStatus.Font = new Font("Segoe UI Semibold", 10F);
+            btnToggleStatus.ForeColor = Color.White;
+            btnToggleStatus.Location = new Point(270, 15);
+            btnToggleStatus.Name = "btnToggleStatus";
+            btnToggleStatus.Size = new Size(140, 35);
+            btnToggleStatus.TabIndex = 2;
+            btnToggleStatus.Text = "Toggle Status";
+            btnToggleStatus.ThemeName = "Metro";
+            btnToggleStatus.UseVisualStyleBackColor = false;
+            btnToggleStatus.Click += BtnToggleStatus_Click;
+            // 
+            // btnRefreshStaff
+            // 
+            btnRefreshStaff.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnRefreshStaff.BackColor = Color.FromArgb(34, 139, 34);
+            btnRefreshStaff.BeforeTouchSize = new Size(120, 35);
+            btnRefreshStaff.FlatStyle = FlatStyle.Flat;
+            btnRefreshStaff.Font = new Font("Segoe UI Semibold", 10F);
+            btnRefreshStaff.ForeColor = Color.White;
+            btnRefreshStaff.Location = new Point(420, 15);
+            btnRefreshStaff.Name = "btnRefreshStaff";
+            btnRefreshStaff.Size = new Size(120, 35);
+            btnRefreshStaff.TabIndex = 3;
+            btnRefreshStaff.Text = "Refresh";
+            btnRefreshStaff.ThemeName = "Metro";
+            btnRefreshStaff.UseVisualStyleBackColor = false;
+            btnRefreshStaff.Click += BtnRefreshStaff_Click;
+            // 
             // StaffControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -570,7 +570,6 @@
             ((System.ComponentModel.ISupportInitialize)tabControlStaff).EndInit();
             tabControlStaff.ResumeLayout(false);
             tabPageStaffList.ResumeLayout(false);
-            panelStaffActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridStaff).EndInit();
             tabPageStaffAdd.ResumeLayout(false);
             panelStaffForm.ResumeLayout(false);
@@ -584,6 +583,7 @@
             ((System.ComponentModel.ISupportInitialize)txtUsername).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtUserLastName).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtUserFirstName).EndInit();
+            panelStaffActions.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -593,11 +593,6 @@
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageStaffList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageStaffAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridStaff;
-        private System.Windows.Forms.Panel panelStaffActions;
-        private Syncfusion.Windows.Forms.ButtonAdv btnEditStaff;
-        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteStaff;
-        private Syncfusion.Windows.Forms.ButtonAdv btnToggleStatus;
-        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshStaff;
         private System.Windows.Forms.Panel panelStaffForm;
         private System.Windows.Forms.Label lblStaffFormTitle;
         private System.Windows.Forms.Label lblUserFirstName;
@@ -619,5 +614,10 @@
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cmbBranch;
         private Syncfusion.Windows.Forms.ButtonAdv btnSaveStaff;
         private Syncfusion.Windows.Forms.ButtonAdv btnCancelStaff;
+        private Panel panelStaffActions;
+        private Syncfusion.Windows.Forms.ButtonAdv btnEditStaff;
+        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteStaff;
+        private Syncfusion.Windows.Forms.ButtonAdv btnToggleStatus;
+        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshStaff;
     }
 }

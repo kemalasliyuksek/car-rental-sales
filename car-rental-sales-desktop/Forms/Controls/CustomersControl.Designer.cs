@@ -35,11 +35,6 @@
             Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn4 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             tabControlCustomers = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             tabPageCustomersList = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            panelCustomerActions = new Panel();
-            btnEditCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnDeleteCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnToggleCustomerStatus = new Syncfusion.Windows.Forms.ButtonAdv();
-            btnRefreshCustomers = new Syncfusion.Windows.Forms.ButtonAdv();
             sfDataGridCustomers = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             tabPageCustomerAdd = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             panelCustomerForm = new Panel();
@@ -69,10 +64,14 @@
             lblCustomerLastName = new Label();
             lblCustomerFirstName = new Label();
             lblCustomerFormTitle = new Label();
+            panelCustomerActions = new Panel();
+            btnEditCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnDeleteCustomer = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnToggleCustomerStatus = new Syncfusion.Windows.Forms.ButtonAdv();
+            btnRefreshCustomers = new Syncfusion.Windows.Forms.ButtonAdv();
             ((System.ComponentModel.ISupportInitialize)tabControlCustomers).BeginInit();
             tabControlCustomers.SuspendLayout();
             tabPageCustomersList.SuspendLayout();
-            panelCustomerActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).BeginInit();
             tabPageCustomerAdd.SuspendLayout();
             panelCustomerForm.SuspendLayout();
@@ -90,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)txtCustomerNationalID).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtCustomerLastName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtCustomerFirstName).BeginInit();
+            panelCustomerActions.SuspendLayout();
             SuspendLayout();
             // 
             // tabControlCustomers
@@ -118,86 +118,6 @@
             tabPageCustomersList.TabIndex = 1;
             tabPageCustomersList.Text = "Customers List";
             tabPageCustomersList.ThemesEnabled = false;
-            // 
-            // panelCustomerActions
-            // 
-            panelCustomerActions.Controls.Add(btnEditCustomer);
-            panelCustomerActions.Controls.Add(btnDeleteCustomer);
-            panelCustomerActions.Controls.Add(btnToggleCustomerStatus);
-            panelCustomerActions.Controls.Add(btnRefreshCustomers);
-            panelCustomerActions.Dock = DockStyle.Top;
-            panelCustomerActions.Location = new Point(20, 20);
-            panelCustomerActions.Name = "panelCustomerActions";
-            panelCustomerActions.Size = new Size(1627, 60);
-            panelCustomerActions.TabIndex = 1;
-            // 
-            // btnEditCustomer
-            // 
-            btnEditCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnEditCustomer.BackColor = Color.FromArgb(0, 120, 215);
-            btnEditCustomer.BeforeTouchSize = new Size(140, 35);
-            btnEditCustomer.FlatStyle = FlatStyle.Flat;
-            btnEditCustomer.Font = new Font("Segoe UI Semibold", 10F);
-            btnEditCustomer.ForeColor = Color.White;
-            btnEditCustomer.Location = new Point(10, 15);
-            btnEditCustomer.Name = "btnEditCustomer";
-            btnEditCustomer.Size = new Size(140, 35);
-            btnEditCustomer.TabIndex = 0;
-            btnEditCustomer.Text = "Edit Customer";
-            btnEditCustomer.ThemeName = "Metro";
-            btnEditCustomer.UseVisualStyleBackColor = false;
-            btnEditCustomer.Click += BtnEditCustomer_Click;
-            // 
-            // btnDeleteCustomer
-            // 
-            btnDeleteCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnDeleteCustomer.BackColor = Color.FromArgb(215, 55, 55);
-            btnDeleteCustomer.BeforeTouchSize = new Size(140, 35);
-            btnDeleteCustomer.FlatStyle = FlatStyle.Flat;
-            btnDeleteCustomer.Font = new Font("Segoe UI Semibold", 10F);
-            btnDeleteCustomer.ForeColor = Color.White;
-            btnDeleteCustomer.Location = new Point(160, 15);
-            btnDeleteCustomer.Name = "btnDeleteCustomer";
-            btnDeleteCustomer.Size = new Size(140, 35);
-            btnDeleteCustomer.TabIndex = 1;
-            btnDeleteCustomer.Text = "Delete Customer";
-            btnDeleteCustomer.ThemeName = "Metro";
-            btnDeleteCustomer.UseVisualStyleBackColor = false;
-            btnDeleteCustomer.Click += BtnDeleteCustomer_Click;
-            // 
-            // btnToggleCustomerStatus
-            // 
-            btnToggleCustomerStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnToggleCustomerStatus.BackColor = Color.FromArgb(255, 140, 0);
-            btnToggleCustomerStatus.BeforeTouchSize = new Size(140, 35);
-            btnToggleCustomerStatus.FlatStyle = FlatStyle.Flat;
-            btnToggleCustomerStatus.Font = new Font("Segoe UI Semibold", 10F);
-            btnToggleCustomerStatus.ForeColor = Color.White;
-            btnToggleCustomerStatus.Location = new Point(310, 15);
-            btnToggleCustomerStatus.Name = "btnToggleCustomerStatus";
-            btnToggleCustomerStatus.Size = new Size(140, 35);
-            btnToggleCustomerStatus.TabIndex = 2;
-            btnToggleCustomerStatus.Text = "Toggle Status";
-            btnToggleCustomerStatus.ThemeName = "Metro";
-            btnToggleCustomerStatus.UseVisualStyleBackColor = false;
-            btnToggleCustomerStatus.Click += BtnToggleCustomerStatus_Click;
-            // 
-            // btnRefreshCustomers
-            // 
-            btnRefreshCustomers.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            btnRefreshCustomers.BackColor = Color.FromArgb(34, 139, 34);
-            btnRefreshCustomers.BeforeTouchSize = new Size(120, 35);
-            btnRefreshCustomers.FlatStyle = FlatStyle.Flat;
-            btnRefreshCustomers.Font = new Font("Segoe UI Semibold", 10F);
-            btnRefreshCustomers.ForeColor = Color.White;
-            btnRefreshCustomers.Location = new Point(460, 15);
-            btnRefreshCustomers.Name = "btnRefreshCustomers";
-            btnRefreshCustomers.Size = new Size(120, 35);
-            btnRefreshCustomers.TabIndex = 3;
-            btnRefreshCustomers.Text = "Refresh";
-            btnRefreshCustomers.ThemeName = "Metro";
-            btnRefreshCustomers.UseVisualStyleBackColor = false;
-            btnRefreshCustomers.Click += BtnRefreshCustomers_Click;
             // 
             // sfDataGridCustomers
             // 
@@ -324,11 +244,11 @@
             sfDataGridCustomers.Columns.Add(gridCheckBoxColumn1);
             sfDataGridCustomers.Columns.Add(gridComboBoxColumn1);
             sfDataGridCustomers.Columns.Add(gridDateTimeColumn4);
-            sfDataGridCustomers.Dock = DockStyle.Fill;
-            sfDataGridCustomers.Location = new Point(20, 20);
+            sfDataGridCustomers.Dock = DockStyle.Bottom;
+            sfDataGridCustomers.Location = new Point(20, 80);
             sfDataGridCustomers.Name = "sfDataGridCustomers";
             sfDataGridCustomers.NavigationMode = Syncfusion.WinForms.DataGrid.Enums.NavigationMode.Row;
-            sfDataGridCustomers.Size = new Size(1627, 925);
+            sfDataGridCustomers.Size = new Size(1627, 865);
             sfDataGridCustomers.Style.AddNewRowStyle.BackColor = Color.Transparent;
             sfDataGridCustomers.Style.BorderColor = Color.FromArgb(100, 100, 100);
             sfDataGridCustomers.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
@@ -445,20 +365,27 @@
             // 
             // 
             // 
-            dtpLicenseDate.Calendar.BottomHeight = 0;
+            dtpLicenseDate.Calendar.BottomHeight = 6;
+            dtpLicenseDate.Calendar.DayNamesFont = new Font("Verdana", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dtpLicenseDate.Calendar.DayNamesHeight = 29;
+            dtpLicenseDate.Calendar.DaysFont = new Font("Segoe UI", 11F);
             dtpLicenseDate.Calendar.Font = new Font("Segoe UI", 11F);
+            dtpLicenseDate.Calendar.HeaderFont = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dtpLicenseDate.Calendar.HeaderHeight = 38;
             dtpLicenseDate.Calendar.Location = new Point(0, 0);
             dtpLicenseDate.Calendar.Name = "monthCalendar";
+            dtpLicenseDate.Calendar.Size = new Size(200, 200);
             dtpLicenseDate.Calendar.TabIndex = 0;
             // 
             // 
             // 
-            dtpLicenseDate.Calendar.NoneButton.Location = new Point(78, 0);
+            dtpLicenseDate.Calendar.NoneButton.AutoSize = true;
+            dtpLicenseDate.Calendar.NoneButton.Location = new Point(128, 0);
             // 
             // 
             // 
+            dtpLicenseDate.Calendar.TodayButton.AutoSize = true;
             dtpLicenseDate.Calendar.TodayButton.Location = new Point(0, 0);
-            dtpLicenseDate.CalendarFont = new Font("Segoe UI", 9F);
             dtpLicenseDate.CalendarSize = new Size(189, 176);
             dtpLicenseDate.DropDownImage = null;
             dtpLicenseDate.Font = new Font("Segoe UI", 11F);
@@ -476,20 +403,27 @@
             // 
             // 
             // 
-            dtpDateOfBirth.Calendar.BottomHeight = 0;
+            dtpDateOfBirth.Calendar.BottomHeight = 6;
+            dtpDateOfBirth.Calendar.DayNamesFont = new Font("Verdana", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dtpDateOfBirth.Calendar.DayNamesHeight = 29;
+            dtpDateOfBirth.Calendar.DaysFont = new Font("Segoe UI", 11F);
             dtpDateOfBirth.Calendar.Font = new Font("Segoe UI", 11F);
+            dtpDateOfBirth.Calendar.HeaderFont = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dtpDateOfBirth.Calendar.HeaderHeight = 38;
             dtpDateOfBirth.Calendar.Location = new Point(0, 0);
             dtpDateOfBirth.Calendar.Name = "monthCalendar";
+            dtpDateOfBirth.Calendar.Size = new Size(200, 200);
             dtpDateOfBirth.Calendar.TabIndex = 0;
             // 
             // 
             // 
-            dtpDateOfBirth.Calendar.NoneButton.Location = new Point(78, 0);
+            dtpDateOfBirth.Calendar.NoneButton.AutoSize = true;
+            dtpDateOfBirth.Calendar.NoneButton.Location = new Point(128, 0);
             // 
             // 
             // 
+            dtpDateOfBirth.Calendar.TodayButton.AutoSize = true;
             dtpDateOfBirth.Calendar.TodayButton.Location = new Point(0, 0);
-            dtpDateOfBirth.CalendarFont = new Font("Segoe UI", 9F);
             dtpDateOfBirth.CalendarSize = new Size(189, 176);
             dtpDateOfBirth.DropDownImage = null;
             dtpDateOfBirth.Font = new Font("Segoe UI", 11F);
@@ -715,6 +649,138 @@
             lblCustomerFormTitle.TabIndex = 0;
             lblCustomerFormTitle.Text = "Add New Customer";
             // 
+            // panelCustomerActions
+            // 
+            panelCustomerActions.Controls.Add(btnEditCustomer);
+            panelCustomerActions.Controls.Add(btnDeleteCustomer);
+            panelCustomerActions.Controls.Add(btnToggleCustomerStatus);
+            panelCustomerActions.Controls.Add(btnRefreshCustomers);
+            panelCustomerActions.Dock = DockStyle.Top;
+            panelCustomerActions.Location = new Point(20, 20);
+            panelCustomerActions.Name = "panelCustomerActions";
+            panelCustomerActions.Size = new Size(1627, 60);
+            panelCustomerActions.TabIndex = 2;
+            // 
+            // btnEditCustomer
+            // 
+            btnEditCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnEditCustomer.BackColor = Color.FromArgb(0, 120, 215);
+            btnEditCustomer.BeforeTouchSize = new Size(140, 35);
+            btnEditCustomer.FlatStyle = FlatStyle.Flat;
+            btnEditCustomer.Font = new Font("Segoe UI Semibold", 10F);
+            btnEditCustomer.ForeColor = Color.White;
+            btnEditCustomer.Location = new Point(10, 15);
+            btnEditCustomer.Name = "btnEditCustomer";
+            btnEditCustomer.Size = new Size(140, 35);
+            btnEditCustomer.TabIndex = 0;
+            btnEditCustomer.Text = "Edit Customer";
+            btnEditCustomer.ThemeName = "Metro";
+            btnEditCustomer.ThemeStyle.BackColor = Color.FromArgb(255, 255, 255);
+            btnEditCustomer.ThemeStyle.BorderColor = Color.FromArgb(171, 171, 171);
+            btnEditCustomer.ThemeStyle.DisabledBackColor = Color.FromArgb(243, 243, 243);
+            btnEditCustomer.ThemeStyle.DisabledBorderColor = Color.FromArgb(230, 230, 230);
+            btnEditCustomer.ThemeStyle.DisabledForeColor = Color.FromArgb(171, 171, 171);
+            btnEditCustomer.ThemeStyle.Font = new Font("Microsoft Sans Serif", 8.25F);
+            btnEditCustomer.ThemeStyle.ForeColor = Color.FromArgb(68, 68, 68);
+            btnEditCustomer.ThemeStyle.HoverBackColor = Color.FromArgb(222, 236, 249);
+            btnEditCustomer.ThemeStyle.HoverBorderColor = Color.FromArgb(113, 175, 229);
+            btnEditCustomer.ThemeStyle.HoverForeColor = Color.FromArgb(68, 68, 68);
+            btnEditCustomer.ThemeStyle.PressedBackColor = Color.FromArgb(205, 230, 247);
+            btnEditCustomer.ThemeStyle.PressedBorderColor = Color.FromArgb(0, 120, 212);
+            btnEditCustomer.ThemeStyle.PressedForeColor = Color.FromArgb(68, 68, 68);
+            btnEditCustomer.UseVisualStyleBackColor = false;
+            btnEditCustomer.Click += BtnEditCustomer_Click;
+            // 
+            // btnDeleteCustomer
+            // 
+            btnDeleteCustomer.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnDeleteCustomer.BackColor = Color.FromArgb(215, 55, 55);
+            btnDeleteCustomer.BeforeTouchSize = new Size(140, 35);
+            btnDeleteCustomer.FlatStyle = FlatStyle.Flat;
+            btnDeleteCustomer.Font = new Font("Segoe UI Semibold", 10F);
+            btnDeleteCustomer.ForeColor = Color.White;
+            btnDeleteCustomer.Location = new Point(160, 15);
+            btnDeleteCustomer.Name = "btnDeleteCustomer";
+            btnDeleteCustomer.Size = new Size(140, 35);
+            btnDeleteCustomer.TabIndex = 1;
+            btnDeleteCustomer.Text = "Delete Customer";
+            btnDeleteCustomer.ThemeName = "Metro";
+            btnDeleteCustomer.ThemeStyle.BackColor = Color.FromArgb(255, 255, 255);
+            btnDeleteCustomer.ThemeStyle.BorderColor = Color.FromArgb(171, 171, 171);
+            btnDeleteCustomer.ThemeStyle.DisabledBackColor = Color.FromArgb(243, 243, 243);
+            btnDeleteCustomer.ThemeStyle.DisabledBorderColor = Color.FromArgb(230, 230, 230);
+            btnDeleteCustomer.ThemeStyle.DisabledForeColor = Color.FromArgb(171, 171, 171);
+            btnDeleteCustomer.ThemeStyle.Font = new Font("Microsoft Sans Serif", 8.25F);
+            btnDeleteCustomer.ThemeStyle.ForeColor = Color.FromArgb(68, 68, 68);
+            btnDeleteCustomer.ThemeStyle.HoverBackColor = Color.FromArgb(222, 236, 249);
+            btnDeleteCustomer.ThemeStyle.HoverBorderColor = Color.FromArgb(113, 175, 229);
+            btnDeleteCustomer.ThemeStyle.HoverForeColor = Color.FromArgb(68, 68, 68);
+            btnDeleteCustomer.ThemeStyle.PressedBackColor = Color.FromArgb(205, 230, 247);
+            btnDeleteCustomer.ThemeStyle.PressedBorderColor = Color.FromArgb(0, 120, 212);
+            btnDeleteCustomer.ThemeStyle.PressedForeColor = Color.FromArgb(68, 68, 68);
+            btnDeleteCustomer.UseVisualStyleBackColor = false;
+            btnDeleteCustomer.Click += BtnDeleteCustomer_Click;
+            // 
+            // btnToggleCustomerStatus
+            // 
+            btnToggleCustomerStatus.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnToggleCustomerStatus.BackColor = Color.FromArgb(255, 140, 0);
+            btnToggleCustomerStatus.BeforeTouchSize = new Size(140, 35);
+            btnToggleCustomerStatus.FlatStyle = FlatStyle.Flat;
+            btnToggleCustomerStatus.Font = new Font("Segoe UI Semibold", 10F);
+            btnToggleCustomerStatus.ForeColor = Color.White;
+            btnToggleCustomerStatus.Location = new Point(310, 15);
+            btnToggleCustomerStatus.Name = "btnToggleCustomerStatus";
+            btnToggleCustomerStatus.Size = new Size(140, 35);
+            btnToggleCustomerStatus.TabIndex = 2;
+            btnToggleCustomerStatus.Text = "Toggle Status";
+            btnToggleCustomerStatus.ThemeName = "Metro";
+            btnToggleCustomerStatus.ThemeStyle.BackColor = Color.FromArgb(255, 255, 255);
+            btnToggleCustomerStatus.ThemeStyle.BorderColor = Color.FromArgb(171, 171, 171);
+            btnToggleCustomerStatus.ThemeStyle.DisabledBackColor = Color.FromArgb(243, 243, 243);
+            btnToggleCustomerStatus.ThemeStyle.DisabledBorderColor = Color.FromArgb(230, 230, 230);
+            btnToggleCustomerStatus.ThemeStyle.DisabledForeColor = Color.FromArgb(171, 171, 171);
+            btnToggleCustomerStatus.ThemeStyle.Font = new Font("Microsoft Sans Serif", 8.25F);
+            btnToggleCustomerStatus.ThemeStyle.ForeColor = Color.FromArgb(68, 68, 68);
+            btnToggleCustomerStatus.ThemeStyle.HoverBackColor = Color.FromArgb(222, 236, 249);
+            btnToggleCustomerStatus.ThemeStyle.HoverBorderColor = Color.FromArgb(113, 175, 229);
+            btnToggleCustomerStatus.ThemeStyle.HoverForeColor = Color.FromArgb(68, 68, 68);
+            btnToggleCustomerStatus.ThemeStyle.PressedBackColor = Color.FromArgb(205, 230, 247);
+            btnToggleCustomerStatus.ThemeStyle.PressedBorderColor = Color.FromArgb(0, 120, 212);
+            btnToggleCustomerStatus.ThemeStyle.PressedForeColor = Color.FromArgb(68, 68, 68);
+            btnToggleCustomerStatus.UseVisualStyleBackColor = false;
+            btnToggleCustomerStatus.Click += BtnToggleCustomerStatus_Click;
+            // 
+            // btnRefreshCustomers
+            // 
+            btnRefreshCustomers.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            btnRefreshCustomers.BackColor = Color.FromArgb(34, 139, 34);
+            btnRefreshCustomers.BeforeTouchSize = new Size(120, 35);
+            btnRefreshCustomers.FlatStyle = FlatStyle.Flat;
+            btnRefreshCustomers.Font = new Font("Segoe UI Semibold", 10F);
+            btnRefreshCustomers.ForeColor = Color.White;
+            btnRefreshCustomers.Location = new Point(460, 15);
+            btnRefreshCustomers.Name = "btnRefreshCustomers";
+            btnRefreshCustomers.Size = new Size(120, 35);
+            btnRefreshCustomers.TabIndex = 3;
+            btnRefreshCustomers.Text = "Refresh";
+            btnRefreshCustomers.ThemeName = "Metro";
+            btnRefreshCustomers.ThemeStyle.BackColor = Color.FromArgb(255, 255, 255);
+            btnRefreshCustomers.ThemeStyle.BorderColor = Color.FromArgb(171, 171, 171);
+            btnRefreshCustomers.ThemeStyle.DisabledBackColor = Color.FromArgb(243, 243, 243);
+            btnRefreshCustomers.ThemeStyle.DisabledBorderColor = Color.FromArgb(230, 230, 230);
+            btnRefreshCustomers.ThemeStyle.DisabledForeColor = Color.FromArgb(171, 171, 171);
+            btnRefreshCustomers.ThemeStyle.Font = new Font("Microsoft Sans Serif", 8.25F);
+            btnRefreshCustomers.ThemeStyle.ForeColor = Color.FromArgb(68, 68, 68);
+            btnRefreshCustomers.ThemeStyle.HoverBackColor = Color.FromArgb(222, 236, 249);
+            btnRefreshCustomers.ThemeStyle.HoverBorderColor = Color.FromArgb(113, 175, 229);
+            btnRefreshCustomers.ThemeStyle.HoverForeColor = Color.FromArgb(68, 68, 68);
+            btnRefreshCustomers.ThemeStyle.PressedBackColor = Color.FromArgb(205, 230, 247);
+            btnRefreshCustomers.ThemeStyle.PressedBorderColor = Color.FromArgb(0, 120, 212);
+            btnRefreshCustomers.ThemeStyle.PressedForeColor = Color.FromArgb(68, 68, 68);
+            btnRefreshCustomers.UseVisualStyleBackColor = false;
+            btnRefreshCustomers.Click += BtnRefreshCustomers_Click;
+            // 
             // CustomersControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -725,7 +791,6 @@
             ((System.ComponentModel.ISupportInitialize)tabControlCustomers).EndInit();
             tabControlCustomers.ResumeLayout(false);
             tabPageCustomersList.ResumeLayout(false);
-            panelCustomerActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)sfDataGridCustomers).EndInit();
             tabPageCustomerAdd.ResumeLayout(false);
             panelCustomerForm.ResumeLayout(false);
@@ -744,6 +809,7 @@
             ((System.ComponentModel.ISupportInitialize)txtCustomerNationalID).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtCustomerLastName).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtCustomerFirstName).EndInit();
+            panelCustomerActions.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -753,11 +819,6 @@
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageCustomersList;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageCustomerAdd;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGridCustomers;
-        private System.Windows.Forms.Panel panelCustomerActions;
-        private Syncfusion.Windows.Forms.ButtonAdv btnEditCustomer;
-        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteCustomer;
-        private Syncfusion.Windows.Forms.ButtonAdv btnToggleCustomerStatus;
-        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshCustomers;
         private System.Windows.Forms.Panel panelCustomerForm;
         private System.Windows.Forms.Label lblCustomerFormTitle;
         private System.Windows.Forms.Label lblCustomerFirstName;
@@ -785,5 +846,10 @@
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cmbCustomerType;
         private Syncfusion.Windows.Forms.ButtonAdv btnSaveCustomer;
         private Syncfusion.Windows.Forms.ButtonAdv btnCancelCustomer;
+        private Panel panelCustomerActions;
+        private Syncfusion.Windows.Forms.ButtonAdv btnEditCustomer;
+        private Syncfusion.Windows.Forms.ButtonAdv btnDeleteCustomer;
+        private Syncfusion.Windows.Forms.ButtonAdv btnToggleCustomerStatus;
+        private Syncfusion.Windows.Forms.ButtonAdv btnRefreshCustomers;
     }
 }
