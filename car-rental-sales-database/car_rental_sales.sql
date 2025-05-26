@@ -660,3 +660,16 @@ ALTER TABLE `Vehicles`
   ADD CONSTRAINT `Vehicles_ibfk_1` FOREIGN KEY (`VehicleStatusID`) REFERENCES `VehicleStatuses` (`VehicleStatusID`),
   ADD CONSTRAINT `Vehicles_ibfk_2` FOREIGN KEY (`VehicleBranchID`) REFERENCES `Branches` (`BranchID`),
   ADD CONSTRAINT `Vehicles_ibfk_3` FOREIGN KEY (`VehicleClassID`) REFERENCES `VehicleClasses` (`VehicleClassID`);
+  
+  
+  -- Rentals tablosuna RentalStatus alanı ekleme
+ALTER TABLE Rentals 
+ADD COLUMN RentalStatus VARCHAR(20) DEFAULT 'Pending' AFTER RentalPaymentType;
+
+-- Mevcut tüm kiralamaları 'Approved' olarak güncelle (geriye dönük uyumluluk için)
+UPDATE Rentals 
+SET RentalStatus = 'Approved' 
+WHERE RentalID > 0;
+
+-- Index ekle performans için
+CREATE INDEX idx_rental_status ON Rentals(RentalStatus);
