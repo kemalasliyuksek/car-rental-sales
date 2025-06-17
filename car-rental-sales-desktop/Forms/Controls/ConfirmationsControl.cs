@@ -1,5 +1,6 @@
 ﻿using car_rental_sales_desktop.Models;
 using car_rental_sales_desktop.Repositories;
+using car_rental_sales_desktop.Utils;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
@@ -45,7 +46,15 @@ namespace car_rental_sales_desktop.Forms.Controls
         // Kontrol yüklendiğinde tetiklenen olay metodu.
         private void ConfirmationsControl_Load(object sender, EventArgs e)
         {
-            // Onay bekleyen kiralamaları yükler.
+            // Onaylama yetkisi kontrolü
+            if (!CurrentUser.CanPerformAction("approve_rentals"))
+            {
+                MessageBox.Show("You do not have the authority to approve rental.", "Unauthorized Access",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Enabled = false;
+                return;
+            }
+
             LoadPendingRentals();
         }
 
@@ -81,8 +90,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Onay bekleyen kiralamalar yüklenirken hata: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading pending rentals: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -90,9 +99,9 @@ namespace car_rental_sales_desktop.Forms.Controls
         private void UpdateStats()
         {
             // Onay bekleyen kiralama sayısını etikete yazar.
-            lblPendingCount.Text = $"Onay Bekleyen: {_pendingRentals.Count}";
+            lblPendingCount.Text = $"Pending Approval: {_pendingRentals.Count}";
             // Bugün oluşturulan kiralama sayısını etikete yazar.
-            lblTodayCount.Text = $"Bugün Oluşturulan: {_pendingRentals.Count(r => r.RentalCreatedAt.Date == DateTime.Today)}";
+            lblTodayCount.Text = $"Created Today: {_pendingRentals.Count(r => r.RentalCreatedAt.Date == DateTime.Today)}";
         }
 
         // "Onayla" butonuna tıklandığında tetiklenen olay metodu.
@@ -103,8 +112,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Eğer hiçbir kiralama seçilmemişse, kullanıcıyı uyarır ve işlemi sonlandırır.
             if (selectedRental == null)
             {
-                MessageBox.Show("Lütfen onaylanacak bir kiralama seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a rental to approve.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -116,8 +125,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 // Onay bekleyen kiralamaları yeniden yükler.
                 LoadPendingRentals();
                 // Kullanıcıya başarılı onay mesajı gösterir.
-                MessageBox.Show("Kiralama başarıyla onaylandı!",
-                    "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Rental approved successfully!",
+                    "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -129,15 +138,15 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Eğer hiçbir kiralama seçilmemişse, kullanıcıyı uyarır ve işlemi sonlandırır.
             if (selectedRental == null)
             {
-                MessageBox.Show("Lütfen reddedilecek bir kiralama seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a rental to reject.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Kullanıcıya kiralama reddetme işlemini onaylaması için bir mesaj kutusu gösterir.
             var result = MessageBox.Show(
-                $"Kiralama ID: {selectedRental.RentalID} reddedilecek. Emin misiniz?",
-                "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                $"Rental ID: {selectedRental.RentalID} will be rejected. Are you sure?",
+                "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             // Kullanıcı "Evet" seçeneğini seçerse.
             if (result == DialogResult.Yes)
@@ -146,13 +155,13 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (_rentalRepository.UpdateRentalStatus(selectedRental.RentalID, "Rejected"))
                 {
                     // Aracın durumunu tekrar "Müsait" (1) olarak günceller.
-                    _vehicleRepository.UpdateVehicleStatus(selectedRental.RentalVehicleID, 1);
+                    _vehicleRepository.UpdateVehicleStatus(selectedRental.RentalVehicleID, 1); // Assuming 1 means "Available"
 
                     // Onay bekleyen kiralamaları yeniden yükler.
                     LoadPendingRentals();
                     // Kullanıcıya kiralama reddedildi bilgisi mesajı gösterir.
-                    MessageBox.Show("Kiralama reddedildi.",
-                        "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Rental rejected.",
+                        "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

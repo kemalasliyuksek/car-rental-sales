@@ -26,6 +26,90 @@ namespace car_rental_sales_desktop.Utils
             get { return $"{FirstName} {LastName}"; }
         }
 
+        // Kullanıcının şube müdürü olup olmadığını kontrol eder
+        public static bool IsBranchManager()
+        {
+            return RoleName?.ToLower() == "branch manager";
+        }
+
+        // Kullanıcının personel olup olmadığını kontrol eder
+        public static bool IsStaff()
+        {
+            return RoleName?.ToLower() == "staff";
+        }
+
+        // Kullanıcının teknisyen olup olmadığını kontrol eder
+        public static bool IsTechnician()
+        {
+            return RoleName?.ToLower() == "technician";
+        }
+
+        // Kullanıcının bakım personeli olup olmadığını kontrol eder
+        public static bool IsMaintenanceStaff()
+        {
+            return RoleName?.ToLower() == "maintenance staff";
+        }
+
+        // Kullanıcının müşteri olup olmadığını kontrol eder
+        public static bool IsCustomer()
+        {
+            return RoleName?.ToLower() == "customer";
+        }
+
+        // Kullanıcının belirtilen işlemi yapma yetkisi var mı kontrol eder
+        public static bool CanPerformAction(string action)
+        {
+            string role = RoleName?.ToLower();
+
+            switch (action.ToLower())
+            {
+                case "manage_branches":
+                    return IsAdmin();
+
+                case "manage_staff":
+                    return IsAdmin() || IsBranchManager();
+
+                case "manage_customers":
+                    return IsAdmin() || IsBranchManager() || IsStaff();
+
+                case "manage_vehicles":
+                    return IsAdmin() || IsBranchManager() || IsStaff() || IsTechnician() || IsMaintenanceStaff();
+
+                case "manage_rentals":
+                    return IsAdmin() || IsBranchManager() || IsStaff();
+
+                case "approve_rentals":
+                    return IsAdmin() || IsBranchManager() || IsStaff();
+
+                case "manage_service":
+                    return IsAdmin() || IsBranchManager() || IsTechnician() || IsMaintenanceStaff();
+
+                case "view_reports":
+                    return IsAdmin() || IsBranchManager();
+
+                case "edit_vehicle_status":
+                    return IsAdmin() || IsTechnician() || IsMaintenanceStaff();
+
+                default:
+                    return false;
+            }
+        }
+
+        // Kullanıcının sadece kendi şubesindeki verileri görebilmesi için kontrol
+        public static bool CanAccessBranch(int? branchId)
+        {
+            // Admin her şubeye erişebilir
+            if (IsAdmin()) return true;
+
+            // Şube müdürü ve personel sadece kendi şubelerine erişebilir
+            if (IsBranchManager() || IsStaff())
+            {
+                return !BranchID.HasValue || !branchId.HasValue || BranchID.Value == branchId.Value;
+            }
+
+            return false;
+        }
+
         // Mevcut kullanıcı bilgilerini ayarlar.
         // user: Ayarlanacak kullanıcı nesnesi.
         // ArgumentNullException: Kullanıcı nesnesi null ise fırlatılır.

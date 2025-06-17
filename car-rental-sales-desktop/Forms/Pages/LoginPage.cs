@@ -69,7 +69,7 @@ namespace car_rental_sales_desktop.Forms.Pages
         private void iconClose_Click(object sender, EventArgs e)
         {
             // Kullanıcıya uygulamadan çıkmak isteyip istemediğini soran bir onay kutusu gösterir.
-            var result = MessageBox.Show("Uygulamadan çıkmak istediğinizden emin misiniz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var result = MessageBox.Show("Are you sure you want to exit the application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             // Kullanıcı "Evet" seçeneğini seçerse.
             if (result == DialogResult.Yes)
             {
@@ -82,8 +82,8 @@ namespace car_rental_sales_desktop.Forms.Pages
         private void lnkForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Şifre sıfırlama talepleri için yöneticiyle iletişime geçilmesi gerektiğini belirten bir mesaj kutusu gösterir.
-            MessageBox.Show("Şifre sıfırlama talepleri için lütfen yönetici ile iletişime geçin. (admin@carrentalsales.com)",
-                          "Şifremi Unuttum", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("For password reset requests, please contact the administrator. (admin@carrentalsales.com)",
+                          "Forgot Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Başarılı bir işlem sonucunda durum etiketini (lblStatus) güncelleyen metot.
@@ -202,7 +202,7 @@ namespace car_rental_sales_desktop.Forms.Pages
             if (success)
             {
                 // Başarılı giriş mesajını gösterir.
-                LoginPage.ShowSuccess(loginForm, "Giriş başarılı! Yönlendiriliyorsunuz...");
+                LoginPage.ShowSuccess(loginForm, "Login successful! Redirecting...");
 
                 // Arayüzdeki olayların işlenmesini sağlar (mesajın görünmesi için).
                 Application.DoEvents();
@@ -225,7 +225,7 @@ namespace car_rental_sales_desktop.Forms.Pages
             else
             {
                 // Hatalı giriş mesajını gösterir.
-                LoginPage.ShowError(loginForm, "Kullanıcı adı veya şifre hatalı!");
+                LoginPage.ShowError(loginForm, "Incorrect username or password!");
             }
         }
     }

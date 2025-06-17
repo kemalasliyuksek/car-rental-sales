@@ -11,7 +11,6 @@ namespace car_rental_sales_desktop.Models
         public string ContractText { get; set; }
         public string ContractFilePath { get; set; }
 
-        // Navigation properties
         public virtual ICollection<Rental> Rentals { get; set; }
 
         public Contract()

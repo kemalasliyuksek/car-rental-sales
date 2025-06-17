@@ -91,7 +91,7 @@ namespace car_rental_sales_desktop.Repositories
             return entity.CustomerID;
         }
 
-        // Get customer by national ID
+        // Müşteriyi TC Kimlik Numarasına göre getirir
         public Customer GetByNationalID(string nationalID)
         {
             string query = "SELECT * FROM Customers WHERE CustomerNationalID = @nationalID";
@@ -104,7 +104,7 @@ namespace car_rental_sales_desktop.Repositories
             return MapToModel(dataTable.Rows[0]);
         }
 
-        // Get customer by phone
+        // Müşteriyi telefon numarasına göre getirir
         public Customer GetByPhone(string phone)
         {
             string query = "SELECT * FROM Customers WHERE CustomerPhone = @phone";
@@ -117,7 +117,7 @@ namespace car_rental_sales_desktop.Repositories
             return MapToModel(dataTable.Rows[0]);
         }
 
-        // Search customers
+        // Müşterilerde arama yapar
         public List<Customer> Search(string searchTerm)
         {
             string query = @"
@@ -134,7 +134,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get active customers
+        // Aktif müşterileri getirir
         public List<Customer> GetActiveCustomers()
         {
             string query = "SELECT * FROM Customers WHERE CustomerAvailable = 1";
@@ -143,7 +143,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get customers by type (Individual, Corporate, etc.)
+        // Müşterileri tipine göre getirir (Bireysel, Kurumsal, vb.)
         public List<Customer> GetByType(string customerType)
         {
             string query = "SELECT * FROM Customers WHERE CustomerType = @customerType";
@@ -153,7 +153,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get customers with rentals
+        // Kiralaması olan müşterileri getirir
         public List<Customer> GetCustomersWithRentals()
         {
             string query = @"
@@ -165,7 +165,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get customers with sales
+        // Satışı olan müşterileri getirir
         public List<Customer> GetCustomersWithSales()
         {
             string query = @"
@@ -177,7 +177,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get total number of customers
+        // Toplam müşteri sayısını getirir
         public int GetTotalCount()
         {
             string query = "SELECT COUNT(*) FROM Customers";
@@ -185,7 +185,7 @@ namespace car_rental_sales_desktop.Repositories
             return Convert.ToInt32(result);
         }
 
-        // Get customers with expired license
+        // Ehliyet süresi dolmuş müşterileri getirir
         public List<Customer> GetCustomersWithExpiredLicense()
         {
             string query = "SELECT * FROM Customers WHERE CustomerLicenseDate < @today AND CustomerLicenseDate IS NOT NULL";
@@ -195,7 +195,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get new customers registered in the last N days
+        // Son N günde kaydedilen yeni müşterileri getirir
         public List<Customer> GetNewCustomers(int days)
         {
             string query = "SELECT * FROM Customers WHERE CustomerRegistrationDate >= @startDate";
@@ -205,7 +205,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get all customers
+        // Tüm müşterileri getirir
         public List<Customer> GetAllCustomers()
         {
             string query = "SELECT * FROM Customers";

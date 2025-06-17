@@ -11,7 +11,6 @@ namespace car_rental_sales_desktop.Models
         public string ServiceEmail { get; set; }
         public int ServiceAuthorizedPersonID { get; set; }
 
-        // Navigation properties
         public virtual User AuthorizedPerson { get; set; }
         public virtual ICollection<Maintenance> Maintenances { get; set; }
 

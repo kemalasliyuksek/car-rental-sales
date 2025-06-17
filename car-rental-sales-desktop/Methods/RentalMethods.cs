@@ -71,15 +71,15 @@ namespace car_rental_sales_desktop.Methods
             switch (status)
             {
                 case RentalStatus.Active:
-                    return "Aktif Kiralama";
+                    return "Active Rental";
                 case RentalStatus.CompletedOnTime:
-                    return "Zamanında Tamamlandı";
+                    return "Completed On Time";
                 case RentalStatus.CompletedLate:
-                    return "Geç Tamamlandı (Cezalı)";
+                    return "Completed Late (Penalized)";
                 case RentalStatus.Overdue:
-                    return "Süresi Geçmiş";
+                    return "Overdue";
                 default:
-                    return "Belirsiz";
+                    return "Undefined";
             }
         }
 

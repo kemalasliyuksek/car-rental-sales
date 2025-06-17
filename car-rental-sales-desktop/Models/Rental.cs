@@ -23,7 +23,6 @@ namespace car_rental_sales_desktop.Models
         public DateTime RentalCreatedAt { get; set; }
         public DateTime? RentalUpdatedAt { get; set; }
 
-        // Navigation properties
         public virtual Customer Customer { get; set; }
         public virtual Vehicle Vehicle { get; set; }
         public virtual RentalNote Note { get; set; }

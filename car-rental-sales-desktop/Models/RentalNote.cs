@@ -10,7 +10,6 @@ namespace car_rental_sales_desktop.Models
         public DateTime RentalNoteCreatedAt { get; set; }
         public int RentalNoteUserID { get; set; }
 
-        // Navigation properties
         public virtual Rental Rental { get; set; }
         public virtual User User { get; set; }
 

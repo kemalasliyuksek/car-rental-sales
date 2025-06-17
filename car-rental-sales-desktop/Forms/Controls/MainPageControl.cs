@@ -23,9 +23,6 @@ namespace car_rental_sales_desktop.Forms.Controls
             InitializeComponent();
         }
 
-        // Bu metod, 'btnGoWebsite' isimli butona tıklandığında çalışır.
-        // 'sender' parametresi, olayı başlatan kontrolü (yani butonu) temsil eder.
-        // 'e' parametresi, olayla ilgili ek bilgileri içerir.
         private void btnGoWebsite_Click(object sender, EventArgs e)
         {
             // Gidilecek web sitesinin URL'si bir string değişkeninde saklanır.
@@ -49,7 +46,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Kullanıcıya bir mesaj kutusu gösterilerek yönlendirmenin başarısız olduğu ve hatanın ne olduğu bildirilir.
-                MessageBox.Show("Siteye yönlendirme başarısız: " + ex.Message);
+                MessageBox.Show("Failed to redirect to the site: " + ex.Message);
             }
         }
     }

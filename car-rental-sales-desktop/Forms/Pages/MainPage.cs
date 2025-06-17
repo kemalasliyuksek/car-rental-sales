@@ -27,6 +27,9 @@ namespace car_rental_sales_desktop.Forms.Pages
             lblUserRole.Text = Utils.CurrentUser.RoleName; // Kullanıcının rolünü gösterir.
             lblBranchName.Text = Utils.CurrentUser.BranchName; // Kullanıcının şube adını gösterir.
 
+            // Rol bazlı menü görünürlüğünü ayarla
+            ConfigureMenuByRole();
+
             ResetButtons(); // Yan menüdeki butonların görünümünü sıfırlar.
             SetActiveButton(btnMainPage); // Ana sayfa butonunu aktif olarak ayarlar.
 
@@ -34,6 +37,81 @@ namespace car_rental_sales_desktop.Forms.Pages
             var mainPageControl = new MainPageControl(); // Ana sayfa için kullanıcı kontrolü oluşturur.
             mainPageControl.Dock = DockStyle.Fill; // Kontrolü panele yayar.
             pnlContent.Controls.Add(mainPageControl); // Kontrolü içerik paneline ekler.
+        }
+
+        // Kullanıcının rolüne göre yan menüdeki butonların görünürlüğünü ayarlar.
+        private void ConfigureMenuByRole()
+        {
+            string userRole = Utils.CurrentUser.RoleName?.ToLower();
+
+            // Önce tüm menüleri gizle
+            btnDashboard.Visible = false;
+            btnCustomers.Visible = false;
+            btnVehicles.Visible = false;
+            btnRentals.Visible = false;
+            btnConfirmations.Visible = false;
+            btnBranches.Visible = false;
+            btnStaff.Visible = false;
+            btnReports.Visible = false;
+            btnService.Visible = false;
+            btnSettings.Visible = false;
+
+            // Ana sayfa her zaman görünür
+            btnMainPage.Visible = true;
+
+            switch (userRole)
+            {
+                case "administrator":
+                    // Admin her şeye erişebilir
+                    btnDashboard.Visible = true;
+                    btnCustomers.Visible = true;
+                    btnVehicles.Visible = true;
+                    btnRentals.Visible = true;
+                    btnConfirmations.Visible = true;
+                    btnBranches.Visible = true;
+                    btnStaff.Visible = true;
+                    btnReports.Visible = true;
+                    btnService.Visible = true;
+                    btnSettings.Visible = true;
+                    break;
+
+                case "branch manager":
+                    // Şube müdürü kendi şubesindeki işlemleri yönetebilir
+                    btnDashboard.Visible = true;
+                    btnCustomers.Visible = true;
+                    btnVehicles.Visible = true;
+                    btnRentals.Visible = true;
+                    btnConfirmations.Visible = true;
+                    btnStaff.Visible = true; // Kendi şubesindeki personeli görebilir
+                    btnReports.Visible = true;
+                    btnService.Visible = true;
+                    break;
+
+                case "staff":
+                    // Personel araç işlemleri, rezervasyon ve kiralama yapabilir
+                    btnCustomers.Visible = true;
+                    btnVehicles.Visible = true;
+                    btnRentals.Visible = true;
+                    btnConfirmations.Visible = true;
+                    break;
+
+                case "technician":
+                    // Teknisyen sadece servis işlemleri görebilir
+                    btnVehicles.Visible = true; // Araç durumlarını görmek için
+                    btnService.Visible = true;
+                    break;
+
+                case "maintenance staff":
+                    // Bakım personeli araç ve servis işlemleri görebilir
+                    btnVehicles.Visible = true;
+                    btnService.Visible = true;
+                    break;
+
+                case "customer":
+                    // Müşteriler sadece kendi işlemlerini görebilir (ileride eklenebilir)
+                    // Şimdilik sadece ana sayfayı görsün
+                    break;
+            }
         }
 
         // Oturumu kapatma butonuna tıklandığında çalışan metot.

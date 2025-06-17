@@ -27,17 +27,17 @@ namespace car_rental_sales_desktop.Forms
         private void LoadRentalInfo()
         {
             // Kiralama ID'sini etikete yazar.
-            lblRentalId.Text = $"Kiralama ID: {_rental.RentalID}";
+            lblRentalId.Text = $"Rental ID: {_rental.RentalID}";
             // Müşteri adını ve soyadını etikete yazar. Müşteri bilgisi yoksa "Bilinmiyor" yazar.
-            lblCustomerName.Text = $"Müşteri: {_rental.Customer?.FullName ?? "Bilinmiyor"}";
+            lblCustomerName.Text = $"Customer: {_rental.Customer?.FullName ?? "Unknown"}";
             // Araç plakasını, markasını ve modelini etikete yazar. Araç bilgisi yoksa "Bilinmiyor" yazar.
-            lblVehicle.Text = $"Araç: {_rental.Vehicle?.VehiclePlateNumber ?? "Bilinmiyor"} - {_rental.Vehicle?.VehicleBrand} {_rental.Vehicle?.VehicleModel}";
+            lblVehicle.Text = $"Vehicle: {_rental.Vehicle?.VehiclePlateNumber ?? "Unknown"} - {_rental.Vehicle?.VehicleBrand} {_rental.Vehicle?.VehicleModel}";
             // Kiralama tutarını formatlı bir şekilde (N2: iki ondalık basamak) etikete yazar.
-            lblAmount.Text = $"Tutar: {_rental.RentalAmount:N2} ₺";
+            lblAmount.Text = $"Amount: {_rental.RentalAmount:N2} ₺";
             // Kiralama başlangıç ve bitiş tarihlerini formatlı bir şekilde (dd.MM.yyyy) etikete yazar.
-            lblDates.Text = $"Tarih: {_rental.RentalStartDate:dd.MM.yyyy} - {_rental.RentalEndDate:dd.MM.yyyy}";
+            lblDates.Text = $"Date: {_rental.RentalStartDate:dd.MM.yyyy} - {_rental.RentalEndDate:dd.MM.yyyy}";
             // Kiralama işlemini yapan yetkili personel adını ve soyadını etikete yazar. Yetkili bilgisi yoksa "Bilinmiyor" yazar.
-            lblStaff.Text = $"Yetkili: {_rental.User?.FullName ?? "Bilinmiyor"}";
+            lblStaff.Text = $"Authorized Staff: {_rental.User?.FullName ?? "Unknown"}";
         }
 
         // "Onayla" butonuna tıklandığında çalışan olay yöneticisi.
@@ -48,14 +48,14 @@ namespace car_rental_sales_desktop.Forms
             // Yetkili adı soyadı boş ise uyarı mesajı gösterir ve işlemi sonlandırır.
             if (string.IsNullOrEmpty(staffFullName))
             {
-                MessageBox.Show("Lütfen yetkili adı soyadı girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter the authorized staff name and surname.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Metoddan çıkar.
             }
 
             // Girilen yetkili adı soyadı, kiralama kaydındaki yetkili adı soyadı ile eşleşmiyorsa (büyük/küçük harf duyarsız) hata mesajı gösterir.
             if (!staffFullName.Equals(_rental.User?.FullName, StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Yetkili adı soyadı eşleşmiyor!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Authorized staff name and surname do not match!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtStaffName.Focus(); // Yetkili adı metin kutusuna odaklanır.
                 return; // Metoddan çıkar.
             }
@@ -65,22 +65,22 @@ namespace car_rental_sales_desktop.Forms
             // Müşteri adı soyadı boş ise uyarı mesajı gösterir ve işlemi sonlandırır.
             if (string.IsNullOrEmpty(customerFullName))
             {
-                MessageBox.Show("Lütfen müşteri adı soyadı girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter the customer name and surname.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Metoddan çıkar.
             }
 
             // Girilen müşteri adı soyadı, kiralama kaydındaki müşteri adı soyadı ile eşleşmiyorsa (büyük/küçük harf duyarsız) hata mesajı gösterir.
             if (!customerFullName.Equals(_rental.Customer?.FullName, StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Müşteri adı soyadı eşleşmiyor!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Customer name and surname do not match!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCustomerName.Focus(); // Müşteri adı metin kutusuna odaklanır.
                 return; // Metoddan çıkar.
             }
 
             // Kullanıcıya kiralama sözleşmesinin onaylanacağına dair bir onay mesajı gösterir.
             var result = MessageBox.Show(
-                "Kiralama sözleşmesi onaylanacak. Emin misiniz?",
-                "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                "The rental agreement will be approved. Are you sure?",
+                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             // Kullanıcı "Evet" butonuna tıklarsa onaylama işlemini gerçekleştirir.
             if (result == DialogResult.Yes)
@@ -99,7 +99,7 @@ namespace car_rental_sales_desktop.Forms
                 else
                 {
                     // Kiralama durumu güncellenemezse hata mesajı gösterir.
-                    MessageBox.Show("Onaylama işlemi başarısız!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Approval process failed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

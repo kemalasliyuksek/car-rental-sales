@@ -48,6 +48,32 @@ namespace car_rental_sales_desktop.Forms.Controls
             LoadVehicleStatuses();
             SetupFuelTypeComboBox();
             SetupTransmissionTypeComboBox();
+
+            // Rol bazlı kontroller
+            ConfigureControlsByRole();
+        }
+
+        private void ConfigureControlsByRole()
+        {
+            // Araç ekleme/düzenleme/silme butonları
+            bool canManageVehicles = CurrentUser.CanPerformAction("manage_vehicles");
+            btnEditVehicle.Visible = canManageVehicles;
+            btnDeleteVehicle.Visible = CurrentUser.IsAdmin(); // Sadece admin silebilir
+            btnSaveVehicle.Visible = canManageVehicles;
+
+            // Durum değiştirme sadece teknisyen ve bakım personeli
+            btnToggleVehicleStatus.Visible = CurrentUser.CanPerformAction("edit_vehicle_status");
+
+            // Şube müdürü sadece kendi şubesindeki araçları görebilir
+            if (CurrentUser.IsBranchManager() && CurrentUser.BranchID.HasValue)
+            {
+                _vehicleList = _vehicleList.Where(v => v.VehicleBranchID == CurrentUser.BranchID.Value).ToList();
+                sfDataGridVehicles.DataSource = _vehicleList;
+
+                // Şube seçimini sadece kendi şubesi olarak sabitle
+                cmbBranch.SelectedValue = CurrentUser.BranchID.Value;
+                cmbBranch.Enabled = false;
+            }
         }
 
         // Bu metot, araç verilerini veritabanından yükler ve DataGrid'e bağlar.
@@ -61,8 +87,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Araç verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading vehicle data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -86,8 +112,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Şube verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading branch data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -111,8 +137,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Araç sınıfı verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading vehicle class data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -141,8 +167,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Araç durumu verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading vehicle status data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -178,8 +204,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Seçili araç alınırken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error retrieving selected vehicle: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -296,8 +322,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             var selectedVehicle = GetSelectedVehicle();
             if (selectedVehicle == null)
             {
-                MessageBox.Show("Lütfen düzenlemek için bir araç seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a vehicle to edit.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -313,16 +339,16 @@ namespace car_rental_sales_desktop.Forms.Controls
             var selectedVehicle = GetSelectedVehicle();
             if (selectedVehicle == null)
             {
-                MessageBox.Show("Lütfen silmek için bir araç seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a vehicle to delete.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             var result = MessageBox.Show(
-                $"'{selectedVehicle.VehiclePlateNumber} - {selectedVehicle.VehicleBrand} {selectedVehicle.VehicleModel}' aracını silmek istediğinizden emin misiniz?\n\n" +
-                "Bu işlem geri alınamaz ve aracın tüm verilerini silecektir.\n" +
-                "UYARI: Araca ait kiralama, satış ve bakım kayıtları da silinecektir.",
-                "Araç Silme Onayı",
+                $"Are you sure you want to delete the vehicle '{selectedVehicle.VehiclePlateNumber} - {selectedVehicle.VehicleBrand} {selectedVehicle.VehicleModel}'?\n\n" +
+                "This operation cannot be undone and will delete all data for the vehicle.\n" +
+                "WARNING: Rental, sales, and maintenance records for the vehicle will also be deleted.",
+                "Confirm Vehicle Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -333,20 +359,20 @@ namespace car_rental_sales_desktop.Forms.Controls
                     bool success = _vehicleRepository.Delete(selectedVehicle.VehicleID);
                     if (success)
                     {
-                        MessageBox.Show("Araç başarıyla silindi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Vehicle deleted successfully.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadVehicles();
                     }
                     else
                     {
-                        MessageBox.Show("Araç silinirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while deleting the vehicle.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Araç silinirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"An error occurred while deleting the vehicle: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -359,17 +385,17 @@ namespace car_rental_sales_desktop.Forms.Controls
             var selectedVehicle = GetSelectedVehicle();
             if (selectedVehicle == null)
             {
-                MessageBox.Show("Lütfen durumunu değiştirmek için bir araç seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a vehicle to change its status.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            int newStatusId = selectedVehicle.VehicleStatusID == 1 ? 10 : 1;
+            int newStatusId = selectedVehicle.VehicleStatusID == 1 ? 10 : 1; // 1: Available, 10: Maintenance
             string newStatusName = newStatusId == 1 ? "Available" : "Maintenance";
 
             var result = MessageBox.Show(
-                $"'{selectedVehicle.VehiclePlateNumber}' plakalı aracın durumunu '{newStatusName}' olarak değiştirmek istediğinizden emin misiniz?",
-                "Durum Değiştirme Onayı",
+                $"Are you sure you want to change the status of vehicle '{selectedVehicle.VehiclePlateNumber}' to '{newStatusName}'?",
+                "Confirm Status Change",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -380,20 +406,20 @@ namespace car_rental_sales_desktop.Forms.Controls
                     bool success = _vehicleRepository.UpdateVehicleStatus(selectedVehicle.VehicleID, newStatusId);
                     if (success)
                     {
-                        MessageBox.Show($"Araç durumu başarıyla '{newStatusName}' olarak değiştirildi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Vehicle status successfully changed to '{newStatusName}'.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadVehicles();
                     }
                     else
                     {
-                        MessageBox.Show("Araç durumu değiştirilirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while changing the vehicle status.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Araç durumu değiştirilirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"An error occurred while changing the vehicle status: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -403,8 +429,8 @@ namespace car_rental_sales_desktop.Forms.Controls
         private void BtnRefreshVehicles_Click(object sender, EventArgs e)
         {
             LoadVehicles();
-            MessageBox.Show("Araç listesi yenilendi.",
-                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Vehicle list refreshed.",
+                "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // "Kaydet" butonu tıklandığında çağrılır.
@@ -422,24 +448,24 @@ namespace car_rental_sales_desktop.Forms.Controls
                     cmbTransmissionType.SelectedItem == null ||
                     cmbVehicleStatus.SelectedValue == null)
                 {
-                    MessageBox.Show("Lütfen tüm gerekli alanları doldurun.\n(Plaka, Marka, Model, Şasi No, Yakıt Tipi, Şanzıman Tipi ve Durum zorunludur)",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please fill in all required fields.\n(Plate, Brand, Model, Chassis No, Fuel Type, Transmission Type, and Status are mandatory)",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var existingVehicle = _vehicleRepository.GetByPlateNumber(txtPlateNumber.Text);
                 if (existingVehicle != null && (!_isEditMode || existingVehicle.VehicleID != _editingVehicleId))
                 {
-                    MessageBox.Show("Bu plaka numarası zaten başka bir araç tarafından kullanılmaktadır.",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("This plate number is already in use by another vehicle.",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var existingVehicleByChassis = _vehicleRepository.GetByChassisNumber(txtChassisNumber.Text);
                 if (existingVehicleByChassis != null && (!_isEditMode || existingVehicleByChassis.VehicleID != _editingVehicleId))
                 {
-                    MessageBox.Show("Bu şasi numarası zaten başka bir araç tarafından kullanılmaktadır.",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("This chassis number is already in use by another vehicle.",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -449,8 +475,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     vehicle = _vehicleRepository.GetById(_editingVehicleId);
                     if (vehicle == null)
                     {
-                        MessageBox.Show("Düzenlenecek araç bulunamadı.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("The vehicle to be edited was not found.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -490,8 +516,8 @@ namespace car_rental_sales_desktop.Forms.Controls
 
                 if (success)
                 {
-                    string message = _isEditMode ? "Araç başarıyla güncellendi." : "Araç başarıyla eklendi.";
-                    MessageBox.Show(message, "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string message = _isEditMode ? "Vehicle updated successfully." : "Vehicle added successfully.";
+                    MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     ClearForm();
                     LoadVehicles();
@@ -499,14 +525,14 @@ namespace car_rental_sales_desktop.Forms.Controls
                 }
                 else
                 {
-                    string message = _isEditMode ? "Araç güncellenirken bir hata oluştu." : "Araç eklenirken bir hata oluştu.";
-                    MessageBox.Show(message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string message = _isEditMode ? "An error occurred while updating the vehicle." : "An error occurred while adding the vehicle.";
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"İşlem sırasında hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred during the operation: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

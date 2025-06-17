@@ -11,7 +11,6 @@ namespace car_rental_sales_desktop.Models
         public string RoleDescription { get; set; }
         public DateTime RoleCreatedAt { get; set; }
 
-        // Navigation properties
         public virtual ICollection<User> Users { get; set; }
 
         public Role()

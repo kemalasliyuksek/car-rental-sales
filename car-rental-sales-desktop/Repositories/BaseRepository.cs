@@ -11,16 +11,17 @@ namespace car_rental_sales_desktop.Repositories
         protected readonly string _tableName;
         protected readonly string _idColumnName;
 
+        // Yapıcı metot
         protected BaseRepository(string tableName, string idColumnName)
         {
             _tableName = tableName;
             _idColumnName = idColumnName;
         }
 
-        // Convert DataRow to model object
+        // DataRow'u model nesnesine dönüştürür
         protected abstract T MapToModel(DataRow row);
 
-        // Get all records
+        // Tüm kayıtları getirir
         public virtual List<T> GetAll()
         {
             string query = $"SELECT * FROM {_tableName}";
@@ -28,7 +29,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get record by ID
+        // ID'ye göre kayıt getirir
         public virtual T GetById(int id)
         {
             string query = $"SELECT * FROM {_tableName} WHERE {_idColumnName} = @id";
@@ -41,7 +42,7 @@ namespace car_rental_sales_desktop.Repositories
             return MapToModel(dataTable.Rows[0]);
         }
 
-        // Insert new record
+        // Yeni kayıt ekler
         public virtual int Insert(T entity)
         {
             var parameters = GetInsertParameters(entity);
@@ -50,15 +51,15 @@ namespace car_rental_sales_desktop.Repositories
 
             string query = $"INSERT INTO {_tableName} ({columnNames}) VALUES ({paramNames}); SELECT LAST_INSERT_ID();";
 
-            // Convert dictionary to MySqlParameter array
+            // Sözlüğü MySqlParameter dizisine dönüştürür
             var sqlParameters = parameters.Select(p => DatabaseHelper.CreateParameter($"@{p.Key}", p.Value)).ToArray();
 
-            // Execute and get the new ID
+            // Çalıştırır ve yeni ID'yi alır
             object result = DatabaseHelper.ExecuteScalar(query, sqlParameters);
             return Convert.ToInt32(result);
         }
 
-        // Update existing record
+        // Mevcut kaydı günceller
         public virtual bool Update(T entity)
         {
             var parameters = GetUpdateParameters(entity);
@@ -70,7 +71,7 @@ namespace car_rental_sales_desktop.Repositories
             string setClause = string.Join(", ", parameters.Keys.Select(k => $"{k} = @{k}"));
             string query = $"UPDATE {_tableName} SET {setClause} WHERE {_idColumnName} = @id";
 
-            // Add all parameters including the ID
+            // ID dahil tüm parametreleri ekler
             var sqlParameters = parameters.Select(p => DatabaseHelper.CreateParameter($"@{p.Key}", p.Value)).ToList();
             sqlParameters.Add(DatabaseHelper.CreateParameter("@id", id));
 
@@ -78,7 +79,7 @@ namespace car_rental_sales_desktop.Repositories
             return affectedRows > 0;
         }
 
-        // Delete record by ID
+        // ID'ye göre kaydı siler
         public virtual bool Delete(int id)
         {
             string query = $"DELETE FROM {_tableName} WHERE {_idColumnName} = @id";
@@ -88,7 +89,7 @@ namespace car_rental_sales_desktop.Repositories
             return affectedRows > 0;
         }
 
-        // Convert DataTable to List of entity
+        // DataTable'ı varlık listesine dönüştürür
         protected List<T> ConvertDataTableToList(DataTable dataTable)
         {
             List<T> entities = new List<T>();
@@ -102,7 +103,7 @@ namespace car_rental_sales_desktop.Repositories
             return entities;
         }
 
-        // Abstract methods that must be implemented by derived classes
+        // Türetilmiş sınıflar tarafından implemente edilmesi gereken soyut metotlar
         protected abstract Dictionary<string, object> GetInsertParameters(T entity);
         protected abstract Dictionary<string, object> GetUpdateParameters(T entity);
         protected abstract int GetEntityId(T entity);

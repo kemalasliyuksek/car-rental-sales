@@ -1,5 +1,4 @@
-﻿// Gerekli kütüphanelerin ve isim alanlarının tanımlanması
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,7 +6,6 @@ using car_rental_sales_desktop.Models;
 using car_rental_sales_desktop.Repositories;
 using car_rental_sales_desktop.Utils;
 
-// Formun bulunduğu isim alanı
 namespace car_rental_sales_desktop.Forms
 {
     // Kiralama işlemleri formunu temsil eden sınıf
@@ -78,7 +76,7 @@ namespace car_rental_sales_desktop.Forms
                 if (_rental == null)
                 {
                     // Kullanıcıya hata mesajı göster
-                    MessageBox.Show("Kiralama bilgisi bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Rental information not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     // Formu kapat
                     this.Close();
                     // Metodun devam etmesini engelle
@@ -101,8 +99,8 @@ namespace car_rental_sales_desktop.Forms
 
                 // Formdaki ilgili etiketlere kiralama bilgilerini yazdır
                 lblRentalID.Text = _rental.RentalID.ToString(); // Kiralama ID'si
-                lblCustomerName.Text = _rental.Customer?.FullName ?? "Bilinmeyen Müşteri"; // Müşteri adı (Null ise "Bilinmeyen Müşteri" yaz)
-                lblVehicleInfo.Text = _rental.Vehicle?.VehiclePlateNumber ?? "Bilinmeyen Araç"; // Araç plakası (Null ise "Bilinmeyen Araç" yaz)
+                lblCustomerName.Text = _rental.Customer?.FullName ?? "Unknown Customer"; // Müşteri adı (Null ise "Bilinmeyen Müşteri" yaz)
+                lblVehicleInfo.Text = _rental.Vehicle?.VehiclePlateNumber ?? "Unknown Vehicle"; // Araç plakası (Null ise "Bilinmeyen Araç" yaz)
                 lblStartDate.Text = _rental.RentalStartDate.ToString("dd.MM.yyyy"); // Kiralama başlangıç tarihi
                 lblEndDate.Text = _rental.RentalEndDate.ToString("dd.MM.yyyy"); // Kiralama bitiş tarihi
                 lblStartMileage.Text = _rental.RentalStartKm.ToString() + " KM"; // Başlangıç kilometresi
@@ -130,7 +128,7 @@ namespace car_rental_sales_desktop.Forms
                         if (notes.Count > 1)
                         {
                             // Önceki notları belirtmek için bir başlık ekle
-                            txtRentalNote.Text += Environment.NewLine + Environment.NewLine + "Önceki notlar:";
+                            txtRentalNote.Text += Environment.NewLine + Environment.NewLine + "Previous notes:";
                             // Diğer notları döngü ile metin kutusuna ekle
                             for (int i = 1; i < notes.Count; i++)
                             {
@@ -145,7 +143,7 @@ namespace car_rental_sales_desktop.Forms
                 if (_rental.RentalReturnDate.HasValue)
                 {
                     // Durum etiketini "Bu kiralama zaten iade edilmiş." olarak ayarla
-                    lblStatus.Text = "Bu kiralama zaten iade edilmiş.";
+                    lblStatus.Text = "This rental has already been returned.";
                     // Durum etiketinin yazı rengini mavi yap
                     lblStatus.ForeColor = Color.Blue;
 
@@ -156,7 +154,7 @@ namespace car_rental_sales_desktop.Forms
                     btnCompleteReturn.Enabled = false;
 
                     // İadeyi tamamla butonunun metnini "Notu Kaydet" olarak değiştir
-                    btnCompleteReturn.Text = "Notu Kaydet";
+                    btnCompleteReturn.Text = "Save Note";
                     // İadeyi tamamla butonunu tekrar aktif et (sadece not kaydetmek için)
                     btnCompleteReturn.Enabled = true;
                     // Butonun arka plan rengini değiştir
@@ -177,12 +175,12 @@ namespace car_rental_sales_desktop.Forms
                         // Kullanılan kilometre farkını hesapla
                         int mileageDifference = _rental.RentalEndKm.Value - _rental.RentalStartKm;
                         // Kilometre bilgi etiketini güncelle
-                        lblMileageInfo.Text = $"Kullanılan mesafe: {mileageDifference} KM";
+                        lblMileageInfo.Text = $"Distance used: {mileageDifference} KM";
                     }
                     else
                     {
                         // Kilometre bilgi etiketini "Kullanılan mesafe: 0 KM" olarak ayarla
-                        lblMileageInfo.Text = "Kullanılan mesafe: 0 KM";
+                        lblMileageInfo.Text = "Distance used: 0 KM";
                     }
 
                     // İade detaylarını hesapla (gecikme ücreti vb.)
@@ -191,7 +189,7 @@ namespace car_rental_sales_desktop.Forms
                 else // Eğer araç henüz iade edilmemişse
                 {
                     // Durum etiketini "Bu kiralama aktif ve iade edilebilir." olarak ayarla
-                    lblStatus.Text = "Bu kiralama aktif ve iade edilebilir.";
+                    lblStatus.Text = "This rental is active and can be returned.";
                     // Durum etiketinin yazı rengini yeşil yap
                     lblStatus.ForeColor = Color.Green;
 
@@ -202,7 +200,7 @@ namespace car_rental_sales_desktop.Forms
             catch (Exception ex) // Hata yakalanırsa
             {
                 // Kullanıcıya hata mesajı göster
-                MessageBox.Show($"Kiralama detayları yüklenirken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading rental details: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -235,7 +233,7 @@ namespace car_rental_sales_desktop.Forms
                     // Gecikme ücreti etiketini güncelle
                     lblLateFee.Text = _lateFee.ToString("N2") + " ₺";
                     // Gecikme gün sayısı etiketini güncelle
-                    lblLateDays.Text = lateDays.ToString() + " gün geç";
+                    lblLateDays.Text = lateDays.ToString() + " days late";
                     // Gecikme ücreti panelini görünür yap
                     pnlLateFee.Visible = true;
                 }
@@ -244,7 +242,7 @@ namespace car_rental_sales_desktop.Forms
                     // Gecikme ücreti etiketini "0.00 ₺" olarak ayarla
                     lblLateFee.Text = "0.00 ₺";
                     // Gecikme gün sayısı etiketini "0 gün (zamanında)" olarak ayarla
-                    lblLateDays.Text = "0 gün (zamanında)";
+                    lblLateDays.Text = "0 days (on time)";
                     // Gecikme ücreti panelini gizle
                     pnlLateFee.Visible = false;
                 }
@@ -257,12 +255,12 @@ namespace car_rental_sales_desktop.Forms
                 // Kullanılan kilometre farkını hesapla
                 int mileageDifference = returnMileage - _rental.RentalStartKm;
                 // Kilometre bilgi etiketini güncelle
-                lblMileageInfo.Text = $"Kullanılan mesafe: {mileageDifference} KM";
+                lblMileageInfo.Text = $"Distance used: {mileageDifference} KM";
             }
             catch (Exception ex) // Hata yakalanırsa
             {
                 // Kullanıcıya hata mesajı göster
-                MessageBox.Show($"İade detayları hesaplanırken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error calculating return details: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -301,8 +299,8 @@ namespace car_rental_sales_desktop.Forms
                         {
                             // Kullanıcıya başarı mesajı göster
                             MessageBox.Show(
-                                "Not kiralamaya başarıyla eklendi.",
-                                "Başarılı",
+                                "Note successfully added to rental.",
+                                "Success",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
 
@@ -313,8 +311,8 @@ namespace car_rental_sales_desktop.Forms
                         {
                             // Kullanıcıya hata mesajı göster
                             MessageBox.Show(
-                                "Not kaydedilirken bir hata oluştu.",
-                                "Hata",
+                                "An error occurred while saving the note.",
+                                "Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                         }
@@ -323,8 +321,8 @@ namespace car_rental_sales_desktop.Forms
                     {
                         // Kullanıcıya uyarı mesajı göster
                         MessageBox.Show(
-                            "Lütfen bir not girin veya iptal'e tıklayın.",
-                            "Uyarı",
+                            "Please enter a note or click cancel.",
+                            "Warning",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning);
                     }
@@ -335,8 +333,8 @@ namespace car_rental_sales_desktop.Forms
 
                 // Araç iade edilmemişse, kullanıcıya iade işlemini onaylamasını sor
                 DialogResult result = MessageBox.Show(
-                    "Bu kiralama iadesini tamamlamak istediğinizden emin misiniz?",
-                    "İadeyi Onayla",
+                    "Are you sure you want to complete the return for this rental?",
+                    "Confirm Return",
                     MessageBoxButtons.YesNo, // Evet ve Hayır butonları
                     MessageBoxIcon.Question); // Soru ikonu
 
@@ -368,7 +366,7 @@ namespace car_rental_sales_desktop.Forms
                             PaymentAmount = _lateFee, // Ödeme tutarı (gecikme ücreti)
                             PaymentDate = returnDate, // Ödeme tarihi (iade tarihi)
                             PaymentType = "Late Fee", // Ödeme tipi: Gecikme Ücreti
-                            PaymentNote = $"Kiralama ID {_rental.RentalID} için gecikme ücreti", // Ödeme notu
+                            PaymentNote = $"Late fee for Rental ID {_rental.RentalID}", // Ödeme notu
                             PaymentUserID = CurrentUser.UserID // İşlemi yapan kullanıcı ID'si
                         };
 
@@ -389,8 +387,8 @@ namespace car_rental_sales_desktop.Forms
 
                     // Kullanıcıya başarı mesajı göster
                     MessageBox.Show(
-                        "Kiralama iadesi başarıyla işlendi.",
-                        "Başarılı",
+                        "Rental return processed successfully.",
+                        "Success",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
@@ -401,8 +399,8 @@ namespace car_rental_sales_desktop.Forms
                 {
                     // Kullanıcıya hata mesajı göster
                     MessageBox.Show(
-                        "Kiralama iadesi işlenirken bir hata oluştu.",
-                        "Hata",
+                        "An error occurred while processing the rental return.",
+                        "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -410,7 +408,7 @@ namespace car_rental_sales_desktop.Forms
             catch (Exception ex) // Hata yakalanırsa
             {
                 // Kullanıcıya genel bir hata mesajı göster
-                MessageBox.Show($"İşlem sırasında hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred during the operation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

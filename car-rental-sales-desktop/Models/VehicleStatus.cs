@@ -10,7 +10,6 @@ namespace car_rental_sales_desktop.Models
         public string VehicleStatusDescription { get; set; }
         public DateTime VehicleStatusCreatedAt { get; set; }
 
-        // Navigation properties
         public virtual ICollection<Vehicle> Vehicles { get; set; }
 
         public VehicleStatus()

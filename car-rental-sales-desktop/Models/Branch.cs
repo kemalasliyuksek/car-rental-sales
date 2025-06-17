@@ -14,7 +14,6 @@ namespace car_rental_sales_desktop.Models
         public bool BranchActive { get; set; }
         public DateTime BranchCreatedAt { get; set; }
 
-        // Navigation properties
         public virtual ICollection<Vehicle> Vehicles { get; set; }
         public virtual ICollection<User> Users { get; set; }
 

@@ -50,9 +50,29 @@ namespace car_rental_sales_desktop.Forms.Controls
         // Personel, rol ve şube verilerini yükler.
         private void StaffControl_Load(object sender, EventArgs e)
         {
-            LoadStaff(); // Personel verilerini yükler.
-            LoadRoles(); // Rol verilerini yükler.
-            LoadBranches(); // Şube verilerini yükler.
+            // Admin ve Şube Müdürü personel yönetebilir
+            if (!CurrentUser.CanPerformAction("manage_staff"))
+            {
+                MessageBox.Show("You do not have access to this page.", "Unauthorized Access",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Enabled = false;
+                return;
+            }
+
+            LoadStaff();
+            LoadRoles();
+            LoadBranches();
+
+            // Şube müdürü sadece kendi şubesindeki personeli görebilir
+            if (CurrentUser.IsBranchManager() && CurrentUser.BranchID.HasValue)
+            {
+                _staffList = _staffList.Where(s => s.UserBranchID == CurrentUser.BranchID.Value).ToList();
+                sfDataGridStaff.DataSource = _staffList;
+
+                // Şube seçimini sadece kendi şubesi olarak sabitle
+                cmbBranch.SelectedValue = CurrentUser.BranchID.Value;
+                cmbBranch.Enabled = false;
+            }
         }
 
         // Personel verilerini veritabanından yükler ve DataGrid'e bağlar.
@@ -74,7 +94,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                     else
                     {
                         // Rol atanmamışsa varsayılan bir rol nesnesi oluşturur.
-                        user.Role = new Role { RoleName = "Atanmamış" };
+                        user.Role = new Role { RoleName = "Unassigned" };
                     }
 
                     if (user.UserBranchID.HasValue && user.UserBranchID.Value > 0)
@@ -85,7 +105,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                     else
                     {
                         // Şube atanmamışsa varsayılan bir şube nesnesi oluşturur.
-                        user.Branch = new Branch { BranchName = "Atanmamış" };
+                        user.Branch = new Branch { BranchName = "Unassigned" };
                     }
                 }
 
@@ -95,8 +115,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Personel verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading staff data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -117,8 +137,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Rol verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading role data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -134,7 +154,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                 // ComboBox için "Atanmamış" seçeneğini içeren yeni bir liste oluşturur.
                 var branchesWithEmpty = new List<Branch>
                 {
-                    new Branch { BranchID = 0, BranchName = "Atanmamış" } // Varsayılan "Atanmamış" seçeneği.
+                    new Branch { BranchID = 0, BranchName = "Unassigned" } // Varsayılan "Atanmamış" seçeneği.
                 };
                 // Mevcut şube listesini bu yeni listeye ekler.
                 branchesWithEmpty.AddRange(_branchList);
@@ -149,8 +169,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Şube verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading branch data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -171,8 +191,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Seçili kullanıcı alınırken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error retrieving selected user: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -200,9 +220,9 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Düzenlenen kullanıcı ID'sini sıfırlar.
             _editingUserId = 0;
             // Form başlığını "Yeni Personel Ekle" olarak ayarlar.
-            lblStaffFormTitle.Text = "Yeni Personel Ekle";
+            lblStaffFormTitle.Text = "Add New Staff";
             // Kaydet butonunun metnini "Personeli Kaydet" olarak ayarlar.
-            btnSaveStaff.Text = "Personeli Kaydet";
+            btnSaveStaff.Text = "Save Staff";
         }
 
         // Seçili personelin bilgilerini personel ekleme/düzenleme formundaki alanlara doldurur.
@@ -248,9 +268,9 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Düzenlenen kullanıcı ID'sini ayarlar.
             _editingUserId = user.UserID;
             // Form başlığını "Personeli Düzenle" olarak ayarlar.
-            lblStaffFormTitle.Text = "Personeli Düzenle";
+            lblStaffFormTitle.Text = "Edit Staff";
             // Kaydet butonunun metnini "Personeli Güncelle" olarak ayarlar.
-            btnSaveStaff.Text = "Personeli Güncelle";
+            btnSaveStaff.Text = "Update Staff";
         }
 
         // DataGrid'deki satırların stilini özelleştirmek için kullanılan olay metodu.
@@ -278,8 +298,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Eğer personel seçilmemişse uyarı mesajı gösterir ve metottan çıkar.
             if (selectedUser == null)
             {
-                MessageBox.Show("Lütfen düzenlemek için bir personel seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a staff member to edit.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -298,24 +318,24 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Eğer personel seçilmemişse uyarı mesajı gösterir ve metottan çıkar.
             if (selectedUser == null)
             {
-                MessageBox.Show("Lütfen silmek için bir personel seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a staff member to delete.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Kullanıcının kendi hesabını silmesini engeller.
             if (selectedUser.UserID == CurrentUser.UserID) // CurrentUser, o an giriş yapmış kullanıcıyı temsil eder.
             {
-                MessageBox.Show("Kendi hesabınızı silemezsiniz.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("You cannot delete your own account.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Silme işlemi için kullanıcıdan onay alır.
             var result = MessageBox.Show(
-                $"'{selectedUser.FullName}' adlı personeli silmek istediğinizden emin misiniz?\n\n" +
-                "Bu işlem geri alınamaz ve personelin tüm verilerini silecektir.",
-                "Personel Silme Onayı",
+                $"Are you sure you want to delete the staff member '{selectedUser.FullName}'?\n\n" +
+                "This action cannot be undone and will delete all data for this staff member.",
+                "Confirm Staff Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -329,22 +349,22 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (success)
                     {
                         // Başarılı olursa bilgi mesajı gösterir ve personel listesini yeniler.
-                        MessageBox.Show("Personel başarıyla silindi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Staff member deleted successfully.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadStaff();
                     }
                     else
                     {
                         // Başarısız olursa hata mesajı gösterir.
-                        MessageBox.Show("Personel silinirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while deleting the staff member.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
                     // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                    MessageBox.Show($"Personel silinirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"An error occurred while deleting the staff member: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -358,25 +378,25 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Eğer personel seçilmemişse uyarı mesajı gösterir ve metottan çıkar.
             if (selectedUser == null)
             {
-                MessageBox.Show("Lütfen durumunu değiştirmek için bir personel seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a staff member to change their status.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Kullanıcının kendi hesabını pasif hale getirmesini engeller.
             if (selectedUser.UserID == CurrentUser.UserID && selectedUser.UserActive)
             {
-                MessageBox.Show("Kendi hesabınızı pasif hale getiremezsiniz.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("You cannot deactivate your own account.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Değiştirilecek durumu belirler (aktif ise pasif, pasif ise aktif).
-            string statusText = selectedUser.UserActive ? "pasif" : "aktif";
+            string statusText = selectedUser.UserActive ? "inactive" : "active";
             // Durum değiştirme işlemi için kullanıcıdan onay alır.
             var result = MessageBox.Show(
-                $"'{selectedUser.FullName}' adlı personeli {statusText} hale getirmek istediğinizden emin misiniz?",
-                "Durum Değiştirme Onayı",
+                $"Are you sure you want to make the staff member '{selectedUser.FullName}' {statusText}?",
+                "Confirm Status Change",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -390,22 +410,22 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (success)
                     {
                         // Başarılı olursa bilgi mesajı gösterir ve personel listesini yeniler.
-                        MessageBox.Show($"Personel durumu başarıyla {statusText} hale getirildi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Staff member status successfully changed to {statusText}.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadStaff();
                     }
                     else
                     {
                         // Başarısız olursa hata mesajı gösterir.
-                        MessageBox.Show("Personel durumu değiştirilirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while changing the staff member's status.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
                     // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                    MessageBox.Show($"Personel durumu değiştirilirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"An error occurred while changing the staff member's status: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -415,8 +435,8 @@ namespace car_rental_sales_desktop.Forms.Controls
         private void BtnRefreshStaff_Click(object sender, EventArgs e)
         {
             LoadStaff(); // Personel verilerini yeniden yükler.
-            MessageBox.Show("Personel listesi yenilendi.",
-                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Staff list refreshed.",
+                "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // "Kaydet" (veya "Güncelle") butonuna tıklandığında çağrılan olay metodu.
@@ -434,8 +454,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     string.IsNullOrEmpty(txtUserPhone.Text) ||
                     cmbRole.SelectedValue == null) // Rol seçimi zorunludur.
                 {
-                    MessageBox.Show("Lütfen tüm gerekli alanları doldurun.",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please fill in all required fields.",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -444,8 +464,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 var existingUser = _userRepository.GetByUsername(txtUsername.Text.Trim());
                 if (existingUser != null && (!_isEditMode || existingUser.UserID != _editingUserId))
                 {
-                    MessageBox.Show("Bu kullanıcı adı zaten kullanılmaktadır.",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("This username is already in use.",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -456,8 +476,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     user = _userRepository.GetById(_editingUserId);
                     if (user == null)
                     {
-                        MessageBox.Show("Düzenlenecek kullanıcı bulunamadı.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("The user to be edited was not found.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -493,8 +513,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (success)
                 {
                     // Başarılı olursa duruma göre mesaj gösterir.
-                    string message = _isEditMode ? "Personel başarıyla güncellendi." : "Personel başarıyla eklendi.";
-                    MessageBox.Show(message, "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string message = _isEditMode ? "Staff member updated successfully." : "Staff member added successfully.";
+                    MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     ClearForm(); // Formu temizler.
                     LoadStaff(); // Personel listesini yeniler.
@@ -503,15 +523,15 @@ namespace car_rental_sales_desktop.Forms.Controls
                 else
                 {
                     // Başarısız olursa duruma göre hata mesajı gösterir.
-                    string message = _isEditMode ? "Personel güncellenirken bir hata oluştu." : "Personel eklenirken bir hata oluştu.";
-                    MessageBox.Show(message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string message = _isEditMode ? "An error occurred while updating the staff member." : "An error occurred while adding the staff member.";
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 // Genel bir hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"İşlem sırasında hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred during the operation: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

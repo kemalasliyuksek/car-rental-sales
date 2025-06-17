@@ -56,7 +56,7 @@ namespace car_rental_sales_desktop.Repositories
             return entity.BranchID;
         }
 
-        // Get active branches
+        // Aktif şubeleri getirir
         public List<Branch> GetActiveBranches()
         {
             string query = "SELECT * FROM Branches WHERE BranchActive = 1";
@@ -65,7 +65,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get branch with vehicles count
+        // Araç sayılarıyla birlikte şubeleri getirir
         public DataTable GetBranchesWithVehicleCount()
         {
             string query = @"
@@ -85,7 +85,7 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query);
         }
 
-        // Get branch with staff count
+        // Personel sayılarıyla birlikte şubeleri getirir
         public DataTable GetBranchesWithStaffCount()
         {
             string query = @"
@@ -105,7 +105,7 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query);
         }
 
-        // Get branch status (active/inactive)
+        // Şube durumunu ayarlar (aktif/pasif)
         public bool SetBranchStatus(int branchId, bool isActive)
         {
             string query = "UPDATE Branches SET BranchActive = @isActive WHERE BranchID = @branchId";
@@ -119,7 +119,7 @@ namespace car_rental_sales_desktop.Repositories
             return affectedRows > 0;
         }
 
-        // Get branch with vehicle availability
+        // Şube araç uygunluk durumunu getirir
         public DataTable GetBranchVehicleAvailability()
         {
             string query = @"
@@ -140,7 +140,7 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query);
         }
 
-        // Get branch with rental statistics
+        // Şube kiralama istatistiklerini getirir
         public DataTable GetBranchRentalStatistics(DateTime startDate, DateTime endDate)
         {
             string query = @"

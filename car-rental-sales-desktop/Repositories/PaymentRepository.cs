@@ -29,7 +29,7 @@ namespace car_rental_sales_desktop.Repositories
                 PaymentUserID = row.GetValue<int>("PaymentUserID"),
                 PaymentCreatedAt = row.GetValue<DateTime>("PaymentCreatedAt"),
 
-                // Navigation properties
+                // Navigasyon özellikleri
                 Customer = GetCustomer(row.GetValue<int>("PaymentCustomerID")),
                 Bank = row.GetValue<int?>("PaymentBankID").HasValue ?
                     GetBank(row.GetValue<int>("PaymentBankID")) : null,
@@ -75,7 +75,7 @@ namespace car_rental_sales_desktop.Repositories
             return entity.PaymentID;
         }
 
-        // Get payments by transaction
+        // İşleme göre ödemeleri getir
         public List<Payment> GetByTransaction(string transactionType, int transactionId)
         {
             string query = "SELECT * FROM Payments WHERE PaymentTransactionType = @transactionType AND PaymentTransactionID = @transactionId";
@@ -89,7 +89,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get payments by customer
+        // Müşteriye göre ödemeleri getir
         public List<Payment> GetByCustomer(int customerId)
         {
             string query = "SELECT * FROM Payments WHERE PaymentCustomerID = @customerId";
@@ -99,7 +99,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get payments by date range
+        // Tarih aralığına göre ödemeleri getir
         public List<Payment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
             string query = "SELECT * FROM Payments WHERE PaymentDate BETWEEN @startDate AND @endDate";
@@ -113,7 +113,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get payments by type
+        // Ödeme türüne göre ödemeleri getir
         public List<Payment> GetByPaymentType(string paymentType)
         {
             string query = "SELECT * FROM Payments WHERE PaymentType = @paymentType";
@@ -123,7 +123,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get payments by bank
+        // Bankaya göre ödemeleri getir
         public List<Payment> GetByBank(int bankId)
         {
             string query = "SELECT * FROM Payments WHERE PaymentBankID = @bankId";
@@ -133,7 +133,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get payments by user
+        // Kullanıcıya göre ödemeleri getir
         public List<Payment> GetByUser(int userId)
         {
             string query = "SELECT * FROM Payments WHERE PaymentUserID = @userId";
@@ -143,7 +143,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get payment totals by type
+        // Ödeme türüne göre ödeme toplamlarını getir
         public DataTable GetPaymentTotalsByType()
         {
             string query = @"
@@ -158,7 +158,7 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query);
         }
 
-        // Get payment totals by transaction type
+        // İşlem türüne göre ödeme toplamlarını getir
         public DataTable GetPaymentTotalsByTransactionType()
         {
             string query = @"
@@ -173,7 +173,7 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query);
         }
 
-        // Get payment statistics by date range
+        // Tarih aralığına göre ödeme istatistiklerini getir
         public DataTable GetPaymentStatistics(DateTime startDate, DateTime endDate)
         {
             string query = @"
@@ -195,7 +195,7 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query, parameters);
         }
 
-        // Get payments by month
+        // Aya göre ödemeleri getir
         public DataTable GetPaymentsByMonth(int year)
         {
             string query = @"
@@ -212,7 +212,7 @@ namespace car_rental_sales_desktop.Repositories
             return DatabaseHelper.ExecuteQuery(query, parameter);
         }
 
-        // Create transaction payment with multiple payment methods
+        // Birden fazla ödeme yöntemiyle işlem ödemesi oluştur
         public bool CreateTransactionPayments(string transactionType, int transactionId, int customerId, List<Payment> payments)
         {
             using (var connection = ConnectionManager.GetConnection())
@@ -277,7 +277,7 @@ namespace car_rental_sales_desktop.Repositories
             }
         }
 
-        // Helper method to get customer
+        // Müşteri almak için yardımcı metot
         private Customer GetCustomer(int customerId)
         {
             string query = "SELECT * FROM Customers WHERE CustomerID = @customerId";
@@ -293,11 +293,11 @@ namespace car_rental_sales_desktop.Repositories
                 CustomerID = row.GetValue<int>("CustomerID"),
                 CustomerFirstName = row.GetValue<string>("CustomerFirstName"),
                 CustomerLastName = row.GetValue<string>("CustomerLastName")
-                // Add other fields as needed
+                // Gerektiğinde diğer alanları ekleyin
             };
         }
 
-        // Helper method to get bank
+        // Banka almak için yardımcı metot
         private Bank GetBank(int? bankId)
         {
             if (!bankId.HasValue)
@@ -319,7 +319,7 @@ namespace car_rental_sales_desktop.Repositories
             };
         }
 
-        // Helper method to get user
+        // Kullanıcı almak için yardımcı metot
         private User GetUser(int userId)
         {
             string query = "SELECT * FROM Users WHERE UserID = @userId";
@@ -335,7 +335,6 @@ namespace car_rental_sales_desktop.Repositories
                 UserID = row.GetValue<int>("UserID"),
                 UserFirstName = row.GetValue<string>("UserFirstName"),
                 UserLastName = row.GetValue<string>("UserLastName")
-                // Add other fields as needed
             };
         }
     }

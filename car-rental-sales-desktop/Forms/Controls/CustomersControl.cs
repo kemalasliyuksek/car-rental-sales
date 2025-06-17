@@ -69,8 +69,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex) // Eğer try bloğunda bir hata oluşursa, catch bloğu çalışır.
             {
                 // Hata mesajını kullanıcıya bir mesaj kutusuyla gösterir.
-                MessageBox.Show($"Müşteri verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading customer data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -104,8 +104,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi verir ve null döndürür.
-                MessageBox.Show($"Seçili müşteri alınırken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error retrieving selected customer: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -231,8 +231,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             if (selectedCustomer == null)
             {
                 // Kullanıcıya bir uyarı mesajı gösterir.
-                MessageBox.Show("Lütfen düzenlemek için bir müşteri seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a customer to edit.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Metottan çıkar.
             }
 
@@ -245,14 +245,22 @@ namespace car_rental_sales_desktop.Forms.Controls
         // "Sil" butonuna tıklandığında çağrılan metot.
         private void BtnDeleteCustomer_Click(object sender, EventArgs e)
         {
+            // Sadece Admin ve Şube Müdürü müşteri silebilir
+            if (!CurrentUser.IsAdmin() && !CurrentUser.IsBranchManager())
+            {
+                MessageBox.Show("You do not have the authority to delete customer. "," Unauthorized Transaction ",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // Veri tablosundan seçili olan müşteriyi alır.
             var selectedCustomer = GetSelectedCustomer();
             // Eğer hiçbir müşteri seçilmemişse
             if (selectedCustomer == null)
             {
                 // Kullanıcıya bir uyarı mesajı gösterir.
-                MessageBox.Show("Lütfen silmek için bir müşteri seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a customer to delete.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Metottan çıkar.
             }
 
@@ -260,10 +268,10 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Mesaj, müşterinin adını ve işlemin geri alınamayacağını belirtir.
             // Ayrıca, müşteriye ait kiralama ve ödeme kayıtlarının da silineceği uyarısı yapılır.
             var result = MessageBox.Show(
-                $"'{selectedCustomer.FullName}' adlı müşteriyi silmek istediğinizden emin misiniz?\n\n" +
-                "Bu işlem geri alınamaz ve müşterinin tüm verilerini silecektir.\n" +
-                "UYARI: Müşteriye ait kiralama ve ödeme kayıtları da silinecektir.",
-                "Müşteri Silme Onayı",
+                $"Are you sure you want to delete the customer '{selectedCustomer.FullName}'?\n\n" +
+                "This action cannot be undone and will delete all data for this customer.\n" +
+                "WARNING: Rental and payment records associated with this customer will also be deleted.",
+                "Confirm Customer Deletion",
                 MessageBoxButtons.YesNo, // Evet ve Hayır butonları gösterir.
                 MessageBoxIcon.Question); // Soru ikonu gösterir.
 
@@ -278,23 +286,23 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (success)
                     {
                         // Başarı mesajı gösterir.
-                        MessageBox.Show("Müşteri başarıyla silindi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Customer deleted successfully.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // Müşteri listesini günceller (silinen müşterinin listeden kalkması için).
                         LoadCustomers();
                     }
                     else // Eğer silme işlemi başarısızsa
                     {
                         // Hata mesajı gösterir.
-                        MessageBox.Show("Müşteri silinirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while deleting the customer.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex) // Eğer try bloğunda bir hata oluşursa
                 {
                     // Hata mesajını kullanıcıya gösterir.
-                    MessageBox.Show($"Müşteri silinirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error deleting customer: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -308,18 +316,18 @@ namespace car_rental_sales_desktop.Forms.Controls
             if (selectedCustomer == null)
             {
                 // Kullanıcıya bir uyarı mesajı gösterir.
-                MessageBox.Show("Lütfen durumunu değiştirmek için bir müşteri seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a customer to change status.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Metottan çıkar.
             }
 
             // Müşterinin mevcut durumuna göre (CustomerAvailable özelliği) hedef durumu belirler.
             // Eğer müşteri aktifse "pasif", pasifse "aktif" yapar.
-            string statusText = selectedCustomer.CustomerAvailable ? "pasif" : "aktif";
+            string statusText = selectedCustomer.CustomerAvailable ? "inactive" : "active";
             // Kullanıcıdan durum değiştirme işlemini onaylamasını isteyen bir mesaj kutusu gösterir.
             var result = MessageBox.Show(
-                $"'{selectedCustomer.FullName}' adlı müşteriyi {statusText} hale getirmek istediğinizden emin misiniz?",
-                "Durum Değiştirme Onayı",
+                $"Are you sure you want to make the customer '{selectedCustomer.FullName}' {statusText}?",
+                "Confirm Status Change",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -337,16 +345,16 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (success)
                     {
                         // Başarı mesajı gösterir.
-                        MessageBox.Show($"Müşteri durumu başarıyla {statusText} hale getirildi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Customer status successfully changed to {statusText}.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // Müşteri listesini günceller (değişen durumu yansıtmak için).
                         LoadCustomers();
                     }
                     else // Eğer güncelleme işlemi başarısızsa
                     {
                         // Hata mesajı gösterir.
-                        MessageBox.Show("Müşteri durumu değiştirilirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while changing the customer status.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         // Başarısızlık durumunda yapılan değişikliği geri alır (eski durumuna döndürür).
                         selectedCustomer.CustomerAvailable = !selectedCustomer.CustomerAvailable;
@@ -355,8 +363,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 catch (Exception ex) // Eğer try bloğunda bir hata oluşursa
                 {
                     // Hata mesajını kullanıcıya gösterir.
-                    MessageBox.Show($"Müşteri durumu değiştirilirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error changing customer status: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     // Hata durumunda yapılan değişikliği geri alır (eski durumuna döndürür).
                     selectedCustomer.CustomerAvailable = !selectedCustomer.CustomerAvailable;
@@ -370,8 +378,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Müşteri listesini yeniden yükler.
             LoadCustomers();
             // Kullanıcıya listenin yenilendiğine dair bilgi mesajı gösterir.
-            MessageBox.Show("Müşteri listesi yenilendi.",
-                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Customer list refreshed.",
+                "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // "Kaydet" (veya düzenleme modunda "Güncelle") butonuna tıklandığında çağrılan metot.
@@ -385,8 +393,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     string.IsNullOrEmpty(txtCustomerPhone.Text))
                 {
                     // Eğer zorunlu alanlar boşsa, kullanıcıya uyarı mesajı gösterir.
-                    MessageBox.Show("Lütfen en az Ad, Soyad ve Telefon alanlarını doldurun.",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please fill in at least the First Name, Last Name, and Phone fields.",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return; // Metottan çıkar.
                 }
 
@@ -399,8 +407,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (existingCustomer != null && (!_isEditMode || existingCustomer.CustomerID != _editingCustomerId))
                     {
                         // Kullanıcıya bu TC Kimlik No'nun zaten kullanıldığını belirten bir uyarı mesajı gösterir.
-                        MessageBox.Show("Bu TC Kimlik No zaten başka bir müşteri tarafından kullanılmaktadır.",
-                            "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("This National ID is already used by another customer.",
+                            "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return; // Metottan çıkar.
                     }
                 }
@@ -414,8 +422,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (existingCustomerByPhone != null && (!_isEditMode || existingCustomerByPhone.CustomerID != _editingCustomerId))
                     {
                         // Kullanıcıya bu telefon numarasının zaten kullanıldığını belirten bir uyarı mesajı gösterir.
-                        MessageBox.Show("Bu telefon numarası zaten başka bir müşteri tarafından kullanılmaktadır.",
-                            "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("This phone number is already used by another customer.",
+                            "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return; // Metottan çıkar.
                     }
                 }
@@ -430,8 +438,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (customer == null)
                     {
                         // Hata mesajı gösterir.
-                        MessageBox.Show("Düzenlenecek müşteri bulunamadı.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Customer to edit not found.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return; // Metottan çıkar.
                     }
                 }
@@ -480,9 +488,9 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (success)
                 {
                     // Duruma göre (düzenleme veya ekleme) uygun başarı mesajını oluşturur.
-                    string message = _isEditMode ? "Müşteri başarıyla güncellendi." : "Müşteri başarıyla eklendi.";
+                    string message = _isEditMode ? "Customer updated successfully." : "Customer added successfully.";
                     // Başarı mesajını gösterir.
-                    MessageBox.Show(message, "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Formu temizler.
                     ClearForm();
@@ -494,16 +502,16 @@ namespace car_rental_sales_desktop.Forms.Controls
                 else // Eğer kaydetme/güncelleme işlemi başarısızsa
                 {
                     // Duruma göre uygun hata mesajını oluşturur.
-                    string message = _isEditMode ? "Müşteri güncellenirken bir hata oluştu." : "Müşteri eklenirken bir hata oluştu.";
+                    string message = _isEditMode ? "An error occurred while updating the customer." : "An error occurred while adding the customer.";
                     // Hata mesajını gösterir.
-                    MessageBox.Show(message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex) // Eğer try bloğunda genel bir hata oluşursa
             {
                 // Hata mesajını kullanıcıya gösterir.
-                MessageBox.Show($"İşlem sırasında hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred during the operation: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

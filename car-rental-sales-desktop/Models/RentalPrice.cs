@@ -18,7 +18,6 @@ namespace car_rental_sales_desktop.Models
         public decimal RentPrice { get; set; }
         public DateTime RentalPriceCreatedAt { get; set; }
 
-        // Navigation properties
         public virtual VehicleClass VehicleClass { get; set; }
 
         public RentalPrice()

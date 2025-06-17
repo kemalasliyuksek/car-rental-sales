@@ -21,7 +21,6 @@ namespace car_rental_sales_desktop.Models
         public string CustomerType { get; set; }
         public DateTime? CustomerUpdatedAt { get; set; }
 
-        // Navigation properties
         public virtual ICollection<Rental> Rentals { get; set; }
 
         public virtual ICollection<Payment> Payments { get; set; }

@@ -16,7 +16,6 @@ namespace car_rental_sales_desktop.Models
         public DateTime MaintenanceCreatedAt { get; set; }
         public DateTime? MaintenanceUpdatedAt { get; set; }
 
-        // Navigation properties
         public virtual Vehicle Vehicle { get; set; }
         public virtual Service Service { get; set; }
         public virtual User User { get; set; }

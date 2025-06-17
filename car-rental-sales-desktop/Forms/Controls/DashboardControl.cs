@@ -42,7 +42,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata mesajı gösterilir
-                MessageBox.Show($"İstatistik verileri yüklenirken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading statistics data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

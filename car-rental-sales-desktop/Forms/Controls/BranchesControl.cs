@@ -36,7 +36,16 @@ namespace car_rental_sales_desktop.Forms.Controls
         // Kontrol yüklendiğinde çalışan olay metodu
         private void BranchControl_Load(object sender, EventArgs e)
         {
-            LoadBranches(); // Şube verilerini yükler
+            // Sadece Admin şubeleri yönetebilir
+            if (!CurrentUser.IsAdmin())
+            {
+                MessageBox.Show("You do not have access to this page.", "Unauthorized Access",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Enabled = false;
+                return;
+            }
+
+            LoadBranches();
         }
 
         // Şube verilerini veritabanından yükler ve DataGrid'de gösterir
@@ -50,8 +59,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata oluşursa kullanıcıya bilgi mesajı gösterir
-                MessageBox.Show($"Şube verileri yüklenirken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading branch data: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -70,8 +79,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata oluşursa kullanıcıya bilgi mesajı gösterir
-                MessageBox.Show($"Seçili şube alınırken hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error getting selected branch: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -87,8 +96,8 @@ namespace car_rental_sales_desktop.Forms.Controls
 
             _isEditMode = false; // Düzenleme modunu kapatır
             _editingBranchId = 0; // Düzenlenen şube kimliğini sıfırlar
-            lblBranchFormTitle.Text = "Yeni Şube Ekle"; // Form başlığını "Yeni Şube Ekle" olarak ayarlar
-            btnSaveBranch.Text = "Şubeyi Kaydet"; // Kaydet butonunun metnini "Şubeyi Kaydet" olarak ayarlar
+            lblBranchFormTitle.Text = "Add New Branch"; // Form başlığını "Yeni Şube Ekle" olarak ayarlar
+            btnSaveBranch.Text = "Save Branch"; // Kaydet butonunun metnini "Şubeyi Kaydet" olarak ayarlar
         }
 
         // Seçilen şubenin bilgilerini formdaki alanlara doldurur
@@ -104,8 +113,8 @@ namespace car_rental_sales_desktop.Forms.Controls
 
             _isEditMode = true; // Düzenleme modunu açar
             _editingBranchId = branch.BranchID; // Düzenlenen şubenin kimliğini ayarlar
-            lblBranchFormTitle.Text = "Şubeyi Düzenle"; // Form başlığını "Şubeyi Düzenle" olarak ayarlar
-            btnSaveBranch.Text = "Şubeyi Güncelle"; // Kaydet butonunun metnini "Şubeyi Güncelle" olarak ayarlar
+            lblBranchFormTitle.Text = "Edit Branch"; // Form başlığını "Şubeyi Düzenle" olarak ayarlar
+            btnSaveBranch.Text = "Update Branch"; // Kaydet butonunun metnini "Şubeyi Güncelle" olarak ayarlar
         }
 
         // DataGrid'deki satırların stilini (görünümünü) özelleştirir
@@ -130,8 +139,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             if (selectedBranch == null)
             {
                 // Eğer şube seçilmemişse kullanıcıya uyarı mesajı gösterir
-                MessageBox.Show("Lütfen düzenlemek için bir şube seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a branch to edit.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -146,24 +155,24 @@ namespace car_rental_sales_desktop.Forms.Controls
             if (selectedBranch == null)
             {
                 // Eğer şube seçilmemişse kullanıcıya uyarı mesajı gösterir
-                MessageBox.Show("Lütfen silmek için bir şube seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a branch to delete.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Mevcut kullanıcının kendi şubesini silmesini engeller
             if (CurrentUser.BranchID.HasValue && selectedBranch.BranchID == CurrentUser.BranchID.Value)
             {
-                MessageBox.Show("Kendi şubenizi silemezsiniz.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("You cannot delete your own branch.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Kullanıcıya silme işlemini onaylatır
             var result = MessageBox.Show(
-                $"'{selectedBranch.BranchName}' adlı şubeyi silmek istediğinizden emin misiniz?\n\n" +
-                "Bu işlem geri alınamaz ve şubenin tüm verilerini silecektir.",
-                "Şube Silme Onayı",
+                $"Are you sure you want to delete the branch named '{selectedBranch.BranchName}'?\n\n" +
+                "This action cannot be undone and will delete all data for the branch.",
+                "Confirm Branch Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -176,22 +185,22 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (success)
                     {
                         // Başarılı olursa kullanıcıya bilgi mesajı gösterir
-                        MessageBox.Show("Şube başarıyla silindi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Branch deleted successfully.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBranches(); // Şube listesini yeniler
                     }
                     else
                     {
                         // Başarısız olursa kullanıcıya hata mesajı gösterir
-                        MessageBox.Show("Şube silinirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while deleting the branch.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
                     // Hata oluşursa kullanıcıya detaylı hata mesajı gösterir
-                    MessageBox.Show($"Şube silinirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error deleting branch: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -203,25 +212,25 @@ namespace car_rental_sales_desktop.Forms.Controls
             if (selectedBranch == null)
             {
                 // Eğer şube seçilmemişse kullanıcıya uyarı mesajı gösterir
-                MessageBox.Show("Lütfen durumunu değiştirmek için bir şube seçin.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a branch to change its status.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Mevcut kullanıcının kendi şubesini pasif hale getirmesini engeller
             if (CurrentUser.BranchID.HasValue && selectedBranch.BranchID == CurrentUser.BranchID.Value && selectedBranch.BranchActive)
             {
-                MessageBox.Show("Kendi şubenizi pasif hale getiremezsiniz.",
-                    "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("You cannot deactivate your own branch.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Şubenin mevcut durumuna göre onay mesajındaki metni ayarlar
-            string statusText = selectedBranch.BranchActive ? "pasif" : "aktif";
+            string statusText = selectedBranch.BranchActive ? "inactive" : "active";
             // Kullanıcıya durum değiştirme işlemini onaylatır
             var result = MessageBox.Show(
-                $"'{selectedBranch.BranchName}' adlı şubeyi {statusText} hale getirmek istediğinizden emin misiniz?",
-                "Durum Değiştirme Onayı",
+                $"Are you sure you want to make the branch '{selectedBranch.BranchName}' {statusText}?",
+                "Confirm Status Change",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -235,22 +244,22 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (success)
                     {
                         // Başarılı olursa kullanıcıya bilgi mesajı gösterir
-                        MessageBox.Show($"Şube durumu başarıyla {statusText} hale getirildi.",
-                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Branch status successfully changed to {statusText}.",
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBranches(); // Şube listesini yeniler
                     }
                     else
                     {
                         // Başarısız olursa kullanıcıya hata mesajı gösterir
-                        MessageBox.Show("Şube durumu değiştirilirken bir hata oluştu.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while changing the branch status.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
                     // Hata oluşursa kullanıcıya detaylı hata mesajı gösterir
-                    MessageBox.Show($"Şube durumu değiştirilirken hata oluştu: {ex.Message}",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error changing branch status: {ex.Message}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -260,8 +269,8 @@ namespace car_rental_sales_desktop.Forms.Controls
         {
             LoadBranches(); // Şube listesini yeniden yükler
             // Kullanıcıya listenin yenilendiğine dair bilgi mesajı gösterir
-            MessageBox.Show("Şube listesi yenilendi.",
-                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Branch list refreshed.",
+                "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // "Kaydet" (veya "Güncelle") butonuna tıklandığında çalışan olay metodu
@@ -274,24 +283,24 @@ namespace car_rental_sales_desktop.Forms.Controls
                     string.IsNullOrEmpty(txtBranchAddress.Text) ||
                     string.IsNullOrEmpty(txtBranchPhone.Text))
                 {
-                    MessageBox.Show("Lütfen gerekli alanları doldurun (Şube Adı, Adres, Telefon).",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please fill in the required fields (Branch Name, Address, Phone).",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Telefon numarasının temel formatını kontrol eder (en az 10 karakter)
                 if (txtBranchPhone.Text.Length < 10)
                 {
-                    MessageBox.Show("Lütfen geçerli bir telefon numarası girin.",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please enter a valid phone number.",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // E-posta adresi girilmişse formatının geçerli olup olmadığını kontrol eder
                 if (!string.IsNullOrEmpty(txtBranchEmail.Text) && !IsValidEmail(txtBranchEmail.Text))
                 {
-                    MessageBox.Show("Lütfen geçerli bir e-posta adresi girin.",
-                        "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please enter a valid email address.",
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -303,8 +312,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                     if (branch == null)
                     {
                         // Düzenlenecek şube bulunamazsa hata mesajı gösterir
-                        MessageBox.Show("Düzenlenecek şube bulunamadı.",
-                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("The branch to be edited was not found.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -338,8 +347,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (success)
                 {
                     // Duruma göre (ekleme/güncelleme) kullanıcıya bilgi mesajı gösterir
-                    string message = _isEditMode ? "Şube başarıyla güncellendi." : "Şube başarıyla eklendi.";
-                    MessageBox.Show(message, "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string message = _isEditMode ? "Branch updated successfully." : "Branch added successfully.";
+                    MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     ClearForm(); // Formu temizler
                     LoadBranches(); // Şube listesini yeniler
@@ -349,15 +358,15 @@ namespace car_rental_sales_desktop.Forms.Controls
                 else
                 {
                     // Duruma göre (ekleme/güncelleme) kullanıcıya hata mesajı gösterir
-                    string message = _isEditMode ? "Şube güncellenirken bir hata oluştu." : "Şube eklenirken bir hata oluştu.";
-                    MessageBox.Show(message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string message = _isEditMode ? "An error occurred while updating the branch." : "An error occurred while adding the branch.";
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 // Genel bir hata oluşursa kullanıcıya detaylı hata mesajı gösterir
-                MessageBox.Show($"İşlem sırasında hata oluştu: {ex.Message}",
-                    "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred during the operation: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

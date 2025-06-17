@@ -20,7 +20,6 @@ namespace car_rental_sales_desktop.Models
         public DateTime UserCreatedAt { get; set; }
         public DateTime? UserUpdatedAt { get; set; }
 
-        // Navigation properties
         public virtual Role Role { get; set; }
         public virtual Branch Branch { get; set; }
         public virtual ICollection<Rental> Rentals { get; set; }
@@ -42,7 +41,6 @@ namespace car_rental_sales_desktop.Models
             UserCreatedAt = DateTime.Now;
         }
 
-        // Helper property to get full name
         public string FullName
         {
             get { return $"{UserFirstName} {UserLastName}"; }

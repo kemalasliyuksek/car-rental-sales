@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using car_rental_sales_desktop.Methods;
 using car_rental_sales_desktop.Models;
 using car_rental_sales_desktop.Repositories;
-using System.Drawing;
-using System.Linq;
-using car_rental_sales_desktop.Methods;
+using car_rental_sales_desktop.Utils;
+using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
-using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace car_rental_sales_desktop.Forms.Controls
 {
@@ -117,17 +118,28 @@ namespace car_rental_sales_desktop.Forms.Controls
         // RentalsControl yüklendiğinde çalışacak metot.
         private void RentalsControl_Load(object sender, EventArgs e)
         {
-            // Kiralamaları yükler.
+            // Kiralama yetkisi kontrolü
+            if (!CurrentUser.CanPerformAction("manage_rentals"))
+            {
+                MessageBox.Show("You do not have authority for rental transactions.", "Unauthorized Access",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Enabled = false;
+                return;
+            }
+
             LoadRentals();
-            // Müşteri otomatik tamamlama listesini yükler.
             LoadCustomersForAutoComplete();
-            // Araç otomatik tamamlama listesini yükler.
             LoadVehiclesForAutoComplete();
 
-            // Kiralama başlangıç tarihinin minimum değerini bugünün tarihi olarak ayarlar.
             dtpRentalStartDate.MinDate = DateTime.Today;
-            // Kiralama bitiş tarihinin minimum değerini bugünden bir sonraki gün olarak ayarlar.
             dtpRentalEndDate.MinDate = DateTime.Today.AddDays(1);
+
+            // Şube müdürü ve personel sadece kendi şubelerindeki araçları kiralayabilir
+            if ((CurrentUser.IsBranchManager() || CurrentUser.IsStaff()) && CurrentUser.BranchID.HasValue)
+            {
+                _vehicles = _vehicles.Where(v => v.VehicleBranchID == CurrentUser.BranchID.Value).ToList();
+                LoadVehiclesForAutoComplete(); // Listeyi yeniden yükle
+            }
         }
 
         // Veritabanından kiralama kayıtlarını yükler ve ilgili tablolara (DataGrid) bağlar.
@@ -158,7 +170,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Kiralama verileri yüklenirken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading rental data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -244,7 +256,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Müşteri verileri yüklenirken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading customer data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -256,7 +268,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Arama metni boşsa uyarı verir ve işlemi sonlandırır.
             if (string.IsNullOrEmpty(searchText))
             {
-                MessageBox.Show("Lütfen bir müşteri seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a customer.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -273,12 +285,12 @@ namespace car_rental_sales_desktop.Forms.Controls
                 {
                     // Aktif kiralamaların ilk üçünü ve toplam sayısını içeren bir bilgi mesajı oluşturur.
                     string activeRentalInfo = string.Join("\n", customerActiveRentals.Take(3)
-                        .Select(r => $"• Plaka: {r.Vehicle?.VehiclePlateNumber ?? "Bilinmiyor"} - Bitiş: {r.RentalEndDate:dd.MM.yyyy}"));
-                    if (customerActiveRentals.Count > 3) activeRentalInfo += $"\n• ... ve {customerActiveRentals.Count - 3} kiralama daha";
+                        .Select(r => $"• Plate: {r.Vehicle?.VehiclePlateNumber ?? "Unknown"} - End Date: {r.RentalEndDate:dd.MM.yyyy}"));
+                    if (customerActiveRentals.Count > 3) activeRentalInfo += $"\n• ... and {customerActiveRentals.Count - 3} more rentals";
 
                     // Kullanıcıya aktif kiralamalar hakkında bilgi verir ve yeni kiralama yapmak isteyip istemediğini sorar.
-                    DialogResult result = MessageBox.Show($"UYARI: Bu müşterinin aktif {customerActiveRentals.Count} kiralaması var:\n\n{activeRentalInfo}\n\nYeni kiralama yapmak istiyor musunuz?",
-                        "Aktif Kiralama Uyarısı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult result = MessageBox.Show($"WARNING: This customer has {customerActiveRentals.Count} active rental(s):\n\n{activeRentalInfo}\n\nDo you want to create a new rental?",
+                        "Active Rental Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     // Kullanıcı "Hayır" derse, arama kutusunu temizler ve işlemi sonlandırır.
                     if (result == DialogResult.No)
                     {
@@ -289,13 +301,13 @@ namespace car_rental_sales_desktop.Forms.Controls
                 // Seçilen müşteri bilgilerini forma yükler.
                 _formManager.LoadCustomerInfo(selectedCustomer);
                 // İlerleme durumu mesajını günceller. Aktif kiralama varsa uyarı rengiyle, yoksa başarı rengiyle gösterir.
-                _formManager.UpdateProgressWarning(customerActiveRentals.Any() ? $"Müşteri yüklendi. DİKKAT: {customerActiveRentals.Count} aktif kiralama var!" : "Müşteri bilgileri başarıyla yüklendi.",
+                _formManager.UpdateProgressWarning(customerActiveRentals.Any() ? $"Customer loaded. ATTENTION: {customerActiveRentals.Count} active rental(s)!" : "Customer information loaded successfully.",
                                                   customerActiveRentals.Any() ? Color.OrangeRed : Color.Green);
             }
             else
             {
                 // Müşteri bulunamazsa uyarı verir.
-                MessageBox.Show("Müşteri bulunamadı.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Customer not found.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         #endregion
@@ -326,7 +338,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Araç verileri yüklenirken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading vehicle data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -338,7 +350,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Arama metni boşsa uyarı verir ve işlemi sonlandırır.
             if (string.IsNullOrEmpty(searchText))
             {
-                MessageBox.Show("Lütfen bir araç seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a vehicle.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -352,8 +364,8 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (!RentalMethods.IsVehicleAvailableForRental(selectedVehicle, _rentalRepository))
                 {
                     // Araç uygun değilse uyarı verir, otomatik tamamlama listesini yeniler ve arama kutusunu temizler.
-                    MessageBox.Show($"Araç ({selectedVehicle.VehiclePlateNumber}) kiralamaya uygun değil. Durum: {selectedVehicle.VehicleStatus?.VehicleStatusName ?? "Bilinmiyor"}.",
-                        "Araç Uygun Değil", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Vehicle ({selectedVehicle.VehiclePlateNumber}) is not available for rental. Status: {selectedVehicle.VehicleStatus?.VehicleStatusName ?? "Unknown"}.",
+                        "Vehicle Not Available", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     LoadVehiclesForAutoComplete();
                     textBoxSearchVehicle.Text = string.Empty;
                     return;
@@ -361,12 +373,12 @@ namespace car_rental_sales_desktop.Forms.Controls
                 // Seçilen araç bilgilerini forma yükler ve kiralama tutarını hesaplar.
                 _formManager.LoadVehicleInfo(selectedVehicle, CalculateRentalAmount);
                 // İlerleme durumu mesajını başarı rengiyle günceller.
-                _formManager.UpdateProgressWarning("Araç bilgileri başarıyla yüklendi.", Color.Green);
+                _formManager.UpdateProgressWarning("Vehicle information loaded successfully.", Color.Green);
             }
             else
             {
                 // Araç bulunamazsa veya uygun değilse uyarı verir ve otomatik tamamlama listesini yeniler.
-                MessageBox.Show("Araç bulunamadı veya uygun değil.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vehicle not found or not available.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 LoadVehiclesForAutoComplete();
             }
         }
@@ -449,7 +461,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Formu düzenlenebilir hale getirir.
             _formManager.SetFormReadOnly(false);
             // İlerleme durumu mesajını günceller.
-            _formManager.UpdateProgressWarning("Form temizlendi.", Color.Blue);
+            _formManager.UpdateProgressWarning("Form cleared.", Color.Blue);
         }
 
         // Kiralama formunun geçerliliğini kontrol eder.
@@ -458,13 +470,13 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Müşteri adı boşsa uyarı verir ve false döner.
             if (string.IsNullOrEmpty(txtBoxCustomerFullName.Text))
             {
-                _formManager.UpdateProgressWarning("Lütfen bir müşteri seçin.", Color.Red);
+                _formManager.UpdateProgressWarning("Please select a customer.", Color.Red);
                 txtBoxSearchCustomer.Focus(); return false;
             }
             // Araç plakası boşsa uyarı verir ve false döner.
             if (string.IsNullOrEmpty(txtBoxVehiclePlate.Text))
             {
-                _formManager.UpdateProgressWarning("Lütfen bir araç seçin.", Color.Red);
+                _formManager.UpdateProgressWarning("Please select a vehicle.", Color.Red);
                 textBoxSearchVehicle.Focus(); return false;
             }
 
@@ -472,7 +484,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             Customer selectedCustomer = RentalMethods.FindCustomerByFullName(txtBoxCustomerFullName.Text, _customers);
             if (selectedCustomer == null)
             {
-                _formManager.UpdateProgressWarning("Seçilen müşteri geçerli değil.", Color.Red);
+                _formManager.UpdateProgressWarning("Selected customer is not valid.", Color.Red);
                 txtBoxSearchCustomer.Focus(); return false;
             }
 
@@ -480,14 +492,14 @@ namespace car_rental_sales_desktop.Forms.Controls
             Vehicle selectedVehicle = RentalMethods.FindVehicleByPlate(txtBoxVehiclePlate.Text, _vehicles);
             if (selectedVehicle == null)
             {
-                _formManager.UpdateProgressWarning("Seçilen araç geçerli değil.", Color.Red);
+                _formManager.UpdateProgressWarning("Selected vehicle is not valid.", Color.Red);
                 textBoxSearchVehicle.Focus(); return false;
             }
 
             // Aracın kiralamaya uygun olup olmadığını kontrol eder.
             if (!RentalMethods.IsVehicleAvailableForRental(selectedVehicle, _rentalRepository))
             {
-                _formManager.UpdateProgressWarning("Araç kiralamaya uygun değil.", Color.Red);
+                _formManager.UpdateProgressWarning("Vehicle is not available for rental.", Color.Red);
                 LoadVehiclesForAutoComplete();
                 textBoxSearchVehicle.Text = string.Empty;
                 txtBoxVehiclePlate.Text = string.Empty;
@@ -497,25 +509,25 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Bitiş tarihinin başlangıç tarihinden önce olup olmadığını kontrol eder.
             if (dtpRentalEndDate.Value.Date < dtpRentalStartDate.Value.Date)
             {
-                _formManager.UpdateProgressWarning("Bitiş tarihi başlangıçtan önce olamaz.", Color.Red);
+                _formManager.UpdateProgressWarning("End date cannot be before start date.", Color.Red);
                 dtpRentalEndDate.Focus(); return false;
             }
 
             // Kiralama tutarının geçerli olup olmadığını kontrol eder.
             if (string.IsNullOrEmpty(txtBoxRentalAmount.Text) || !decimal.TryParse(txtBoxRentalAmount.Text.Replace("₺", "").Trim(), out _))
             {
-                _formManager.UpdateProgressWarning("Kiralama tutarı geçersiz.", Color.Red); return false;
+                _formManager.UpdateProgressWarning("Rental amount is invalid.", Color.Red); return false;
             }
             // Başlangıç kilometresinin girilip girilmediğini ve geçerli olup olmadığını kontrol eder.
             if (string.IsNullOrEmpty(txtBoxRentalStartMileage.Text) || !int.TryParse(txtBoxRentalStartMileage.Text.Replace("KM", "").Trim(), out _))
             {
-                _formManager.UpdateProgressWarning("Başlangıç KM girilmelidir.", Color.Red);
+                _formManager.UpdateProgressWarning("Start mileage must be entered.", Color.Red);
                 txtBoxRentalStartMileage.Focus(); return false;
             }
             // Ödeme türünün girilip girilmediğini kontrol eder.
             if (string.IsNullOrEmpty(txtBoxRentalPaymentType.Text))
             {
-                _formManager.UpdateProgressWarning("Ödeme türü girilmelidir.", Color.Red);
+                _formManager.UpdateProgressWarning("Payment type must be entered.", Color.Red);
                 txtBoxRentalPaymentType.Focus(); return false;
             }
 
@@ -524,12 +536,12 @@ namespace car_rental_sales_desktop.Forms.Controls
             if (customerActiveRentals.Count > 0)
             {
                 // Kullanıcıya aktif kiralamalar hakkında bilgi verir ve devam etmek isteyip istemediğini sorar.
-                DialogResult result = MessageBox.Show($"Son kontrol: Müşterinin {customerActiveRentals.Count} aktif kiralaması var. Devam edilsin mi?",
-                    "Aktif Kiralama Uyarısı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show($"Final check: Customer has {customerActiveRentals.Count} active rental(s). Continue?",
+                    "Active Rental Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 // Kullanıcı "Hayır" derse, işlemi iptal eder ve false döner.
                 if (result == DialogResult.No)
                 {
-                    _formManager.UpdateProgressWarning("Kiralama iptal edildi.", Color.Blue);
+                    _formManager.UpdateProgressWarning("Rental cancelled.", Color.Blue);
                     return false;
                 }
             }
@@ -549,12 +561,12 @@ namespace car_rental_sales_desktop.Forms.Controls
                 // Müşteri veya araç bulunamazsa uyarı verir ve işlemi sonlandırır.
                 if (selectedCustomer == null || selectedVehicle == null)
                 {
-                    _formManager.UpdateProgressWarning("Müşteri veya araç bulunamadı.", Color.Red); return;
+                    _formManager.UpdateProgressWarning("Customer or vehicle not found.", Color.Red); return;
                 }
                 // Araç kiralamaya uygun değilse uyarı verir, formu günceller ve işlemi sonlandırır.
                 if (!RentalMethods.IsVehicleAvailableForRental(selectedVehicle, _rentalRepository))
                 {
-                    _formManager.UpdateProgressWarning("Araç uygun değil, işlem iptal edildi.", Color.Red);
+                    _formManager.UpdateProgressWarning("Vehicle not available, operation cancelled.", Color.Red);
                     LoadVehiclesForAutoComplete();
                     textBoxSearchVehicle.Text = string.Empty;
                     txtBoxVehiclePlate.Text = string.Empty;
@@ -565,7 +577,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (!decimal.TryParse(txtBoxRentalAmount.Text.Replace("₺", "").Trim(), out decimal rentalAmount) ||
                     !int.TryParse(txtBoxRentalStartMileage.Text.Replace("KM", "").Trim(), out int startKm))
                 {
-                    _formManager.UpdateProgressWarning("Tutar veya KM formatı geçersiz.", Color.Red); return;
+                    _formManager.UpdateProgressWarning("Amount or KM format is invalid.", Color.Red); return;
                 }
                 // Depozito tutarını alır (varsa).
                 decimal? depositAmount = null;
@@ -599,9 +611,9 @@ namespace car_rental_sales_desktop.Forms.Controls
                 if (rentalId > 0)
                 {
                     // İlerleme durumu mesajını günceller ve kullanıcıya bilgi verir.
-                    _formManager.UpdateProgressWarning($"Kiralama ID {rentalId} oluşturuldu ve ONAY BEKLİYOR!", Color.Orange);
-                    MessageBox.Show("Kiralama onay sürecine gönderildi. Müşteri ve yetkili imzaları sonrası aktif olacaktır.",
-                        "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _formManager.UpdateProgressWarning($"Rental ID {rentalId} created and PENDING APPROVAL!", Color.Orange);
+                    MessageBox.Show("Rental has been sent to the approval process. It will be active after customer and authorized signatures.",
+                        "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Kiralama listesini ve araç otomatik tamamlama listesini yeniler.
                     LoadRentals();
@@ -612,13 +624,13 @@ namespace car_rental_sales_desktop.Forms.Controls
                 else
                 {
                     // Kiralama oluşturulamazsa uyarı verir.
-                    _formManager.UpdateProgressWarning("Kiralama oluşturulamadı.", Color.Red);
+                    _formManager.UpdateProgressWarning("Rental could not be created.", Color.Red);
                 }
             }
             catch (Exception ex)
             {
                 // Hata durumunda ilerleme durumu mesajını günceller.
-                _formManager.UpdateProgressWarning($"Kiralama hatası: {ex.Message}", Color.Red);
+                _formManager.UpdateProgressWarning($"Rental error: {ex.Message}", Color.Red);
             }
         }
 
@@ -638,7 +650,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Formu temizler.
             ClearForm();
             // İlerleme durumu mesajını günceller.
-            _formManager.UpdateProgressWarning("Form temizlendi. Yeni kiralama girişi için hazır.", Color.Blue);
+            _formManager.UpdateProgressWarning("Form cleared. Ready for new rental entry.", Color.Blue);
         }
 
         // Son kiralamalar (sfDataGridLastRentals) tablosundaki bir hücreye çift tıklandığında tetiklenir.
@@ -690,7 +702,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                 // Seçili bir kiralama yoksa uyarı verir ve işlemi sonlandırır.
                 if (selectedRental == null)
                 {
-                    MessageBox.Show("Lütfen listeden bir kiralama seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select a rental from the list.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -753,12 +765,12 @@ namespace car_rental_sales_desktop.Forms.Controls
                 // Kiralama durumunu alır.
                 RentalMethods.RentalStatus status = RentalMethods.GetRentalStatus(selectedRental);
                 // İlerleme durumu mesajını kiralama durumu ve rengiyle günceller.
-                _formManager.UpdateProgressWarning($"Kiralama Durumu: {RentalMethods.GetStatusDescription(status)}", RentalMethods.GetStatusTextColor(status));
+                _formManager.UpdateProgressWarning($"Rental Status: {RentalMethods.GetStatusDescription(status)}", RentalMethods.GetStatusTextColor(status));
             }
             catch (Exception ex)
             {
                 // Hata durumunda kullanıcıya bilgi mesajı gösterir.
-                MessageBox.Show($"Kiralama bilgileri yüklenirken hata: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading rental information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -770,7 +782,7 @@ namespace car_rental_sales_desktop.Forms.Controls
             // Seçili bir kiralama yoksa uyarı verir ve işlemi sonlandırır.
             if (selectedRental == null)
             {
-                MessageBox.Show("Lütfen işlem için bir kiralama seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a rental for the operation.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -816,7 +828,7 @@ namespace car_rental_sales_desktop.Forms.Controls
                     ClearForm();
                 }
                 // İlerleme durumu mesajını günceller.
-                _formManager.UpdateProgressWarning("Kiralama işlemleri tamamlandı. Veriler yenilendi.", Color.Blue);
+                _formManager.UpdateProgressWarning("Rental operations completed. Data refreshed.", Color.Blue);
             }
         }
     }

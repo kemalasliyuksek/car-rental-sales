@@ -8,7 +8,6 @@ namespace car_rental_sales_desktop.Models
         public string BankName { get; set; }
         public string BankDescription { get; set; }
 
-        // Navigation properties
         public virtual ICollection<Payment> Payments { get; set; }
 
         public Bank()

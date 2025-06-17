@@ -73,10 +73,10 @@ namespace car_rental_sales_desktop.Forms.Controls
             _rentalsControl.txtBoxVehicleTransmission.Text = vehicle.VehicleTransmissionType;
             // Aracın kilometresini " KM" ekiyle ilgili metin kutusuna yazar.
             _rentalsControl.txtBoxVehicleMileage.Text = $"{vehicle.VehicleMileage} KM";
-            // Aracın bulunduğu şubenin adını yazar; şube bilgisi yoksa "Belirsiz" yazar.
-            _rentalsControl.txtBoxVehicleLocation.Text = vehicle.Branch?.BranchName ?? "Belirsiz";
-            // Aracın durumunu yazar; durum bilgisi yoksa "Belirsiz" yazar.
-            _rentalsControl.txtBoxVehicleStatus.Text = vehicle.VehicleStatus?.VehicleStatusName ?? "Belirsiz";
+            // Aracın bulunduğu şubenin adını yazar; şube bilgisi yoksa "Undefined" yazar.
+            _rentalsControl.txtBoxVehicleLocation.Text = vehicle.Branch?.BranchName ?? "Undefined";
+            // Aracın durumunu yazar; durum bilgisi yoksa "Undefined" yazar.
+            _rentalsControl.txtBoxVehicleStatus.Text = vehicle.VehicleStatus?.VehicleStatusName ?? "Undefined";
 
             // Kiralama başlangıç tarihini mevcut zamana ayarlar.
             _rentalsControl.dtpRentalStartDate.Value = DateTime.Now;
@@ -144,8 +144,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             _rentalsControl.txtBoxRentalStartMileage.Text = string.Empty;
             // Kiralama bitiş kilometresi metin kutusunu (textBox8) temizler.
             _rentalsControl.textBox8.Text = string.Empty;
-            // Kiralama ödeme tipini "Nakit" olarak ayarlar.
-            _rentalsControl.txtBoxRentalPaymentType.Text = "Nakit";
+            // Kiralama ödeme tipini "Cash" olarak ayarlar.
+            _rentalsControl.txtBoxRentalPaymentType.Text = "Cash";
             // Kiralama tutarı metin kutusunu temizler.
             _rentalsControl.txtBoxRentalAmount.Text = string.Empty;
             // Kiralama depozito metin kutusunu temizler.
@@ -291,8 +291,8 @@ namespace car_rental_sales_desktop.Forms.Controls
             _rentalsControl.dtpRentalStartDate.Value = DateTime.Now;
             // Kiralama bitiş tarihini mevcut zamandan bir gün sonrasına ayarlar.
             _rentalsControl.dtpRentalEndDate.Value = DateTime.Now.AddDays(1);
-            // Kiralama ödeme tipini "Nakit" olarak ayarlar.
-            _rentalsControl.txtBoxRentalPaymentType.Text = "Nakit";
+            // Kiralama ödeme tipini "Cash" olarak ayarlar.
+            _rentalsControl.txtBoxRentalPaymentType.Text = "Cash";
         }
     }
 }

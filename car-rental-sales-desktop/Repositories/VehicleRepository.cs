@@ -37,7 +37,7 @@ namespace car_rental_sales_desktop.Repositories
                 VehicleCreatedAt = row.GetValue<DateTime>("VehicleCreatedAt"),
                 VehicleUpdatedAt = row.GetValue<DateTime?>("VehicleUpdatedAt"),
 
-                // Navigation properties
+                // Navigasyon özellikleri
                 VehicleStatus = GetVehicleStatus(row.GetValue<int>("VehicleStatusID")),
                 Branch = row.GetValue<int?>("VehicleBranchID").HasValue
                     ? GetVehicleBranch(row.GetValue<int>("VehicleBranchID"))
@@ -101,7 +101,7 @@ namespace car_rental_sales_desktop.Repositories
             return entity.VehicleID;
         }
 
-        // Get vehicle by plate number
+        // Aracı plaka numarasına göre getir
         public Vehicle GetByPlateNumber(string plateNumber)
         {
             string query = "SELECT * FROM Vehicles WHERE VehiclePlateNumber = @plateNumber";
@@ -114,7 +114,7 @@ namespace car_rental_sales_desktop.Repositories
             return MapToModel(dataTable.Rows[0]);
         }
 
-        // Get vehicle by chassis number
+        // Aracı şasi numarasına göre getir
         public Vehicle GetByChassisNumber(string chassisNumber)
         {
             string query = "SELECT * FROM Vehicles WHERE VehicleChassisNumber = @chassisNumber";
@@ -127,7 +127,7 @@ namespace car_rental_sales_desktop.Repositories
             return MapToModel(dataTable.Rows[0]);
         }
 
-        // Get vehicles by status
+        // Araçları duruma göre getir
         public List<Vehicle> GetByStatus(int statusId)
         {
             string query = "SELECT * FROM Vehicles WHERE VehicleStatusID = @statusId";
@@ -137,7 +137,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get vehicles by branch
+        // Araçları şubeye göre getir
         public List<Vehicle> GetByBranch(int branchId)
         {
             string query = "SELECT * FROM Vehicles WHERE VehicleBranchID = @branchId";
@@ -147,7 +147,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get vehicles by class
+        // Araçları sınıfa göre getir
         public List<Vehicle> GetByClass(int classId)
         {
             string query = "SELECT * FROM Vehicles WHERE VehicleClassID = @classId";
@@ -157,7 +157,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Search vehicles
+        // Araçları ara
         public List<Vehicle> Search(string searchTerm)
         {
             string query = @"
@@ -174,10 +174,10 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get available vehicles (for rental)
+        // Mevcut araçları getir (kiralama için)
         public List<Vehicle> GetAvailableVehicles()
         {
-            // Assuming status ID 1 is "Available"
+            // Durum ID'si 1 olanın "Mevcut" olduğunu varsayalım
             string query = @"
                 SELECT v.* FROM Vehicles v
                 WHERE v.VehicleStatusID = 1
@@ -192,7 +192,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get available vehicles in a specific branch
+        // Belirli bir şubedeki mevcut araçları getir
         public List<Vehicle> GetAvailableVehiclesByBranch(int branchId)
         {
             string query = @"
@@ -215,17 +215,17 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get vehicles available for sale
+        // Satılık araçları getir
         public List<Vehicle> GetVehiclesForSale()
         {
-            // Assuming status ID 2 is "For Sale"
+            // Durum ID'si 2 olanın "Satılık" olduğunu varsayalım
             string query = "SELECT * FROM Vehicles WHERE VehicleStatusID = 2";
             var dataTable = DatabaseHelper.ExecuteQuery(query);
 
             return ConvertDataTableToList(dataTable);
         }
 
-        // Update vehicle status
+        // Araç durumunu güncelle
         public bool UpdateVehicleStatus(int vehicleId, int statusId)
         {
             string query = "UPDATE Vehicles SET VehicleStatusID = @statusId, VehicleUpdatedAt = @updatedAt WHERE VehicleID = @vehicleId";
@@ -240,7 +240,7 @@ namespace car_rental_sales_desktop.Repositories
             return affectedRows > 0;
         }
 
-        // Update vehicle mileage
+        // Araç kilometresini güncelle
         public bool UpdateVehicleMileage(int vehicleId, int mileage)
         {
             string query = "UPDATE Vehicles SET VehicleMileage = @mileage, VehicleUpdatedAt = @updatedAt WHERE VehicleID = @vehicleId";
@@ -255,7 +255,7 @@ namespace car_rental_sales_desktop.Repositories
             return affectedRows > 0;
         }
 
-        // Transfer vehicle to another branch
+        // Aracı başka bir şubeye transfer et
         public bool TransferVehicle(int vehicleId, int branchId)
         {
             string query = "UPDATE Vehicles SET VehicleBranchID = @branchId, VehicleUpdatedAt = @updatedAt WHERE VehicleID = @vehicleId";
@@ -270,7 +270,7 @@ namespace car_rental_sales_desktop.Repositories
             return affectedRows > 0;
         }
 
-        // Helper method to get vehicle status
+        // Araç durumunu almak için yardımcı metot
         private VehicleStatus GetVehicleStatus(int statusId)
         {
             string query = "SELECT * FROM VehicleStatuses WHERE VehicleStatusID = @statusId";
@@ -290,7 +290,7 @@ namespace car_rental_sales_desktop.Repositories
             };
         }
 
-        // Helper method to get branch
+        // Şube bilgilerini almak için yardımcı metot
         private Branch GetVehicleBranch(int? branchId)
         {
             if (!branchId.HasValue)
@@ -316,7 +316,7 @@ namespace car_rental_sales_desktop.Repositories
             };
         }
 
-        // Helper method to get vehicle class
+        // Araç sınıfını almak için yardımcı metot
         private VehicleClass GetVehicleClass(int? classId)
         {
             if (!classId.HasValue)

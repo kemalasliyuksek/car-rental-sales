@@ -35,7 +35,7 @@ namespace car_rental_sales_desktop.Repositories
                 RentalCreatedAt = row.GetValue<DateTime>("RentalCreatedAt"),
                 RentalUpdatedAt = row.GetValue<DateTime?>("RentalUpdatedAt"),
 
-                // Navigation properties - can be loaded separately if needed
+                // Navigasyon özellikleri - gerekirse ayrı olarak yüklenebilir
                 Customer = GetCustomer(row.GetValue<int>("RentalCustomerID")),
                 Vehicle = GetVehicle(row.GetValue<int>("RentalVehicleID")),
                 User = GetUser(row.GetValue<int>("RentalUserID"))
@@ -90,7 +90,7 @@ namespace car_rental_sales_desktop.Repositories
             return entity.RentalID;
         }
 
-        // Get active rentals (not returned yet)
+        // Aktif kiralamaları getir (henüz iade edilmemiş)
         public List<Rental> GetActiveRentals()
         {
             string query = "SELECT * FROM Rentals WHERE RentalReturnDate IS NULL AND RentalStatus <> 'Rejected'";
@@ -99,7 +99,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get overdue rentals
+        // Vadesi geçmiş kiralamaları getir
         public List<Rental> GetOverdueRentals()
         {
             string query = "SELECT * FROM Rentals WHERE RentalEndDate < @today AND RentalReturnDate IS NULL";
@@ -109,7 +109,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get rentals by customer
+        // Müşteriye göre kiralamaları getir
         public List<Rental> GetByCustomer(int customerId)
         {
             string query = "SELECT * FROM Rentals WHERE RentalCustomerID = @customerId";
@@ -119,7 +119,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get rentals by vehicle
+        // Araca göre kiralamaları getir
         public List<Rental> GetByVehicle(int vehicleId)
         {
             string query = "SELECT * FROM Rentals WHERE RentalVehicleID = @vehicleId";
@@ -129,7 +129,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get rentals by date range
+        // Tarih aralığına göre kiralamaları getir
         public List<Rental> GetByDateRange(DateTime startDate, DateTime endDate)
         {
             string query = @"
@@ -149,7 +149,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get rentals by branch
+        // Şubeye göre kiralamaları getir
         public List<Rental> GetByBranch(int branchId)
         {
             string query = @"
@@ -163,7 +163,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Get rentals created by user
+        // Kullanıcı tarafından oluşturulan kiralamaları getir
         public List<Rental> GetByUser(int userId)
         {
             string query = "SELECT * FROM Rentals WHERE RentalUserID = @userId";
@@ -173,7 +173,7 @@ namespace car_rental_sales_desktop.Repositories
             return ConvertDataTableToList(dataTable);
         }
 
-        // Process vehicle return
+        // Araç iade işlemini yap
         public bool ProcessReturn(int rentalId, DateTime returnDate, int endKm)
         {
             using (var connection = ConnectionManager.GetConnection())
@@ -183,7 +183,7 @@ namespace car_rental_sales_desktop.Repositories
                 {
                     try
                     {
-                        // 1. Update rental return information
+                        // 1. Kiralama iade bilgilerini güncelle
                         string updateRentalQuery = @"
                             UPDATE Rentals 
                             SET RentalReturnDate = @returnDate, 
@@ -205,7 +205,7 @@ namespace car_rental_sales_desktop.Repositories
                             rentalCommand.ExecuteNonQuery();
                         }
 
-                        // 2. Get vehicle ID and update vehicle information
+                        // 2. Araç kimliğini al ve araç bilgilerini güncelle
                         string getVehicleQuery = "SELECT RentalVehicleID FROM Rentals WHERE RentalID = @rentalId";
                         int vehicleId;
 
@@ -215,11 +215,11 @@ namespace car_rental_sales_desktop.Repositories
                             vehicleId = Convert.ToInt32(getVehicleCommand.ExecuteScalar());
                         }
 
-                        // 3. Update vehicle mileage and status
+                        // 3. Araç kilometresini ve durumunu güncelle
                         string updateVehicleQuery = @"
                             UPDATE Vehicles 
                             SET VehicleMileage = @mileage, 
-                                VehicleStatusID = 1, -- Assuming 1 is 'Available'
+                                VehicleStatusID = 1, -- 1'in 'Müsait' olduğunu varsayalım
                                 VehicleUpdatedAt = @updatedAt
                             WHERE VehicleID = @vehicleId";
 
@@ -248,7 +248,7 @@ namespace car_rental_sales_desktop.Repositories
             }
         }
 
-        // Create rental with note
+        // Not ile kiralama oluştur
         public int CreateRentalWithNote(Rental rental, string noteText)
         {
             using (var connection = ConnectionManager.GetConnection())
@@ -258,7 +258,7 @@ namespace car_rental_sales_desktop.Repositories
                 {
                     try
                     {
-                        // 1. Insert rental note
+                        // 1. Kiralama notunu ekle
                         string insertNoteQuery = @"
                             INSERT INTO RentalNotes (
                                 RentalID,
@@ -274,7 +274,7 @@ namespace car_rental_sales_desktop.Repositories
                             SELECT LAST_INSERT_ID();";
 
                         int noteId;
-                        int tempRentalId = -1; // Temporary placeholder
+                        int tempRentalId = -1; // Geçici yer tutucu
 
                         using (var noteCommand = new MySqlCommand(insertNoteQuery, connection, transaction))
                         {
@@ -285,7 +285,7 @@ namespace car_rental_sales_desktop.Repositories
                             noteId = Convert.ToInt32(noteCommand.ExecuteScalar());
                         }
 
-                        // 2. Insert rental with the note ID
+                        // 2. Not kimliği ile kiralamayı ekle
                         string insertRentalQuery = @"
                             INSERT INTO Rentals (
                                 RentalCustomerID,
@@ -341,7 +341,7 @@ namespace car_rental_sales_desktop.Repositories
                             rentalId = Convert.ToInt32(rentalCommand.ExecuteScalar());
                         }
 
-                        // 3. Update the rental note with the correct rental ID
+                        // 3. Kiralama notunu doğru kiralama kimliği ile güncelle
                         string updateNoteQuery = "UPDATE RentalNotes SET RentalID = @rentalId WHERE RentalNoteID = @noteId";
 
                         using (var updateNoteCommand = new MySqlCommand(updateNoteQuery, connection, transaction))
@@ -351,10 +351,10 @@ namespace car_rental_sales_desktop.Repositories
                             updateNoteCommand.ExecuteNonQuery();
                         }
 
-                        // 4. Update vehicle status
+                        // 4. Araç durumunu güncelle
                         string updateVehicleQuery = @"
                             UPDATE Vehicles 
-                            SET VehicleStatusID = 3, -- Assuming 3 is 'Rented'
+                            SET VehicleStatusID = 3, -- 3'ün 'Kirada' olduğunu varsayalım
                                 VehicleUpdatedAt = @updatedAt
                             WHERE VehicleID = @vehicleId";
 
@@ -377,7 +377,7 @@ namespace car_rental_sales_desktop.Repositories
             }
         }
 
-        // Add note to existing rental
+        // Mevcut kiralamaya not ekle
         public bool AddNote(int rentalId, string noteText, int userId)
         {
             string query = @"
@@ -428,7 +428,7 @@ namespace car_rental_sales_desktop.Repositories
             return affectedRows > 0;
         }
 
-        // Get notes for a rental
+        // Bir kiralama için notları getir
         public List<RentalNote> GetNotes(int rentalId)
         {
             string query = @"
@@ -456,7 +456,7 @@ namespace car_rental_sales_desktop.Repositories
             return notes;
         }
 
-        // Helper method to get customer
+        // Müşteriyi getirmek için yardımcı metot
         private Customer GetCustomer(int customerId)
         {
             string query = "SELECT * FROM Customers WHERE CustomerID = @customerId";
@@ -475,11 +475,10 @@ namespace car_rental_sales_desktop.Repositories
                 CustomerNationalID = row.GetValue<string>("CustomerNationalID"),
                 CustomerPhone = row.GetValue<string>("CustomerPhone"),
                 CustomerEmail = row.GetValue<string>("CustomerEmail")
-                // Add other fields as needed
             };
         }
 
-        // Helper method to get vehicle
+        // Aracı getirmek için yardımcı metot
         private Vehicle GetVehicle(int vehicleId)
         {
             string query = "SELECT * FROM Vehicles WHERE VehicleID = @vehicleId";
@@ -497,11 +496,10 @@ namespace car_rental_sales_desktop.Repositories
                 VehicleBrand = row.GetValue<string>("VehicleBrand"),
                 VehicleModel = row.GetValue<string>("VehicleModel"),
                 VehicleMileage = row.GetValue<int>("VehicleMileage")
-                // Add other fields as needed
             };
         }
 
-        // Helper method to get user
+        // Kullanıcıyı getirmek için yardımcı metot
         private User GetUser(int userId)
         {
             string query = "SELECT * FROM Users WHERE UserID = @userId";
@@ -518,7 +516,6 @@ namespace car_rental_sales_desktop.Repositories
                 UserFirstName = row.GetValue<string>("UserFirstName"),
                 UserLastName = row.GetValue<string>("UserLastName"),
                 Username = row.GetValue<string>("Username")
-                // Add other fields as needed
             };
         }
     }

@@ -5,7 +5,7 @@ namespace car_rental_sales_desktop.Models
     public class Payment
     {
         public int PaymentID { get; set; }
-        public string PaymentTransactionType { get; set; } // "Rental" or "Sale"
+        public string PaymentTransactionType { get; set; } 
         public int PaymentTransactionID { get; set; }
         public int PaymentCustomerID { get; set; }
         public decimal PaymentAmount { get; set; }
@@ -16,7 +16,6 @@ namespace car_rental_sales_desktop.Models
         public int PaymentUserID { get; set; }
         public DateTime PaymentCreatedAt { get; set; }
 
-        // Navigation properties
         public virtual Customer Customer { get; set; }
         public virtual Bank Bank { get; set; }
         public virtual User User { get; set; }
